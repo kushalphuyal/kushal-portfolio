@@ -76,11 +76,29 @@
       color: var(--primary);
     }
 
-    <div class="hero-content">
-  <img src="./images/profile.png" alt="Kushal" style="width:150px; height:150px; border-radius:50%; border:5px solid white; margin-bottom:1.5rem; box-shadow:0 5px 15px rgba(0,0,0,0.3);">
-  <h1>Hello, I'm Kushal</h1>
-  <!-- baki -->
-</div>
+    <section id="home">
+  <div class="hero-content">
+
+    <img 
+      src="./images/profile.png" 
+      alt="Kushal"
+      style="
+        width:150px;
+        height:150px;
+        border-radius:50%;
+        border:5px solid white;
+        margin-bottom:1.5rem;
+        box-shadow:0 5px 15px rgba(0,0,0,0.3);
+      "
+    >
+
+    <h1>Hello, I'm Kushal</h1>
+    <h2>Accountant | Photography | Student | From Nepal</h2>
+    <a href="#projects" class="btn">View My Work</a>
+
+  </div>
+</section>
+
     #home {
       height: 100vh;
       min-height: 600px;
@@ -404,32 +422,27 @@
 <section id="contact" style="background:#f8f9fa;">
   <h2 class="section-title">Get In Touch</h2>
   <div class="contact-form">
-    <form action="https://formspree.io/f/xrekpekg" method="POST">  <!-- ? yaha timro real endpoint paste gara -->
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="_replyto" placeholder="Your Email" required>  <!-- _replyto ? reply pathauna sajilo -->
-      <input type="text" name="subject" placeholder="Subject" required>
-      <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-      
-      <!-- Optional extras (spam avoid ra better email) -->
-      <input type="hidden" name="_subject" value="New Message from Kushal Portfolio">
-      <input type="hidden" name="_next" value="https://kushal.github.io/emi-calculator/thanks.html">  <!-- thanks page optional -->
-      <input type="text" name="_gotcha" style="display:none" />  <!-- honeypot ? spam block -->
-      
-      <button type="submit">Send Message</button>
-    </form>
-  </div>
-</section>
-<input type="hidden" name="_next" value="./thanks.html">
+    
+    <form action="https://formspree.io/f/xrekpekg" method="POST">
 
-  <!-- Optional extras -->
-  <input type="hidden" name="_subject" value="New Message from Portfolio">
-  <input type="text" name="_gotcha" style="display:none" />
+  <input type="text" name="name" placeholder="Your Name" required>
+
+  <input type="email" name="_replyto" placeholder="Your Email" required>
+
+  <input type="text" name="subject" placeholder="Subject" required>
+
+  <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+
+  <!-- Formspree extras -->
+  <input type="hidden" name="_subject" value="New Message from Kushal Portfolio">
+  <input type="hidden" name="_next" value="thanks.html">
+  <input type="text" name="_gotcha" style="display:none">
 
   <button type="submit">Send Message</button>
 </form>
 
-
-
+  </div>
+</section>
 
 
   <!-- Footer -->
@@ -445,5 +458,6 @@
 </body>
 
 </html>
+
 
 
