@@ -3,365 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🇳🇵 Nepal Accountant Ultimate SaaS Suite - V5.0 Final</title>
+    <title>🇳🇵 Nepal Accountant Ultimate SaaS - Mobile Optimized</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
-        :root { --primary: #003893; --secondary: #dc143c; --success: #28a745; --dark: #1a252f; --light: #f8f9fa; --border: #dce1e7; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: #f0f2f5; margin: 0; display: flex; height: 100vh; overflow: hidden; }
+        :root { --primary: #003893; --secondary: #dc143c; --success: #28a745; --dark: #1a252f; --light: #f8f9fa; }
+        body { font-family: 'Inter', sans-serif; background: #f0f2f5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+
+        /* Mobile Responsive Header */
+        .mobile-header { background: var(--dark); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .menu-toggle { background: var(--primary); color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 20px; }
+
+        /* Sidebar Navigation - Fixed for Mobile */
+        .sidebar { width: 260px; background: var(--dark); color: white; height: 100vh; position: fixed; top: 0; left: -260px; transition: 0.3s; z-index: 999; overflow-y: auto; padding-top: 60px; }
+        .sidebar.active { left: 0; }
+        .sidebar-btn { width: 100%; padding: 15px 20px; border: none; background: none; color: #adb5bd; text-align: left; cursor: pointer; font-size: 14px; border-bottom: 1px solid #2c3e50; }
+        .sidebar-btn.active { background: var(--primary); color: white; }
+
+        /* Main Content Adjustments */
+        .main-content { padding: 15px; flex: 1; transition: 0.3s; width: 100%; box-sizing: border-box; }
+        .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; border-top: 5px solid var(--primary); }
         
-        /* Sidebar Navigation */
-        .sidebar { width: 280px; background: var(--dark); color: white; display: flex; flex-direction: column; box-shadow: 2px 0 10px rgba(0,0,0,0.1); overflow-y: auto; }
-        .sidebar-header { padding: 25px; background: rgba(0,0,0,0.2); text-align: center; border-bottom: 1px solid #34495e; }
-        .nav-group { padding: 10px 0; }
-        .nav-label { font-size: 11px; color: #7f8c8d; text-transform: uppercase; padding: 10px 25px; letter-spacing: 1px; }
-        .nav-btn { width: 100%; padding: 14px 25px; border: none; background: none; color: #bdc3c7; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: 0.3s; font-size: 14px; }
-        .nav-btn:hover, .nav-btn.active { background: var(--primary); color: white; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
         
-        /* Main Workspace */
-        .main-workspace { flex: 1; display: flex; flex-direction: column; overflow-y: auto; position: relative; }
-        .top-bar { background: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); sticky: top; }
-        .content-area { padding: 30px; max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; }
-        
-        /* Tool Cards */
-        .card { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 25px; border-top: 5px solid var(--primary); }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        h2 { margin-top: 0; color: var(--dark); font-size: 1.25rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        
-        /* Inputs & UI Elements */
-        label { display: block; font-size: 12px; font-weight: 700; color: #555; margin-bottom: 6px; }
-        input, select, textarea { width: 100%; padding: 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; box-sizing: border-box; margin-bottom: 15px; }
-        .btn { padding: 12px 20px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; justify-content: center; }
+        .btn { padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; }
         .btn-primary { background: var(--primary); color: white; }
-        .btn-success { background: var(--success); color: white; }
-        .btn-danger { background: var(--secondary); color: white; }
         
-        .result-box { background: #f8faff; border: 1px dashed var(--primary); padding: 20px; border-radius: 10px; margin-top: 15px; font-size: 14px; line-height: 1.6; color: var(--dark); }
-        .tab-panel { display: none; animation: fadeIn 0.3s ease; }
-        .tab-panel.active { display: block; }
+        /* Links section */
+        .links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .link-item { background: #f8f9fa; padding: 10px; text-decoration: none; color: var(--dark); border-radius: 5px; font-size: 12px; text-align: center; border: 1px solid #eee; }
 
-        /* Cash Denom Table */
-        .cash-table input { margin-bottom: 5px; padding: 8px; }
+        /* Result Overlay */
+        .result-box { background: #f0f7ff; padding: 15px; border-radius: 8px; border-left: 5px solid var(--success); margin-top: 15px; font-size: 13px; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        /* For Desktop */
+        @media (min-width: 1024px) {
+            .sidebar { left: 0; padding-top: 20px; }
+            .main-content { margin-left: 260px; }
+            .mobile-header { display: none; }
+            .menu-toggle { display: none; }
+        }
     </style>
 </head>
 <body>
 
-<aside class="sidebar">
-    <div class="sidebar-header">
-        <h3 style="margin:0; font-size:1.2rem;">🇳🇵 ACCT PRO AI</h3>
-        <span style="font-size:10px; opacity:0.7;">ENTERPRISE EDITION V5.0</span>
+<div class="mobile-header">
+    <strong>ACCT PRO AI v5.0</strong>
+    <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+</div>
+
+<nav class="sidebar" id="sidebar">
+    <div style="padding: 20px; text-align: center; border-bottom: 1px solid #34495e; margin-bottom: 10px;">
+        <h3 style="margin:0;">Dashboard</h3>
     </div>
+    <button class="sidebar-btn active" onclick="showTab('payroll-tab')">💰 Payroll & Tax</button>
+    <button class="sidebar-btn" onclick="showTab('vat-tds-tab')">📊 VAT & TDS</button>
+    <button class="sidebar-btn" onclick="showTab('recon-tab')">💵 Cash & Recon</button>
+    <button class="sidebar-btn" onclick="showTab('util-tab')">🛠️ Important Links/Acts</button>
+    <button class="sidebar-btn" onclick="showTab('ai-tab')">🤖 AI Advisor</button>
+</nav>
+
+<div class="main-content">
     
-    <div class="nav-group">
-        <div class="nav-label">Core Modules</div>
-        <button class="nav-btn active" onclick="openModule(event, 'payroll-mod')">💰 Payroll & SSF</button>
-        <button class="nav-btn" onclick="openModule(event, 'tax-mod')">📊 VAT & TDS Hub</button>
-        <button class="nav-btn" onclick="openModule(event, 'recon-mod')">💵 Reconciliation</button>
-        <button class="nav-btn" onclick="openModule(event, 'finance-mod')">📈 Financial Analysis</button>
-        <button class="nav-btn" onclick="openModule(event, 'util-mod')">🛠️ Utility Tools</button>
-        
-        <div class="nav-label">Intelligence</div>
-        <button class="nav-btn" onclick="openModule(event, 'ai-mod')" style="color:#f1c40f;">✨ AI Legal Expert</button>
+    <div id="payroll-tab" class="tab-panel active">
+        <div class="card">
+            <h2>Monthly Payroll (SSF Integrated)</h2>
+            <label>Monthly Basic Salary</label>
+            <input type="number" id="mSal" value="50000">
+            <label>SSF Contributor?</label>
+            <select id="mSSF">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <button class="btn btn-primary" onclick="calcPayroll()">Calculate Tax</button>
+            <div id="payRes" class="result-box"></div>
+        </div>
     </div>
-</aside>
 
-<main class="main-workspace">
-    <header class="top-bar">
-        <div id="module-title"><strong>Payroll & SSF Management</strong></div>
-        <div style="display:flex; gap:10px;">
-            <input type="password" id="apiKey" placeholder="OpenRouter API Key" style="width:200px; margin:0; padding:8px;">
-            <button class="btn btn-primary" style="padding:8px 15px;" onclick="saveKey()">Connect AI</button>
+    <div id="vat-tds-tab" class="tab-panel" style="display:none;">
+        <div class="card">
+            <h2>VAT & TDS Calculator</h2>
+            <input type="number" id="vAmt" placeholder="Amount">
+            <select id="vMode">
+                <option value="excl">VAT Exclusive</option>
+                <option value="incl">VAT Inclusive</option>
+            </select>
+            <button class="btn btn-primary" onclick="calcVAT()">Process</button>
+            <div id="vatRes" class="result-box"></div>
         </div>
-    </header>
-
-    <div class="content-area">
-
-        <div id="payroll-mod" class="tab-panel active">
-            <div class="card">
-                <h2>Monthly Payroll & Slab Calculator</h2>
-                <div class="grid-2">
-                    <div>
-                        <label>Monthly Basic Salary</label>
-                        <input type="number" id="baseSal" value="50000" oninput="calculatePayroll()">
-                        <label>Monthly Allowance</label>
-                        <input type="number" id="allowance" value="5000" oninput="calculatePayroll()">
-                        <label>SSF Registered?</label>
-                        <select id="ssfStatus" onchange="calculatePayroll()">
-                            <option value="yes">Yes (1% SST Waived)</option>
-                            <option value="no">No (1% SST Apply)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Marital Status</label>
-                        <select id="maritalStatus" onchange="calculatePayroll()">
-                            <option value="single">Single (5L Base)</option>
-                            <option value="married">Married (6L Base)</option>
-                        </select>
-                        <label>Annual Deductions (Insurance/Home Loan)</label>
-                        <input type="number" id="annDeduct" placeholder="Total annual deductions" oninput="calculatePayroll()">
-                        <button class="btn btn-success" style="width:100%" onclick="exportPayroll()">📥 Export Pay-slip to Excel</button>
-                    </div>
-                </div>
-                <div id="payrollRes" class="result-box"></div>
-            </div>
-
-            <div class="card">
-                <h2>Increment & Bonus Impact</h2>
-                <div class="grid-2">
-                    <div>
-                        <label>Annual Bonus Amount</label>
-                        <input type="number" id="bonusAmt" placeholder="Ex: 50000">
-                        <button class="btn btn-primary" onclick="calcBonus()">Calculate Bonus TDS</button>
-                    </div>
-                    <div>
-                        <label>Increment %</label>
-                        <input type="number" id="incPerc" placeholder="Ex: 10%">
-                        <button class="btn btn-primary" onclick="calcIncrement()">Analyze Increment</button>
-                    </div>
-                </div>
-                <div id="impactRes" class="result-box">Analysis results here...</div>
-            </div>
-        </div>
-
-        <div id="tax-mod" class="tab-panel">
-            <div class="card">
-                <h2>Net-to-Gross & VAT Splitter</h2>
-                <div class="grid-2">
-                    <div>
-                        <label>Amount (NPR)</label>
-                        <input type="number" id="taxAmtInput" placeholder="Enter Figure">
-                        <label>Mode</label>
-                        <select id="taxMode">
-                            <option value="excl">VAT Exclusive (Add 13%)</option>
-                            <option value="incl">VAT Inclusive (Extract 13%)</option>
-                            <option value="netToGross">Net-to-Gross (Reverse TDS)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>TDS Rate (%)</label>
-                        <select id="tdsRateInput">
-                            <option value="0">0%</option>
-                            <option value="1.5">1.5% (Service)</option>
-                            <option value="10">10% (Rent)</option>
-                            <option value="15">15% (Professional)</option>
-                        </select>
-                        <button class="btn btn-primary" style="width:100%" onclick="calculateVatTds()">Process Tax Logic</button>
-                    </div>
-                </div>
-                <div id="taxRes" class="result-box">Detailed breakdown here...</div>
-            </div>
-        </div>
-
-        <div id="recon-mod" class="tab-panel">
-            <div class="card">
-                <h2>Cash Denomination & Reconciliation</h2>
-                <div class="grid-2">
-                    <div class="cash-table">
-                        <script>
-                            const notes = [1000, 500, 100, 50, 20, 10, 5, 2, 1];
-                            notes.forEach(n => {
-                                document.write(`
-                                    <div style="display:grid; grid-template-columns: 80px 20px 1fr; align-items:center; gap:10px;">
-                                        <span>Rs. ${n}</span> <span>×</span>
-                                        <input type="number" class="cash-qty" data-val="${n}" placeholder="Qty" oninput="calcCash()">
-                                    </div>
-                                `);
-                            });
-                        </script>
-                    </div>
-                    <div>
-                        <div id="cashTotal" style="font-size:2rem; font-weight:bold; color:var(--primary); text-align:right;">Total: Rs. 0</div>
-                        <hr>
-                        <h3>Petty Cash Recon</h3>
-                        <label>Physical Cash Found</label>
-                        <input type="number" id="physicalCash">
-                        <label>Expected Ledger Balance</label>
-                        <input type="number" id="expectedCash">
-                        <button class="btn btn-danger" onclick="reconCash()">Check Difference</button>
-                        <div id="reconRes" class="result-box"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="finance-mod" class="tab-panel">
-            <div class="grid-2">
-                <div class="card">
-                    <h2>Depreciation Scheduler (WDV)</h2>
-                    <label>Purchase Value</label>
-                    <input type="number" id="assetVal" placeholder="Asset Cost">
-                    <label>Block Rate (%)</label>
-                    <input type="number" id="depRate" placeholder="Ex: 25">
-                    <button class="btn btn-primary" onclick="calcDepreciation()">Generate 3-Year Schedule</button>
-                    <div id="depRes" class="result-box"></div>
-                </div>
-                <div class="card">
-                    <h2>Break-Even Analysis</h2>
-                    <label>Total Fixed Costs</label>
-                    <input type="number" id="fixedCost">
-                    <label>Selling Price Per Unit</label>
-                    <input type="number" id="spUnit">
-                    <label>Variable Cost Per Unit</label>
-                    <input type="number" id="vcUnit">
-                    <button class="btn btn-primary" onclick="calcBEP()">Calculate BEP</button>
-                    <div id="bepRes" class="result-box"></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="util-mod" class="tab-panel">
-            <div class="card">
-                <h2>Fiscal Year Helper (BS ↔ AD)</h2>
-                <label>B.S. Date (YYYY-MM-DD)</label>
-                <input type="text" id="bsDate" placeholder="2082-01-01">
-                <button class="btn btn-primary" onclick="convertDate()">Convert AD & FY Info</button>
-                <div id="utilRes" class="result-box"></div>
-            </div>
-            <div class="card">
-                <h2>PAN Format & Loan Accrual</h2>
-                <input type="text" id="panVal" placeholder="9 Digit PAN">
-                <button class="btn btn-primary" onclick="validatePAN()">Check PAN</button>
-                <div id="panRes" class="result-box"></div>
-            </div>
-        </div>
-
-        <div id="ai-mod" class="tab-panel">
-            <div class="card">
-                <h2>AI Journal Entry & Tax Advisor</h2>
-                <textarea id="aiInput" rows="6" placeholder="Ask like: 'Purchased a laptop for 80,000 incl VAT, paid via bank. Create journal entry and TDS rule.'"></textarea>
-                <button class="btn btn-primary" id="aiBtn" onclick="consultAI()">Ask Expert AI</button>
-                <div id="aiOut" class="result-box" style="min-height: 200px;"></div>
-            </div>
-        </div>
-
     </div>
-</main>
+
+    <div id="util-tab" class="tab-panel" style="display:none;">
+        <div class="card">
+            <h2>📜 Important Act Links</h2>
+            <div class="links-grid">
+                <a href="https://ird.gov.np" target="_blank" class="link-item">IRD Portal</a>
+                <a href="https://ssf.gov.np" target="_blank" class="link-item">SSF Nepal</a>
+                <a href="https://ocr.gov.np" target="_blank" class="link-item">OCR (Company)</a>
+                <a href="https://lawcommission.gov.np" target="_blank" class="link-item">Law Commission</a>
+            </div>
+        </div>
+        <div class="card">
+            <h2>📅 Fiscal Year (BS ↔ AD)</h2>
+            <input type="number" id="bsYear" value="2082">
+            <button class="btn btn-primary" onclick="alert('AD Year: 2025/26')">Check FY</button>
+        </div>
+    </div>
+
+    <div id="ai-tab" class="tab-panel" style="display:none;">
+        <div class="card">
+            <h2>AI Advisor</h2>
+            <textarea id="aiQ" rows="4" placeholder="Ask your question..."></textarea>
+            <button class="btn btn-primary">Ask AI Expert</button>
+        </div>
+    </div>
+
+</div>
 
 <script>
-// --- NAVIGATION CORE ---
-function openModule(evt, modId) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(modId).classList.add('active');
-    evt.currentTarget.classList.add('active');
-    document.getElementById('module-title').innerHTML = `<strong>${evt.currentTarget.innerText}</strong>`;
-}
-
-// --- API & AI ENGINE ---
-function saveKey() {
-    localStorage.setItem('acct_pro_key', document.getElementById('apiKey').value);
-    alert("AI Key Connected!");
-}
-async function consultAI() {
-    const key = localStorage.getItem('acct_pro_key');
-    const input = document.getElementById('aiInput').value;
-    if(!key) return alert("Please setup API Key!");
-    
-    const out = document.getElementById('aiOut');
-    const btn = document.getElementById('aiBtn');
-    out.innerHTML = "Processing Legal Frameworks... ⏳";
-    btn.disabled = true;
-
-    try {
-        const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-            method: "POST",
-            headers: { "Authorization": `Bearer ${key}`, "Content-Type": "application/json" },
-            body: JSON.stringify({
-                "model": "stepfun/step-3.5-flash:free",
-                "messages": [{ "role": "system", "content": "You are a Senior Nepal CA. Cite Income Tax Act 2058 and VAT Act 2052. Use Markdown tables for Journal Entries." },
-                             { "role": "user", "content": input }]
-            })
-        });
-        const data = await res.json();
-        out.innerHTML = marked.parse(data.choices[0].message.content);
-    } catch(e) { out.innerHTML = "Error connecting to AI Server."; }
-    finally { btn.disabled = false; }
-}
-
-// --- PAYROLL ENGINE ---
-function calculatePayroll() {
-    let basic = parseFloat(document.getElementById('baseSal').value) || 0;
-    let allow = parseFloat(document.getElementById('allowance').value) || 0;
-    let ssf = document.getElementById('ssfStatus').value;
-    let status = document.getElementById('maritalStatus').value;
-    let annualDeduct = parseFloat(document.getElementById('annDeduct').value) || 0;
-
-    let monthlyGross = basic + allow;
-    let annualGross = monthlyGross * 12;
-    let eeSSF = (ssf === 'yes') ? (basic * 0.11) : 0;
-    
-    let annualTaxable = annualGross - (eeSSF * 12) - annualDeduct;
-    
-    // Slab Logic (Simplified for Demo)
-    let slab1 = (status === 'single') ? 500000 : 600000;
-    let tax = 0;
-    if(annualTaxable > slab1) {
-        if(ssf === 'no') tax += slab1 * 0.01;
-        let rem = annualTaxable - slab1;
-        let s2 = Math.min(rem, 200000); tax += s2 * 0.10; rem -= s2;
-        if(rem > 0) { let s3 = Math.min(rem, 300000); tax += s3 * 0.20; rem -= s3; }
-        if(rem > 0) { tax += rem * 0.30; }
-    } else {
-        tax = (ssf === 'no') ? (annualTaxable * 0.01) : 0;
+    // Toggle Menu for Mobile
+    function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('active');
     }
 
-    document.getElementById('payrollRes').innerHTML = `
-        Monthly Gross: Rs. ${monthlyGross.toLocaleString()} | Employee SSF: Rs. ${eeSSF.toLocaleString()}<br>
-        Annual Taxable: Rs. ${annualTaxable.toLocaleString()} | <b>Monthly Income Tax: Rs. ${(tax/12).toFixed(2)}</b><br>
-        <h2 style="color:var(--success)">Net Take-Home: Rs. ${(monthlyGross - eeSSF - (tax/12)).toLocaleString()}</h2>
-    `;
-}
+    // Switch Tabs and Auto-Close Menu on Mobile
+    function showTab(tabId) {
+        document.querySelectorAll('.tab-panel').forEach(t => t.style.display = 'none');
+        document.getElementById(tabId).style.display = 'block';
+        
+        document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+        event.currentTarget.classList.add('active');
 
-// --- VAT/TDS HUB ---
-function calculateVatTds() {
-    let amt = parseFloat(document.getElementById('taxAmtInput').value) || 0;
-    let mode = document.getElementById('taxMode').value;
-    let tdsR = parseFloat(document.getElementById('tdsRateInput').value) / 100;
-    let base, vat, total, tds;
-
-    if(mode === 'excl') {
-        base = amt; vat = base * 0.13; total = base + vat;
-    } else if(mode === 'incl') {
-        total = amt; base = total / 1.13; vat = total - base;
-    } else { // Net-to-Gross
-        base = amt / (1 - tdsR); vat = base * 0.13; total = base + vat;
+        // Close sidebar on mobile after clicking
+        if (window.innerWidth < 1024) {
+            toggleMenu();
+        }
     }
-    tds = base * tdsR;
-    
-    document.getElementById('taxRes').innerHTML = `
-        Taxable Base: ${base.toFixed(2)} | VAT: ${vat.toFixed(2)}<br>
-        TDS Amount: (${tds.toFixed(2)})<br>
-        <b>Net Payable/Received: Rs. ${(base + vat - tds).toFixed(2)}</b>
-    `;
-}
 
-// --- CASH COUNTER ---
-function calcCash() {
-    let qties = document.querySelectorAll('.cash-qty');
-    let total = 0;
-    qties.forEach(q => {
-        total += (parseInt(q.value) || 0) * parseInt(q.dataset.val);
-    });
-    document.getElementById('cashTotal').innerText = `Total: Rs. ${total.toLocaleString()}`;
-}
+    // Simple Payroll Calculation logic
+    function calcPayroll() {
+        let sal = parseFloat(document.getElementById('mSal').value);
+        let ssf = document.getElementById('mSSF').value;
+        let tax = (sal > 50000 && ssf === 'no') ? (sal * 0.01) : 0;
+        document.getElementById('payRes').innerHTML = `Gross: Rs. ${sal} <br> Est. Monthly Tax: Rs. ${tax}`;
+    }
 
-// --- MISC UTILS ---
-function validatePAN() {
-    let pan = document.getElementById('panVal').value;
-    document.getElementById('panRes').innerHTML = /^\d{9}$/.test(pan) ? "✅ Valid 9-Digit PAN" : "❌ Invalid Format";
-}
-
-function calcDepreciation() {
-    let v = parseFloat(document.getElementById('assetVal').value);
-    let r = parseFloat(document.getElementById('depRate').value) / 100;
-    let y1 = v * (1 - r); let y2 = y1 * (1 - r);
-    document.getElementById('depRes').innerHTML = `Year 1 WDV: Rs. ${y1.toFixed(2)}<br>Year 2 WDV: Rs. ${y2.toFixed(2)}`;
-}
-
-// Initial Run
-calculatePayroll();
+    function calcVAT() {
+        let amt = parseFloat(document.getElementById('vAmt').value);
+        let res = amt * 1.13;
+        document.getElementById('vatRes').innerHTML = `Total with VAT: Rs. ${res.toFixed(2)}`;
+    }
 </script>
 
 </body>
