@@ -1,238 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🇳🇵 Nepal Accountant Pro - 32 Tools Edition</title>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <style>
-        :root { --primary: #003893; --secondary: #dc143c; --success: #28a745; --dark: #1a252f; --light: #f8f9fa; }
-        body { font-family: 'Inter', sans-serif; background: #eef2f7; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nepal Accountant Pro</title>
 
-        /* Navigation */
-        .mobile-header { background: var(--dark); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; sticky: top; z-index: 1001; }
-        .sidebar { width: 260px; background: var(--dark); color: white; height: 100vh; position: fixed; top: 0; left: -260px; transition: 0.3s; z-index: 1000; overflow-y: auto; padding-top: 60px; }
-        .sidebar.active { left: 0; }
-        .sidebar-btn { width: 100%; padding: 15px 20px; border: none; background: none; color: #adb5bd; text-align: left; cursor: pointer; border-bottom: 1px solid #2c3e50; font-size: 14px; }
-        .sidebar-btn.active { background: var(--primary); color: white; }
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-        .main-content { padding: 15px; flex: 1; width: 100%; box-sizing: border-box; transition: 0.3s; }
-        .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; border-top: 5px solid var(--primary); }
-        
-        /* Grid */
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
-        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
-        .btn { padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; margin: 5px 0; }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-success { background: var(--success); color: white; }
-
-        /* Calculator Display */
-        .calc-screen { background: #222; color: #0f0; padding: 15px; text-align: right; font-size: 1.5rem; border-radius: 8px; margin-bottom: 10px; }
-        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
-        .calc-grid button { padding: 15px; border-radius: 5px; border: 1px solid #ddd; font-weight: bold; cursor: pointer; }
-
-        /* Results */
-        .result-box { background: #f0f7ff; padding: 15px; border-radius: 8px; border-left: 5px solid var(--success); margin-top: 10px; font-size: 13px; line-height: 1.6; }
-
-        @media (min-width: 1024px) {
-            .sidebar { left: 0; padding-top: 20px; }
-            .main-content { margin-left: 260px; }
-            .mobile-header { display: none; }
-        }
-    </style>
+<style>
+:root { --primary:#003893; --success:#28a745; --dark:#1a252f; }
+body { margin:0;font-family:Arial;background:#eef2f7; }
+.sidebar { width:250px;background:var(--dark);color:white;height:100vh;position:fixed; }
+.sidebar button { width:100%;padding:15px;border:none;background:none;color:#bbb;text-align:left;cursor:pointer; }
+.sidebar button:hover { background:var(--primary);color:white; }
+.main { margin-left:250px;padding:20px; }
+.card { background:white;padding:20px;border-radius:10px;margin-bottom:20px; }
+input,select,textarea { width:100%;padding:10px;margin:5px 0; }
+button.run { background:var(--primary);color:white;padding:10px;border:none;width:100%; }
+.result { background:#f0f7ff;padding:10px;margin-top:10px;border-left:4px solid var(--success); }
+.calc button { width:24%;padding:15px;margin:1%; }
+</style>
 </head>
+
 <body>
 
-<div class="mobile-header">
-    <strong>ACCT PRO AI v5.0 (32 Tools)</strong>
-    <button onclick="toggleMenu()" style="background:var(--primary); color:white; border:none; padding:8px 12px; border-radius:5px;">☰ Menu</button>
+<div class="sidebar">
+<button onclick="show('payroll')">Payroll</button>
+<button onclick="show('tax')">VAT / TDS</button>
+<button onclick="show('cash')">Cash Recon</button>
+<button onclick="show('finance')">Finance</button>
+<button onclick="show('date')">Date Convert</button>
+<button onclick="show('ai')">AI Advisor</button>
+<button onclick="show('calc')">Calculator</button>
 </div>
 
-<nav class="sidebar" id="sidebar">
-    <div style="padding: 20px; border-bottom: 1px solid #34495e;"><h4>Accounting Hub</h4></div>
-    <button class="sidebar-btn active" onclick="showTab('payroll')">💰 Payroll & Tax Slab</button>
-    <button class="sidebar-btn" onclick="showTab('vat-tds')">📊 VAT/TDS & Reverse</button>
-    <button class="sidebar-btn" onclick="showTab('recon')">💵 Cash & Recon</button>
-    <button class="sidebar-btn" onclick="showTab('finance')">📈 Finance & Ratio</button>
-    <button class="sidebar-btn" onclick="showTab('utils')">🛠️ Date/PAN/Links</button>
-    <button class="sidebar-btn" onclick="showTab('ai')">🤖 AI Advisor (API Key)</button>
-    <button class="sidebar-btn" onclick="showTab('calc')">🧮 Standard Calc</button>
-</nav>
+<div class="main">
 
-<div class="main-content">
+<!-- Payroll -->
+<div id="payroll" class="card">
+<h3>Payroll Calculator</h3>
+<input type="number" id="salary" placeholder="Monthly Salary">
+<select id="ssf"><option value="yes">SSF Yes</option><option value="no">SSF No</option></select>
+<button class="run" onclick="calcPayroll()">Calculate</button>
+<div id="payrollRes" class="result"></div>
+</div>
 
-    <div id="payroll" class="tab-panel">
-        <div class="card">
-            <h2>Payroll & Slab (FY 2082/83)</h2>
-            <div class="grid-2">
-                <div>
-                    <label>Monthly Basic</label>
-                    <input type="number" id="mBasic" value="50000">
-                    <label>SSF?</label>
-                    <select id="mSSF"><option value="yes">Yes</option><option value="no">No</option></select>
-                </div>
-                <div>
-                    <label>Status</label>
-                    <select id="mStatus"><option value="single">Single</option><option value="married">Married</option></select>
-                    <label>Insurance/Home Loan (Annual)</label>
-                    <input type="number" id="mDeduct" value="0">
-                </div>
-            </div>
-            <button class="btn btn-primary" onclick="calcPayroll()">Run Payroll Analysis</button>
-            <div id="payrollRes" class="result-box"></div>
-        </div>
-    </div>
+<!-- VAT -->
+<div id="tax" class="card" style="display:none">
+<h3>VAT / TDS Engine</h3>
+<input type="number" id="amt" placeholder="Amount">
+<select id="mode">
+<option value="excl">VAT Exclusive</option>
+<option value="incl">VAT Inclusive</option>
+<option value="net">Reverse TDS</option>
+</select>
+<input type="number" id="tdsRate" value="1.5">
+<button class="run" onclick="calcTax()">Process</button>
+<div id="taxRes" class="result"></div>
+</div>
 
-    <div id="vat-tds" class="tab-panel" style="display:none;">
-        <div class="card">
-            <h2>VAT, TDS & Net-to-Gross</h2>
-            <input type="number" id="vAmt" placeholder="Enter Amount">
-            <select id="vMode">
-                <option value="excl">VAT Exclusive (Add 13%)</option>
-                <option value="incl">VAT Inclusive (Extract 13%)</option>
-                <option value="net">Net-to-Gross (Reverse TDS)</option>
-            </select>
-            <label>TDS Rate (%)</label>
-            <input type="number" id="vTds" value="1.5">
-            <button class="btn btn-primary" onclick="runTaxLogic()">Process Transaction</button>
-            <div id="taxRes" class="result-box"></div>
-        </div>
-    </div>
+<!-- Cash -->
+<div id="cash" class="card" style="display:none">
+<h3>Cash Denomination</h3>
+<div id="denoms"></div>
+<input type="number" id="ledger" placeholder="Ledger Balance">
+<button class="run" onclick="recon()">Recon</button>
+<div id="cashRes" class="result"></div>
+</div>
 
-    <div id="recon" class="tab-panel" style="display:none;">
-        <div class="card">
-            <h2>Cash Denomination & Recon</h2>
-            <div id="denomInputs">
-                <script>
-                    [1000, 500, 100, 50, 20, 10, 5, 2, 1].forEach(n => {
-                        document.write(`<div style="display:flex; align-items:center; gap:10px; margin-bottom:5px;">
-                            <span style="width:60px">Rs. ${n}</span> × <input type="number" class="c-qty" data-v="${n}" style="margin:0; padding:5px;" oninput="cashSum()">
-                        </div>`);
-                    });
-                </script>
-            </div>
-            <h3 id="cTotal">Total: Rs. 0</h3>
-            <hr>
-            <label>Physical Cash vs Ledger</label>
-            <input type="number" id="ledger" placeholder="Ledger Balance">
-            <button class="btn btn-primary" onclick="reconCash()">Check Shortage</button>
-            <div id="reconRes" class="result-box"></div>
-        </div>
-    </div>
+<!-- Finance -->
+<div id="finance" class="card" style="display:none">
+<h3>Financial Analysis</h3>
+<input id="sales" placeholder="Sales">
+<input id="exp" placeholder="Expenses">
+<input id="assets" placeholder="Assets">
+<button class="run" onclick="finance()">Analyze</button>
+<div id="finRes" class="result"></div>
+</div>
 
-    <div id="utils" class="tab-panel" style="display:none;">
-        <div class="card">
-            <h2>Date Converter (BS ↔ AD)</h2>
-            <input type="text" id="dateIn" placeholder="2082-01-01">
-            <button class="btn btn-primary" onclick="convertDate()">Convert & FY Check</button>
-            <div id="dateRes" class="result-box"></div>
-        </div>
-        <div class="card">
-            <h2>Quick Links & Acts</h2>
-            <div class="grid-2">
-                <a href="https://ird.gov.np" target="_blank" class="btn btn-primary" style="text-decoration:none; text-align:center;">IRD Portal</a>
-                <a href="https://ssf.gov.np" target="_blank" class="btn btn-primary" style="text-decoration:none; text-align:center;">SSF Nepal</a>
-            </div>
-        </div>
-    </div>
+<!-- Date -->
+<div id="date" class="card" style="display:none">
+<h3>BS ⇄ AD Converter</h3>
+<input id="dateIn" placeholder="2082-01-01 OR 2025-04-14">
+<button class="run" onclick="convert()">Convert</button>
+<div id="dateRes" class="result"></div>
+</div>
 
-    <div id="ai" class="tab-panel" style="display:none;">
-        <div class="card">
-            <h2>AI Setup & Advisor</h2>
-            <label>OpenRouter API Key (Required)</label>
-            <input type="password" id="apiKey" placeholder="sk-or-v1-...">
-            <button class="btn btn-success" onclick="saveKey()">Save Key</button>
-            <hr>
-            <textarea id="aiQ" rows="4" placeholder="Ask anything: 'Journal entry for VAT purchase'"></textarea>
-            <button class="btn btn-primary" onclick="askAI()">Consult AI CA</button>
-            <div id="aiRes" class="result-box"></div>
-        </div>
-    </div>
+<!-- AI -->
+<div id="ai" class="card" style="display:none">
+<h3>AI Accountant</h3>
+<input type="password" id="apiKey" placeholder="OpenRouter API Key">
+<textarea id="q" placeholder="Ask accounting question"></textarea>
+<button class="run" onclick="ask()">Ask AI</button>
+<div id="aiRes" class="result"></div>
+</div>
 
-    <div id="calc" class="tab-panel" style="display:none;">
-        <div class="card" style="max-width:350px; margin:auto;">
-            <div id="cDisp" class="calc-screen">0</div>
-            <div class="calc-grid">
-                <button onclick="cClr()">C</button><button onclick="cP('/')">/</button><button onclick="cP('*')">×</button><button onclick="cBs()">⌫</button>
-                <button onclick="cP('7')">7</button><button onclick="cP('8')">8</button><button onclick="cP('9')">9</button><button onclick="cP('-')">-</button>
-                <button onclick="cP('4')">4</button><button onclick="cP('5')">5</button><button onclick="cP('6')">6</button><button onclick="cP('+')">+</button>
-                <button onclick="cP('1')">1</button><button onclick="cP('2')">2</button><button onclick="cP('3')">3</button><button onclick="cRes()" style="background:var(--success); color:white;">=</button>
-                <button onclick="cP('0')" style="grid-column: span 2;">0</button><button onclick="cP('.')">.</button>
-            </div>
-        </div>
-    </div>
+<!-- Calculator -->
+<div id="calc" class="card" style="display:none">
+<h3>Calculator</h3>
+<input id="screen" value="0">
+<div class="calc">
+<button onclick="p('7')">7</button><button onclick="p('8')">8</button><button onclick="p('9')">9</button><button onclick="p('/')">÷</button>
+<button onclick="p('4')">4</button><button onclick="p('5')">5</button><button onclick="p('6')">6</button><button onclick="p('*')">×</button>
+<button onclick="p('1')">1</button><button onclick="p('2')">2</button><button onclick="p('3')">3</button><button onclick="p('-')">-</button>
+<button onclick="p('0')">0</button><button onclick="p('.')">.</button><button onclick="solve()">=</button><button onclick="clr()">C</button>
+</div>
+</div>
 
 </div>
 
 <script>
-    function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
-    function showTab(id) {
-        document.querySelectorAll('.tab-panel').forEach(t => t.style.display = 'none');
-        document.getElementById(id).style.display = 'block';
-        document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-        if(window.innerWidth < 1024) toggleMenu();
-    }
+// navigation
+function show(id){
+document.querySelectorAll('.card').forEach(c=>c.style.display='none');
+document.getElementById(id).style.display='block';
+}
 
-    // API Key Logic
-    function saveKey() { localStorage.setItem('tk', document.getElementById('apiKey').value); alert("Key Saved!"); }
-    if(localStorage.getItem('tk')) document.getElementById('apiKey').value = localStorage.getItem('tk');
+// payroll
+function calcPayroll(){
+let s=+salary.value;
+let ssfDed=(ssf.value==='yes')?s*0.11:0;
+let annual=(s-ssfDed)*12;
+let tax=annual>500000?(annual-500000)*0.1:0;
+payrollRes.innerHTML=`SSF: ${ssfDed.toFixed(2)} | Annual: ${annual.toFixed(2)} | Tax: ${tax.toFixed(2)}`;
+}
 
-    // 1. Payroll
-    function calcPayroll() {
-        let b = parseFloat(document.getElementById('mBasic').value) || 0;
-        let ssf = document.getElementById('mSSF').value;
-        let ee = (ssf === 'yes') ? b * 0.11 : 0;
-        let taxable = (b - ee) * 12;
-        document.getElementById('payrollRes').innerHTML = `Monthly Gross: Rs. ${b} <br> SSF (11%): Rs. ${ee} <br> <b>Take Home (Est): Rs. ${b - ee}</b>`;
-    }
+// vat/tds
+function calcTax(){
+let a=+amt.value;
+let r=(+tdsRate.value)/100;
+let base,vat,tds;
+if(mode.value==='excl'){ base=a; vat=a*0.13; }
+if(mode.value==='incl'){ base=a/1.13; vat=a-base; }
+if(mode.value==='net'){ base=a/(1-r); vat=base*0.13; }
+tds=base*r;
+taxRes.innerHTML=`Base:${base.toFixed(2)} VAT:${vat.toFixed(2)} TDS:${tds.toFixed(2)} Net:${(base+vat-tds).toFixed(2)}`;
+}
 
-    // 2. VAT/TDS
-    function runTaxLogic() {
-        let a = parseFloat(document.getElementById('vAmt').value) || 0;
-        let m = document.getElementById('vMode').value;
-        let t = parseFloat(document.getElementById('vTds').value) / 100;
-        let base, vat, tds;
-        if(m === 'excl') { base = a; vat = a * 0.13; }
-        else if(m === 'incl') { base = a / 1.13; vat = a - base; }
-        else { base = a / (1 - t); vat = base * 0.13; }
-        tds = base * t;
-        document.getElementById('taxRes').innerHTML = `Base: ${base.toFixed(2)} | VAT: ${vat.toFixed(2)} | TDS: ${tds.toFixed(2)} <br> <b>Net: ${(base + vat - tds).toFixed(2)}</b>`;
-    }
+// cash
+[1000,500,100,50,20,10,5,2,1].forEach(n=>{
+denoms.innerHTML+=`Rs ${n} × <input type='number' class='q' data-v='${n}'><br>`;
+});
 
-    // 3. Cash
-    function cashSum() {
-        let t = 0;
-        document.querySelectorAll('.c-qty').forEach(i => { t += (i.value || 0) * i.dataset.v; });
-        document.getElementById('cTotal').innerText = "Total: Rs. " + t.toLocaleString();
-    }
+function recon(){
+let total=0;
+document.querySelectorAll('.q').forEach(i=>total+=(+i.value||0)*i.dataset.v);
+let diff=total-(+ledger.value||0);
+cashRes.innerHTML=`Physical:${total} Difference:${diff}`;
+}
 
-    // 4. Calculator
-    let cd = document.getElementById('cDisp');
-    function cP(v) { if(cd.innerText === "0") cd.innerText = v; else cd.innerText += v; }
-    function cClr() { cd.innerText = "0"; }
-    function cBs() { cd.innerText = cd.innerText.slice(0, -1) || "0"; }
-    function cRes() { try { cd.innerText = eval(cd.innerText); } catch(e) { cd.innerText = "Error"; } }
+// finance
+function finance(){
+let p=sales.value-exp.value;
+let margin=(p/sales.value)*100;
+let roa=(p/assets.value)*100;
+finRes.innerHTML=`Profit:${p} Margin:${margin.toFixed(2)}% ROA:${roa.toFixed(2)}%`;
+}
 
-    // 5. AI Advisor
-    async function askAI() {
-        const key = localStorage.getItem('tk');
-        if(!key) return alert("API Key first!");
-        const out = document.getElementById('aiRes');
-        out.innerHTML = "Consulting Law Books... ⏳";
-        try {
-            const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-                method: "POST",
-                headers: { "Authorization": `Bearer ${key}`, "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    "model": "stepfun/step-3.5-flash:free",
-                    "messages": [{"role": "system", "content": "You are a Senior Nepal CA."}, {"role": "user", "content": document.getElementById('aiQ').value}]
-                })
-            });
-            const data = await res.json();
-            out.innerHTML = marked.parse(data.choices[0].message.content);
-        } catch(e) { out.innerHTML = "Connection Error!"; }
-    }
+// date convert
+function convert(){
+let d=dateIn.value.split('-');
+let y=+d[0];
+if(y>2000){ dateRes.innerHTML=`AD ≈ ${y-56}-${d[1]}-${d[2]}`;}
+else{ dateRes.innerHTML=`BS ≈ ${y+56}-${d[1]}-${d[2]}`;}
+}
+
+// calculator
+function p(v){ screen.value=(screen.value==='0')?v:screen.value+v;}
+function clr(){screen.value='0';}
+function solve(){screen.value=eval(screen.value);}
+
+// AI memory chat
+let history=[];
+async function ask(){
+localStorage.setItem('key',apiKey.value);
+history.push({role:"user",content:q.value});
+
+let res=await fetch("https://openrouter.ai/api/v1/chat/completions",{
+method:"POST",
+headers:{
+"Authorization":"Bearer "+localStorage.getItem('key'),
+"Content-Type":"application/json"
+},
+body:JSON.stringify({model:"mistralai/mistral-7b-instruct:free",messages:history})
+});
+
+let data=await res.json();
+let reply=data.choices[0].message.content;
+history.push({role:"assistant",content:reply});
+aiRes.innerHTML=marked.parse(reply);
+}
 </script>
+
 </body>
 </html>
