@@ -3,280 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nepal Accountant Pro</title>
-
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
+<title>Nepal Accounting Suite</title>
 <style>
-:root { --primary:#003893; --success:#28a745; --dark:#1a252f; --light:#f0f7ff; }
-body { margin:0; font-family:Arial, sans-serif; background:#eef2f7; line-height:1.5; }
-.sidebar { width:250px; background:var(--dark); color:white; height:100vh; position:fixed; overflow-y:auto; transition:0.3s; }
-.sidebar button { width:100%; padding:15px 20px; border:none; background:none; color:#ddd; text-align:left; cursor:pointer; font-size:16px; }
-.sidebar button:hover, .sidebar button.active { background:var(--primary); color:white; }
-.main { margin-left:250px; padding:20px; transition:0.3s; }
-.card { background:white; padding:20px; border-radius:10px; margin-bottom:25px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-input, select, textarea, button { width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:6px; font-size:16px; box-sizing:border-box; }
-button.run { background:var(--primary); color:white; border:none; cursor:pointer; font-weight:bold; }
-button.run:hover { opacity:0.9; }
-.result { background:var(--light); padding:15px; margin-top:15px; border-left:5px solid var(--success); border-radius:6px; white-space:pre-wrap; }
-.calc { display:flex; flex-wrap:wrap; }
-.calc button { width:24%; padding:18px; margin:1%; font-size:20px; background:#444; color:white; border:none; border-radius:8px; cursor:pointer; }
-.calc button:hover { background:#666; }
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-    .sidebar { width:100%; height:auto; position:relative; display:flex; flex-wrap:wrap; justify-content:center; padding:10px 0; }
-    .sidebar button { width:auto; padding:12px 18px; font-size:14px; margin:4px 6px; border-radius:20px; }
-    .main { margin-left:0; padding:15px; }
-    input, select, textarea, button { font-size:16px; padding:14px; }
-    .calc button { width:23.5%; padding:20px; font-size:22px; margin:1%; }
-    .card { padding:15px; }
-}
+body {font-family: Arial, sans-serif; margin:0; background:#f5f7fa;}
+header {background:#2c3e50; color:#fff; padding:15px; text-align:center;}
+nav {display:flex; flex-wrap:wrap; background:#34495e;}
+nav button {flex:1; padding:10px; border:none; background:#34495e; color:#fff; cursor:pointer;}
+nav button.active {background:#1abc9c;}
+section {display:none; padding:20px;}
+section.active {display:block;}
+.tool {background:#fff; padding:15px; margin-bottom:15px; border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);}
+.tool h3 {margin-top:0; color:#2c3e50;}
+input, select, textarea {width:100%; padding:8px; margin:5px 0 10px; border:1px solid #ccc; border-radius:4px;}
+button.calc {background:#1abc9c; color:#fff; border:none; padding:10px 15px; border-radius:4px; cursor:pointer;}
+button.save {background:#e67e22; color:#fff; border:none; padding:8px 12px; border-radius:4px; cursor:pointer;}
+.result {background:#ecf0f1; padding:10px; border-radius:4px; margin-top:10px;}
+footer {background:#2c3e50; color:#fff; text-align:center; padding:10px;}
+footer a {color:#1abc9c; margin:0 10px;}
+@media(max-width:600px){nav button{flex:100%;}}
 </style>
 </head>
-
 <body>
+<header>
+  <h1>Nepal Accounting Tools Suite</h1>
+  <p>40 Professional Tools for Nepali Accounting</p>
+</header>
 
-<div class="sidebar">
-    <button onclick="show('payroll')">Payroll</button>
-    <button onclick="show('tax')">VAT / TDS</button>
-    <button onclick="show('cash')">Cash Recon</button>
-    <button onclick="show('finance')">Finance</button>
-    <button onclick="show('date')">Date Convert</button>
-    <button onclick="show('ai')">AI Advisor</button>
-    <button onclick="show('calc')">Calculator</button>
-</div>
+<nav id="tabs">
+  <button class="active" onclick="showTab('client')">Client Tools</button>
+  <button onclick="showTab('voucher')">Voucher & Ledger</button>
+  <button onclick="showTab('vat')">VAT</button>
+  <button onclick="showTab('tds')">TDS & Tax</button>
+  <button onclick="showTab('bank')">Banking & Loan</button>
+  <button onclick="showTab('payroll')">Payroll</button>
+  <button onclick="showTab('financial')">Financial</button>
+  <button onclick="showTab('cloud')">Cloud & Backup</button>
+  <button onclick="showTab('smart')">Smart AI</button>
+</nav>
 
-<div class="main">
+<!-- CLIENT TOOLS -->
+<section id="client" class="active">
+  <div class="tool"><h3>PAN Validator</h3>
+    <input id="panInput" placeholder="Enter PAN Number">
+    <button class="calc" onclick="validatePAN()">Validate</button>
+    <div id="panResult" class="result"></div>
+  </div>
+  <div class="tool"><h3>Business Registration Checker</h3>
+    <input id="brInput" placeholder="Enter Registration No.">
+    <button class="calc" onclick="checkBusiness()">Check</button>
+    <div id="brResult" class="result"></div>
+  </div>
+  <div class="tool"><h3>Contact Organizer</h3>
+    <textarea id="contactInput" placeholder="Enter contacts"></textarea>
+    <button class="save" onclick="saveData('contacts',contactInput.value)">Save</button>
+  </div>
+  <div class="tool"><h3>Document Scanner / PDF Generator</h3>
+    <p>Upload documents and generate PDF (browser print to PDF supported).</p>
+  </div>
+</section>
 
-    <!-- Payroll -->
-    <div id="payroll" class="card">
-        <h3>Payroll Calculator</h3>
-        <input type="number" id="salary" placeholder="Monthly Salary (Rs)">
-        <select id="ssf">
-            <option value="yes">SSF Yes (11% deduction)</option>
-            <option value="no">SSF No</option>
-        </select>
-        <button class="run" onclick="calcPayroll()">Calculate</button>
-        <div id="payrollRes" class="result"></div>
-    </div>
+<!-- VOUCHER & LEDGER -->
+<section id="voucher">
+  <div class="tool"><h3>Journal Voucher</h3><textarea></textarea></div>
+  <div class="tool"><h3>Payment Voucher</h3><textarea></textarea></div>
+  <div class="tool"><h3>Receipt Voucher</h3><textarea></textarea></div>
+  <div class="tool"><h3>Contra Voucher</h3><textarea></textarea></div>
+  <div class="tool"><h3>Ledger Balance Checker</h3>
+    <input id="ledgerDebit" type="number" placeholder="Debit">
+    <input id="ledgerCredit" type="number" placeholder="Credit">
+    <button class="calc" onclick="checkLedger()">Check</button>
+    <div id="ledgerResult" class="result"></div>
+  </div>
+</section>
 
-    <!-- VAT / TDS -->
-    <div id="tax" class="card" style="display:none">
-        <h3>VAT / TDS Engine</h3>
-        <input type="number" id="amt" placeholder="Amount (Rs)">
-        <select id="mode">
-            <option value="excl">VAT Exclusive</option>
-            <option value="incl">VAT Inclusive</option>
-            <option value="net">Reverse TDS (on base)</option>
-        </select>
-        <input type="number" id="tdsRate" value="1.5" placeholder="TDS % (e.g. 1.5)">
-        <button class="run" onclick="calcTax()">Process</button>
-        <div id="taxRes" class="result"></div>
-    </div>
+<!-- VAT -->
+<section id="vat">
+  <div class="tool"><h3>VAT Sale</h3>
+    <input id="vatSale" type="number" placeholder="Sale Amount">
+    <button class="calc" onclick="calcVATSale()">Calculate</button>
+    <div id="vatSaleResult" class="result"></div>
+  </div>
+  <div class="tool"><h3>VAT Purchase</h3>
+    <input id="vatPurchase" type="number" placeholder="Purchase Amount">
+    <button class="calc" onclick="calcVATPurchase()">Calculate</button>
+    <div id="vatPurchaseResult" class="result"></div>
+  </div>
+  <div class="tool"><h3>VAT Payable</h3>
+    <input id="vatSaleAmt" type="number" placeholder="Sale VAT">
+    <input id="vatPurchaseAmt" type="number" placeholder="Purchase VAT">
+    <button class="calc" onclick="calcVATPayable()">Calculate</button>
+    <div id="vatPayableResult" class="result"></div>
+  </div>
+  <div class="tool"><h3>VAT 9 Auto-Filler</h3><textarea></textarea></div>
+  <div class="tool"><h3>Late Payment Penalty</h3>
+    <input id="vatPenaltyAmt" type="number" placeholder="Tax Amount">
+    <input id="vatPenaltyDays" type="number" placeholder="Days Late">
+    <button class="calc" onclick="calcVATPenalty()">Calculate</button>
+    <div id="vatPenaltyResult" class="result"></div>
+  </div>
+</section>
 
-    <!-- Cash Reconciliation -->
-    <div id="cash" class="card" style="display:none">
-        <h3>Cash Denomination</h3>
-        <div id="denoms"></div>
-        <input type="number" id="ledger" placeholder="Ledger Balance (Rs)">
-        <button class="run" onclick="recon()">Reconcile</button>
-        <div id="cashRes" class="result"></div>
-    </div>
+<!-- TDS & TAX -->
+<section id="tds">
+  <div class="tool"><h3>TDS Calculator</h3>
+    <input id="tdsAmt" type="number" placeholder="Amount">
+    <select id="tdsRate"><option value="0.015">1.5%</option><option value="0.05">5%</option><option value="0.15">15%</option></select>
+    <button class="calc" onclick="calcTDS()">Calculate</button>
+    <div id="tdsResult" class="result"></div>
+  </div>
+  <div class="tool"><h3>Deduction Tracker</h3><textarea></textarea></div>
+  <div class="tool"><h3>Advance Tax Estimator</h3><textarea></textarea></div>
+  <div class="tool"><h3>Income Tax Slab</h3><textarea></textarea></div>
+  <div class="tool"><h3>Tax Deduction Certificate</h3><textarea></textarea></div>
+</section>
 
-    <!-- Finance -->
-    <div id="finance" class="card" style="display:none">
-        <h3>Financial Analysis</h3>
-        <input id="sales" placeholder="Total Sales (Rs)" type="number">
-        <input id="exp" placeholder="Total Expenses (Rs)" type="number">
-        <input id="assets" placeholder="Total Assets (Rs)" type="number">
-        <button class="run" onclick="finance()">Analyze</button>
-        <div id="finRes" class="result"></div>
-    </div>
-
-    <!-- Date Converter -->
-    <div id="date" class="card" style="display:none">
-        <h3>BS ⇄ AD Converter (Approximate)</h3>
-        <input id="dateIn" placeholder="e.g. 2082-01-01 or 2025-04-14">
-        <button class="run" onclick="convert()">Convert</button>
-        <div id="dateRes" class="result"></div>
-    </div>
-
-    <!-- AI Advisor -->
-    <div id="ai" class="card" style="display:none">
-        <h3>AI Accountant Advisor</h3>
-        <input type="password" id="apiKey" placeholder="OpenRouter API Key (required for AI)">
-        <p style="font-size:14px; color:#555;">Get free key: <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a></p>
-        <textarea id="q" rows="4" placeholder="Ask any accounting, tax, payroll question... e.g. नेपालमा TDS कति लाग्छ?"></textarea>
-        <button class="run" onclick="ask()">Ask AI</button>
-        <div id="aiRes" class="result"></div>
-    </div>
-
-    <!-- Calculator -->
-    <div id="calc" class="card" style="display:none">
-        <h3>Basic Calculator</h3>
-        <input id="screen" value="0" readonly style="font-size:24px; text-align:right;">
-        <div class="calc">
-            <button onclick="p('7')">7</button><button onclick="p('8')">8</button><button onclick="p('9')">9</button><button onclick="p('/')">÷</button>
-            <button onclick="p('4')">4</button><button onclick="p('5')">5</button><button onclick="p('6')">6</button><button onclick="p('*')">×</button>
-            <button onclick="p('1')">1</button><button onclick="p('2')">2</button><button onclick="p('3')">3</button><button onclick="p('-')">-</button>
-            <button onclick="p('0')">0</button><button onclick="p('.')">.</button><button onclick="solve()">=</button><button onclick="clr()">C</button>
-        </div>
-    </div>
-
-</div>
-
-<script>
-// Navigation
-function show(id){
-    document.querySelectorAll('.card').forEach(c => c.style.display='none');
-    document.getElementById(id).style.display='block';
-    // Optional: highlight active button
-    document.querySelectorAll('.sidebar button').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
-}
-
-// Payroll (simple approximation)
-function calcPayroll(){
-    let s = +document.getElementById('salary').value || 0;
-    let ssfDed = (document.getElementById('ssf').value === 'yes') ? s * 0.11 : 0;
-    let annual = (s - ssfDed) * 12;
-    let tax = annual > 500000 ? (annual - 500000) * 0.1 : 0; // very basic
-    document.getElementById('payrollRes').innerHTML = `SSF Deduction: ${ssfDed.toFixed(2)}<br>Taxable Annual: ${annual.toFixed(2)}<br>Income Tax (approx): ${tax.toFixed(2)}<br>Net Monthly (after SSF & tax/12): ${((s - ssfDed - tax/12)).toFixed(2)}`;
-}
-
-// VAT/TDS
-function calcTax(){
-    let a = +document.getElementById('amt').value || 0;
-    let r = (+document.getElementById('tdsRate').value || 1.5) / 100;
-    let base, vat = 0, tds;
-    let mode = document.getElementById('mode').value;
-
-    if (mode === 'excl') { base = a; vat = a * 0.13; }
-    else if (mode === 'incl') { base = a / 1.13; vat = a - base; }
-    else if (mode === 'net') { base = a / (1 - r); vat = base * 0.13; }
-
-    tds = base * r;
-    let net = base + vat - tds;
-    document.getElementById('taxRes').innerHTML = `Base Amount: ${base.toFixed(2)}<br>VAT (13%): ${vat.toFixed(2)}<br>TDS: ${tds.toFixed(2)}<br>Net Payable/Receivable: ${net.toFixed(2)}`;
-}
-
-// Cash Denom
-const denoms = [1000,500,100,50,20,10,5,2,1];
-let denomHTML = '';
-denoms.forEach(n => {
-    denomHTML += `Rs ${n} × <input type='number' class='q' data-v='${n}' min='0'><br>`;
-});
-document.getElementById('denoms').innerHTML = denomHTML;
-
-function recon(){
-    let total = 0;
-    document.querySelectorAll('.q').forEach(i => total += (+i.value || 0) * i.dataset.v);
-    let diff = total - (+document.getElementById('ledger').value || 0);
-    document.getElementById('cashRes').innerHTML = `Physical Cash Count: ${total.toFixed(2)}<br>Ledger Balance: ${document.getElementById('ledger').value || 0}<br>Difference: ${diff.toFixed(2)} ${diff > 0 ? '(Excess)' : diff < 0 ? '(Short)' : ''}`;
-}
-
-// Finance
-function finance(){
-    let sales = +document.getElementById('sales').value || 0;
-    let exp = +document.getElementById('exp').value || 0;
-    let assets = +document.getElementById('assets').value || 0;
-    let profit = sales - exp;
-    let margin = sales > 0 ? (profit / sales) * 100 : 0;
-    let roa = assets > 0 ? (profit / assets) * 100 : 0;
-    document.getElementById('finRes').innerHTML = `Profit: ${profit.toFixed(2)}<br>Profit Margin: ${margin.toFixed(2)}%<br>Return on Assets (ROA): ${roa.toFixed(2)}%`;
-}
-
-// Date Convert (simple +56/-56 approx)
-function convert(){
-    let val = document.getElementById('dateIn').value.trim();
-    if (!val) return;
-    let parts = val.split('-');
-    if (parts.length !== 3) {
-        document.getElementById('dateRes').innerHTML = "Invalid format. Use YYYY-MM-DD";
-        return;
-    }
-    let y = +parts[0];
-    if (y > 2000) {
-        // AD to BS approx
-        document.getElementById('dateRes').innerHTML = `Approximate BS: ${y + 56}-${parts[1]}-${parts[2]}`;
-    } else {
-        // BS to AD approx
-        document.getElementById('dateRes').innerHTML = `Approximate AD: ${y - 56}-${parts[1]}-${parts[2]}`;
-    }
-}
-
-// Calculator
-function p(v){
-    let scr = document.getElementById('screen');
-    scr.value = (scr.value === '0' && v !== '.') ? v : scr.value + v;
-}
-function clr(){ document.getElementById('screen').value = '0'; }
-function solve(){
-    try {
-        document.getElementById('screen').value = eval(document.getElementById('screen').value);
-    } catch(e) {
-        document.getElementById('screen').value = 'Error';
-    }
-}
-
-// AI part - with error handling
-let history = [];
-async function ask(){
-    const keyInput = document.getElementById('apiKey');
-    const question = document.getElementById('q').value.trim();
-    const resDiv = document.getElementById('aiRes');
-
-    if (!keyInput.value) {
-        resDiv.innerHTML = "Error: Please enter your OpenRouter API Key first.";
-        return;
-    }
-    if (!question) {
-        resDiv.innerHTML = "Please type a question.";
-        return;
-    }
-
-    // Save key to localStorage
-    localStorage.setItem('openrouter_key', keyInput.value);
-
-    resDiv.innerHTML = "Thinking...";
-
-    history.push({role: "user", content: question});
-
-    try {
-        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem('openrouter_key'),
-                "Content-Type": "application/json",
-                "HTTP-Referer": window.location.href, // optional, helps OpenRouter
-                "X-Title": "Nepal Accountant Pro"
-            },
-            body: JSON.stringify({
-                model: "arcee-ai/trinity-large-preview:free",   // Good free model in Feb 2026
-                messages: history
-            })
-        });
-
-        if (!response.ok) throw new Error(`API error: ${response.status}`);
-
-        const data = await response.json();
-        const reply = data.choices[0].message.content;
-
-        history.push({role: "assistant", content: reply});
-        resDiv.innerHTML = marked.parse(reply);
-    } catch (err) {
-        resDiv.innerHTML = `Error: ${err.message}<br>Check your API key or internet.<br>Free models have rate limits — try again later if blocked.`;
-    }
-}
-
-// Load saved key on page load
-window.onload = () => {
-    const savedKey = localStorage.getItem('openrouter_key');
-    if (savedKey) document.getElementById('apiKey').value = savedKey;
-    show('payroll'); // default open
-}
-</script>
-
-</body>
-</html>
+<!-- BANKING & LOAN -->
+<section id="bank">
+  <div class="tool"><h3>EMI Calculator</h3>
+    <input id="loanAmt" type="number" placeholder="Loan Amount">
+    <input id="loanRate" type="number" placeholder="Annual Interest %">
+    <input id="loanYears" type="number" placeholder="Years">
+    <button class="calc" onclick="calcEMI()">Calculate</button>
+    <div id="emiResult" class="result"></div>
+  </div>
+  <div class="tool"><h3>Loan Interest</h3><textarea></textarea></div>
+  <div class="tool"><h3>Loan Schedule Generator</h3><textarea></textarea></div>
+  <div class="tool"><h3>N
