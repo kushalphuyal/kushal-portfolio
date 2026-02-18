@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🇳🇵 Nepal Tax & Accounting AI Demo</title>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <style>
-        :root { --primary: #003893; --secondary: #dc143c; --bg: #f4f7f6; --success: #28a745; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; line-height: 1.6; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.1); border-top: 8px solid var(--primary); }
-        h2 { color: var(--primary); text-align: center; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .section { margin-bottom: 25px; padding: 15px; border: 1px solid #eee; border-radius: 10px; background: #fff; }
-        h3 { margin-top: 0; color: #333; font-size: 1.1rem; border-left: 4px solid var(--secondary); padding-left: 10px; }
-        input, select, textarea { width: 100%; padding: 12px; margin-top: 10px; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 15px; transition: 0.3s; }
-        input:focus, textarea:focus, select:focus { border-color: var(--primary); outline: none; }
-        button { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px; font-size: 16px; transition: 0.3s; }
-        button:hover { opacity: 0.9; transform: translateY(-1px); }
-        button:disabled { background: #ccc; cursor: not-allowed; }
-        .key-setup { background: #fff5f5; border: 1px dashed var(--secondary); padding: 15px; border-radius: 10px; margin-bottom: 20px; }
-        .key-setup p { margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: var(--secondary); }
-        #vatResult, #aiResult { margin-top: 20px; padding: 15px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; min-height: 100px; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; font-size: 14px; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        th { background: #f8f9fa; color: var(--primary); font-weight: bold; }
-        .loading { color: var(--secondary); font-weight: bold; text-align: center; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-        .badge { background: var(--success); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
-        .error-msg { color: var(--secondary); font-weight: bold; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇳🇵 Nepal Tax & Accounting AI Demo (Gemini)</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root { --primary:#003893; --secondary:#dc143c; --bg:#f4f7f6; --success:#28a745; }
+body { font-family:'Segoe UI', Arial, sans-serif; background:var(--bg); margin:0; padding:10px; line-height:1.6; }
+.container { max-width:800px; margin:auto; background:white; padding:20px; border-radius:15px; box-shadow:0 5px 25px rgba(0,0,0,0.1); border-top:8px solid var(--primary);}
+h2 { color:var(--primary); text-align:center; margin-bottom:20px; border-bottom:2px solid #eee; padding-bottom:10px; }
+.section { margin-bottom:25px; padding:15px; border:1px solid #eee; border-radius:10px; background:#fff; }
+h3 { margin-top:0; color:#333; font-size:1.1rem; border-left:4px solid var(--secondary); padding-left:10px; }
+input, select, textarea { width:100%; padding:12px; margin-top:10px; border:2px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:15px; transition:0.3s; }
+input:focus, textarea:focus, select:focus { border-color:var(--primary); outline:none; }
+button { width:100%; padding:15px; background:var(--primary); color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer; margin-top:15px; font-size:16px; transition:0.3s; }
+button:hover { opacity:0.9; transform:translateY(-1px); }
+button:disabled { background:#ccc; cursor:not-allowed; }
+.key-setup { background:#fff5f5; border:1px dashed var(--secondary); padding:15px; border-radius:10px; margin-bottom:20px; }
+.key-setup p { margin:0 0 10px 0; font-size:14px; font-weight:bold; color:var(--secondary);}
+#vatResult, #aiResult { margin-top:20px; padding:15px; background:#fafafa; border-radius:8px; border:1px solid #eee; min-height:100px; overflow-x:auto;}
+table { width:100%; border-collapse:collapse; margin-top:15px; background:white; font-size:14px;}
+th, td { border:1px solid #ddd; padding:12px; text-align:left;}
+th { background:#f8f9fa; color:var(--primary); font-weight:bold; }
+.loading { color:var(--secondary); font-weight:bold; text-align:center; animation:pulse 1.5s infinite;}
+@keyframes pulse {0%{opacity:1;}50%{opacity:0.5;}100%{opacity:1;}}
+.badge { background:var(--success); color:white; padding:2px 8px; border-radius:4px; font-size:12px;}
+.error-msg { color:var(--secondary); font-weight:bold;}
+</style>
 </head>
 <body>
 
 <div class="container">
-    <h2>🇳🇵 Nepal Tax & Accounting AI (Free Demo)</h2>
-    <p style="text-align:center; font-size:14px; color:#555;">Demo project for Microsoft Startups – Uses OpenRouter free AI models (rate limited to ~50/day)</p>
+    <h2>🇳🇵 Nepal Tax & Accounting AI (Gemini Demo)</h2>
+    <p style="text-align:center; font-size:14px; color:#555;">
+        Demo project using Google Gemini API (PaLM) – AI responses in Roman Nepali + English
+    </p>
 
+    <!-- Gemini Key Setup -->
     <div class="key-setup" id="keyConfig">
-        <p>🔑 OpenRouter Free API Key Setup</p>
-        <span style="font-size:12px; color:#666;">https://openrouter.ai/keys bata free key banaera halnus (no card needed)</span>
-        <input type="password" id="userApiKey" placeholder="sk-or-v1-xxxxxxxxxxxxxxxxxxxxxxx">
-        <button onclick="saveKey()" style="background: var(--success);">Connect Free AI</button>
+        <p>🔑 Google Gemini API Key Setup</p>
+        <span style="font-size:12px; color:#666;">
+            Google Cloud Console bata API key halnus
+        </span>
+        <input type="password" id="userApiKey" placeholder="AIzaSyxxxxxxxxxxxxxxxxxxxxxx">
+        <button onclick="saveKey()" style="background: var(--success);">Connect Gemini AI</button>
     </div>
 
+    <!-- VAT Calculator -->
     <div class="section">
         <h3>📊 Manual VAT Calculator (13% Nepal VAT)</h3>
         <input type="number" id="vatAmt" placeholder="Amount (NPR)">
@@ -53,50 +59,48 @@
         <div id="vatResult">Result here...</div>
     </div>
 
+    <!-- AI Tax Advisor -->
     <div class="section">
         <h3>💬 AI Tax & Journal Advisor <span id="statusBadge"></span></h3>
         <select id="aiModel">
-            <option value="stepfun/step-3.5-flash:free">Step 3.5 Flash (Best Free - Recommended)</option>
-            <option value="arcee-ai/trinity-large-preview:free">Trinity Large (Detailed)</option>
-            <option value="z-ai/glm-4.5-air:free">GLM 4.5 Air (Fast)</option>
-            <option value="openrouter/free">Auto Free (Random best available)</option>
+            <option value="chat-bison-001">Gemini Chat - Balanced (Recommended)</option>
+            <option value="text-bison-001">Text Bison - Fast / Short</option>
+            <option value="code-bison-001">Code Bison - Step-by-Step / Detailed</option>
         </select>
         <textarea id="aiQ" rows="4" placeholder="Example: Computer 80,000 NPR VAT vendor bata kinyo, 1.5% TDS paid. Journal entry banaunus."></textarea>
-        <button id="askBtn" onclick="askAI()">Generate (Free AI)</button>
-        <div id="aiResult">AI response here... (Limit: ~50/day free tier)</div>
+        <button id="askBtn" onclick="askAI()">Generate (Gemini AI)</button>
+        <div id="aiResult">AI response here...</div>
     </div>
-    
+
     <button onclick="clearKey()" style="background:#666; font-size:12px; padding:8px;">Reset Key</button>
 </div>
 
 <script>
-// API KEY
+// Save/Load Gemini API Key
 function saveKey() {
     const key = document.getElementById('userApiKey').value.trim();
-    if(key.startsWith('sk-or-v1-')) {
+    if(key.startsWith('AIzaSy')) {
         localStorage.setItem('nepal_tax_ai_key', key);
-        alert("✅ Free API Key saved! Ready for demo.");
+        alert("✅ Gemini API Key saved! Ready for demo.");
         location.reload();
     } else {
-        alert("Invalid key! sk-or-v1- bata suru hune key halnus.");
+        alert("Invalid key! Gemini API keys start with 'AIzaSy...'");
     }
 }
-
 function clearKey() {
     if(confirm("Reset API Key?")) {
         localStorage.removeItem('nepal_tax_ai_key');
         location.reload();
     }
 }
-
 window.onload = () => {
     if(localStorage.getItem('nepal_tax_ai_key')) {
         document.getElementById('keyConfig').style.display = 'none';
-        document.getElementById('statusBadge').innerHTML = '<span class="badge">Connected (Free)</span>';
+        document.getElementById('statusBadge').innerHTML = '<span class="badge">Connected</span>';
     }
 };
 
-// VAT Calc
+// VAT Calculator
 function calcVAT() {
     let amt = parseFloat(document.getElementById('vatAmt').value);
     let type = document.getElementById('vatType').value;
@@ -113,67 +117,53 @@ function calcVAT() {
         total = amt;
     }
     document.getElementById('vatResult').innerHTML = `
-        <b>Base:</b> Rs. ${base.toLocaleString(undefined, {minimumFractionDigits: 2})} <br>
-        <b>VAT 13%:</b> Rs. ${vat.toLocaleString(undefined, {minimumFractionDigits: 2})} <br>
+        <b>Base:</b> Rs. ${base.toLocaleString(undefined,{minimumFractionDigits:2})} <br>
+        <b>VAT 13%:</b> Rs. ${vat.toLocaleString(undefined,{minimumFractionDigits:2})} <br>
         <hr>
-        <b style="color:var(--primary)">Total:</b> Rs. ${total.toLocaleString(undefined, {minimumFractionDigits: 2})}
+        <b style="color:var(--primary)">Total:</b> Rs. ${total.toLocaleString(undefined,{minimumFractionDigits:2})}
     `;
 }
 
-// AI Call
+// Gemini AI Call
 async function askAI() {
     const key = localStorage.getItem('nepal_tax_ai_key');
-    if(!key) return alert("Pahila free API key setup garnus!");
+    if(!key) return alert("Pahila Gemini API key setup garnus!");
 
     const question = document.getElementById('aiQ').value.trim();
     if(!question) return alert("Question lekhnuhos!");
 
     const resultDiv = document.getElementById('aiResult');
     const btn = document.getElementById('askBtn');
-    resultDiv.innerHTML = "<p class='loading'>Analyzing Nepal Tax Law (2082/83)...</p>";
+    resultDiv.innerHTML = "<p class='loading'>Analyzing Nepal Tax Law...</p>";
     btn.disabled = true;
 
     try {
         const model = document.getElementById('aiModel').value;
-        const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta2/models/${model}:generateText`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${key}`,
-                "HTTP-Referer": window.location.origin,
-                "X-Title": "Nepal Accounting AI Demo"
+                "Authorization": `Bearer ${key}`
             },
             body: JSON.stringify({
-                "model": model,
-                "messages": [
-                    {
-                        "role": "system",
-                        "content": "You are senior CA in Nepal. Answer in simple Roman Nepali + English. Use markdown journal table: | Date | Particulars | L.F. | Debit Rs. | Credit Rs. |. Follow latest: Income Tax Act 2058 (updated 2082/83), VAT Act 2052, TDS (1.5% VAT service, 15% non-VAT, 10% rent). Show steps/calculations. Precise & professional."
-                    },
-                    { "role": "user", "content": question }
-                ],
-                "temperature": 0.3,
-                "max_tokens": 2000
+                prompt: `You are senior CA in Nepal. Answer in simple Roman Nepali + English. 
+Use markdown journal table: | Date | Particulars | L.F. | Debit Rs. | Credit Rs. |. 
+Follow Income Tax Act 2058 (updated 2082/83), VAT Act 2052, TDS rules. 
+User question: ${question}`,
+                maxOutputTokens: 1000,
+                temperature: 0.3
             })
         });
 
-        if(!res.ok) {
-            if(res.status === 429) {
-                throw new Error("429 - Rate limit pugyo (free tier ~50/day). Subah ~6 AM pachi try garnus ya Microsoft demo ma screenshot use garnus.");
-            }
-            throw new Error(`HTTP ${res.status}`);
-        }
-
+        if(!res.ok) throw new Error(`HTTP ${res.status} - ${res.statusText}`);
         const data = await res.json();
-        if(data.choices?.[0]?.message?.content) {
-            resultDiv.innerHTML = marked.parse(data.choices[0].message.content);
-        } else if(data.error) {
-            resultDiv.innerHTML = `<p class="error-msg">AI Error: ${data.error.message}</p>`;
-            if(data.error.code === 401) localStorage.removeItem('nepal_tax_ai_key');
+
+        if(data.candidates?.[0]?.output) {
+            resultDiv.innerHTML = marked.parse(data.candidates[0].output);
         } else {
-            resultDiv.innerHTML = `<p class="error-msg">Unexpected response. Try again.</p>`;
+            resultDiv.innerHTML = `<p class="error-msg">Unexpected response from Gemini API</p>`;
         }
-    } catch (err) {
+    } catch(err) {
         resultDiv.innerHTML = `<p class="error-msg">Error: ${err.message}</p>`;
         console.error(err);
     } finally {
@@ -182,3 +172,4 @@ async function askAI() {
 }
 </script>
 </body>
+</html>
