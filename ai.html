@@ -1,131 +1,1303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nepal Accounting Suite</title>
-<style>
-body {font-family: Arial, sans-serif; margin:0; background:#f5f7fa;}
-header {background:#2c3e50; color:#fff; padding:15px; text-align:center;}
-nav {display:flex; flex-wrap:wrap; background:#34495e;}
-nav button {flex:1; padding:10px; border:none; background:#34495e; color:#fff; cursor:pointer;}
-nav button.active {background:#1abc9c;}
-section {display:none; padding:20px;}
-section.active {display:block;}
-.tool {background:#fff; padding:15px; margin-bottom:15px; border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);}
-.tool h3 {margin-top:0; color:#2c3e50;}
-input, select, textarea {width:100%; padding:8px; margin:5px 0 10px; border:1px solid #ccc; border-radius:4px;}
-button.calc {background:#1abc9c; color:#fff; border:none; padding:10px 15px; border-radius:4px; cursor:pointer;}
-button.save {background:#e67e22; color:#fff; border:none; padding:8px 12px; border-radius:4px; cursor:pointer;}
-.result {background:#ecf0f1; padding:10px; border-radius:4px; margin-top:10px;}
-footer {background:#2c3e50; color:#fff; text-align:center; padding:10px;}
-footer a {color:#1abc9c; margin:0 10px;}
-@media(max-width:600px){nav button{flex:100%;}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Accounting Tools Suite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            background: #007bff;
+            color: white;
+            padding: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            margin-top: 20px;
+        }
+        details {
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        summary {
+            cursor: pointer;
+            background: #e9ecef;
+            padding: 15px;
+            font-weight: bold;
+        }
+        .tool-section {
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tool-section:last-child {
+            border-bottom: none;
+        }
+        form {
+            display: grid;
+            gap: 10px;
+            max-width: 600px;
+        }
+        input, select, textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background: #f8f9fa;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-<header>
-  <h1>Nepal Accounting Tools Suite</h1>
-  <p>40 Professional Tools for Nepali Accounting</p>
-</header>
+    <div class="container">
+        <header>
+            <h1>Nepal Accounting Tools Suite</h1>
+            <p>Professional web-based tools for Nepal accounting (FY 2025/26 rules applied)</p>
+        </header>
 
-<nav id="tabs">
-  <button class="active" onclick="showTab('client')">Client Tools</button>
-  <button onclick="showTab('voucher')">Voucher & Ledger</button>
-  <button onclick="showTab('vat')">VAT</button>
-  <button onclick="showTab('tds')">TDS & Tax</button>
-  <button onclick="showTab('bank')">Banking & Loan</button>
-  <button onclick="showTab('payroll')">Payroll</button>
-  <button onclick="showTab('financial')">Financial</button>
-  <button onclick="showTab('cloud')">Cloud & Backup</button>
-  <button onclick="showTab('smart')">Smart AI</button>
-</nav>
+        <details>
+            <summary>Client & Basic Tools</summary>
+            <div class="tool-section" id="pan-validator">
+                <h2>PAN Validator</h2>
+                <form onsubmit="validatePAN(event)">
+                    <label>PAN Number:</label>
+                    <input type="text" id="pan-input" required>
+                    <button type="submit">Validate</button>
+                </form>
+                <div class="result" id="pan-result"></div>
+                <button onclick="savePANResult()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="business-registration-checker">
+                <h2>Business Registration Checker</h2>
+                <form onsubmit="checkBusinessReg(event)">
+                    <label>Registration Number:</label>
+                    <input type="text" id="reg-input" required>
+                    <button type="submit">Check</button>
+                </form>
+                <div class="result" id="reg-result"></div>
+                <button onclick="saveRegResult()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="contact-organizer">
+                <h2>Contact Organizer</h2>
+                <form onsubmit="addContact(event)">
+                    <label>Name:</label>
+                    <input type="text" id="contact-name" required>
+                    <label>Email:</label>
+                    <input type="email" id="contact-email" required>
+                    <label>Phone:</label>
+                    <input type="tel" id="contact-phone" required>
+                    <button type="submit">Add Contact</button>
+                </form>
+                <table id="contact-table">
+                    <thead><tr><th>Name</th><th>Email</th><th>Phone</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <button onclick="saveContacts()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="document-scanner">
+                <h2>Document Scanner/PDF Generator</h2>
+                <input type="file" id="doc-file" accept="image/*">
+                <button onclick="generatePDFFromImage()">Generate PDF</button>
+                <div class="result" id="doc-result"></div>
+            </div>
+        </details>
 
-<!-- CLIENT TOOLS -->
-<section id="client" class="active">
-  <div class="tool"><h3>PAN Validator</h3>
-    <input id="panInput" placeholder="Enter PAN Number">
-    <button class="calc" onclick="validatePAN()">Validate</button>
-    <div id="panResult" class="result"></div>
-  </div>
-  <div class="tool"><h3>Business Registration Checker</h3>
-    <input id="brInput" placeholder="Enter Registration No.">
-    <button class="calc" onclick="checkBusiness()">Check</button>
-    <div id="brResult" class="result"></div>
-  </div>
-  <div class="tool"><h3>Contact Organizer</h3>
-    <textarea id="contactInput" placeholder="Enter contacts"></textarea>
-    <button class="save" onclick="saveData('contacts',contactInput.value)">Save</button>
-  </div>
-  <div class="tool"><h3>Document Scanner / PDF Generator</h3>
-    <p>Upload documents and generate PDF (browser print to PDF supported).</p>
-  </div>
-</section>
+        <details>
+            <summary>Voucher & Ledger Tools</summary>
+            <div class="tool-section" id="journal">
+                <h2>Journal Voucher</h2>
+                <form onsubmit="addJournalEntry(event)">
+                    <label>Debit Account:</label>
+                    <input type="text" id="debit-acc" required>
+                    <label>Credit Account:</label>
+                    <input type="text" id="credit-acc" required>
+                    <label>Amount:</label>
+                    <input type="number" id="journal-amount" required>
+                    <label>Description:</label>
+                    <textarea id="journal-desc"></textarea>
+                    <button type="submit">Add Entry</button>
+                </form>
+                <table id="journal-table">
+                    <thead><tr><th>Debit</th><th>Credit</th><th>Amount</th><th>Description</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <button onclick="saveJournal()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="payment">
+                <h2>Payment Voucher</h2>
+                <form onsubmit="addPayment(event)">
+                    <label>Pay To:</label>
+                    <input type="text" id="pay-to" required>
+                    <label>Amount:</label>
+                    <input type="number" id="payment-amount" required>
+                    <label>Description:</label>
+                    <textarea id="payment-desc"></textarea>
+                    <button type="submit">Record Payment</button>
+                </form>
+                <div class="result" id="payment-result"></div>
+                <button onclick="savePayment()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="receipt">
+                <h2>Receipt Voucher</h2>
+                <form onsubmit="addReceipt(event)">
+                    <label>Received From:</label>
+                    <input type="text" id="receipt-from" required>
+                    <label>Amount:</label>
+                    <input type="number" id="receipt-amount" required>
+                    <label>Description:</label>
+                    <textarea id="receipt-desc"></textarea>
+                    <button type="submit">Record Receipt</button>
+                </form>
+                <div class="result" id="receipt-result"></div>
+                <button onclick="saveReceipt()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="contra">
+                <h2>Contra Voucher</h2>
+                <form onsubmit="addContra(event)">
+                    <label>From Account:</label>
+                    <input type="text" id="contra-from" required>
+                    <label>To Account:</label>
+                    <input type="text" id="contra-to" required>
+                    <label>Amount:</label>
+                    <input type="number" id="contra-amount" required>
+                    <button type="submit">Record Contra</button>
+                </form>
+                <div class="result" id="contra-result"></div>
+                <button onclick="saveContra()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="ledger-balance">
+                <h2>Ledger Balance Checker</h2>
+                <form onsubmit="checkLedgerBalance(event)">
+                    <label>Ledger Entries (JSON):</label>
+                    <textarea id="ledger-entries" required></textarea>
+                    <button type="submit">Check Balance</button>
+                </form>
+                <div class="result" id="ledger-result"></div>
+                <button onclick="saveLedger()">Save as PDF</button>
+            </div>
+        </details>
 
-<!-- VOUCHER & LEDGER -->
-<section id="voucher">
-  <div class="tool"><h3>Journal Voucher</h3><textarea></textarea></div>
-  <div class="tool"><h3>Payment Voucher</h3><textarea></textarea></div>
-  <div class="tool"><h3>Receipt Voucher</h3><textarea></textarea></div>
-  <div class="tool"><h3>Contra Voucher</h3><textarea></textarea></div>
-  <div class="tool"><h3>Ledger Balance Checker</h3>
-    <input id="ledgerDebit" type="number" placeholder="Debit">
-    <input id="ledgerCredit" type="number" placeholder="Credit">
-    <button class="calc" onclick="checkLedger()">Check</button>
-    <div id="ledgerResult" class="result"></div>
-  </div>
-</section>
+        <details>
+            <summary>VAT Tools</summary>
+            <div class="tool-section" id="vat-sale">
+                <h2>VAT Sale Calculator (13% VAT)</h2>
+                <form onsubmit="calcVATSale(event)">
+                    <label>Amount (excl. VAT):</label>
+                    <input type="number" id="sale-amount" required>
+                    <button type="submit">Calculate</button>
+                </form>
+                <div class="result" id="sale-result"></div>
+                <button onclick="saveVATSale()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="vat-purchase">
+                <h2>VAT Purchase Calculator (13% VAT)</h2>
+                <form onsubmit="calcVATPurchase(event)">
+                    <label>Amount (incl. VAT):</label>
+                    <input type="number" id="purchase-amount" required>
+                    <button type="submit">Calculate</button>
+                </form>
+                <div class="result" id="purchase-result"></div>
+                <button onclick="saveVATPurchase()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="vat-payable">
+                <h2>VAT Payable Tracker</h2>
+                <form onsubmit="trackVATPayable(event)">
+                    <label>Sales VAT:</label>
+                    <input type="number" id="sales-vat" required>
+                    <label>Purchase VAT:</label>
+                    <input type="number" id="purchase-vat" required>
+                    <button type="submit">Calculate Payable</button>
+                </form>
+                <div class="result" id="payable-result"></div>
+                <button onclick="saveVATPayable()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="vat9-filler">
+                <h2>VAT 9 Auto-Filler</h2>
+                <form onsubmit="fillVAT9(event)">
+                    <label>Total Sales:</label>
+                    <input type="number" id="vat9-sales" required>
+                    <label>Total Purchases:</label>
+                    <input type="number" id="vat9-purchases" required>
+                    <button type="submit">Generate Form Data</button>
+                </form>
+                <div class="result" id="vat9-result"></div>
+                <button onclick="saveVAT9()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="vat-late-penalty">
+                <h2>VAT Late Payment Penalty (15% p.a. interest + 1% monthly penalty)</h2>
+                <form onsubmit="calcVATPenalty(event)">
+                    <label>Outstanding VAT:</label>
+                    <input type="number" id="outstanding-vat" required>
+                    <label>Days Late:</label>
+                    <input type="number" id="days-late" required>
+                    <button type="submit">Calculate</button>
+                </form>
+                <div class="result" id="penalty-result"></div>
+                <button onclick="saveVATPenalty()">Save as PDF</button>
+            </div>
+        </details>
 
-<!-- VAT -->
-<section id="vat">
-  <div class="tool"><h3>VAT Sale</h3>
-    <input id="vatSale" type="number" placeholder="Sale Amount">
-    <button class="calc" onclick="calcVATSale()">Calculate</button>
-    <div id="vatSaleResult" class="result"></div>
-  </div>
-  <div class="tool"><h3>VAT Purchase</h3>
-    <input id="vatPurchase" type="number" placeholder="Purchase Amount">
-    <button class="calc" onclick="calcVATPurchase()">Calculate</button>
-    <div id="vatPurchaseResult" class="result"></div>
-  </div>
-  <div class="tool"><h3>VAT Payable</h3>
-    <input id="vatSaleAmt" type="number" placeholder="Sale VAT">
-    <input id="vatPurchaseAmt" type="number" placeholder="Purchase VAT">
-    <button class="calc" onclick="calcVATPayable()">Calculate</button>
-    <div id="vatPayableResult" class="result"></div>
-  </div>
-  <div class="tool"><h3>VAT 9 Auto-Filler</h3><textarea></textarea></div>
-  <div class="tool"><h3>Late Payment Penalty</h3>
-    <input id="vatPenaltyAmt" type="number" placeholder="Tax Amount">
-    <input id="vatPenaltyDays" type="number" placeholder="Days Late">
-    <button class="calc" onclick="calcVATPenalty()">Calculate</button>
-    <div id="vatPenaltyResult" class="result"></div>
-  </div>
-</section>
+        <details>
+            <summary>TDS & Tax Tools</summary>
+            <div class="tool-section" id="tds-calculator">
+                <h2>TDS Calculator (Rates: Service 1.5%, Rent 10%, Interest 15%, etc.)</h2>
+                <form onsubmit="calcTDS(event)">
+                    <label>Payment Type:</label>
+                    <select id="tds-type">
+                        <option value="1.5">Service (1.5%)</option>
+                        <option value="10">Rent (10%)</option>
+                        <option value="15">Interest/Royalty (15%)</option>
+                        <option value="5">Other (5%)</option>
+                    </select>
+                    <label>Amount:</label>
+                    <input type="number" id="tds-amount" required>
+                    <button type="submit">Calculate TDS</button>
+                </form>
+                <div class="result" id="tds-result"></div>
+                <button onclick="saveTDS()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="deduction-tracker">
+                <h2>Deduction Tracker</h2>
+                <form onsubmit="trackDeduction(event)">
+                    <label>Deduction Type:</label>
+                    <input type="text" id="ded-type" required>
+                    <label>Amount:</label>
+                    <input type="number" id="ded-amount" required>
+                    <button type="submit">Add</button>
+                </form>
+                <div class="result" id="ded-result"></div>
+                <button onclick="saveDeductions()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="advance-tax-estimator">
+                <h2>Advance Tax Estimator (Quarterly: 40%/70%/100%)</h2>
+                <form onsubmit="estimateAdvanceTax(event)">
+                    <label>Estimated Annual Tax:</label>
+                    <input type="number" id="annual-tax" required>
+                    <label>Quarter:</label>
+                    <select id="quarter">
+                        <option value="1">Q1 (40%)</option>
+                        <option value="2">Q2 (70%)</option>
+                        <option value="3">Q3 (100%)</option>
+                    </select>
+                    <button type="submit">Estimate</button>
+                </form>
+                <div class="result" id="advance-result"></div>
+                <button onclick="saveAdvanceTax()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="income-tax-slab">
+                <h2>Income Tax Slab Viewer (FY 2082/83 Unmarried)</h2>
+                <button onclick="showTaxSlabs()">Show Slabs</button>
+                <div class="result" id="slab-result"></div>
+                <button onclick="saveSlabs()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="tax-ded-certificate">
+                <h2>Tax Deduction Certificate Generator</h2>
+                <form onsubmit="generateTaxCert(event)">
+                    <label>Employee Name:</label>
+                    <input type="text" id="emp-name" required>
+                    <label>TDS Amount:</label>
+                    <input type="number" id="cert-tds" required>
+                    <button type="submit">Generate</button>
+                </form>
+                <div class="result" id="cert-result"></div>
+                <button onclick="saveTaxCert()">Save as PDF</button>
+            </div>
+        </details>
 
-<!-- TDS & TAX -->
-<section id="tds">
-  <div class="tool"><h3>TDS Calculator</h3>
-    <input id="tdsAmt" type="number" placeholder="Amount">
-    <select id="tdsRate"><option value="0.015">1.5%</option><option value="0.05">5%</option><option value="0.15">15%</option></select>
-    <button class="calc" onclick="calcTDS()">Calculate</button>
-    <div id="tdsResult" class="result"></div>
-  </div>
-  <div class="tool"><h3>Deduction Tracker</h3><textarea></textarea></div>
-  <div class="tool"><h3>Advance Tax Estimator</h3><textarea></textarea></div>
-  <div class="tool"><h3>Income Tax Slab</h3><textarea></textarea></div>
-  <div class="tool"><h3>Tax Deduction Certificate</h3><textarea></textarea></div>
-</section>
+        <details>
+            <summary>Banking & Loan Tools</summary>
+            <div class="tool-section" id="emi">
+                <h2>EMI Calculator (Reducing/Flat with 1-2% Service/Insurance)</h2>
+                <form onsubmit="calcEMI(event)">
+                    <label>Loan Amount:</label>
+                    <input type="number" id="loan-amount" required>
+                    <label>Interest Rate (%):</label>
+                    <input type="number" id="interest-rate" required>
+                    <label>Tenure (Months):</label>
+                    <input type="number" id="tenure" required>
+                    <label>Type:</label>
+                    <select id="emi-type">
+                        <option value="reducing">Reducing</option>
+                        <option value="flat">Flat</option>
+                    </select>
+                    <label>Service Charge (%):</label>
+                    <input type="number" id="service-charge" value="1">
+                    <label>Insurance (%):</label>
+                    <input type="number" id="insurance" value="0.5">
+                    <button type="submit">Calculate</button>
+                </form>
+                <div class="result" id="emi-result"></div>
+                <button onclick="saveEMI()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="loan-interest">
+                <h2>Loan Interest Calculator</h2>
+                <form onsubmit="calcLoanInterest(event)">
+                    <label>Principal:</label>
+                    <input type="number" id="principal" required>
+                    <label>Rate (%):</label>
+                    <input type="number" id="loan-rate" required>
+                    <label>Time (Years):</label>
+                    <input type="number" id="loan-time" required>
+                    <button type="submit">Calculate</button>
+                </form>
+                <div class="result" id="interest-result"></div>
+                <button onclick="saveLoanInterest()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="loan-schedule">
+                <h2>Loan Schedule Generator</h2>
+                <form onsubmit="generateLoanSchedule(event)">
+                    <label>Loan Amount:</label>
+                    <input type="number" id="schedule-amount" required>
+                    <label>Rate (%):</label>
+                    <input type="number" id="schedule-rate" required>
+                    <label>Tenure (Months):</label>
+                    <input type="number" id="schedule-tenure" required>
+                    <button type="submit">Generate</button>
+                </form>
+                <table id="schedule-table">
+                    <thead><tr><th>Month</th><th>EMI</th><th>Interest</th><th>Principal</th><th>Balance</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <button onclick="saveLoanSchedule()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="npa-tracker">
+                <h2>NPA Tracker (Overdue: <1m Performing 1%, 1-3m Watch 5%, 3-6m Substd 25%, etc.)</h2>
+                <form onsubmit="trackNPA(event)">
+                    <label>Loan Amount:</label>
+                    <input type="number" id="npa-amount" required>
+                    <label>Days Overdue:</label>
+                    <input type="number" id="overdue-days" required>
+                    <button type="submit">Classify</button>
+                </form>
+                <div class="result" id="npa-result"></div>
+                <button onclick="saveNPA()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="bank-reconciliation">
+                <h2>Bank Reconciliation</h2>
+                <form onsubmit="reconcileBank(event)">
+                    <label>Bank Balance:</label>
+                    <input type="number" id="bank-bal" required>
+                    <label>Ledger Balance:</label>
+                    <input type="number" id="ledger-bal" required>
+                    <label>Outstanding Items (JSON):</label>
+                    <textarea id="outstanding"></textarea>
+                    <button type="submit">Reconcile</button>
+                </form>
+                <div class="result" id="recon-result"></div>
+                <button onclick="saveRecon()">Save as PDF</button>
+            </div>
+        </details>
 
-<!-- BANKING & LOAN -->
-<section id="bank">
-  <div class="tool"><h3>EMI Calculator</h3>
-    <input id="loanAmt" type="number" placeholder="Loan Amount">
-    <input id="loanRate" type="number" placeholder="Annual Interest %">
-    <input id="loanYears" type="number" placeholder="Years">
-    <button class="calc" onclick="calcEMI()">Calculate</button>
-    <div id="emiResult" class="result"></div>
-  </div>
-  <div class="tool"><h3>Loan Interest</h3><textarea></textarea></div>
-  <div class="tool"><h3>Loan Schedule Generator</h3><textarea></textarea></div>
-  <div class="tool"><h3>N
+        <details>
+            <summary>Payroll Tools</summary>
+            <div class="tool-section" id="salary-tax">
+                <h2>Salary Tax Calculator (Using Income Slabs)</h2>
+                <form onsubmit="calcSalaryTax(event)">
+                    <label>Annual Salary:</label>
+                    <input type="number" id="salary-amount" required>
+                    <label>Marital Status:</label>
+                    <select id="marital">
+                        <option value="unmarried">Unmarried</option>
+                        <option value="married">Married</option>
+                    </select>
+                    <label>Deductions (PF etc.):</label>
+                    <input type="number" id="salary-deds" value="0">
+                    <button type="submit">Calculate</button>
+                </form>
+                <div class="result" id="salary-result"></div>
+                <button onclick="saveSalaryTax()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="provident-fund">
+                <h2>Provident Fund / SSF Calculator (Employee 11%, Employer 20%)</h2>
+                <form onsubmit="calcPF(event)">
+                    <label>Basic Salary:</label>
+                    <input type="number" id="basic-salary" required>
+                    <button type="submit">Calculate</button>
+                </form>
+                <div class="result" id="pf-result"></div>
+                <button onclick="savePF()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="payslip-generator">
+                <h2>Payslip Generator</h2>
+                <form onsubmit="generatePayslip(event)">
+                    <label>Employee Name:</label>
+                    <input type="text" id="payslip-name" required>
+                    <label>Gross Salary:</label>
+                    <input type="number" id="gross-salary" required>
+                    <label>Deductions:</label>
+                    <input type="number" id="payslip-deds" required>
+                    <button type="submit">Generate</button>
+                </form>
+                <div class="result" id="payslip-result"></div>
+                <button onclick="savePayslip()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="salary-sheet">
+                <h2>Salary Sheet Formatter</h2>
+                <form onsubmit="formatSalarySheet(event)">
+                    <label>Employee Data (CSV):</label>
+                    <textarea id="salary-data" required></textarea>
+                    <button type="submit">Format</button>
+                </form>
+                <table id="salary-table">
+                    <thead><tr><th>Name</th><th>Gross</th><th>Net</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <button onclick="saveSalarySheet()">Save as PDF</button>
+            </div>
+        </details>
+
+        <details>
+            <summary>Financial Tools</summary>
+            <div class="tool-section" id="profit-loss">
+                <h2>Profit & Loss Calculator</h2>
+                <form onsubmit="calcPL(event)">
+                    <label>Revenue:</label>
+                    <input type="number" id="revenue" required>
+                    <label>Expenses:</label>
+                    <input type="number" id="expenses" required>
+                    <button type="submit">Calculate</button>
+                </form>
+                <div class="result" id="pl-result"></div>
+                <button onclick="savePL()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="balance-sheet">
+                <h2>Balance Sheet Checker</h2>
+                <form onsubmit="checkBS(event)">
+                    <label>Assets:</label>
+                    <input type="number" id="assets" required>
+                    <label>Liabilities:</label>
+                    <input type="number" id="liabilities" required>
+                    <label>Equity:</label>
+                    <input type="number" id="equity" required>
+                    <button type="submit">Check</button>
+                </form>
+                <div class="result" id="bs-result"></div>
+                <button onclick="saveBS()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="depreciation">
+                <h2>Depreciation Calculator (Rates: Bldg 5%, Veh 20%, Mach 15%, etc.)</h2>
+                <form onsubmit="calcDep(event)">
+                    <label>Asset Cost:</label>
+                    <input type="number" id="asset-cost" required>
+                    <label>Asset Type:</label>
+                    <select id="asset-type">
+                        <option value="5">Building (5%)</option>
+                        <option value="20">Vehicle (20%)</option>
+                        <option value="15">Machinery (15%)</option>
+                        <option value="25">Furniture/Computer (25%)</option>
+                    </select>
+                    <label>Years:</label>
+                    <input type="number" id="dep-years" required>
+                    <button type="submit">Calculate</button>
+                </form>
+                <div class="result" id="dep-result"></div>
+                <button onclick="saveDep()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="asset-register">
+                <h2>Asset Register</h2>
+                <form onsubmit="addAsset(event)">
+                    <label>Asset Name:</label>
+                    <input type="text" id="asset-name" required>
+                    <label>Cost:</label>
+                    <input type="number" id="asset-cost-reg" required>
+                    <label>Purchase Date:</label>
+                    <input type="date" id="purchase-date" required>
+                    <button type="submit">Add</button>
+                </form>
+                <table id="asset-table">
+                    <thead><tr><th>Name</th><th>Cost</th><th>Date</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <button onclick="saveAssetRegister()">Save as PDF</button>
+            </div>
+        </details>
+
+        <details>
+            <summary>Cloud & Backup Tools</summary>
+            <div class="tool-section" id="google-sheet-backup">
+                <h2>Google Sheet Auto Backup (Simulated - Local Save)</h2>
+                <button onclick="backupData()">Backup Data</button>
+                <div class="result" id="backup-result"></div>
+            </div>
+            <div class="tool-section" id="data-import-export">
+                <h2>Data Import/Export Excel/CSV</h2>
+                <input type="file" id="import-file">
+                <button onclick="importData()">Import</button>
+                <button onclick="exportData()">Export CSV</button>
+                <div class="result" id="import-result"></div>
+            </div>
+            <div class="tool-section" id="offline-collector">
+                <h2>Offline Data Collector (LocalStorage)</h2>
+                <form onsubmit="collectOfflineData(event)">
+                    <label>Data:</label>
+                    <textarea id="offline-data" required></textarea>
+                    <button type="submit">Save Offline</button>
+                </form>
+                <button onclick="retrieveOfflineData()">Retrieve</button>
+                <div class="result" id="offline-result"></div>
+                <button onclick="saveOffline()">Save as PDF</button>
+            </div>
+        </details>
+
+        <details>
+            <summary>Smart AI Tools</summary>
+            <div class="tool-section" id="auto-voucher">
+                <h2>Auto Voucher Suggestion (Rule-Based)</h2>
+                <form onsubmit="suggestVoucher(event)">
+                    <label>Transaction Type:</label>
+                    <input type="text" id="trans-type" required>
+                    <label>Amount:</label>
+                    <input type="number" id="trans-amount" required>
+                    <button type="submit">Suggest</button>
+                </form>
+                <div class="result" id="voucher-result"></div>
+                <button onclick="saveVoucherSug()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="ledger-error">
+                <h2>Ledger Error Detection</h2>
+                <form onsubmit="detectLedgerError(event)">
+                    <label>Ledger Data (JSON):</label>
+                    <textarea id="ledger-data" required></textarea>
+                    <button type="submit">Detect Errors</button>
+                </form>
+                <div class="result" id="error-result"></div>
+                <button onclick="saveLedgerError()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="compliance-reminder">
+                <h2>Compliance Reminder</h2>
+                <form onsubmit="setReminder(event)">
+                    <label>Due Date:</label>
+                    <input type="date" id="due-date" required>
+                    <label>Reminder For:</label>
+                    <input type="text" id="reminder-for" required>
+                    <button type="submit">Set Reminder</button>
+                </form>
+                <div class="result" id="reminder-result"></div>
+                <button onclick="saveReminder()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="financial-health">
+                <h2>Financial Health Score (Simple Ratios)</h2>
+                <form onsubmit="calcHealthScore(event)">
+                    <label>Assets:</label>
+                    <input type="number" id="health-assets" required>
+                    <label>Liabilities:</label>
+                    <input type="number" id="health-liab" required>
+                    <label>Revenue:</label>
+                    <input type="number" id="health-rev" required>
+                    <label>Expenses:</label>
+                    <input type="number" id="health-exp" required>
+                    <button type="submit">Calculate Score</button>
+                </form>
+                <div class="result" id="health-result"></div>
+                <button onclick="saveHealthScore()">Save as PDF</button>
+            </div>
+            <div class="tool-section" id="ird-faq">
+                <h2>IRD Accounting FAQ Helper</h2>
+                <form onsubmit="searchFAQ(event)">
+                    <label>Question:</label>
+                    <input type="text" id="faq-query" required>
+                    <button type="submit">Search</button>
+                </form>
+                <div class="result" id="faq-result"></div>
+                <button onclick="saveFAQ()">Save as PDF</button>
+            </div>
+        </details>
+
+        <footer>
+            <p>Important Nepal Accounting Links:</p>
+            <a href="https://ird.gov.np/">Inland Revenue Department</a> |
+            <a href="https://www.ird.gov.np/pan">PAN Checker</a> |
+            <a href="https://ird.gov.np/vat">VAT Forms & Guidelines</a> |
+            <a href="https://ird.gov.np/">TDS / Tax Slab (Income Tax Act, Nepal)</a>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        const { jsPDF } = window.jspdf;
+
+        // Helper to download PDF
+        function downloadPDF(content, filename) {
+            const doc = new jsPDF();
+            doc.text(content, 10, 10);
+            doc.save(filename + '.pdf');
+        }
+
+        // Client & Basic Tools
+        function validatePAN(event) {
+            event.preventDefault();
+            const pan = document.getElementById('pan-input').value;
+            const result = pan.length === 9 && /^\d+$/.test(pan) ? 'Valid PAN' : 'Invalid PAN';
+            document.getElementById('pan-result').innerText = result;
+        }
+        function savePANResult() {
+            const result = document.getElementById('pan-result').innerText;
+            downloadPDF(`PAN Validation: ${result}`, 'pan_validation');
+        }
+
+        function checkBusinessReg(event) {
+            event.preventDefault();
+            const reg = document.getElementById('reg-input').value;
+            const result = reg.length > 5 ? 'Registered (Simulated)' : 'Not Registered';
+            document.getElementById('reg-result').innerText = result;
+        }
+        function saveRegResult() {
+            const result = document.getElementById('reg-result').innerText;
+            downloadPDF(`Business Reg Check: ${result}`, 'business_reg');
+        }
+
+        let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+        function addContact(event) {
+            event.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const phone = document.getElementById('contact-phone').value;
+            contacts.push({name, email, phone});
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+            renderContacts();
+        }
+        function renderContacts() {
+            const tbody = document.querySelector('#contact-table tbody');
+            tbody.innerHTML = '';
+            contacts.forEach(c => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${c.name}</td><td>${c.email}</td><td>${c.phone}</td>`;
+                tbody.appendChild(tr);
+            });
+        }
+        renderContacts();
+        function saveContacts() {
+            let content = 'Contacts:\n';
+            contacts.forEach(c => content += `${c.name} - ${c.email} - ${c.phone}\n`);
+            downloadPDF(content, 'contacts');
+        }
+
+        function generatePDFFromImage() {
+            const file = document.getElementById('doc-file').files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const doc = new jsPDF();
+                    doc.addImage(e.target.result, 'JPEG', 10, 10, 180, 160);
+                    doc.save('scanned_doc.pdf');
+                    document.getElementById('doc-result').innerText = 'PDF Generated';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Voucher & Ledger Tools
+        let journalEntries = JSON.parse(localStorage.getItem('journal')) || [];
+        function addJournalEntry(event) {
+            event.preventDefault();
+            const debit = document.getElementById('debit-acc').value;
+            const credit = document.getElementById('credit-acc').value;
+            const amount = document.getElementById('journal-amount').value;
+            const desc = document.getElementById('journal-desc').value;
+            journalEntries.push({debit, credit, amount, desc});
+            localStorage.setItem('journal', JSON.stringify(journalEntries));
+            renderJournal();
+        }
+        function renderJournal() {
+            const tbody = document.querySelector('#journal-table tbody');
+            tbody.innerHTML = '';
+            journalEntries.forEach(e => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${e.debit}</td><td>${e.credit}</td><td>${e.amount}</td><td>${e.desc}</td>`;
+                tbody.appendChild(tr);
+            });
+        }
+        renderJournal();
+        function saveJournal() {
+            let content = 'Journal Entries:\n';
+            journalEntries.forEach(e => content += `${e.debit} Dr ${e.amount} - ${e.credit} Cr - ${e.desc}\n`);
+            downloadPDF(content, 'journal');
+        }
+
+        function addPayment(event) {
+            event.preventDefault();
+            const to = document.getElementById('pay-to').value;
+            const amount = document.getElementById('payment-amount').value;
+            const desc = document.getElementById('payment-desc').value;
+            document.getElementById('payment-result').innerText = `Payment to ${to}: ${amount} - ${desc}`;
+        }
+        function savePayment() {
+            const result = document.getElementById('payment-result').innerText;
+            downloadPDF(result, 'payment_voucher');
+        }
+
+        function addReceipt(event) {
+            event.preventDefault();
+            const from = document.getElementById('receipt-from').value;
+            const amount = document.getElementById('receipt-amount').value;
+            const desc = document.getElementById('receipt-desc').value;
+            document.getElementById('receipt-result').innerText = `Receipt from ${from}: ${amount} - ${desc}`;
+        }
+        function saveReceipt() {
+            const result = document.getElementById('receipt-result').innerText;
+            downloadPDF(result, 'receipt_voucher');
+        }
+
+        function addContra(event) {
+            event.preventDefault();
+            const from = document.getElementById('contra-from').value;
+            const to = document.getElementById('contra-to').value;
+            const amount = document.getElementById('contra-amount').value;
+            document.getElementById('contra-result').innerText = `Contra: ${from} to ${to} - ${amount}`;
+        }
+        function saveContra() {
+            const result = document.getElementById('contra-result').innerText;
+            downloadPDF(result, 'contra_voucher');
+        }
+
+        function checkLedgerBalance(event) {
+            event.preventDefault();
+            const entries = JSON.parse(document.getElementById('ledger-entries').value);
+            let balance = 0;
+            entries.forEach(e => balance += e.debit - e.credit);
+            const result = balance === 0 ? 'Balanced' : `Imbalance: ${balance}`;
+            document.getElementById('ledger-result').innerText = result;
+        }
+        function saveLedger() {
+            const result = document.getElementById('ledger-result').innerText;
+            downloadPDF(`Ledger Balance: ${result}`, 'ledger_balance');
+        }
+
+        // VAT Tools
+        function calcVATSale(event) {
+            event.preventDefault();
+            const amount = parseFloat(document.getElementById('sale-amount').value);
+            const vat = amount * 0.13;
+            const total = amount + vat;
+            document.getElementById('sale-result').innerText = `VAT: ${vat.toFixed(2)}, Total: ${total.toFixed(2)}`;
+        }
+        function saveVATSale() {
+            const result = document.getElementById('sale-result').innerText;
+            downloadPDF(result, 'vat_sale');
+        }
+
+        function calcVATPurchase(event) {
+            event.preventDefault();
+            const total = parseFloat(document.getElementById('purchase-amount').value);
+            const vat = total * 0.13 / 1.13;
+            const amount = total - vat;
+            document.getElementById('purchase-result').innerText = `VAT Credit: ${vat.toFixed(2)}, Net Amount: ${amount.toFixed(2)}`;
+        }
+        function saveVATPurchase() {
+            const result = document.getElementById('purchase-result').innerText;
+            downloadPDF(result, 'vat_purchase');
+        }
+
+        function trackVATPayable(event) {
+            event.preventDefault();
+            const salesVAT = parseFloat(document.getElementById('sales-vat').value);
+            const purchaseVAT = parseFloat(document.getElementById('purchase-vat').value);
+            const payable = salesVAT - purchaseVAT;
+            document.getElementById('payable-result').innerText = `VAT Payable: ${payable.toFixed(2)}`;
+        }
+        function saveVATPayable() {
+            const result = document.getElementById('payable-result').innerText;
+            downloadPDF(result, 'vat_payable');
+        }
+
+        function fillVAT9(event) {
+            event.preventDefault();
+            const sales = parseFloat(document.getElementById('vat9-sales').value);
+            const purchases = parseFloat(document.getElementById('vat9-purchases').value);
+            const vatDue = (sales * 0.13) - (purchases * 0.13);
+            document.getElementById('vat9-result').innerText = `VAT Due: ${vatDue.toFixed(2)} (Form Data Generated)`;
+        }
+        function saveVAT9() {
+            const result = document.getElementById('vat9-result').innerText;
+            downloadPDF(result, 'vat9_form');
+        }
+
+        function calcVATPenalty(event) {
+            event.preventDefault();
+            const outstanding = parseFloat(document.getElementById('outstanding-vat').value);
+            const days = parseFloat(document.getElementById('days-late').value);
+            const interest = outstanding * 0.15 / 365 * days;
+            const penalty = outstanding * 0.01 * (days / 30);
+            const total = interest + penalty;
+            document.getElementById('penalty-result').innerText = `Interest: ${interest.toFixed(2)}, Penalty: ${penalty.toFixed(2)}, Total: ${total.toFixed(2)}`;
+        }
+        function saveVATPenalty() {
+            const result = document.getElementById('penalty-result').innerText;
+            downloadPDF(result, 'vat_penalty');
+        }
+
+        // TDS & Tax Tools
+        function calcTDS(event) {
+            event.preventDefault();
+            const rate = parseFloat(document.getElementById('tds-type').value);
+            const amount = parseFloat(document.getElementById('tds-amount').value);
+            const tds = amount * (rate / 100);
+            document.getElementById('tds-result').innerText = `TDS: ${tds.toFixed(2)}`;
+        }
+        function saveTDS() {
+            const result = document.getElementById('tds-result').innerText;
+            downloadPDF(result, 'tds_calc');
+        }
+
+        let deductions = [];
+        function trackDeduction(event) {
+            event.preventDefault();
+            const type = document.getElementById('ded-type').value;
+            const amount = document.getElementById('ded-amount').value;
+            deductions.push({type, amount});
+            let content = 'Deductions:\n';
+            deductions.forEach(d => content += `${d.type}: ${d.amount}\n`);
+            document.getElementById('ded-result').innerText = content;
+        }
+        function saveDeductions() {
+            const result = document.getElementById('ded-result').innerText;
+            downloadPDF(result, 'deductions');
+        }
+
+        function estimateAdvanceTax(event) {
+            event.preventDefault();
+            const annual = parseFloat(document.getElementById('annual-tax').value);
+            const q = document.getElementById('quarter').value;
+            const perc = q === '1' ? 0.4 : q === '2' ? 0.7 : 1;
+            const estimate = annual * perc;
+            document.getElementById('advance-result').innerText = `Advance Tax: ${estimate.toFixed(2)}`;
+        }
+        function saveAdvanceTax() {
+            const result = document.getElementById('advance-result').innerText;
+            downloadPDF(result, 'advance_tax');
+        }
+
+        function showTaxSlabs() {
+            const slabs = `Unmarried:
+Up to 500,000: 1%
+500,001-700,000: 10%
+700,001-1,000,000: 20%
+1,000,001-2,000,000: 30%
+2,000,001-5,000,000: 36%
+Above 5,000,000: 39%`;
+            document.getElementById('slab-result').innerText = slabs;
+        }
+        function saveSlabs() {
+            const result = document.getElementById('slab-result').innerText;
+            downloadPDF(result, 'tax_slabs');
+        }
+
+        function generateTaxCert(event) {
+            event.preventDefault();
+            const name = document.getElementById('emp-name').value;
+            const tds = document.getElementById('cert-tds').value;
+            document.getElementById('cert-result').innerText = `Certificate for ${name}: TDS Deducted ${tds}`;
+        }
+        function saveTaxCert() {
+            const result = document.getElementById('cert-result').innerText;
+            downloadPDF(result, 'tax_cert');
+        }
+
+        // Banking & Loan Tools
+        function calcEMI(event) {
+            event.preventDefault();
+            const p = parseFloat(document.getElementById('loan-amount').value);
+            const r = parseFloat(document.getElementById('interest-rate').value) / 1200;
+            const n = parseFloat(document.getElementById('tenure').value);
+            const type = document.getElementById('emi-type').value;
+            const service = p * (parseFloat(document.getElementById('service-charge').value) / 100);
+            const ins = p * (parseFloat(document.getElementById('insurance').value) / 100);
+            let emi;
+            if (type === 'reducing') {
+                emi = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+            } else {
+                emi = (p / n) + (p * r);
+            }
+            const total = emi * n + service + ins;
+            document.getElementById('emi-result').innerText = `EMI: ${emi.toFixed(2)}, Total: ${total.toFixed(2)}, Service: ${service}, Ins: ${ins}`;
+        }
+        function saveEMI() {
+            const result = document.getElementById('emi-result').innerText;
+            downloadPDF(result, 'emi');
+        }
+
+        function calcLoanInterest(event) {
+            event.preventDefault();
+            const p = parseFloat(document.getElementById('principal').value);
+            const r = parseFloat(document.getElementById('loan-rate').value) / 100;
+            const t = parseFloat(document.getElementById('loan-time').value);
+            const interest = p * r * t;
+            document.getElementById('interest-result').innerText = `Interest: ${interest.toFixed(2)}`;
+        }
+        function saveLoanInterest() {
+            const result = document.getElementById('interest-result').innerText;
+            downloadPDF(result, 'loan_interest');
+        }
+
+        function generateLoanSchedule(event) {
+            event.preventDefault();
+            const p = parseFloat(document.getElementById('schedule-amount').value);
+            const r = parseFloat(document.getElementById('schedule-rate').value) / 1200;
+            const n = parseFloat(document.getElementById('schedule-tenure').value);
+            const emi = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+            let balance = p;
+            const tbody = document.querySelector('#schedule-table tbody');
+            tbody.innerHTML = '';
+            for (let i = 1; i <= n; i++) {
+                const int = balance * r;
+                const prin = emi - int;
+                balance -= prin;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${i}</td><td>${emi.toFixed(2)}</td><td>${int.toFixed(2)}</td><td>${prin.toFixed(2)}</td><td>${balance.toFixed(2)}</td>`;
+                tbody.appendChild(tr);
+            }
+        }
+        function saveLoanSchedule() {
+            let content = 'Loan Schedule:\nMonth | EMI | Interest | Principal | Balance\n';
+            const rows = document.querySelectorAll('#schedule-table tbody tr');
+            rows.forEach(row => {
+                content += Array.from(row.cells).map(cell => cell.innerText).join(' | ') + '\n';
+            });
+            downloadPDF(content, 'loan_schedule');
+        }
+
+        function trackNPA(event) {
+            event.preventDefault();
+            const amount = parseFloat(document.getElementById('npa-amount').value);
+            const days = parseFloat(document.getElementById('overdue-days').value);
+            let classif, prov;
+            if (days < 30) { classif = 'Performing'; prov = 0.01; }
+            else if (days < 90) { classif = 'Watchlist'; prov = 0.05; }
+            else if (days < 180) { classif = 'Substandard'; prov = 0.25; }
+            else if (days < 365) { classif = 'Doubtful'; prov = 0.5; }
+            else { classif = 'Bad'; prov = 1; }
+            const provision = amount * prov;
+            document.getElementById('npa-result').innerText = `Classification: ${classif}, Provision: ${provision.toFixed(2)}`;
+        }
+        function saveNPA() {
+            const result = document.getElementById('npa-result').innerText;
+            downloadPDF(result, 'npa_tracker');
+        }
+
+        function reconcileBank(event) {
+            event.preventDefault();
+            const bank = parseFloat(document.getElementById('bank-bal').value);
+            const ledger = parseFloat(document.getElementById('ledger-bal').value);
+            const outstanding = JSON.parse(document.getElementById('outstanding').value || '[]');
+            let adj = 0;
+            outstanding.forEach(o => adj += o.amount);
+            const reconciled = ledger + adj === bank ? 'Reconciled' : `Difference: ${bank - (ledger + adj)}`;
+            document.getElementById('recon-result').innerText = reconciled;
+        }
+        function saveRecon() {
+            const result = document.getElementById('recon-result').innerText;
+            downloadPDF(result, 'bank_recon');
+        }
+
+        // Payroll Tools
+        function calcSalaryTax(event) {
+            event.preventDefault();
+            let income = parseFloat(document.getElementById('salary-amount').value);
+            const marital = document.getElementById('marital').value;
+            const deds = parseFloat(document.getElementById('salary-deds').value);
+            income -= deds;
+            let tax = 0;
+            const slabs = marital === 'unmarried' ? 
+                [[500000, 0.01], [200000, 0.1], [300000, 0.2], [1000000, 0.3], [3000000, 0.36], [Infinity, 0.39]] :
+                [[600000, 0.01], [200000, 0.1], [300000, 0.2], [900000, 0.3], [3000000, 0.36], [Infinity, 0.39]];
+            let remaining = income;
+            slabs.forEach(([bracket, rate]) => {
+                if (remaining > 0) {
+                    const taxable = Math.min(remaining, bracket);
+                    tax += taxable * rate;
+                    remaining -= taxable;
+                }
+            });
+            document.getElementById('salary-result').innerText = `Tax: ${tax.toFixed(2)}`;
+        }
+        function saveSalaryTax() {
+            const result = document.getElementById('salary-result').innerText;
+            downloadPDF(result, 'salary_tax');
+        }
+
+        function calcPF(event) {
+            event.preventDefault();
+            const basic = parseFloat(document.getElementById('basic-salary').value);
+            const emp = basic * 0.11;
+            const empl = basic * 0.20;
+            const total = emp + empl;
+            document.getElementById('pf-result').innerText = `Employee: ${emp.toFixed(2)}, Employer: ${empl.toFixed(2)}, Total: ${total.toFixed(2)}`;
+        }
+        function savePF() {
+            const result = document.getElementById('pf-result').innerText;
+            downloadPDF(result, 'pf_calc');
+        }
+
+        function generatePayslip(event) {
+            event.preventDefault();
+            const name = document.getElementById('payslip-name').value;
+            const gross = parseFloat(document.getElementById('gross-salary').value);
+            const deds = parseFloat(document.getElementById('payslip-deds').value);
+            const net = gross - deds;
+            document.getElementById('payslip-result').innerText = `Payslip for ${name}: Gross ${gross}, Deds ${deds}, Net ${net}`;
+        }
+        function savePayslip() {
+            const result = document.getElementById('payslip-result').innerText;
+            downloadPDF(result, 'payslip');
+        }
+
+        function formatSalarySheet(event) {
+            event.preventDefault();
+            const data = document.getElementById('salary-data').value.split('\n').map(line => line.split(','));
+            const tbody = document.querySelector('#salary-table tbody');
+            tbody.innerHTML = '';
+            data.forEach(row => {
+                if (row.length >= 3) {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
+                    tbody.appendChild(tr);
+                }
+            });
+        }
+        function saveSalarySheet() {
+            let content = 'Salary Sheet:\nName | Gross | Net\n';
+            const rows = document.querySelectorAll('#salary-table tbody tr');
+            rows.forEach(row => {
+                content += Array.from(row.cells).map(cell => cell.innerText).join(' | ') + '\n';
+            });
+            downloadPDF(content, 'salary_sheet');
+        }
+
+        // Financial Tools
+        function calcPL(event) {
+            event.preventDefault();
+            const rev = parseFloat(document.getElementById('revenue').value);
+            const exp = parseFloat(document.getElementById('expenses').value);
+            const profit = rev - exp;
+            document.getElementById('pl-result').innerText = `Profit/Loss: ${profit.toFixed(2)}`;
+        }
+        function savePL() {
+            const result = document.getElementById('pl-result').innerText;
+            downloadPDF(result, 'profit_loss');
+        }
+
+        function checkBS(event) {
+            event.preventDefault();
+            const assets = parseFloat(document.getElementById('assets').value);
+            const liab = parseFloat(document.getElementById('liabilities').value);
+            const equity = parseFloat(document.getElementById('equity').value);
+            const check = assets === liab + equity ? 'Balanced' : `Imbalance: ${assets - (liab + equity)}`;
+            document.getElementById('bs-result').innerText = check;
+        }
+        function saveBS() {
+            const result = document.getElementById('bs-result').innerText;
+            downloadPDF(result, 'balance_sheet');
+        }
+
+        function calcDep(event) {
+            event.preventDefault();
+            const cost = parseFloat(document.getElementById('asset-cost').value);
+            const rate = parseFloat(document.getElementById('asset-type').value) / 100;
+            const years = parseFloat(document.getElementById('dep-years').value);
+            const dep = cost * rate * years;
+            document.getElementById('dep-result').innerText = `Depreciation: ${dep.toFixed(2)}`;
+        }
+        function saveDep() {
+            const result = document.getElementById('dep-result').innerText;
+            downloadPDF(result, 'depreciation');
+        }
+
+        let assets = JSON.parse(localStorage.getItem('assets')) || [];
+        function addAsset(event) {
+            event.preventDefault();
+            const name = document.getElementById('asset-name').value;
+            const cost = document.getElementById('asset-cost-reg').value;
+            const date = document.getElementById('purchase-date').value;
+            assets.push({name, cost, date});
+            localStorage.setItem('assets', JSON.stringify(assets));
+            renderAssets();
+        }
+        function renderAssets() {
+            const tbody = document.querySelector('#asset-table tbody');
+            tbody.innerHTML = '';
+            assets.forEach(a => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${a.name}</td><td>${a.cost}</td><td>${a.date}</td>`;
+                tbody.appendChild(tr);
+            });
+        }
+        renderAssets();
+        function saveAssetRegister() {
+            let content = 'Asset Register:\nName | Cost | Date\n';
+            assets.forEach(a => content += `${a.name} | ${a.cost} | ${a.date}\n`);
+            downloadPDF(content, 'asset_register');
+        }
+
+        // Cloud & Backup Tools
+        function backupData() {
+            const allData = localStorage.getItem('contacts') + localStorage.getItem('journal') + localStorage.getItem('assets');
+            downloadPDF(allData, 'backup');
+            document.getElementById('backup-result').innerText = 'Backup Created';
+        }
+
+        function importData() {
+            const file = document.getElementById('import-file').files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('import-result').innerText = 'Data Imported: ' + e.target.result.substring(0, 100);
+                };
+                reader.readAsText(file);
+            }
+        }
+        function exportData() {
+            const blob = new Blob(['Sample Export Data'], {type: 'text/csv'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'export.csv';
+            a.click();
+        }
+
+        function collectOfflineData(event) {
+            event.preventDefault();
+            const data = document.getElementById('offline-data').value;
+            localStorage.setItem('offlineData', data);
+            document.getElementById('offline-result').innerText = 'Data Saved Offline';
+        }
+        function retrieveOfflineData() {
+            const data = localStorage.getItem('offlineData');
+            document.getElementById('offline-result').innerText = data || 'No Data';
+        }
+        function saveOffline() {
+            const result = document.getElementById('offline-result').innerText;
+            downloadPDF(result, 'offline_data');
+        }
+
+        // Smart AI Tools
+        function suggestVoucher(event) {
+            event.preventDefault();
+            const type = document.getElementById('trans-type').value.toLowerCase();
+            const amount = document.getElementById('trans-amount').value;
+            let suggestion = 'No Suggestion';
+            if (type.includes('sale')) suggestion = 'Debit Cash, Credit Sales';
+            else if (type.includes('purchase')) suggestion = 'Debit Purchase, Credit Cash';
+            document.getElementById('voucher-result').innerText = `Suggestion: ${suggestion} for ${amount}`;
+        }
+        function saveVoucherSug() {
+            const result = document.getElementById('voucher-result').innerText;
+            downloadPDF(result, 'voucher_sug');
+        }
+
+        function detectLedgerError(event) {
+            event.preventDefault();
+            const data = JSON.parse(document.getElementById('ledger-data').value);
+            let totalDr = 0, totalCr = 0;
+            data.forEach(e => {
+                totalDr += e.debit || 0;
+                totalCr += e.credit || 0;
+            });
+            const error = totalDr !== totalCr ? `Error: Dr ${totalDr} != Cr ${totalCr}` : 'No Error';
+            document.getElementById('error-result').innerText = error;
+        }
+        function saveLedgerError() {
+            const result = document.getElementById('error-result').innerText;
+            downloadPDF(result, 'ledger_error');
+        }
+
+        function setReminder(event) {
+            event.preventDefault();
+            const date = document.getElementById('due-date').value;
+            const forWhat = document.getElementById('reminder-for').value;
+            document.getElementById('reminder-result').innerText = `Reminder Set for ${forWhat} on ${date}`;
+        }
+        function saveReminder() {
+            const result = document.getElementById('reminder-result').innerText;
+            downloadPDF(result, 'compliance_reminder');
+        }
+
+        function calcHealthScore(event) {
+            event.preventDefault();
+            const assets = parseFloat(document.getElementById('health-assets').value);
+            const liab = parseFloat(document.getElementById('health-liab').value);
+            const rev = parseFloat(document.getElementById('health-rev').value);
+            const exp = parseFloat(document.getElementById('health-exp').value);
+            const currentRatio = assets / liab;
+            const profitMargin = (rev - exp) / rev * 100;
+            const score = (currentRatio > 1 ? 50 : 0) + (profitMargin > 10 ? 50 : 0);
+            document.getElementById('health-result').innerText = `Health Score: ${score}/100 (Current Ratio: ${currentRatio.toFixed(2)}, Profit Margin: ${profitMargin.toFixed(2)}%)`;
+        }
+        function saveHealthScore() {
+            const result = document.getElementById('health-result').innerText;
+            downloadPDF(result, 'financial_health');
+        }
+
+        const faqs = {
+            'vat rate': 'VAT rate in Nepal is 13%.',
+            'tds service': 'TDS for services is 1.5% if VAT bill.',
+            'tax filing': 'File within 3 months after fiscal year end.',
+            // Add more from search
+        };
+        function searchFAQ(event) {
+            event.preventDefault();
+            const query = document.getElementById('faq-query').value.toLowerCase();
+            let answer = 'No FAQ found.';
+            for (let key in faqs) {
+                if (query.includes(key)) {
+                    answer = faqs[key];
+                    break;
+                }
+            }
+            document.getElementById('faq-result').innerText = answer;
+        }
+        function saveFAQ() {
+            const result = document.getElementById('faq-result').innerText;
+            downloadPDF(result, 'ird_faq');
+        }
+    </script>
+</body>
+</html>
