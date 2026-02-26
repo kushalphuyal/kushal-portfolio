@@ -4,98 +4,398 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kushal Photography Gallery</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
+:root{
+  --ink:#070810;--card:#0e1020;--line:rgba(255,255,255,0.07);
+  --teal:#00e5cc;--violet:#7c5cfc;--rose:#ff6584;
+  --text:#d4d8f0;--muted:#5a6080;
+}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Arial,sans-serif;background:#111;color:#fff;}
-header{text-align:center;padding:50px 20px 30px 20px;}
-header h1{font-size:3rem;letter-spacing:2px;margin-bottom:10px;}
-header p{font-size:1.2rem;color:#ccc;}
-.featured-photo{position:relative;width:90%;max-width:800px;margin:0 auto 50px auto;cursor:pointer;overflow:hidden;border-radius:12px;}
-.featured-photo img{width:100%;display:block;transition:transform 0.4s ease;}
-.featured-photo:hover img{transform:scale(1.05);}
-.featured-photo .overlay{position:absolute;bottom:0;width:100%;text-align:center;background:rgba(0,0,0,0.6);padding:15px 0;font-size:1.2rem;letter-spacing:1px;opacity:0;transition:0.3s;}
-.featured-photo:hover .overlay{opacity:1;}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;min-height:100vh;}
 
-/* Modal / Lightbox */
-.modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.95);}
-.modal-content{position:relative;margin:auto;top:50%;transform:translateY(-50%);max-width:90%;max-height:80%;}
-.modal-content img{width:100%;border-radius:10px;display:block;margin:auto;}
-.close,.prev,.next{position:absolute;color:#fff;font-size:40px;cursor:pointer;user-select:none;transition:0.3s;}
-.close{top:20px;right:40px;}
-.prev{top:50%;left:30px;transform:translateY(-50%);}
-.next{top:50%;right:30px;transform:translateY(-50%);}
-.close:hover,.prev:hover,.next:hover{color:#ff6347;}
-.caption{text-align:center;color:#ccc;font-size:1rem;margin-top:10px;}
-footer{text-align:center;padding:20px;background:#111;color:#aaa;font-size:0.9rem;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:9999;height:66px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 6%;
+  background:rgba(7,8,16,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);}
+.nav-logo{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:.1em;
+  color:white;text-decoration:none;}
+.nav-logo em{color:var(--teal);font-style:normal;}
+.nav-back{display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;
+  font-size:.875rem;font-weight:500;padding:8px 16px;border-radius:8px;transition:all .25s;
+  border:1px solid var(--line);}
+.nav-back:hover{color:var(--teal);border-color:var(--teal);transform:translateX(-3px);}
+
+/* HERO */
+.hero-header{padding:110px 6% 60px;position:relative;z-index:1;text-align:center;}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--teal);display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;}
+.eyebrow::before,.eyebrow::after{content:'';width:28px;height:1px;background:var(--teal);}
+.hero-header h1{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,5vw,4rem);
+  font-weight:800;color:white;line-height:1.05;margin-bottom:16px;}
+.hero-header h1 span{background:linear-gradient(100deg,var(--teal),var(--violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-header p{color:var(--muted);font-size:1.05rem;max-width:460px;margin:0 auto 40px;}
+
+.stats-row{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;margin-bottom:8px;}
+.stat-n{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;color:var(--teal);}
+.stat-l{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+
+/* FILTER TABS */
+.filter-bar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;
+  padding:0 6% 52px;position:relative;z-index:1;}
+.filter-btn{padding:8px 22px;border-radius:50px;font-size:.82rem;font-weight:600;
+  cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.04);
+  color:var(--muted);transition:all .25s;letter-spacing:.04em;font-family:'DM Sans',sans-serif;}
+.filter-btn:hover{color:white;border-color:rgba(255,255,255,.25);}
+.filter-btn.active{background:var(--violet);color:white;border-color:var(--violet);
+  box-shadow:0 4px 18px rgba(124,92,252,.35);}
+
+/* FEATURED */
+.featured-wrap{padding:0 6% 56px;position:relative;z-index:1;max-width:1200px;margin:0 auto;}
+.featured-card{position:relative;border-radius:20px;overflow:hidden;cursor:pointer;
+  border:1px solid var(--line);aspect-ratio:16/6;}
+.featured-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;}
+.featured-card:hover img{transform:scale(1.04);}
+.featured-overlay{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 55%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:36px;
+  opacity:0;transition:opacity .35s;}
+.featured-card:hover .featured-overlay{opacity:1;}
+.featured-overlay h2{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:white;margin-bottom:6px;}
+.featured-overlay p{color:rgba(255,255,255,.7);font-size:.9rem;}
+.featured-badge{position:absolute;top:20px;left:20px;
+  background:var(--teal);color:var(--ink);padding:5px 16px;border-radius:50px;
+  font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+
+/* MASONRY */
+.gallery-wrap{padding:0 6% 60px;position:relative;z-index:1;max-width:1200px;margin:0 auto;}
+.masonry{columns:4;column-gap:14px;}
+.photo-item{break-inside:avoid;margin-bottom:14px;position:relative;
+  border-radius:14px;overflow:hidden;cursor:pointer;border:1px solid var(--line);
+  transition:transform .35s,box-shadow .35s;}
+.photo-item:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(0,0,0,.55);}
+.photo-item img{width:100%;display:block;transition:transform .45s;}
+.photo-item:hover img{transform:scale(1.06);}
+.photo-info{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.82) 0%,transparent 55%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:14px;
+  opacity:0;transition:opacity .3s;}
+.photo-item:hover .photo-info{opacity:1;}
+.photo-info span{color:white;font-size:.82rem;font-weight:500;}
+.photo-info small{color:rgba(255,255,255,.55);font-size:.72rem;text-transform:capitalize;}
+.photo-num{position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.68rem;color:rgba(255,255,255,.8);opacity:0;transition:opacity .3s;}
+.photo-item:hover .photo-num{opacity:1;}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted);display:none;}
+.empty-state i{font-size:2.5rem;margin-bottom:14px;color:var(--line);}
+
+/* LOAD MORE */
+.load-more-wrap{text-align:center;padding:0 0 80px;position:relative;z-index:1;}
+.btn-load{display:inline-flex;align-items:center;gap:10px;padding:14px 36px;
+  border-radius:12px;background:var(--card);border:1px solid var(--line);
+  color:var(--text);font-size:.9rem;font-weight:600;cursor:pointer;
+  transition:all .28s;font-family:'DM Sans',sans-serif;}
+.btn-load:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-3px);}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;z-index:10000;
+  background:rgba(0,0,0,.96);align-items:center;justify-content:center;}
+.lightbox.open{display:flex;}
+.lb-inner{position:relative;max-width:880px;width:90%;animation:lbIn .28s ease;}
+@keyframes lbIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+.lb-img-wrap{border-radius:16px;overflow:hidden;position:relative;background:#000;}
+.lb-img-wrap img{width:100%;display:block;max-height:76vh;object-fit:contain;}
+
+/* loading skeleton inside lightbox */
+.lb-img-wrap::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);
+  animation:shimmer 1.2s infinite;transform:translateX(-100%);}
+@keyframes shimmer{to{transform:translateX(100%)}}
+
+.lb-btn{position:absolute;top:50%;transform:translateY(-50%);
+  width:46px;height:46px;border-radius:50%;
+  background:rgba(255,255,255,.1);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.15);color:white;font-size:1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .25s;z-index:2;}
+.lb-btn:hover{background:var(--violet);border-color:var(--violet);}
+.lb-prev{left:-62px;} .lb-next{right:-62px;}
+.lb-close{position:fixed;top:22px;right:26px;width:42px;height:42px;border-radius:50%;
+  background:rgba(255,255,255,.1);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.15);color:white;font-size:.95rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .25s;}
+.lb-close:hover{background:var(--rose);border-color:var(--rose);}
+
+.lb-footer{display:flex;justify-content:space-between;align-items:center;padding:14px 2px 0;}
+.lb-caption-text{color:var(--text);font-size:.88rem;}
+.lb-count{color:var(--muted);font-size:.8rem;}
+.lb-bar-wrap{height:2px;background:var(--line);border-radius:2px;margin-top:12px;overflow:hidden;}
+.lb-bar{height:100%;background:var(--teal);transition:width .3s;}
+
+/* thumb strip */
+.lb-thumbs{display:flex;gap:6px;overflow-x:auto;padding:12px 0 0;scrollbar-width:none;}
+.lb-thumbs::-webkit-scrollbar{display:none;}
+.lb-thumb{width:52px;height:38px;border-radius:6px;overflow:hidden;cursor:pointer;
+  border:2px solid transparent;flex-shrink:0;opacity:.5;transition:all .25s;}
+.lb-thumb.active{border-color:var(--teal);opacity:1;}
+.lb-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* FOOTER */
+footer{text-align:center;padding:44px 20px;background:#030408;
+  border-top:1px solid var(--line);position:relative;z-index:1;}
+.foot-logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;
+  background:linear-gradient(to right,white,var(--teal));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;}
+footer p{color:#333;font-size:.82rem;}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.masonry{columns:3;}}
+@media(max-width:768px){
+  .masonry{columns:2;}
+  .lb-prev{left:-10px;}.lb-next{right:-10px;}
+  .stats-row{gap:28px;}
+  .lb-thumbs{display:none;}
+}
+@media(max-width:480px){
+  .masonry{columns:2;column-gap:10px;}
+  .photo-item{margin-bottom:10px;}
+  .hero-header{padding:90px 5% 44px;}
+}
 </style>
 </head>
 <body>
 
-<header>
-<h1>Kushal Photography</h1>
-<p>Capturing moments, one frame at a time</p>
-</header>
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">KUSHAL<em>.</em>P</a>
+  <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+</nav>
 
-<section id="home">
-<div class="featured-photo" id="openGallery">
-<img src="https://picsum.photos/800/500?random=1" alt="Featured Photo">
-<div class="overlay">Click to Explore Gallery</div>
-</div>
-</section>
-
-<!-- Modal / Lightbox -->
-<div id="galleryModal" class="modal">
-<span class="close">&times;</span>
-<span class="prev">&#10094;</span>
-<span class="next">&#10095;</span>
-<div class="modal-content">
-<img src="" alt="" id="modalImg">
-<div class="caption" id="captionText"></div>
-</div>
+<!-- HERO -->
+<div class="hero-header">
+  <div class="eyebrow">Visual Stories</div>
+  <h1>Kushal <span>Photography</span></h1>
+  <p>Capturing moments, one frame at a time</p>
+  <div class="stats-row">
+    <div><div class="stat-n" id="totalCount">50</div><div class="stat-l">Photos</div></div>
+    <div><div class="stat-n">∞</div><div class="stat-l">Memories</div></div>
+    <div><div class="stat-n">1</div><div class="stat-l">Photographer</div></div>
+  </div>
 </div>
 
+<!-- FILTERS -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All Photos</button>
+  <button class="filter-btn" data-filter="nature">Nature</button>
+  <button class="filter-btn" data-filter="portrait">Portrait</button>
+  <button class="filter-btn" data-filter="urban">Urban</button>
+  <button class="filter-btn" data-filter="travel">Travel</button>
+</div>
+
+<!-- FEATURED -->
+<div class="featured-wrap">
+  <div class="featured-card" id="featuredCard">
+    <span class="featured-badge"><i class="fas fa-star"></i> Featured</span>
+    <img src="https://picsum.photos/1200/500?random=99" alt="Featured" id="featuredImg">
+    <div class="featured-overlay">
+      <h2>Featured Shot</h2>
+      <p>Click to open in gallery</p>
+    </div>
+  </div>
+</div>
+
+<!-- GRID -->
+<div class="gallery-wrap">
+  <div class="masonry" id="masonryGrid"></div>
+  <div class="empty-state" id="emptyState">
+    <i class="fas fa-camera-slash"></i>
+    <p>No photos in this category yet.</p>
+  </div>
+</div>
+
+<!-- LOAD MORE -->
+<div class="load-more-wrap">
+  <button class="btn-load" id="loadMoreBtn"><i class="fas fa-images"></i> Load More Photos</button>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose"><i class="fas fa-times"></i></button>
+  <div class="lb-inner">
+    <div class="lb-img-wrap">
+      <button class="lb-btn lb-prev" id="lbPrev"><i class="fas fa-chevron-left"></i></button>
+      <img src="" alt="" id="lbImg">
+      <button class="lb-btn lb-next" id="lbNext"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <div class="lb-footer">
+      <span class="lb-caption-text" id="lbCaption"></span>
+      <span class="lb-count" id="lbCount"></span>
+    </div>
+    <div class="lb-bar-wrap"><div class="lb-bar" id="lbBar"></div></div>
+    <div class="lb-thumbs" id="lbThumbs"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer>
-<p>&copy; 2026 Kushal Photography. All Rights Reserved.</p>
+  <div class="foot-logo">KUSHAL PHOTOGRAPHY</div>
+  <p>&copy; 2026 Kushal Phuyal. All Rights Reserved.</p>
 </footer>
 
 <script>
-// ===== JS START =====
-const galleryImages = [];
-// Auto-generate 50+ photos
-for(let i=1;i<=50;i++){
-  galleryImages.push({
-    src:`https://picsum.photos/800/500?random=${i+1}`, // Replace with your own photo URLs
-    caption:`Kushal Photo ${i}`
+// ═══════════════════════════════════════════════════
+// PHOTO DATA
+// Replace picsum URLs below with your own photo URLs!
+// Format: { src:"full-url", thumb:"thumbnail-url", caption:"Title", category:"nature|portrait|urban|travel" }
+// ═══════════════════════════════════════════════════
+const cats = ['nature','portrait','urban','travel'];
+const allPhotos = Array.from({length:50},(_,i)=>({
+  src:   `https://picsum.photos/900/650?random=${i+10}`,
+  thumb: `https://picsum.photos/120/80?random=${i+10}`,
+  caption: `Kushal Photo ${i+1}`,
+  category: cats[i % cats.length]
+}));
+
+// ── STATE ──────────────────────────────────────────
+let filtered = [...allPhotos];
+let shown    = 0;
+let current  = 0;
+const PER_PAGE = 16;
+
+// ── DOM ────────────────────────────────────────────
+const grid      = document.getElementById('masonryGrid');
+const emptyEl   = document.getElementById('emptyState');
+const loadBtn   = document.getElementById('loadMoreBtn');
+const lb        = document.getElementById('lightbox');
+const lbImg     = document.getElementById('lbImg');
+const lbCapEl   = document.getElementById('lbCaption');
+const lbCountEl = document.getElementById('lbCount');
+const lbBarEl   = document.getElementById('lbBar');
+const lbThumbs  = document.getElementById('lbThumbs');
+const lbClose   = document.getElementById('lbClose');
+const lbPrev    = document.getElementById('lbPrev');
+const lbNext    = document.getElementById('lbNext');
+
+// ── RENDER GRID ────────────────────────────────────
+function renderBatch(){
+  const batch = filtered.slice(shown, shown + PER_PAGE);
+  batch.forEach((p, i) => {
+    const idx = shown + i;
+    const el  = document.createElement('div');
+    el.className   = 'photo-item';
+    el.dataset.idx = idx;
+    el.innerHTML   = `
+      <img src="${p.src}" alt="${p.caption}" loading="lazy">
+      <div class="photo-info">
+        <span>${p.caption}</span>
+        <small>${p.category}</small>
+      </div>
+      <div class="photo-num">${idx+1}</div>`;
+    el.addEventListener('click', () => openLb(idx));
+    grid.appendChild(el);
+  });
+  shown += batch.length;
+  loadBtn.style.display = shown >= filtered.length ? 'none' : 'inline-flex';
+}
+
+function resetGrid(){
+  grid.innerHTML = '';
+  shown = 0;
+  emptyEl.style.display = 'none';
+  grid.style.display = 'block';
+  if(filtered.length === 0){
+    emptyEl.style.display = 'block';
+    grid.style.display = 'none';
+    loadBtn.style.display = 'none';
+    return;
+  }
+  renderBatch();
+  document.getElementById('totalCount').textContent = filtered.length;
+}
+
+// ── FILTER ─────────────────────────────────────────
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    filtered = f === 'all' ? [...allPhotos] : allPhotos.filter(p => p.category === f);
+    resetGrid();
+  });
+});
+
+loadBtn.addEventListener('click', renderBatch);
+document.getElementById('featuredCard').addEventListener('click', () => openLb(0));
+
+// ── LIGHTBOX ───────────────────────────────────────
+function buildThumbs(){
+  lbThumbs.innerHTML = '';
+  filtered.forEach((p, i) => {
+    const t = document.createElement('div');
+    t.className = 'lb-thumb' + (i===current?' active':'');
+    t.innerHTML = `<img src="${p.thumb}" alt="">`;
+    t.addEventListener('click', () => { current=i; updateLb(); });
+    lbThumbs.appendChild(t);
   });
 }
 
-let currentIndex=0;
-const modal=document.getElementById("galleryModal");
-const modalImg=document.getElementById("modalImg");
-const captionText=document.getElementById("captionText");
-const openGallery=document.getElementById("openGallery");
-const closeBtn=document.querySelector(".close");
-const prevBtn=document.querySelector(".prev");
-const nextBtn=document.querySelector(".next");
-
-// Open modal with first image
-openGallery.onclick=function(){currentIndex=0;showImage(currentIndex);modal.style.display="block";}
-
-// Show image function
-function showImage(index){
-  modalImg.src=galleryImages[index].src;
-  captionText.textContent=galleryImages[index].caption;
+function updateLb(){
+  const p = filtered[current];
+  lbImg.src = p.src;
+  lbCapEl.textContent  = p.caption + ' · ' + p.category;
+  lbCountEl.textContent = `${current+1} / ${filtered.length}`;
+  lbBarEl.style.width   = ((current+1)/filtered.length*100) + '%';
+  // sync active thumb
+  lbThumbs.querySelectorAll('.lb-thumb').forEach((t,i)=>t.classList.toggle('active',i===current));
+  // scroll thumb into view
+  const active = lbThumbs.children[current];
+  if(active) active.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
 }
 
-// Next / Prev
-nextBtn.onclick=function(){currentIndex=(currentIndex+1)%galleryImages.length;showImage(currentIndex);}
-prevBtn.onclick=function(){currentIndex=(currentIndex-1+galleryImages.length)%galleryImages.length;showImage(currentIndex);}
+function openLb(idx){
+  current = idx;
+  buildThumbs();
+  updateLb();
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb(){
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
 
-// Close modal
-closeBtn.onclick=function(){modal.style.display="none";}
-window.onclick=function(event){if(event.target===modal)modal.style.display="none";}
-// ===== JS END =====
+lbClose.addEventListener('click', closeLb);
+lb.addEventListener('click', e => { if(e.target===lb) closeLb(); });
+lbPrev.addEventListener('click', () => { current=(current-1+filtered.length)%filtered.length; updateLb(); });
+lbNext.addEventListener('click', () => { current=(current+1)%filtered.length; updateLb(); });
+
+// keyboard
+document.addEventListener('keydown', e => {
+  if(!lb.classList.contains('open')) return;
+  if(e.key==='ArrowRight') { current=(current+1)%filtered.length; updateLb(); }
+  if(e.key==='ArrowLeft')  { current=(current-1+filtered.length)%filtered.length; updateLb(); }
+  if(e.key==='Escape') closeLb();
+});
+
+// swipe
+let tx=0;
+lb.addEventListener('touchstart', e=>{tx=e.touches[0].clientX;},{passive:true});
+lb.addEventListener('touchend',   e=>{
+  const dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>50){ dx<0?lbNext.click():lbPrev.click(); }
+});
+
+// ── INIT ───────────────────────────────────────────
+renderBatch();
 </script>
-
 </body>
 </html>
