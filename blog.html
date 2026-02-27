@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
+    /* तिम्रो पूर्ण CSS यहाँ यथावत छ (मैले काटेको छैन, तिमीले original CSS राख्नु) */
     :root{
       --ink:#070810;--card:#0e1428;--line:rgba(255,255,255,0.08);
       --teal:#00e5cc;--violet:#7c5cfc;--rose:#ff6584;--gold:#ffd166;
@@ -248,9 +249,8 @@
   <p>© <script>document.write(new Date().getFullYear())</script> Kushal Phuyal. All Rights Reserved.</p>
 </footer>
 
-
-    <script>
-// BLOG POSTS — पूर्ण ६ posts (तिम्रो original)
+<script>
+// BLOG POSTS — पूर्ण ६ posts (सबै content सहित)
 const POSTS = [
   {
     id: 1,
@@ -262,7 +262,31 @@ const POSTS = [
     icon: "fas fa-robot",
     color: "linear-gradient(135deg, #0d1230, #1a0e40)",
     iconColor: "var(--violet)",
-    content: `... (full content यहाँ राख्नु, तिम्रो original content) ...`
+    content: `
+      <h2>AI Accountant भनेको के हो?</h2>
+      <p>पहिले accounting भनेको manual ledger, calculator, र थुप्रै कागजातको काम थियो। तर अहिले AI ले यो सबै बदलिरहेको छ।</p>
+      <p>AI Accountant भनेको कोही जसले traditional accounting knowledge सँगसँगै artificial intelligence tools पनि प्रयोग गर्न जान्दछ — automation गर्न, data analyze गर्न, र smart financial decisions लिन।</p>
+
+      <div class="highlight">
+        मेरो विचारमा, आउने ५ वर्षमा नेपालका ७०% routine accounting tasks AI ले handle गर्नेछ। जसले adapt गर्दैन, उसलाई गाह्रो हुन्छ।
+      </div>
+
+      <h2>परम्परागत vs AI Accountant</h2>
+      <p><strong>परम्परागत Accountant:</strong> Manual data entry, spreadsheet, physical voucher — समय धेरै लाग्छ।</p>
+      <p><strong>AI Accountant:</strong> Automated bookkeeping, real-time reporting, pattern detection — काम छिटो, गल्ती कम।</p>
+
+      <h3>मैले के सिकें?</h3>
+      <ul>
+        <li>AI tools सिक्न डराउनु हुँदैन</li>
+        <li>Excel मात्र जानेको अब पुग्दैन</li>
+        <li>Python, automation tools, र AI platforms बुझ्नु जरुरी छ</li>
+        <li>Nepal context मा apply गर्न सक्नु नै असली skill हो</li>
+      </ul>
+
+      <h2>नेपालको अवस्था</h2>
+      <p>नेपालमा अझैपनि धेरै firms manual accounting नै गर्छन्। यही gap नै opportunity हो। जसले आफ्नो accounting knowledge मा AI थप्न सक्छ, उसले market मा अलग ठाउँ बनाउन सक्छ।</p>
+      <p>Okhaldhunga जस्तो ठाउँबाट पनि digital tools प्रयोग गरेर national level मा काम गर्न सकिन्छ — यो मैले आफैं prove गर्दैछु।</p>
+    `
   },
   {
     id: 2,
@@ -274,7 +298,39 @@ const POSTS = [
     icon: "fas fa-receipt",
     color: "linear-gradient(135deg, #0d1820, #0a1a30)",
     iconColor: "var(--teal)",
-    content: `... (full content) ...`
+    content: `
+      <h2>VAT भनेको के हो?</h2>
+      <p>VAT (Value Added Tax) भनेको नेपालमा goods र services मा लाग्ने कर हो। हाल नेपालमा <strong>13%</strong> VAT लाग्छ।</p>
+
+      <div class="highlight">
+        वार्षिक turnover Rs 50 लाख वा माथि भएका व्यापारीहरूले VAT registration अनिवार्य गर्नुपर्छ।
+      </div>
+
+      <h2>VAT Filing Deadline</h2>
+      <ul>
+        <li><strong>Monthly filing:</strong> प्रत्येक महिनाको २५ गतेभित्र</li>
+        <li><strong>Quarterly filing:</strong> केही business को लागि अनुमति छ</li>
+        <li>Late filing मा <strong>15% annual interest + 1% monthly penalty</strong> लाग्छ</li>
+      </ul>
+
+      <h2>VAT Calculation कसरी गर्ने?</h2>
+      <h3>Sale मा VAT जोड्दा:</h3>
+      <p>Rs 1,00,000 को सामान बेच्दा: <strong>Rs 1,00,000 × 13% = Rs 13,000 VAT</strong> → Total: Rs 1,13,000</p>
+
+      <h3>Purchase मा VAT घटाउँदा:</h3>
+      <p>Rs 1,13,000 को bill भएमा: VAT Credit = Rs 1,13,000 × 13/113 = Rs 13,000</p>
+
+      <h3>IRD मा Submit गर्ने:</h3>
+      <p><strong>Net VAT = Output VAT (Sales) − Input VAT (Purchases)</strong></p>
+      <p>यदि Output बढी छ भने government लाई बुझाउने, Input बढी छ भने refund माग्न सकिन्छ।</p>
+
+      <h2>Common Mistakes</h2>
+      <ul>
+        <li>VAT bill नलिने — Input credit lost हुन्छ</li>
+        <li>Deadline miss गर्ने — penalty बढ्छ</li>
+        <li>Exempt items मा पनि VAT charge गर्ने — legal issue</li>
+      </ul>
+    `
   },
   {
     id: 3,
@@ -286,7 +342,30 @@ const POSTS = [
     icon: "fas fa-calculator",
     color: "linear-gradient(135deg, #0a1a15, #0d2820)",
     iconColor: "var(--teal)",
-    content: `... (full content) ...`
+    content: `
+      <h2>Problem के थियो?</h2>
+      <p>मेरा आफन्त र साथीहरूले bank loan लिँदा कति EMI तिर्नुपर्छ, कति interest जान्छ, service charge कति हो — यो कुरा clearly बुझ्दैनथे।</p>
+      <p>Bank ले दिने schedule पढ्न गाह्रो हुन्थ्यो। Simple, Nepali-friendly tool चाहिन्थ्यो।</p>
+
+      <div class="highlight">
+        "एउटा tool बनाऊँ जसले सजिलै EMI calculate गरोस् — service charge र insurance सहित।" — यही सोचेर सुरु गरें।
+      </div>
+
+      <h2>Tool मा के छ?</h2>
+      <ul>
+        <li><strong>EMI Calculation:</strong> Reducing balance method</li>
+        <li><strong>Service Charge:</strong> Adjustable (default 1.3%)</li>
+        <li><strong>Insurance:</strong> Adjustable (default 0.425%/year)</li>
+        <li><strong>Amortization Schedule:</strong> Month-by-month breakdown</li>
+        <li><strong>Nepal Number Format:</strong> Rs 1,23,456 format</li>
+      </ul>
+
+      <h2>मैले सिकेको कुरा</h2>
+      <p>Tool बनाउँदा मैले realize गरें कि coding र finance दुवै जान्दा कति powerful combination हुन्छ। एउटा problem देखेर solution बनाउन सक्नु — यो नै real skill हो।</p>
+
+      <h3>अब के?</h3>
+      <p>भविष्यमा यो tool मा AI add गर्ने सोचेको छु — जसले automatically loan comparison गरोस् र best option suggest गरोस्।</p>
+    `
   },
   {
     id: 4,
@@ -298,7 +377,36 @@ const POSTS = [
     icon: "fas fa-percentage",
     color: "linear-gradient(135deg, #1a0d20, #2d1040)",
     iconColor: "var(--rose)",
-    content: `... (full content) ...`
+    content: `
+      <h2>TDS भनेको के हो?</h2>
+      <p>TDS (Tax Deducted at Source) भनेको payment गर्दा नै tax काटेर IRD मा बुझाउने system हो। Nepal Income Tax Act बमोजिम धेरै payments मा TDS काट्नु अनिवार्य छ।</p>
+
+      <h2>FY 2082/83 TDS Rates</h2>
+      <ul>
+        <li><strong>Service (VAT bill सहित):</strong> 1.5%</li>
+        <li><strong>Service (VAT bill बिना):</strong> 15%</li>
+        <li><strong>Rent:</strong> 10%</li>
+        <li><strong>Interest / Royalty:</strong> 15%</li>
+        <li><strong>Dividend:</strong> 5%</li>
+        <li><strong>Natural Person Contract:</strong> 25%</li>
+        <li><strong>Land/Building Rent:</strong> 1%</li>
+      </ul>
+
+      <div class="highlight">
+        Important: VAT registered vendor ले VAT bill दिए 1.5% TDS मात्र काट्ने। Bill नदिए 15% काट्नुपर्छ। यो धेरैले confuse गर्छन्।
+      </div>
+
+      <h2>TDS Deposit Deadline</h2>
+      <p>काटेको TDS अर्को महिनाको <strong>25 गतेभित्र</strong> IRD मा बुझाउनुपर्छ।</p>
+
+      <h2>Example</h2>
+      <p>एउटा IT company लाई Rs 1,00,000 service payment गर्दा:</p>
+      <ul>
+        <li>VAT bill छ भने: TDS = Rs 1,00,000 × 1.5% = <strong>Rs 1,500</strong></li>
+        <li>VAT bill छैन भने: TDS = Rs 1,00,000 × 15% = <strong>Rs 15,000</strong></li>
+      </ul>
+      <p>Net payment = Gross − TDS भुक्तान गर्ने, TDS IRD मा जम्मा गर्ने।</p>
+    `
   },
   {
     id: 5,
@@ -310,7 +418,30 @@ const POSTS = [
     icon: "fas fa-mountain",
     color: "linear-gradient(135deg, #0a150d, #102515)",
     iconColor: "#06d6a0",
-    content: `... (full content) ...`
+    content: `
+      <h2>सुरुआत कहाँबाट?</h2>
+      <p>Okhaldhunga — नेपालको एउटा सानो जिल्ला। धेरैले सोच्छन् यहाँबाट digital career possible छैन। तर मैले ठीक उल्टो prove गरें।</p>
+
+      <div class="highlight">
+        "Internet connection भएको ठाउँबाट जो पनि काम गर्न सकिन्छ। Location अब limitation होइन।"
+      </div>
+
+      <h2>के सिकें?</h2>
+      <ul>
+        <li>Accounting fundamentals — Nepal law बमोजिम</li>
+        <li>Web development — HTML, CSS, JavaScript</li>
+        <li>AI tools — ChatGPT, Cloudflare Workers</li>
+        <li>Finance automation — calculator tools बनाउने</li>
+      </ul>
+
+      <h2>कसरी सुरु गर्ने?</h2>
+      <p>मेरो advice: आफ्नो field को knowledge लेउ, त्यसमा technology थप। Accountant हो? Excel automation सिक। Teacher हो? Online course बनाउ।</p>
+
+      <h3>मेरो Next Goal</h3>
+      <p>Nepal भर accountants लाई AI tools सिकाउने। Financial literacy बढाउने। र prove गर्ने कि Okhaldhunga बाट पनि national impact गर्न सकिन्छ।</p>
+
+      <p>यो blog, यो website, यी tools — सबै त्यही direction मा एउटा सुरुआत हो।</p>
+    `
   },
   {
     id: 6,
@@ -322,16 +453,43 @@ const POSTS = [
     icon: "fas fa-file-invoice-dollar",
     color: "linear-gradient(135deg, #0d0820, #1a1040)",
     iconColor: "var(--gold)",
-    content: `... (full content) ...`
+    content: `
+      <h2>Income Tax Slabs FY 2082/83</h2>
+
+      <h3>Unmarried (अविवाहित)</h3>
+      <ul>
+        <li>Rs 5,00,000 सम्म — <strong>1%</strong></li>
+        <li>Rs 5,00,001 – 7,00,000 — <strong>10%</strong></li>
+        <li>Rs 7,00,001 – 10,00,000 — <strong>20%</strong></li>
+        <li>Rs 10,00,001 – 20,00,000 — <strong>30%</strong></li>
+        <li>Rs 20,00,001 – 50,00,000 — <strong>36%</strong></li>
+        <li>Rs 50,00,000 माथि — <strong>39%</strong></li>
+      </ul>
+
+      <h3>Married (विवाहित / Couple)</h3>
+      <ul>
+        <li>Rs 6,00,000 सम्म — <strong>1%</strong></li>
+        <li>त्यसपछिका slabs same</li>
+      </ul>
+
+      <div class="highlight">
+        Married हुँदा Rs 1 लाख extra tax-free income पाइन्छ — वार्षिक Rs 1,000 सम्म बच्छ।
+      </div>
+
+      <h2>PF Deduction को फाइदा</h2>
+      <p>PF (Provident Fund) contribution taxable income बाट घटाउन पाइन्छ। Monthly Rs 5,000 PF तिरे, वार्षिक Rs 60,000 taxable income घट्छ।</p>
+
+      <h2>Example Calculation</h2>
+      <p>Annual income: Rs 8,00,000, Unmarried, PF: Rs 60,000</p>
+      <ul>
+        <li>Taxable = Rs 8,00,000 − Rs 60,000 = <strong>Rs 7,40,000</strong></li>
+        <li>Tax on Rs 5,00,000 @ 1% = Rs 5,000</li>
+        <li>Tax on Rs 2,00,000 @ 10% = Rs 20,000</li>
+        <li>Tax on Rs 40,000 @ 20% = Rs 8,000</li>
+        <li><strong>Total Tax = Rs 33,000 | Monthly TDS = Rs 2,750</strong></li>
+      </ul>
+    `
   }
-  // यदि थप्न मन छ भने यहाँ id: 7 बाट नयाँ object थप्नु
-];
-    
-    
-    
-    
-  // बाँकी ४ posts पनि यस्तै छन् (मैले छोटो बनाउन यहाँ काटेको छैन, तर तिम्रो original मा ६ वटा छन् — सबै राख्नु)
-  // यदि तिमीले full ६ posts चाहन्छौ भने अघिल्लो सन्देशमा दिएको code मा सबै छन्।
 ];
 
 // CATEGORY CONFIG
