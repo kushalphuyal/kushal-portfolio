@@ -16,7 +16,6 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--ink);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
-
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:9999;height:64px;display:flex;align-items:center;
   justify-content:space-between;padding:0 5%;background:rgba(7,8,16,.92);
@@ -26,13 +25,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:9999;height:64px;display:flex;al
 .nav-back{display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;
   font-size:.85rem;font-weight:500;padding:7px 14px;border-radius:8px;border:1px solid var(--line);transition:all .25s;}
 .nav-back:hover{color:var(--teal);border-color:var(--teal);}
-
+.hamburger{display:none;background:none;border:none;color:white;font-size:1.6rem;cursor:pointer;padding:8px;}
 /* LAYOUT */
 .layout{display:flex;padding-top:64px;min-height:100vh;}
-
 /* SIDEBAR */
 .sidebar{width:230px;flex-shrink:0;background:#090d1f;border-right:1px solid var(--line);
-  position:fixed;top:64px;bottom:0;left:0;overflow-y:auto;padding:16px 0;}
+  position:fixed;top:64px;bottom:0;left:0;overflow-y:auto;padding:16px 0;transition:transform .3s ease;z-index:1000;}
 .sidebar::-webkit-scrollbar{width:3px;}
 .sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);}
 .sb-group{margin-bottom:4px;}
@@ -45,15 +43,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:9999;height:64px;display:flex;al
 .sb-item:hover{color:white;background:rgba(255,255,255,.04);}
 .sb-item.active{color:var(--teal);background:rgba(0,229,204,.07);border-left-color:var(--teal);}
 .sb-item i{width:15px;text-align:center;font-size:.82rem;}
-
 /* MAIN */
 .main{margin-left:230px;flex:1;padding:28px 4% 60px;}
-
 /* PANELS */
 .panel{display:none;animation:fadeUp .3s ease;}
 .panel.active{display:block;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-
 /* PAGE HEADER */
 .ph{margin-bottom:28px;}
 .ph-eye{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
@@ -61,13 +56,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:9999;height:64px;display:flex;al
 .ph-eye::before{content:'';width:18px;height:1px;background:var(--teal);}
 .ph h1{font-family:'Syne',sans-serif;font-size:1.75rem;font-weight:800;color:white;margin-bottom:4px;}
 .ph p{color:var(--muted);font-size:.88rem;}
-
 /* CARD */
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px;}
 .card-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:white;
   margin-bottom:16px;display:flex;align-items:center;gap:9px;}
 .card-title i{color:var(--teal);}
-
 /* FORM */
 .fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
 .fg label{font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
@@ -81,14 +74,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:9999;height:64px;display:flex;al
 .fg select option{background:#111828;}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
-
 /* RANGE */
 .range-lbl{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .range-lbl span{font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
 .range-lbl strong{color:var(--teal);font-size:.88rem;}
 input[type=range]{width:100%;-webkit-appearance:none;height:4px;background:var(--line);border-radius:2px;cursor:pointer;outline:none;}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--teal);border:2px solid var(--ink);cursor:pointer;}
-
 /* BUTTONS */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;
   padding:10px 22px;border-radius:10px;font-weight:600;font-size:.875rem;
@@ -98,7 +89,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 .btn-ghost{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--muted);}
 .btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;}
-
 /* RESULT */
 .result{display:none;margin-top:16px;padding:16px;background:rgba(0,229,204,.05);
   border:1px solid rgba(0,229,204,.2);border-radius:12px;}
@@ -113,7 +103,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 .ri.green .rv{color:var(--green);}
 .ri.rose .rv{color:var(--rose);}
 .ri.gold .rv{color:var(--gold);}
-
 /* TABLE */
 .tbl-wrap{border-radius:10px;overflow:hidden;border:1px solid var(--line);}
 .tbl-scroll{max-height:300px;overflow-y:auto;}
@@ -134,28 +123,24 @@ tbody td.tl{text-align:left;}
 .td-rose{color:var(--rose);}
 .td-teal{color:var(--teal);font-weight:600;}
 .td-muted{color:var(--muted);}
-
 /* STAT ROW */
 .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px;}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 18px;}
 .stat .sl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;}
 .stat .sv{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:white;}
 .stat.hi .sv{color:var(--teal);}
-
 /* SLAB ROW */
 .slab-row{display:flex;justify-content:space-between;align-items:center;
   padding:9px 12px;border-radius:8px;margin-bottom:4px;background:rgba(255,255,255,.03);}
 .slab-row:hover{background:rgba(255,255,255,.06);}
 .slab-label{font-size:.83rem;color:var(--text);}
 .slab-rate{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;}
-
 /* REF TABLE */
 .ref-row{display:flex;justify-content:space-between;align-items:center;
   padding:9px 12px;border-radius:8px;margin-bottom:4px;background:rgba(255,255,255,.03);}
 .ref-row:hover{background:rgba(255,255,255,.06);}
 .ref-label{font-size:.83rem;color:var(--muted);}
 .ref-val{font-weight:600;font-size:.88rem;color:var(--teal);}
-
 /* AI CHAT */
 .chat-wrap{display:flex;flex-direction:column;height:470px;background:var(--card);
   border:1px solid var(--line);border-radius:16px;overflow:hidden;}
@@ -187,7 +172,6 @@ tbody td.tl{text-align:left;}
   background:var(--teal);color:var(--ink);display:flex;align-items:center;
   justify-content:center;cursor:pointer;font-size:.88rem;transition:all .25s;}
 #chat-send:hover{transform:scale(1.1);}
-
 /* CHART */
 .chart-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;}
 .chart-card h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:white;
@@ -195,12 +179,10 @@ tbody td.tl{text-align:left;}
 .chart-card h3 i{color:var(--teal);}
 .chart-h{height:190px;position:relative;}
 .dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;}
-
 /* ERROR */
 .err{display:none;color:var(--rose);font-size:.82rem;margin-top:10px;
   padding:8px 13px;background:rgba(255,101,132,.08);border:1px solid rgba(255,101,132,.2);border-radius:8px;}
 .err.show{display:block;}
-
 /* PAYSLIP */
 .payslip-box{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:12px;}
 .payslip-hdr{background:linear-gradient(135deg,var(--violet),var(--teal));padding:18px 20px;text-align:center;}
@@ -214,31 +196,32 @@ tbody td.tl{text-align:left;}
 .ps-row.total{margin-top:4px;padding-top:12px;}
 .ps-row.total .ps-label{color:white;font-weight:700;}
 .ps-row.total .ps-val{color:var(--teal);font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;}
-
 /* RESPONSIVE */
 @media(max-width:850px){
-  .sidebar{transform:translateX(-100%);transition:.3s;}
-  .sidebar.open{transform:none;}
+  .hamburger{display:block;}
+  .sidebar{
+    transform:translateX(-100%);
+    width:280px;
+  }
+  .sidebar.open{transform:translateX(0);}
   .main{margin-left:0;}
   .row2,.row3{grid-template-columns:1fr;}
   .dash-grid{grid-template-columns:1fr;}
 }
 @media print{
-  nav,.sidebar{display:none!important;}
+  nav,.sidebar,.hamburger{display:none!important;}
   .main{margin-left:0!important;}
   body{background:white;color:#000;}
 }
 </style>
 </head>
 <body>
-
 <nav>
   <a href="index.html" class="nav-logo">KUSHAL<em>.</em>P</a>
+  <button class="hamburger" id="sidebar-toggle"><i class="fas fa-bars"></i></button>
   <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> Portfolio</a>
 </nav>
-
 <div class="layout">
-
 <!-- ═══ SIDEBAR ═══ -->
 <aside class="sidebar" id="sidebar">
   <div class="sb-group">
@@ -281,10 +264,8 @@ tbody td.tl{text-align:left;}
     <button class="sb-item" data-panel="pan"><i class="fas fa-id-card"></i> PAN Validator</button>
   </div>
 </aside>
-
 <!-- ═══ MAIN ═══ -->
 <main class="main">
-
 <!-- DASHBOARD -->
 <div class="panel active" id="panel-dashboard">
   <div class="ph"><div class="ph-eye">Nepal Accounting Suite</div>
@@ -309,7 +290,6 @@ tbody td.tl{text-align:left;}
     </div>
   </div>
 </div>
-
 <!-- AI ASSISTANT -->
 <div class="panel" id="panel-ai">
   <div class="ph"><div class="ph-eye">Smart AI</div>
@@ -339,11 +319,9 @@ tbody td.tl{text-align:left;}
     </div>
   </div>
 </div>
-
 <!-- VAT -->
 <div class="panel" id="panel-vat">
   <div class="ph"><div class="ph-eye">VAT</div><h1>VAT Calculator</h1><p>Nepal VAT @ 13% — Sale, Purchase & Payable Tracker</p></div>
-
   <div class="row3" style="margin-bottom:18px;">
     <div class="card" style="margin-bottom:0">
       <div class="card-title"><i class="fas fa-arrow-up"></i> VAT on Sale</div>
@@ -386,7 +364,6 @@ tbody td.tl{text-align:left;}
       </div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><i class="fas fa-exclamation-circle"></i> Late Payment Penalty (15% p.a. interest + 1%/month penalty)</div>
     <div class="row2">
@@ -407,7 +384,6 @@ tbody td.tl{text-align:left;}
     </div>
   </div>
 </div>
-
 <!-- TDS -->
 <div class="panel" id="panel-tds">
   <div class="ph"><div class="ph-eye">TDS</div><h1>TDS Calculator</h1><p>Nepal TDS rates FY 2082/83</p></div>
@@ -445,7 +421,6 @@ tbody td.tl{text-align:left;}
     <div id="tds-ref"></div>
   </div>
 </div>
-
 <!-- INCOME TAX -->
 <div class="panel" id="panel-income-tax">
   <div class="ph"><div class="ph-eye">Income Tax</div><h1>Income Tax Calculator</h1><p>Nepal Income Tax — FY 2082/83 Slabs</p></div>
@@ -478,7 +453,6 @@ tbody td.tl{text-align:left;}
     <div id="it-slabs"></div>
   </div>
 </div>
-
 <!-- ADVANCE TAX -->
 <div class="panel" id="panel-advance-tax">
   <div class="ph"><div class="ph-eye">Advance Tax</div><h1>Advance Tax Estimator</h1><p>Quarterly: 40% / 70% / 100%</p></div>
@@ -504,10 +478,9 @@ tbody td.tl{text-align:left;}
     </div>
   </div>
 </div>
-
 <!-- EMI -->
 <div class="panel" id="panel-emi">
-  <div class="ph"><div class="ph-eye">Banking</div><h1>EMI Calculator</h1><p>Reducing balance with adjustable service &amp; insurance charges</p></div>
+  <div class="ph"><div class="ph-eye">Banking</div><h1>EMI Calculator</h1><p>Reducing balance with adjustable service & insurance charges</p></div>
   <div class="card">
     <div class="card-title"><i class="fas fa-calculator"></i> Loan Details</div>
     <div class="row3">
@@ -555,7 +528,6 @@ tbody td.tl{text-align:left;}
     </div></div>
   </div>
 </div>
-
 <!-- NPA -->
 <div class="panel" id="panel-npa">
   <div class="ph"><div class="ph-eye">Banking</div><h1>NPA Tracker</h1><p>NRB 2024 classification guidelines</p></div>
@@ -580,7 +552,6 @@ tbody td.tl{text-align:left;}
     <div id="npa-ref"></div>
   </div>
 </div>
-
 <!-- BANK RECON -->
 <div class="panel" id="panel-bank-recon">
   <div class="ph"><div class="ph-eye">Banking</div><h1>Bank Reconciliation</h1></div>
@@ -606,7 +577,6 @@ tbody td.tl{text-align:left;}
     </div>
   </div>
 </div>
-
 <!-- SALARY TAX -->
 <div class="panel" id="panel-salary-tax">
   <div class="ph"><div class="ph-eye">Payroll</div><h1>Salary Tax Calculator</h1><p>Monthly TDS calculation — FY 2082/83</p></div>
@@ -634,7 +604,6 @@ tbody td.tl{text-align:left;}
     </div>
   </div>
 </div>
-
 <!-- PF SSF -->
 <div class="panel" id="panel-pf">
   <div class="ph"><div class="ph-eye">Payroll</div><h1>PF / SSF Calculator</h1><p>Employee 11% · Employer 20%</p></div>
@@ -658,7 +627,6 @@ tbody td.tl{text-align:left;}
     </div>
   </div>
 </div>
-
 <!-- PAYSLIP -->
 <div class="panel" id="panel-payslip">
   <div class="ph"><div class="ph-eye">Payroll</div><h1>Payslip Generator</h1></div>
@@ -679,7 +647,6 @@ tbody td.tl{text-align:left;}
   </div>
   <div id="ps-out"></div>
 </div>
-
 <!-- JOURNAL -->
 <div class="panel" id="panel-journal">
   <div class="ph"><div class="ph-eye">Accounting</div><h1>Journal Voucher</h1></div>
@@ -710,7 +677,6 @@ tbody td.tl{text-align:left;}
     </div>
   </div>
 </div>
-
 <!-- DEPRECIATION -->
 <div class="panel" id="panel-depreciation">
   <div class="ph"><div class="ph-eye">Accounting</div><h1>Depreciation (WDV Method)</h1><p>Nepal Income Tax Act — Written Down Value</p></div>
@@ -744,12 +710,11 @@ tbody td.tl{text-align:left;}
     </div>
   </div>
 </div>
-
 <!-- PROFIT LOSS -->
 <div class="panel" id="panel-pl">
-  <div class="ph"><div class="ph-eye">Financial</div><h1>Profit &amp; Loss</h1></div>
+  <div class="ph"><div class="ph-eye">Financial</div><h1>Profit & Loss</h1></div>
   <div class="card">
-    <div class="card-title"><i class="fas fa-chart-bar"></i> P&amp;L Summary</div>
+    <div class="card-title"><i class="fas fa-chart-bar"></i> P&L Summary</div>
     <div class="row3">
       <div class="fg"><label>Total Revenue Rs</label><input type="number" id="pl-rev" placeholder="0" min="0"></div>
       <div class="fg"><label>Total Expenses Rs</label><input type="number" id="pl-exp" placeholder="0" min="0"></div>
@@ -770,7 +735,6 @@ tbody td.tl{text-align:left;}
     </div>
   </div>
 </div>
-
 <!-- BALANCE SHEET -->
 <div class="panel" id="panel-bs">
   <div class="ph"><div class="ph-eye">Financial</div><h1>Balance Sheet Checker</h1><p>Assets = Liabilities + Equity</p></div>
@@ -795,7 +759,6 @@ tbody td.tl{text-align:left;}
     </div>
   </div>
 </div>
-
 <!-- DATE CONVERTER -->
 <div class="panel" id="panel-date-conv">
   <div class="ph"><div class="ph-eye">Utility</div><h1>BS / AD Date Converter</h1><p>Bikram Sambat ↔ Anno Domini (approximate)</p></div>
@@ -824,7 +787,6 @@ tbody td.tl{text-align:left;}
     </div>
   </div>
 </div>
-
 <!-- PAN -->
 <div class="panel" id="panel-pan">
   <div class="ph"><div class="ph-eye">Utility</div><h1>PAN Validator</h1><p>Nepal IRD PAN format check</p></div>
@@ -846,13 +808,30 @@ tbody td.tl{text-align:left;}
     </p>
   </div>
 </div>
-
 </main>
-</div><!-- end layout -->
+</div>
 
 <script>
 // ────────────────────────────────────────────────────────
-// NAVIGATION
+// SIDEBAR TOGGLE FOR MOBILE
+// ────────────────────────────────────────────────────────
+const toggleBtn = document.getElementById('sidebar-toggle');
+const sidebar = document.getElementById('sidebar');
+
+if (toggleBtn && sidebar) {
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target) && sidebar.classList.contains('open')) {
+      sidebar.classList.remove('open');
+    }
+  });
+}
+
+// ────────────────────────────────────────────────────────
+// NAVIGATION (Panel switching)
 // ────────────────────────────────────────────────────────
 document.querySelectorAll('.sb-item').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -860,11 +839,16 @@ document.querySelectorAll('.sb-item').forEach(btn => {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+    
+    // Mobile मा sidebar auto close
+    if (window.innerWidth <= 850) {
+      sidebar.classList.remove('open');
+    }
   });
 });
 
 // ────────────────────────────────────────────────────────
-// HELPERS
+// HELPERS (fmt, showRes, v, sv, set, doPrint आदि)
 // ────────────────────────────────────────────────────────
 function fmt(n) {
   if (isNaN(n) || n === null) return '—';
@@ -896,7 +880,7 @@ function doPrint(id) {
 }
 
 // ────────────────────────────────────────────────────────
-// VAT
+// VAT Functions
 // ────────────────────────────────────────────────────────
 function doVATSale() {
   const a = v('vs-amt');
@@ -922,7 +906,7 @@ function doVATPayable() {
 function doVATLate() {
   const amt = v('vlp-amt'), days = v('vlp-days');
   const interest = amt * 0.15 / 365 * days;
-  const penalty  = amt * 0.01 * (days / 30);
+  const penalty = amt * 0.01 * (days / 30);
   set('vlp-int', fmt(interest));
   set('vlp-pen', fmt(penalty));
   set('vlp-tot', fmt(interest + penalty));
@@ -934,10 +918,10 @@ function doVATLate() {
 // ────────────────────────────────────────────────────────
 function doTDS() {
   const rate = parseFloat(sv('tds-type'));
-  const amt  = v('tds-amt');
-  const tds  = amt * rate / 100;
-  set('tds-ded',    fmt(tds));
-  set('tds-net',    fmt(amt - tds));
+  const amt = v('tds-amt');
+  const tds = amt * rate / 100;
+  set('tds-ded', fmt(tds));
+  set('tds-net', fmt(amt - tds));
   set('tds-rate-d', rate + '%');
   showRes('tds-res');
 }
@@ -977,13 +961,13 @@ function calcTax(income, status) {
 function doIT() {
   const income = v('it-income');
   const status = sv('it-marital');
-  const deds   = v('it-deds');
+  const deds = v('it-deds');
   const taxable = Math.max(0, income - deds);
   const { tax, bd } = calcTax(taxable, status);
   set('it-taxable', fmt(taxable));
-  set('it-tax',     fmt(tax));
+  set('it-tax', fmt(tax));
   set('it-monthly', fmt(tax / 12));
-  set('it-eff',     income > 0 ? ((tax / income) * 100).toFixed(2) + '%' : '0%');
+  set('it-eff', income > 0 ? ((tax / income) * 100).toFixed(2) + '%' : '0%');
   document.getElementById('it-breakdown').innerHTML =
     '<div style="margin-top:8px;">' +
     bd.filter(b => b.taxable > 0).map(b =>
@@ -994,7 +978,7 @@ function doIT() {
 function buildITSlabs() {
   const labels = ['Up to Rs 5 Lakh (1%)','5L–7L (10%)','7L–10L (20%)','10L–20L (30%)','20L–50L (36%)','Above 50L (39%)'];
   const colors = ['var(--green)','var(--teal)','var(--gold)','var(--violet)','var(--rose)','#ff4500'];
-  const rates  = ['1%','10%','20%','30%','36%','39%'];
+  const rates = ['1%','10%','20%','30%','36%','39%'];
   document.getElementById('it-slabs').innerHTML =
     labels.map((l,i) => `<div class="slab-row"><span class="slab-label">${l}</span><span class="slab-rate" style="color:${colors[i]}">${rates[i]}</span></div>`).join('');
 }
@@ -1004,7 +988,7 @@ function buildITSlabs() {
 // ────────────────────────────────────────────────────────
 function doAT() {
   const annual = v('at-annual');
-  const pct    = parseFloat(sv('at-q'));
+  const pct = parseFloat(sv('at-q'));
   set('at-due', fmt(annual * pct));
   set('at-pct', (pct * 100) + '%');
   showRes('at-res');
@@ -1020,15 +1004,15 @@ function doEMI() {
   const errEl = document.getElementById('em-err');
   errEl.classList.remove('show');
   if (!p || !annR || !n) { errEl.textContent = '⚠️ Please fill all fields.'; errEl.classList.add('show'); return; }
-  const r    = annR / 12 / 100;
-  const emi  = p * r * Math.pow(1+r, n) / (Math.pow(1+r, n) - 1);
+  const r = annR / 12 / 100;
+  const emi = p * r * Math.pow(1+r, n) / (Math.pow(1+r, n) - 1);
   const tInt = emi * n - p;
   const scAmt = p * sc;
   const icAmt = p * ic * Math.ceil(n / 12);
-  set('em-emi',   fmt(emi));
-  set('em-int',   fmt(tInt));
-  set('em-sc-v',  fmt(scAmt));
-  set('em-ic-v',  fmt(icAmt));
+  set('em-emi', fmt(emi));
+  set('em-int', fmt(tInt));
+  set('em-sc-v', fmt(scAmt));
+  set('em-ic-v', fmt(icAmt));
   set('em-total', fmt(p + tInt + scAmt + icAmt));
   showRes('em-res');
   // Table
@@ -1050,24 +1034,24 @@ function doEMI() {
 function doNPA() {
   const amt = v('npa-amt'), days = v('npa-days');
   let cls, prov, color;
-  if      (days < 30)  { cls = 'Pass / Performing'; prov = 0.01; color = 'var(--green)'; }
-  else if (days < 90)  { cls = 'Watchlist';          prov = 0.05; color = 'var(--gold)'; }
-  else if (days < 180) { cls = 'Substandard';        prov = 0.25; color = 'var(--rose)'; }
-  else if (days < 365) { cls = 'Doubtful';           prov = 0.50; color = 'var(--rose)'; }
-  else                 { cls = 'Bad / Loss';         prov = 1.00; color = '#ff4500'; }
+  if (days < 30) { cls = 'Pass / Performing'; prov = 0.01; color = 'var(--green)'; }
+  else if (days < 90) { cls = 'Watchlist'; prov = 0.05; color = 'var(--gold)'; }
+  else if (days < 180) { cls = 'Substandard'; prov = 0.25; color = 'var(--rose)'; }
+  else if (days < 365) { cls = 'Doubtful'; prov = 0.50; color = 'var(--rose)'; }
+  else { cls = 'Bad / Loss'; prov = 1.00; color = '#ff4500'; }
   const clsEl = document.getElementById('npa-cls');
   clsEl.textContent = cls; clsEl.style.color = color;
   set('npa-prate', (prov * 100) + '%');
-  set('npa-pamt',  fmt(amt * prov));
+  set('npa-pamt', fmt(amt * prov));
   showRes('npa-res');
 }
 function buildNPARef() {
   const rows = [
-    ['< 30 days',  'Pass / Performing', '1%',   'var(--green)'],
-    ['30–90 days', 'Watchlist',         '5%',   'var(--gold)'],
-    ['90–180 days','Substandard',       '25%',  'var(--rose)'],
-    ['180–365 days','Doubtful',         '50%',  'var(--rose)'],
-    ['> 365 days', 'Bad / Loss',        '100%', '#ff4500'],
+    ['< 30 days', 'Pass / Performing', '1%', 'var(--green)'],
+    ['30–90 days', 'Watchlist', '5%', 'var(--gold)'],
+    ['90–180 days','Substandard', '25%', 'var(--rose)'],
+    ['180–365 days','Doubtful', '50%', 'var(--rose)'],
+    ['> 365 days', 'Bad / Loss', '100%', '#ff4500'],
   ];
   document.getElementById('npa-ref').innerHTML =
     rows.map(([d,c,p,col]) =>
@@ -1079,10 +1063,10 @@ function buildNPARef() {
 // BANK RECONCILIATION
 // ────────────────────────────────────────────────────────
 function doBankRecon() {
-  const bank   = v('br-bank'), ledger = v('br-ledger');
-  const dep    = v('br-dep'),  chq    = v('br-chq');
+  const bank = v('br-bank'), ledger = v('br-ledger');
+  const dep = v('br-dep'), chq = v('br-chq');
   const adjBank = bank + dep - chq;
-  const diff    = adjBank - ledger;
+  const diff = adjBank - ledger;
   set('br-adj', fmt(adjBank));
   set('br-diff', fmt(diff));
   const statusEl = document.getElementById('br-status');
@@ -1096,16 +1080,16 @@ function doBankRecon() {
 // ────────────────────────────────────────────────────────
 function doSalaryTax() {
   const monthly = v('st-gross');
-  const status  = sv('st-marital');
-  const pf      = v('st-pf');
-  const annual  = monthly * 12;
+  const status = sv('st-marital');
+  const pf = v('st-pf');
+  const annual = monthly * 12;
   const taxable = Math.max(0, annual - pf * 12);
   const { tax } = calcTax(taxable, status);
-  const mtds    = tax / 12;
-  set('st-annual',   fmt(annual));
-  set('st-ann-tax',  fmt(tax));
-  set('st-mtds',     fmt(mtds));
-  set('st-net',      fmt(monthly - mtds - pf));
+  const mtds = tax / 12;
+  set('st-annual', fmt(annual));
+  set('st-ann-tax', fmt(tax));
+  set('st-mtds', fmt(mtds));
+  set('st-net', fmt(monthly - mtds - pf));
   showRes('st-res');
 }
 
@@ -1114,12 +1098,12 @@ function doSalaryTax() {
 // ────────────────────────────────────────────────────────
 function doPF() {
   const basic = v('pf-basic');
-  const emp   = basic * 0.11;
-  const empl  = basic * 0.20;
-  set('pf-emp',   fmt(emp));
-  set('pf-empl',  fmt(empl));
+  const emp = basic * 0.11;
+  const empl = basic * 0.20;
+  set('pf-emp', fmt(emp));
+  set('pf-empl', fmt(empl));
   set('pf-total', fmt(emp + empl));
-  set('pf-net',   fmt(basic - emp));
+  set('pf-net', fmt(basic - emp));
   showRes('pf-res');
 }
 
@@ -1127,16 +1111,16 @@ function doPF() {
 // PAYSLIP
 // ────────────────────────────────────────────────────────
 function doPayslip() {
-  const name  = document.getElementById('ps-name').value  || 'Employee';
+  const name = document.getElementById('ps-name').value || 'Employee';
   const desig = document.getElementById('ps-desig').value || 'Staff';
   const gross = v('ps-gross'), pf = v('ps-pf'), tax = v('ps-tax'), other = v('ps-other');
-  const net   = gross - pf - tax - other;
-  const now   = new Date().toLocaleDateString('en-GB');
+  const net = gross - pf - tax - other;
+  const now = new Date().toLocaleDateString('en-GB');
   document.getElementById('ps-out').innerHTML = `
     <div class="payslip-box">
       <div class="payslip-hdr">
         <h2>PAYSLIP</h2>
-        <p>${name} &mdash; ${desig} &mdash; ${now}</p>
+        <p>${name} — ${desig} — ${now}</p>
       </div>
       <div class="payslip-body">
         <div class="ps-row"><span class="ps-label">Gross Salary</span><span class="ps-val">${fmt(gross)}</span></div>
@@ -1153,9 +1137,9 @@ function doPayslip() {
 // ────────────────────────────────────────────────────────
 let jvList = [];
 function doAddJV() {
-  const dr   = document.getElementById('jv-dr').value.trim();
-  const cr   = document.getElementById('jv-cr').value.trim();
-  const amt  = v('jv-amt');
+  const dr = document.getElementById('jv-dr').value.trim();
+  const cr = document.getElementById('jv-cr').value.trim();
+  const amt = v('jv-amt');
   const narr = document.getElementById('jv-narr').value.trim();
   if (!dr || !cr || !amt) return;
   jvList.push({ dr, cr, amt, narr });
@@ -1178,8 +1162,8 @@ function renderJV() {
 // DEPRECIATION (WDV)
 // ────────────────────────────────────────────────────────
 function doDep() {
-  const cost  = v('dep-cost');
-  const rate  = parseFloat(sv('dep-type')) / 100;
+  const cost = v('dep-cost');
+  const rate = parseFloat(sv('dep-type')) / 100;
   const years = parseInt(document.getElementById('dep-years').value) || 5;
   let wdv = cost, rows = '';
   for (let y = 1; y <= years; y++) {
@@ -1198,8 +1182,8 @@ function doPL() {
   const rev = v('pl-rev'), exp = v('pl-exp'), taxRate = v('pl-tax');
   const gross = rev - exp;
   const taxAmt = Math.max(0, gross) * taxRate / 100;
-  const net    = gross - taxAmt;
-  set('pl-gross',   fmt(gross));
+  const net = gross - taxAmt;
+  set('pl-gross', fmt(gross));
   set('pl-tax-amt', fmt(taxAmt));
   const netEl = document.getElementById('pl-net');
   netEl.textContent = fmt(net);
@@ -1214,7 +1198,7 @@ function doPL() {
 function doBS() {
   const a = v('bs-assets'), l = v('bs-liab'), e = v('bs-equity');
   const le = l + e, diff = Math.abs(a - le);
-  set('bs-a-d',  fmt(a));
+  set('bs-a-d', fmt(a));
   set('bs-le-d', fmt(le));
   const stEl = document.getElementById('bs-status');
   stEl.textContent = diff < 0.01 ? '✓ Balanced' : '✗ Imbalanced (Diff: ' + fmt(diff) + ')';
@@ -1268,11 +1252,9 @@ function doPAN() {
 // ────────────────────────────────────────────────────────
 // AI CHAT
 // ────────────────────────────────────────────────────────
-const chatMsgs  = document.getElementById('chat-msgs');
+const chatMsgs = document.getElementById('chat-msgs');
 const chatInput = document.getElementById('chat-input');
-
 function quickAsk(q) { chatInput.value = q; sendChat(); }
-
 async function sendChat() {
   const text = chatInput.value.trim();
   if (!text) return;
@@ -1305,7 +1287,7 @@ document.getElementById('chat-send').onclick = sendChat;
 chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendChat(); });
 
 // ────────────────────────────────────────────────────────
-// DASHBOARD CHART
+// DASHBOARD CHART & REFERENCES
 // ────────────────────────────────────────────────────────
 function buildDashboard() {
   new Chart(document.getElementById('slabChart'), {
@@ -1335,6 +1317,9 @@ function buildDashboard() {
     ['VAT Filing','Monthly — 25th'],
   ].map(([l,r]) => `<div class="ref-row"><span class="ref-label">${l}</span><span class="ref-val">${r}</span></div>`).join('');
 }
+function buildTDSRef() { /* ... original function ... */ }
+function buildITSlabs() { /* ... original function ... */ }
+function buildNPARef() { /* ... original function ... */ }
 
 // ────────────────────────────────────────────────────────
 // INIT
