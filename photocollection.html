@@ -273,7 +273,8 @@ for(let i = 1; i <= 50; i++){
   allPhotos.push({
     src:   `images/kushal${i}.jpg`,
     thumb: `images/kushal${i}.jpg`,  // यदि thumbnail छ भने अलग राख्न सकिन्छ, अहिले full image नै प्रयोग
-    caption: `Kushal Photo ${i}`,
+    
+    caption: `Photography in Okhaldhunga Nepal - Image ${i} by Kushal Phuyal`,
     category: ['nature','portrait','urban','travel'][(i-1) % 4]  // cycle मा category
   });
 }
@@ -307,7 +308,9 @@ function renderBatch(){
     el.className   = 'photo-item';
     el.dataset.idx = idx;
     el.innerHTML   = `
-      <img src="${p.thumb}" alt="${p.caption}" loading="lazy">
+      
+      <img src="${p.thumb}" alt="Okhaldhunga Nepal Photography by Kushal Phuyal ${idx+1}" loading="lazy">
+      
       <div class="photo-info">
         <span>${p.caption}</span>
         <small>${p.category}</small>
@@ -355,7 +358,7 @@ function buildThumbs(){
   filtered.forEach((p, i) => {
     const t = document.createElement('div');
     t.className = 'lb-thumb' + (i===current?' active':'');
-    t.innerHTML = `<img src="${p.thumb}" alt="${p.caption}" loading="lazy">`;
+    t.innerHTML = `<img src="${p.thumb}" alt="Okhaldhunga Nepal Photography by Kushal Phuyal ${idx+1}" loading="lazy">`;
     t.addEventListener('click', () => { current=i; updateLb(); });
     lbThumbs.appendChild(t);
   });
@@ -407,6 +410,22 @@ lb.addEventListener('touchend', e=>{
 
 // INIT
 resetGrid();
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ImageGallery",
+ "name": "Okhaldhunga Nepal Photography Collection",
+ "author": {
+   "@type": "Person",
+   "name": "Kushal Phuyal"
+ },
+ "contentLocation": {
+   "@type": "Place",
+   "name": "Okhaldhunga, Nepal"
+ },
+ "url": "https://kushalphuyal.com.np/photocollection.html"
+}
 </script>
 </body>
 </html>
