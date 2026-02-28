@@ -41,19 +41,6 @@
 
     /* HERO */
     
-    <section style="max-width:900px;margin:40px auto;color:#5a6080;font-size:15px;line-height:1.7;text-align:center;">
-<h2 style="display:none;">Photography in Okhaldhunga Nepal</h2>
-
-<p>
-This gallery showcases original photography captured in Okhaldhunga and other regions of Nepal by Kushal Phuyal.
-These photographs represent nature, rural lifestyle, travel moments and portrait documentation from real locations.
-</p>
-
-<p>
-All photos are taken and owned by Kushal Phuyal as part of his personal visual documentation project.
-</p>
-</section>
-
     .hero-header{padding:110px 6% 60px;position:relative;z-index:1;text-align:center;}
     .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
       color:var(--teal);display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;}
@@ -188,6 +175,19 @@ All photos are taken and owned by Kushal Phuyal as part of his personal visual d
   </style>
 </head>
 <body>
+<section style="max-width:900px;margin:40px auto;color:#5a6080;font-size:15px;line-height:1.7;text-align:center;">
+<h2 style="display:none;">Photography in Okhaldhunga Nepal</h2>
+
+<p>
+This gallery showcases original photography captured in Okhaldhunga and other regions of Nepal by Kushal Phuyal.
+These photographs represent nature, rural lifestyle, travel moments and portrait documentation from real locations.
+</p>
+
+<p>
+All photos are taken and owned by Kushal Phuyal as part of his personal visual documentation project.
+</p>
+</section>
+
 
 <!-- NAV -->
 <nav>
@@ -358,7 +358,7 @@ function buildThumbs(){
   filtered.forEach((p, i) => {
     const t = document.createElement('div');
     t.className = 'lb-thumb' + (i===current?' active':'');
-    t.innerHTML = `<img src="${p.thumb}" alt="Okhaldhunga Nepal Photography by Kushal Phuyal ${idx+1}" loading="lazy">`;
+    t.innerHTML = `<img src="${p.thumb}" alt="Okhaldhunga Nepal Photography by Kushal Phuyal ${i+1}" loading="lazy">`;
     t.addEventListener('click', () => { current=i; updateLb(); });
     lbThumbs.appendChild(t);
   });
