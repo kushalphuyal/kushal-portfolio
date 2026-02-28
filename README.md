@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/kushalphuyal/main/images/profile.png" 
+<img src="https://raw.githubusercontent.com/kushalphuyal.github.io/main/images/profile.png" 
      alt="Kushal Phuyal" 
      width="180" 
      style="border-radius:50%; float:left; margin-right:20px; margin-bottom:10px;">
