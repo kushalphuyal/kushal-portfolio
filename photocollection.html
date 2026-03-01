@@ -225,7 +225,7 @@ All photos are taken and owned by Kushal Phuyal as part of his personal visual d
 <div class="filter-bar">
   <button class="filter-btn active" data-filter="all">All Photos</button>
   <button class="filter-btn" data-filter="nature">Nature</button>
-  <button class="filter-btn" data-filter="portrait">Portrait</button>
+  <button class="filter-btn" data-filter="certificate">Certificate</button>
   <button class="filter-btn" data-filter="urban">Urban</button>
   <button class="filter-btn" data-filter="travel">Travel</button>
 </div>
@@ -289,7 +289,7 @@ for(let i = 1; i <= 50; i++){
     thumb: `images/kushal${i}.jpeg`,  // यदि thumbnail छ भने अलग राख्न सकिन्छ, अहिले full image नै प्रयोग
     
     caption: `Photography in Okhaldhunga Nepal - Image ${i} by Kushal Phuyal`,
-    category: ['nature','portrait','urban','travel'][(i-1) % 4]  // cycle मा category
+    category: ['nature','certificate','urban','travel'][(i-1) % 4]  // cycle मा category
   });
 }
 
