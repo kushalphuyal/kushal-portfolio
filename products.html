@@ -1,52 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="canonical" href="https://kushalphuyal.com.np/products.html" />
   <title>Products & Templates | Kushal Phuyal — Nepal Finance</title>
   <meta name="description" content="Download Nepal finance templates, Excel sheets, Word formats, and PDF guides by Kushal Phuyal. VAT register, payroll template, income tax guide, and more." />
   <link rel="icon" href="images/profile.webp" type="image/webp" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="Products & Templates | Kushal Phuyal" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Products & Templates | Kushal Phuyal" />
   <meta property="og:description" content="Nepal finance Excel templates, Word formats, PDF guides by Kushal Phuyal. VAT register, payroll, EMI comparison and more." />
-  <meta property="og:image"       content="https://kushalphuyal.com.np/images/profile.webp" />
-  <meta property="og:url"         content="https://kushalphuyal.com.np/products.html" />
-  <meta name="twitter:card"       content="summary_large_image" />
+  <meta property="og:image" content="https://kushalphuyal.com.np/images/profile.webp" />
+  <meta property="og:url" content="https://kushalphuyal.com.np/products.html" />
+  <meta name="twitter:card" content="summary_large_image" />
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"ItemList","name":"Nepal Finance Templates","description":"Excel, Word and PDF finance templates for Nepal","itemListElement":[{"@type":"Product","name":"Nepal Business Account Tracker","offers":{"@type":"Offer","price":"299","priceCurrency":"NPR"}},{"@type":"Product","name":"Payroll Excel Template","offers":{"@type":"Offer","price":"399","priceCurrency":"NPR"}},{"@type":"Product","name":"Nepal Tax Guide PDF","offers":{"@type":"Offer","price":"0","priceCurrency":"NPR"}}]}
   </script>
   <link rel="stylesheet" href="style.css" />
   <style>
     .products-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:48px; }
-    .payment-box { background:var(--card); border:1px solid var(--border); border-radius:var(--r-lg); padding:32px; text-align:center; margin-top:48px; }
+    .payment-box { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px; text-align:center; margin-top:48px; }
     .payment-box h3 { font-family:var(--ff-head); font-size:1.3rem; color:var(--white); margin-bottom:10px; }
-    .payment-box p  { color:var(--muted); font-size:.9rem; max-width:480px; margin:0 auto 24px; }
+    .payment-box p { color:var(--muted); font-size:.9rem; max-width:480px; margin:0 auto 24px; }
     .pay-icons { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:24px; }
     .pay-icon { padding:10px 20px; border-radius:10px; font-size:.85rem; font-weight:700; border:1px solid var(--border); color:var(--text); background:var(--card2); }
-    .filter-btns { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:10px; }
+    .filter-btns { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:32px; }
+    .product-card[data-pcat="free"] .product-price .amt { color:var(--green); font-weight:900; }
     @media(max-width:900px){ .products-grid{grid-template-columns:repeat(2,1fr);} }
     @media(max-width:560px){ .products-grid{grid-template-columns:1fr;} }
   </style>
 </head>
 <body>
-<div class="orb orb-1"></div><div class="orb orb-2"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- NAV -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">Kushal<span class="dot">.</span>P</a>
   <div class="nav-links">
-    <a href="index.html#about">About</a><a href="services.html">Services</a>
-    <a href="index.html#tools">Tools</a><a href="products.html" class="active">Products</a>
-    <a href="blog.html">Blog</a><a href="photocollection.html">Gallery</a>
+    <a href="index.html#about">About</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#tools">Tools</a>
+    <a href="products.html" class="active">Products</a>
+    <a href="blog.html">Blog</a>
+    <a href="photocollection.html">Gallery</a>
     <a href="contact.html" class="nav-cta">Hire Me</a>
   </div>
   <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
 </nav>
 <div class="mob-menu" id="mob-menu">
-  <a href="index.html">Home</a><a href="services.html">Services</a>
-  <a href="products.html">Products</a><a href="blog.html">Blog</a>
-  <a href="photocollection.html">Gallery</a><a href="contact.html">Contact</a>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="products.html">Products</a>
+  <a href="blog.html">Blog</a>
+  <a href="photocollection.html">Gallery</a>
+  <a href="contact.html">Contact</a>
 </div>
 
+<!-- PAGE HERO -->
 <div class="page-hero">
   <div class="eyebrow">Digital Products</div>
   <h1>Templates & <em>Resources</em></h1>
@@ -67,7 +79,6 @@
 <section>
   <div class="inner">
     <div class="products-grid" id="products-grid">
-
       <!-- PRODUCT 1 -->
       <div class="product-card reveal" data-pcat="excel">
         <span class="product-badge">Popular</span>
@@ -199,8 +210,7 @@
           <i class="fas fa-download"></i> Get Free via WhatsApp
         </a>
       </div>
-
-    </div><!-- /products-grid -->
+    </div>
 
     <!-- PAYMENT INFO BOX -->
     <div class="payment-box reveal">
@@ -217,7 +227,6 @@
         <i class="fab fa-whatsapp"></i> +977 9863970493
       </a>
     </div>
-
   </div>
 </section>
 
@@ -229,38 +238,82 @@
         <div class="footer-logo">Kushal<span class="dot">.</span>P</div>
         <p>Digital products for Nepal's accounting & finance professionals.</p>
       </div>
-      <div class="footer-col"><h4>Products</h4>
-        <a href="products.html">Excel Templates</a><a href="products.html">Word Templates</a>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <a href="products.html">Excel Templates</a>
+        <a href="products.html">Word Templates</a>
         <a href="products.html">PDF Guides</a>
       </div>
-      <div class="footer-col"><h4>Pages</h4>
-        <a href="index.html">Home</a><a href="services.html">Services</a>
-        <a href="blog.html">Blog</a><a href="contact.html">Contact</a>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="blog.html">Blog</a>
       </div>
-      <div class="footer-col"><h4>Contact</h4>
-        <a href="/cdn-cgi/l/email-protection#bad3d4dcd5fad1cfc9d2dbd6cad2cfc3dbd694d9d5d794d4ca"><span class="__cf_email__" data-cfemail="5c35323a331c37292f343d302c3429253d30723f333172322c">[email&#160;protected]</span></a>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@kushalphuyal.com.np">info@kushalphuyal.com.np</a>
         <a href="https://wa.me/9779863970493">+977 9863970493</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="yr"></span> Kushal Phuyal.</span>
+      <span>© <span id="yr"></span> Kushal Phuyal. All Rights Reserved.</span>
       <span>Made with <span class="heart">♥</span> in Nepal 🇳🇵</span>
     </div>
   </div>
 </footer>
 
+<!-- CHAT -->
 <button id="chat-toggle" aria-label="Chat"><i class="fas fa-robot"></i></button>
 <div id="chatbox">
-  <div class="chat-head"><div class="chat-head-left"><div class="chat-av"><i class="fas fa-robot"></i></div><div><div class="chat-name">Kushal's AI</div><div class="chat-status-text"><span class="s-dot"></span> Online</div></div></div><button class="chat-close-x" id="chat-close-x"><i class="fas fa-times"></i></button></div>
-  <div class="chat-msgs" id="chat-msgs"><div class="cmsg bot">Namaste! 🙏 Need help choosing a product?</div></div>
-  <div class="chat-inp-row"><input id="c-input" placeholder="Ask about products…" autocomplete="off" /><button id="c-send"><i class="fas fa-paper-plane"></i></button></div>
+  <div class="chat-head">
+    <div class="chat-head-left">
+      <div class="chat-av"><i class="fas fa-robot"></i></div>
+      <div>
+        <div class="chat-name">Kushal's AI</div>
+        <div class="chat-status-text"><span class="s-dot"></span> Online</div>
+      </div>
+    </div>
+    <button class="chat-close-x" id="chat-close-x"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="chat-msgs" id="chat-msgs">
+    <div class="cmsg bot">Namaste! 🙏 Need help choosing a product or template?</div>
+  </div>
+  <div class="chat-inp-row">
+    <input id="c-input" placeholder="Ask about products…" autocomplete="off" />
+    <button id="c-send"><i class="fas fa-paper-plane"></i></button>
+  </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
+<script src="script.js"></script>
+
 <script>
-  // Product filter
-  document.querySelectorAll('.filter-btn[data-pcat]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn[data-pcat]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const cat = btn.dataset.pca
+// Product Filter Logic
+document.querySelectorAll('.filter-btn[data-pcat]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Active class toggle
+    document.querySelectorAll('.filter-btn[data-pcat]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const selectedCat = btn.dataset.pcat;
+
+    // Filter products
+    document.querySelectorAll('.product-card').forEach(card => {
+      const cardCat = card.dataset.pcat;
+      if (selectedCat === 'all' || cardCat.includes(selectedCat)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+// Optional: Initial load - show all
+document.addEventListener('DOMContentLoaded', () => {
+  // Trigger "All" filter on load
+  document.querySelector('.filter-btn[data-pcat="all"]').click();
+});
+</script>
+</body>
+</html>
