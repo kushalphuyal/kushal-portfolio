@@ -8,13 +8,12 @@
   <meta name="description" content="Advanced EMI Calculator for Nepal — reducing balance, service charge, insurance, amortization schedule. Built by Kushal Phuyal." />
   <link rel="icon" href="images/profile.webp" type="image/webp" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-  
-    <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="EMI Calculator Nepal | Kushal Phuyal" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="EMI Calculator Nepal | Kushal Phuyal" />
   <meta property="og:description" content="Free Nepal EMI Calculator with amortization schedule." />
-  <meta property="og:image"       content="https://kushalphuyal.com.np/images/profile.webp" />
-  <meta property="og:url"         content="https://kushalphuyal.com.np/emi-code.html" />
-  <meta name="twitter:card"       content="summary_large_image" />
+  <meta property="og:image" content="https://kushalphuyal.com.np/images/profile.webp" />
+  <meta property="og:url" content="https://kushalphuyal.com.np/emi-code.html" />
+  <meta name="twitter:card" content="summary_large_image" />
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebApplication","name":"Nepal EMI Calculator","url":"https://kushalphuyal.com.np/emi-code.html","author":{"@type":"Person","name":"Kushal Phuyal"},"applicationCategory":"FinanceApplication"}
   </script>
@@ -22,43 +21,37 @@
   <style>
     /* ── EMI PAGE SPECIFIC ── */
     .emi-layout { display: grid; grid-template-columns: 380px 1fr; gap: 28px; align-items: start; }
-
-    .input-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 28px; position: sticky; top: 88px; }
+    .input-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; position: sticky; top: 88px; }
     .input-card-title { font-family: var(--ff-head); font-size: 1.1rem; color: var(--white); margin-bottom: 22px; display: flex; align-items: center; gap: 10px; }
     .input-card-title i { color: var(--gold); }
-
     .inp-wrap { position: relative; }
     .inp-wrap .prefix { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: .85rem; pointer-events: none; }
     .inp-wrap .suffix { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: .78rem; pointer-events: none; }
-    .inp-wrap input { width: 100%; padding: 12px 40px 12px 36px; background: rgba(0,0,0,.3); border: 1px solid var(--border); border-radius: var(--r); color: var(--white); font-size: .9rem; outline: none; transition: border-color .25s; font-family: var(--ff-body); }
+    .inp-wrap input { width: 100%; padding: 12px 40px 12px 36px; background: rgba(0,0,0,.3); border: 1px solid var(--border); border-radius: var(--radius); color: var(--white); font-size: .9rem; outline: none; transition: border-color .25s; font-family: var(--ff-body); }
     .inp-wrap input:focus { border-color: var(--gold); }
     .inp-wrap input::placeholder { color: var(--muted); }
     .inp-wrap input::-webkit-inner-spin-button { -webkit-appearance: none; }
-
     /* Range slider */
-    .range-box { background: rgba(0,0,0,.2); border: 1px solid var(--border); border-radius: var(--r); padding: 16px 18px; margin-bottom: 14px; }
+    .range-box { background: rgba(0,0,0,.2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 14px; }
     .range-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .range-hdr span { font-size: .75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
     .range-hdr strong { font-family: var(--ff-mono); font-size: .9rem; color: var(--gold); }
     input[type=range] { width: 100%; -webkit-appearance: none; height: 4px; background: var(--border); border-radius: 2px; outline: none; cursor: pointer; }
     input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--gold); border: 2px solid var(--bg); cursor: pointer; }
     .range-hints { display: flex; justify-content: space-between; font-size: .68rem; color: var(--muted); margin-top: 5px; }
-
     /* Results panel */
     .result-panel { display: none; flex-direction: column; gap: 20px; }
     .result-panel.show { display: flex; }
-
     .summary-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-    .sum-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 18px 16px; transition: all .3s; }
+    .sum-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 16px; transition: all .3s; }
     .sum-box:hover { border-color: rgba(201,168,76,.3); transform: translateY(-3px); }
     .sum-box.highlight { border-color: rgba(201,168,76,.3); background: rgba(201,168,76,.05); }
     .sum-box .s-lbl { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 7px; }
     .sum-box .s-val { font-family: var(--ff-head); font-size: 1.4rem; font-weight: 700; color: var(--white); }
     .sum-box.highlight .s-val { color: var(--gold); }
     .sum-box .s-sub { font-size: .72rem; color: var(--muted); margin-top: 3px; }
-
     .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .chart-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 22px; }
+    .chart-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; }
     .chart-box h3 { font-family: var(--ff-head); font-size: .95rem; color: var(--white); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
     .chart-box h3 i { color: var(--gold); }
     .chart-wrap { height: 200px; position: relative; display: flex; align-items: center; justify-content: center; }
@@ -70,9 +63,8 @@
     .bk-val { font-weight: 600; font-size: .88rem; color: var(--white); }
     .bk-bar-track { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
     .bk-bar-fill { height: 100%; border-radius: 2px; transition: width .9s ease; }
-
     /* Table */
-    .table-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
+    .table-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
     .table-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; border-bottom: 1px solid var(--border); }
     .table-head h3 { font-family: var(--ff-head); font-size: .95rem; color: var(--white); }
     .table-scroll { max-height: 380px; overflow-y: auto; }
@@ -91,15 +83,12 @@
     tbody td:nth-child(4) { color: var(--red); }
     tbody td:nth-child(5) { color: var(--gold); font-weight: 600; }
     tbody td:nth-child(6) { color: var(--muted); }
-
     .err-msg { display: none; color: var(--red); font-size: .83rem; margin-top: 10px; padding: 9px 13px; background: rgba(224,90,90,.08); border: 1px solid rgba(224,90,90,.2); border-radius: 8px; }
     .err-msg.show { display: block; }
-
     /* Empty state before calc */
     .empty-result { text-align: center; padding: 80px 20px; color: var(--muted); }
     .empty-result i { font-size: 3rem; display: block; margin-bottom: 16px; opacity: .2; color: var(--gold); }
     .empty-result p { font-size: .9rem; }
-
     @media (max-width: 1000px) {
       .emi-layout { grid-template-columns: 1fr; }
       .input-card { position: static; }
@@ -107,11 +96,12 @@
       .chart-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
-      .summary-grid { grid-template-columns: 1fr 1fr; }
+      .summary-grid { grid-template-columns: 1fr; }
     }
     @media print {
-      .input-card, #navbar, #chat-toggle, #chatbox { display: none !important; }
+      .input-card, #navbar, #chat-toggle, #chatbox, .orb { display: none !important; }
       .emi-layout { grid-template-columns: 1fr; }
+      .result-panel { display: block !important; }
     }
   </style>
 </head>
@@ -119,7 +109,7 @@
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">Kushal<span class="dot">.</span>P</a>
   <div class="nav-links">
@@ -142,19 +132,18 @@
   <a href="contact.html">Contact</a>
 </div>
 
-<!-- ── PAGE HERO ── -->
+<!-- PAGE HERO -->
 <div class="page-hero">
   <div class="eyebrow">Finance Tool</div>
   <h1>EMI <em>Analytics Tool</em></h1>
   <p>Advanced loan calculation with amortization schedule, service charge & visual breakdown</p>
 </div>
 
-<!-- ── MAIN CONTENT ── -->
+<!-- MAIN CONTENT -->
 <section>
   <div class="inner">
     <div class="emi-layout">
-
-      <!-- LEFT: INPUT CARD -->
+      <!-- INPUT CARD -->
       <div class="input-card reveal">
         <div class="input-card-title"><i class="fas fa-calculator"></i> Loan Details</div>
 
@@ -184,25 +173,25 @@
           </div>
         </div>
 
-        <!-- Service Charge Slider -->
+        <!-- Service Charge -->
         <div class="range-box">
           <div class="range-hdr">
             <span><i class="fas fa-cog"></i> Service Charge</span>
             <strong id="sc-display">1.30%</strong>
           </div>
-          <input type="range" id="em-sc" min="0" max="5" step="0.05" value="1.3"
-            oninput="document.getElementById('sc-display').textContent = parseFloat(this.value).toFixed(2)+'%'" />
+          <input type="range" id="em-sc" min="0" max="5" step="0.05" value="1.3" 
+                 oninput="document.getElementById('sc-display').textContent = parseFloat(this.value).toFixed(2)+'%'" />
           <div class="range-hints"><span>0%</span><span>5%</span></div>
         </div>
 
-        <!-- Insurance Slider -->
+        <!-- Insurance -->
         <div class="range-box">
           <div class="range-hdr">
             <span><i class="fas fa-shield-alt"></i> Insurance/yr</span>
             <strong id="ic-display">0.425%</strong>
           </div>
-          <input type="range" id="em-ic" min="0" max="2" step="0.025" value="0.425"
-            oninput="document.getElementById('ic-display').textContent = parseFloat(this.value).toFixed(3)+'%'" />
+          <input type="range" id="em-ic" min="0" max="2" step="0.025" value="0.425" 
+                 oninput="document.getElementById('ic-display').textContent = parseFloat(this.value).toFixed(3)+'%'" />
           <div class="range-hints"><span>0%</span><span>2%</span></div>
         </div>
 
@@ -221,18 +210,15 @@
         </div>
       </div>
 
-      <!-- RIGHT: RESULTS -->
+      <!-- RESULTS AREA -->
       <div>
-        <!-- Placeholder before calc -->
         <div class="empty-result" id="em-placeholder">
           <i class="fas fa-chart-pie"></i>
           <p>Enter loan details and click <strong style="color:var(--gold)">Calculate</strong> to see your EMI breakdown, amortization schedule, and cost analysis.</p>
         </div>
 
-        <!-- Results (hidden until calc) -->
         <div class="result-panel" id="em-results">
-
-          <!-- Summary Cards -->
+          <!-- Summary -->
           <div class="summary-grid">
             <div class="sum-box highlight">
               <div class="s-lbl">Monthly EMI</div>
@@ -266,7 +252,7 @@
             </div>
           </div>
 
-          <!-- Chart + Breakdown -->
+          <!-- Charts & Breakdown -->
           <div class="chart-row">
             <div class="chart-box">
               <h3><i class="fas fa-chart-pie"></i> Cost Breakdown</h3>
@@ -302,15 +288,13 @@
               </table>
             </div>
           </div>
-
-        </div><!-- /result-panel -->
+        </div>
       </div>
-
-    </div><!-- /emi-layout -->
+    </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer id="footer">
   <div class="inner">
     <div class="footer-grid">
@@ -334,7 +318,7 @@
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
-        <a href="/cdn-cgi/l/email-protection#731a1d151c331806001b121f031b060a121f5d101c1e5d1d03"><span class="__cf_email__" data-cfemail="5a33343c351a312f29323b362a322f233b367439353774342a">[email&#160;protected]</span></a>
+        <a href="mailto:info@kushalphuyal.com.np">info@kushalphuyal.com.np</a>
         <a href="https://wa.me/9779863970493">+977 9863970493</a>
       </div>
     </div>
@@ -345,7 +329,7 @@
   </div>
 </footer>
 
-<!-- ── CHAT ── -->
+<!-- CHAT -->
 <button id="chat-toggle" aria-label="Chat"><i class="fas fa-robot"></i></button>
 <div id="chatbox">
   <div class="chat-head">
@@ -368,144 +352,199 @@
 </div>
 
 <!-- Chart.js -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script src="script.js"></script>
+
 <script>
-  /* ── EMI CALCULATOR LOGIC ── */
-  let donutChart = null;
+// ── EMI CALCULATOR LOGIC ──
+let donutChart = null;
 
-  function fmt(n) {
-    if (isNaN(n) || n === null) return '—';
-    const neg = n < 0;
-    const abs = Math.abs(n).toFixed(2);
-    const [int, dec] = abs.split('.');
-    let res = '';
-    if (int.length <= 3) { res = int; }
-    else {
-      res = int.slice(-3);
-      let rem = int.slice(0, int.length - 3);
-      while (rem.length > 2) { res = rem.slice(-2) + ',' + res; rem = rem.slice(0, rem.length - 2); }
-      if (rem) res = rem + ',' + res;
+function fmt(n) {
+  if (isNaN(n) || n === null) return '—';
+  const neg = n < 0;
+  const abs = Math.abs(Math.round(n * 100) / 100).toFixed(2);
+  const [int, dec] = abs.split('.');
+  let res = '';
+  if (int.length <= 3) {
+    res = int;
+  } else {
+    res = int.slice(-3);
+    let rem = int.slice(0, int.length - 3);
+    while (rem.length > 2) {
+      res = rem.slice(-2) + ',' + res;
+      rem = rem.slice(0, rem.length - 2);
     }
-    return (neg ? '-' : '') + 'Rs ' + res + '.' + dec;
+    if (rem) res = rem + ',' + res;
+  }
+  return (neg ? '-' : '') + 'Rs ' + res + '.' + dec;
+}
+
+function set(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+
+function v(id) {
+  return parseFloat(document.getElementById(id)?.value) || 0;
+}
+
+function showError(msg) {
+  const el = document.getElementById('em-err');
+  if (el) {
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 5000);
+  }
+}
+
+function calcEMI() {
+  const p = v('em-p');
+  const ar = v('em-r');
+  const n = parseInt(document.getElementById('em-n')?.value) || 0;
+  const sc = parseFloat(document.getElementById('em-sc')?.value) / 100 || 0;
+  const ic = parseFloat(document.getElementById('em-ic')?.value) / 100 || 0;
+
+  if (p <= 0 || ar <= 0 || n <= 0) {
+    showError('⚠️ Please enter valid Principal, Interest Rate and Tenure.');
+    return;
+  }
+  if (n > 600) {
+    showError('⚠️ Loan tenure cannot exceed 50 years (600 months).');
+    return;
   }
 
-  function set(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
-  function v(id) { return parseFloat(document.getElementById(id)?.value) || 0; }
-
-  function showError(msg) {
-    const el = document.getElementById('em-err');
-    el.textContent = msg; el.classList.add('show');
-    setTimeout(() => el.classList.remove('show'), 4000);
+  const r = ar / 12 / 100;
+  const emi = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+  if (!isFinite(emi)) {
+    showError('⚠️ Calculation error — check input values.');
+    return;
   }
 
-  function calcEMI() {
-    const p  = v('em-p');
-    const ar = v('em-r');
-    const n  = parseInt(document.getElementById('em-n').value) || 0;
-    const sc = parseFloat(document.getElementById('em-sc').value) / 100;
-    const ic = parseFloat(document.getElementById('em-ic').value) / 100;
+  const totalInterest = emi * n - p;
+  const serviceCharge = p * sc;
+  const insurance = p * ic * Math.ceil(n / 12);
+  const totalCharges = serviceCharge + insurance;
+  const totalCost = p + totalInterest + totalCharges;
 
-    if (!p || !ar || !n || p <= 0 || ar <= 0 || n <= 0) {
-      showError('⚠️ Please fill all three fields with valid values.'); return;
-    }
-    if (n > 600) { showError('⚠️ Tenure cannot exceed 600 months.'); return; }
+  // Update summary
+  set('r-emi', fmt(emi));
+  set('r-interest', fmt(totalInterest));
+  set('r-int-pct', ((totalInterest / p) * 100).toFixed(1) + '% of principal');
+  set('r-total', fmt(totalCost));
+  set('r-sc', fmt(serviceCharge));
+  set('r-sc-pct', (sc * 100).toFixed(2) + '% of principal');
+  set('r-ic', fmt(insurance));
+  set('r-ic-yrs', (ic * 100).toFixed(3) + '% × ' + Math.ceil(n / 12) + ' year(s)');
+  set('r-charges', fmt(totalCharges));
 
-    const r    = ar / 12 / 100;
-    const emi  = p * r * Math.pow(1+r,n) / (Math.pow(1+r,n) - 1);
-    const tInt = emi * n - p;
-    const scAmt = p * sc;
-    const icAmt = p * ic * Math.ceil(n / 12);
-    const charges = scAmt + icAmt;
-    const total  = p + tInt + charges;
-
-    // Summary
-    set('r-emi',      fmt(emi));
-    set('r-interest', fmt(tInt));
-    set('r-int-pct',  ((tInt/p)*100).toFixed(1) + '% of principal');
-    set('r-total',    fmt(total));
-    set('r-sc',       fmt(scAmt));
-    set('r-sc-pct',   (sc*100).toFixed(2) + '% of principal');
-    set('r-ic',       fmt(icAmt));
-    set('r-ic-yrs',   (ic*100).toFixed(3) + '% × ' + Math.ceil(n/12) + ' year(s)');
-    set('r-charges',  fmt(charges));
-
-    // Donut chart
-    if (donutChart) donutChart.destroy();
-    donutChart = new Chart(document.getElementById('donut-chart'), {
-      type: 'doughnut',
-      data: {
-        labels: ['Principal','Interest','Service Charge','Insurance'],
-        datasets: [{
-          data: [p, tInt, scAmt, icAmt],
-          backgroundColor: ['#c9a84c','#e8c46a','#4caf7d','#5a9ee0'],
-          borderColor: '#161616', borderWidth: 3, hoverOffset: 6
-        }]
-      },
-      options: {
-        cutout: '68%', responsive: true, maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: { label: ctx => ' ' + fmt(ctx.parsed) + ' (' + ((ctx.parsed/total)*100).toFixed(1) + '%)' } }
+  // Donut Chart
+  if (donutChart) donutChart.destroy();
+  donutChart = new Chart(document.getElementById('donut-chart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Principal', 'Interest', 'Service Charge', 'Insurance'],
+      datasets: [{
+        data: [p, totalInterest, serviceCharge, insurance],
+        backgroundColor: ['#c9a84c', '#e8c46a', '#4caf7d', '#5a9ee0'],
+        borderColor: '#161616',
+        borderWidth: 3,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      cutout: '68%',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ' ' + fmt(ctx.parsed) + ' (' + ((ctx.parsed / totalCost) * 100).toFixed(1) + '%)'
+          }
         }
       }
-    });
+    }
+  });
 
-    // Breakdown list
-    const items = [
-      { label: 'Principal',       value: p,      color: '#c9a84c' },
-      { label: 'Total Interest',  value: tInt,   color: '#e8c46a' },
-      { label: 'Service Charge',  value: scAmt,  color: '#4caf7d' },
-      { label: 'Insurance',       value: icAmt,  color: '#5a9ee0' },
-    ];
-    document.getElementById('breakdown-list').innerHTML = items.map(it => `
-      <div class="bk-row">
-        <div class="bk-top">
-          <span class="bk-dot-label">
-            <span class="bk-dot" style="background:${it.color}"></span>${it.label}
-          </span>
-          <span class="bk-val">${fmt(it.value)}</span>
-        </div>
-        <div class="bk-bar-track">
-          <div class="bk-bar-fill" style="width:${(it.value/total*100).toFixed(1)}%;background:${it.color}"></div>
-        </div>
-      </div>`).join('');
+  // Breakdown list
+  const items = [
+    { label: 'Principal', value: p, color: '#c9a84c' },
+    { label: 'Total Interest', value: totalInterest, color: '#e8c46a' },
+    { label: 'Service Charge', value: serviceCharge, color: '#4caf7d' },
+    { label: 'Insurance', value: insurance, color: '#5a9ee0' }
+  ];
 
-    // Amortization table
-    let rem = p;
-    const startDate = new Date();
-    let rows = '';
-    for (let i = 1; i <= n; i++) {
-      const ip  = rem * r;
-      const pp  = emi - ip;
-      rem -= pp;
-      const d = new Date(startDate);
-      d.setMonth(d.getMonth() + i - 1);
-      const dateStr = d.toISOString().split('T')[0];
-      const bal = rem < 0.01 ? 0 : rem;
-      rows += `<tr>
+  document.getElementById('breakdown-list').innerHTML = items.map(it => `
+    <div class="bk-row">
+      <div class="bk-top">
+        <span class="bk-dot-label">
+          <span class="bk-dot" style="background:${it.color}"></span>${it.label}
+        </span>
+        <span class="bk-val">${fmt(it.value)}</span>
+      </div>
+      <div class="bk-bar-track">
+        <div class="bk-bar-fill" style="width:${(it.value / totalCost * 100).toFixed(1)}%; background:${it.color}"></div>
+      </div>
+    </div>
+  `).join('');
+
+  // Amortization table
+  let remaining = p;
+  const startDate = new Date();
+  let tableRows = '';
+  for (let i = 1; i <= n; i++) {
+    const interestThisMonth = remaining * r;
+    const principalThisMonth = emi - interestThisMonth;
+    remaining -= principalThisMonth;
+    const date = new Date(startDate);
+    date.setMonth(date.getMonth() + i - 1);
+    const dateStr = date.toISOString().split('T')[0];
+    const balance = remaining < 0.01 ? 0 : remaining;
+
+    tableRows += `
+      <tr>
         <td>${i}</td>
         <td>${dateStr}</td>
-        <td>${fmt(pp)}</td>
-        <td>${fmt(ip)}</td>
+        <td>${fmt(principalThisMonth)}</td>
+        <td>${fmt(interestThisMonth)}</td>
         <td>${fmt(emi)}</td>
-        <td>${fmt(bal)}</td>
-      </tr>`;
-    }
-    document.getElementById('em-tbody').innerHTML = rows;
-    set('table-info', n + ' payments · ' + fmt(emi) + ' / month');
-
-    // Show results
-    document.getElementById('em-placeholder').style.display = 'none';
-    document.getElementById('em-results').classList.add('show');
-    document.getElementById('em-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        <td>${fmt(balance)}</td>
+      </tr>
+    `;
   }
 
-  function resetEMI() {
-    ['em-p','em-r','em-n'].forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
-    document.getElementById('em-sc').value = 1.3;
-    document.getElementById('sc-display').textContent = '1.30%';
-    document.getElementById('em-ic').value = 0.425;
-    document.getElementById('ic-display').textContent = '0.425%';
-    document.getElementById('em-results').classList.remove('show');
-    document.getElementById('em-placeholder').style.
+  document.getElementById('em-tbody').innerHTML = tableRows;
+  set('table-info', `${n} payments · ${fmt(emi)} / month`);
+
+  // Show results
+  document.getElementById('em-placeholder').style.display = 'none';
+  document.getElementById('em-results').classList.add('show');
+  document.getElementById('em-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetEMI() {
+  ['em-p', 'em-r', 'em-n'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('em-sc').value = 1.3;
+  document.getElementById('sc-display').textContent = '1.30%';
+  document.getElementById('em-ic').value = 0.425;
+  document.getElementById('ic-display').textContent = '0.425%';
+
+  document.getElementById('em-results').classList.remove('show');
+  document.getElementById('em-placeholder').style.display = 'block';
+
+  if (donutChart) {
+    donutChart.destroy();
+    donutChart = null;
+  }
+}
+
+// Reset on page load (optional)
+window.addEventListener('load', () => {
+  resetEMI();
+});
+</script>
+</body>
+</html>
