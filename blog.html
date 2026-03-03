@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="canonical" href="https://kushalphuyal.com.np/blog.html" />
   <title>Blog | Kushal Phuyal — Finance, AI & Nepal Tax</title>
   <meta name="description" content="Kushal Phuyal's blog — Finance, AI, Nepal Tax, VAT, TDS, Income Tax, and Career insights in simple Nepali and English." />
   <link rel="icon" href="images/profile.webp" type="image/webp" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="Blog | Kushal Phuyal — Finance & Nepal Tax" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blog | Kushal Phuyal — Finance & Nepal Tax" />
   <meta property="og:description" content="Finance, AI, Nepal Tax and Career insights by Kushal Phuyal." />
-  <meta property="og:image"       content="https://kushalphuyal.com.np/images/profile.webp" />
-  <meta property="og:url"         content="https://kushalphuyal.com.np/blog.html" />
-  <meta name="twitter:card"       content="summary_large_image" />
-  <meta name="twitter:title"      content="Blog | Kushal Phuyal" />
+  <meta property="og:image" content="https://kushalphuyal.com.np/images/profile.webp" />
+  <meta property="og:url" content="https://kushalphuyal.com.np/blog.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog | Kushal Phuyal" />
   <meta name="twitter:description" content="Nepal finance insights, VAT, TDS, Income Tax guides." />
-  <meta name="twitter:image"      content="https://kushalphuyal.com.np/images/profile.webp" />
+  <meta name="twitter:image" content="https://kushalphuyal.com.np/images/profile.webp" />
   <link rel="stylesheet" href="style.css" />
-  <!--
-  ══════════════════════════════════════════════
-  HOW TO ADD A NEW BLOG POST — SUPER SIMPLE!
-  ══════════════════════════════════════════════
-  1. Open script.js  (or this file's POSTS array below)
-  2. Copy one post object { id, title, category... }
-  3. Change: id (add +1), title, date, excerpt, content
-  4. Save the file — post appears automatically!
-  5. No backend, no server, no database needed.
-  ══════════════════════════════════════════════
-  -->
 </head>
 <body>
-<div class="orb orb-1"></div><div class="orb orb-2"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- NAV -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">Kushal<span class="dot">.</span>P</a>
   <div class="nav-links">
-    <a href="index.html#about">About</a><a href="services.html">Services</a>
-    <a href="index.html#tools">Tools</a><a href="products.html">Products</a>
-    <a href="blog.html" class="active">Blog</a><a href="photocollection.html">Gallery</a>
+    <a href="index.html#about">About</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#tools">Tools</a>
+    <a href="products.html">Products</a>
+    <a href="blog.html" class="active">Blog</a>
+    <a href="photocollection.html">Gallery</a>
     <a href="contact.html" class="nav-cta">Hire Me</a>
   </div>
   <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
 </nav>
 <div class="mob-menu" id="mob-menu">
-  <a href="index.html">Home</a><a href="services.html">Services</a>
-  <a href="products.html">Products</a><a href="blog.html">Blog</a>
-  <a href="photocollection.html">Gallery</a><a href="contact.html">Contact</a>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="products.html">Products</a>
+  <a href="blog.html">Blog</a>
+  <a href="photocollection.html">Gallery</a>
+  <a href="contact.html">Contact</a>
 </div>
 
+<!-- PAGE HERO -->
 <div class="page-hero">
   <div class="eyebrow">Knowledge Hub</div>
   <h1>The <em>Blog</em></h1>
@@ -66,13 +66,18 @@
   <div class="inner">
     <!-- Featured post -->
     <div id="featured-wrap"></div>
-    <!-- Grid -->
+
+    <!-- Grid header -->
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:10px;">
       <span style="font-family:var(--ff-head);font-size:1.1rem;color:var(--white);">All Posts</span>
       <span id="post-count" style="font-size:.82rem;color:var(--muted);"></span>
     </div>
+
     <div class="grid-3" id="blog-grid"></div>
-    <div class="empty-state" id="blog-empty"><i class="fas fa-search"></i><p>No posts found. Try a different keyword.</p></div>
+    <div class="empty-state" id="blog-empty">
+      <i class="fas fa-search"></i>
+      <p>No posts found. Try a different keyword or category.</p>
+    </div>
   </div>
 </section>
 
@@ -83,7 +88,7 @@
     <div class="modal-img" id="modal-img"></div>
     <div class="modal-content">
       <div id="modal-cat"></div>
-      <h2 id="modal-title" style="font-family:var(--ff-head);font-size:1.5rem;color:var(--white);margin-bottom:10px;"></h2>
+      <h1 id="modal-title"></h1>
       <div class="modal-meta" id="modal-meta"></div>
       <div class="modal-body" id="modal-body"></div>
     </div>
@@ -98,36 +103,75 @@
 <footer id="footer">
   <div class="inner">
     <div class="footer-grid">
-      <div class="footer-brand"><div class="footer-logo">Kushal<span class="dot">.</span>P</div><p>AI Accountant from Okhaldhunga, Nepal 🇳🇵</p></div>
-      <div class="footer-col"><h4>Blog Topics</h4><a href="blog.html">Nepal Tax</a><a href="blog.html">Finance Tools</a><a href="blog.html">AI in Finance</a><a href="blog.html">Career Tips</a></div>
-      <div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="services.html">Services</a><a href="products.html">Products</a><a href="contact.html">Contact</a></div>
-      <div class="footer-col"><h4>Contact</h4><a href="/cdn-cgi/l/email-protection#dbb2b5bdb49bb0aea8b3bab7abb3aea2bab7f5b8b4b6f5b5ab"><span class="__cf_email__" data-cfemail="40292e262f002b353328212c30283539212c6e232f2d6e2e30">[email&#160;protected]</span></a><a href="https://wa.me/9779863970493">+977 9863970493</a></div>
+      <div class="footer-brand">
+        <div class="footer-logo">Kushal<span class="dot">.</span>P</div>
+        <p>AI Accountant from Okhaldhunga, Nepal 🇳🇵</p>
+      </div>
+      <div class="footer-col">
+        <h4>Blog Topics</h4>
+        <a href="blog.html">Nepal Tax</a>
+        <a href="blog.html">Finance Tools</a>
+        <a href="blog.html">AI in Finance</a>
+        <a href="blog.html">Career Tips</a>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@kushalphuyal.com.np">info@kushalphuyal.com.np</a>
+        <a href="https://wa.me/9779863970493">+977 9863970493</a>
+      </div>
     </div>
-    <div class="footer-bottom"><span>© <span id="yr"></span> Kushal Phuyal.</span><span>Made with <span class="heart">♥</span> in Nepal 🇳🇵</span></div>
+    <div class="footer-bottom">
+      <span>© <span id="yr"></span> Kushal Phuyal. All Rights Reserved.</span>
+      <span>Made with <span class="heart">♥</span> in Nepal 🇳🇵</span>
+    </div>
   </div>
 </footer>
 
-<button id="chat-toggle" aria-label="Chat"><i class="fas fa-robot"></i></button>
+<!-- CHAT -->
+<button id="chat-toggle" aria-label="Chat with AI"><i class="fas fa-robot"></i></button>
 <div id="chatbox">
-  <div class="chat-head"><div class="chat-head-left"><div class="chat-av"><i class="fas fa-robot"></i></div><div><div class="chat-name">Kushal's AI</div><div class="chat-status-text"><span class="s-dot"></span> Online</div></div></div><button class="chat-close-x" id="chat-close-x"><i class="fas fa-times"></i></button></div>
-  <div class="chat-msgs" id="chat-msgs"><div class="cmsg bot">Namaste! 🙏 Ask me about Nepal accounting!</div></div>
-  <div class="chat-inp-row"><input id="c-input" placeholder="Ask about Nepal accounting…" autocomplete="off" /><button id="c-send"><i class="fas fa-paper-plane"></i></button></div>
+  <div class="chat-head">
+    <div class="chat-head-left">
+      <div class="chat-av"><i class="fas fa-robot"></i></div>
+      <div>
+        <div class="chat-name">Kushal's AI</div>
+        <div class="chat-status-text"><span class="s-dot"></span> Online</div>
+      </div>
+    </div>
+    <button class="chat-close-x" id="chat-close-x"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="chat-msgs" id="chat-msgs">
+    <div class="cmsg bot">Namaste! 🙏 Ask me about Nepal tax, finance, or blog topics!</div>
+  </div>
+  <div class="chat-inp-row">
+    <input id="c-input" placeholder="Ask about Nepal accounting…" autocomplete="off" />
+    <button id="c-send"><i class="fas fa-paper-plane"></i></button>
+  </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
+<script src="script.js"></script>
+
 <script>
-/* ── BLOG POSTS DATA ─────────────────────────────────
-   ADD NEW POST: copy one object, increment id, update fields.
-   Save file — it shows up automatically. That's it!
-─────────────────────────────────────────────────── */
+// BLOG POSTS DATA — तपाईंले यहाँ नयाँ post थप्न सक्नुहुन्छ
 const BLOG_POSTS = [
   {
-    id:1, title:"Nepal मा AI Accountant हुनुको अर्थ के हो?",
-    category:"ai", date:"माघ १०, २०८२", readTime:"6 min",
-    excerpt:"परम्परागत Accountant र AI Accountant बीचको फरक र नेपालको financial sector मा AI को भविष्य।",
-    icon:"fas fa-robot", iconColor:"#c9a84c",
-    bg:"linear-gradient(135deg,#110900,#1a1000)",
-    content:`
+    id: 1,
+    title: "Nepal मा AI Accountant हुनुको अर्थ के हो?",
+    category: "ai",
+    date: "माघ १०, २०८२",
+    readTime: "6 min",
+    excerpt: "परम्परागत Accountant र AI Accountant बीचको फरक र नेपालको financial sector मा AI को भविष्य।",
+    icon: "fas fa-robot",
+    iconColor: "#c9a84c",
+    bg: "linear-gradient(135deg,#110900,#1a1000)",
+    content: `
       <h2>AI Accountant भनेको के हो?</h2>
       <p>पहिले accounting भनेको manual ledger, calculator, र थुप्रै कागजातको काम थियो। तर अहिले AI ले यो सबै बदलिरहेको छ।</p>
       <p>AI Accountant भनेको कोही जसले traditional accounting knowledge सँगसँगै artificial intelligence tools पनि प्रयोग गर्न जान्दछ — automation गर्न, data analyze गर्न, र smart decisions लिन।</p>
@@ -136,48 +180,73 @@ const BLOG_POSTS = [
       <p><strong>परम्परागत:</strong> Manual entry — समय धेरै, गल्ती बढी।</p>
       <p><strong>AI Accountant:</strong> Automated — छिटो, accurate, insightful।</p>
       <h3>के सिक्नुपर्छ?</h3>
-      <ul><li>AI tools — डराउनु हुँदैन</li><li>Excel automation</li><li>Nepal context मा apply गर्न सक्नु</li></ul>
+      <ul>
+        <li>AI tools — डराउनु हुँदैन</li>
+        <li>Excel automation</li>
+        <li>Nepal context मा apply गर्न सक्नु</li>
+      </ul>
     `
   },
   {
-    id:2, title:"Nepal को VAT System — सजिलो भाषामा",
-    category:"tax", date:"माघ २०, २०८२", readTime:"8 min",
-    excerpt:"VAT registration, filing deadline, र 13% VAT calculation को complete guide — Nepal व्यापारीहरूको लागि।",
-    icon:"fas fa-receipt", iconColor:"#c9a84c",
-    bg:"linear-gradient(135deg,#0d1000,#181500)",
-    content:`
+    id: 2,
+    title: "Nepal को VAT System — सजिलो भाषामा",
+    category: "tax",
+    date: "माघ २०, २०८२",
+    readTime: "8 min",
+    excerpt: "VAT registration, filing deadline, र 13% VAT calculation को complete guide — Nepal व्यापारीहरूको लागि।",
+    icon: "fas fa-receipt",
+    iconColor: "#c9a84c",
+    bg: "linear-gradient(135deg,#0d1000,#181500)",
+    content: `
       <h2>VAT भनेको के हो?</h2>
       <p>VAT (Value Added Tax) — नेपालमा goods र services मा लाग्ने <strong>13%</strong> कर।</p>
       <div class="highlight">वार्षिक turnover Rs 50 लाख+ भएका व्यापारीहरूले VAT registration अनिवार्य गर्नुपर्छ।</div>
       <h2>Filing Deadline</h2>
-      <ul><li>Monthly: प्रत्येक महिनाको <strong>२५ गते</strong></li><li>Late: 15% annual interest + 1%/month penalty</li></ul>
+      <ul>
+        <li>Monthly: प्रत्येक महिनाको <strong>२५ गते</strong></li>
+        <li>Late: 15% annual interest + 1%/month penalty</li>
+      </ul>
       <h2>Calculation</h2>
       <p>Sale Rs 1,00,000 → VAT = Rs 13,000 → Total Rs 1,13,000</p>
       <p><strong>Net Payable = Output VAT − Input VAT</strong></p>
     `
   },
   {
-    id:3, title:"EMI Calculator बनाउनु किन जरुरी लाग्यो?",
-    category:"finance", date:"फागुन ५, २०८२", readTime:"5 min",
-    excerpt:"मैले EMI Analytics Tool किन र कसरी बनाएँ — र यसले Nepali loan borrowers लाई कसरी help गर्छ।",
-    icon:"fas fa-calculator", iconColor:"#e8c46a",
-    bg:"linear-gradient(135deg,#0a0800,#151000)",
-    content:`
+    id: 3,
+    title: "EMI Calculator बनाउनु किन जरुरी लाग्यो?",
+    category: "finance",
+    date: "फागुन ५, २०८२",
+    readTime: "5 min",
+    excerpt: "मैले EMI Analytics Tool किन र कसरी बनाएँ — र यसले Nepali loan borrowers लाई कसरी help गर्छ।",
+    icon: "fas fa-calculator",
+    iconColor: "#e8c46a",
+    bg: "linear-gradient(135deg,#0a0800,#151000)",
+    content: `
       <h2>Problem के थियो?</h2>
       <p>मेरा साथीहरूले bank loan लिँदा EMI, interest, service charge — clearly बुझ्दैनथे।</p>
       <div class="highlight">"एउटा tool बनाऊँ — service charge र insurance सहित EMI calculator।"</div>
       <h2>Tool Features</h2>
-      <ul><li>EMI — Reducing balance method</li><li>Service Charge — Adjustable slider</li><li>Insurance — Adjustable</li><li>Amortization Schedule</li><li>Nepal Rs format (1,23,456)</li></ul>
+      <ul>
+        <li>EMI — Reducing balance method</li>
+        <li>Service Charge — Adjustable slider</li>
+        <li>Insurance — Adjustable</li>
+        <li>Amortization Schedule</li>
+        <li>Nepal Rs format (1,23,456)</li>
+      </ul>
       <p><a href="emi-code.html" style="color:var(--gold)">Try the EMI Calculator →</a></p>
     `
   },
   {
-    id:4, title:"TDS कति काट्ने? — FY 2082/83 Complete Guide",
-    category:"tax", date:"फागुन १०, २०८२", readTime:"7 min",
-    excerpt:"Service, rent, interest — कुन payment मा कति TDS? सबै rates एकैठाउँमा।",
-    icon:"fas fa-percentage", iconColor:"#c9a84c",
-    bg:"linear-gradient(135deg,#100800,#1a1000)",
-    content:`
+    id: 4,
+    title: "TDS कति काट्ने? — FY 2082/83 Complete Guide",
+    category: "tax",
+    date: "फागुन १०, २०८२",
+    readTime: "7 min",
+    excerpt: "Service, rent, interest — कुन payment मा कति TDS? सबै rates एकैठाउँमा।",
+    icon: "fas fa-percentage",
+    iconColor: "#c9a84c",
+    bg: "linear-gradient(135deg,#100800,#1a1000)",
+    content: `
       <h2>TDS भनेको के हो?</h2>
       <p>Payment गर्दा नै tax काटेर IRD मा बुझाउने system — Tax Deducted at Source।</p>
       <h2>FY 2082/83 Rates</h2>
@@ -193,31 +262,64 @@ const BLOG_POSTS = [
     `
   },
   {
-    id:5, title:"Okhaldhunga बाट Digital Career — मेरो Journey",
-    category:"career", date:"फागुन १५, २०८२", readTime:"5 min",
-    excerpt:"सानो जिल्लाबाट digital tools प्रयोग गरेर national level मा काम गर्न सकिन्छ — मेरो अनुभव।",
-    icon:"fas fa-mountain", iconColor:"#4caf7d",
-    bg:"linear-gradient(135deg,#060d00,#0d1500)",
-    content:`
+    id: 5,
+    title: "Okhaldhunga बाट Digital Career — मेरो Journey",
+    category: "career",
+    date: "फागुन १५, २०८२",
+    readTime: "5 min",
+    excerpt: "सानो जिल्लाबाट digital tools प्रयोग गरेर national level मा काम गर्न सकिन्छ — मेरो अनुभव।",
+    icon: "fas fa-mountain",
+    iconColor: "#4caf7d",
+    bg: "linear-gradient(135deg,#060d00,#0d1500)",
+    content: `
       <h2>सुरुआत</h2>
       <p>Okhaldhunga बाट। धेरैले भन्थे — यहाँबाट digital career सम्भव छैन।</p>
       <div class="highlight">"Internet भएको ठाउँबाट जो पनि काम गर्न सकिन्छ। Location अब limitation होइन।"</div>
       <h2>के सिकें?</h2>
-      <ul><li>Nepal Accounting — law बमोजिम</li><li>Web Dev — HTML, CSS, JS</li><li>AI Tools — Cloudflare Workers</li><li>Finance Automation</li></ul>
+      <ul>
+        <li>Nepal Accounting — law बमोजिम</li>
+        <li>Web Dev — HTML, CSS, JS</li>
+        <li>AI Tools — Cloudflare Workers</li>
+        <li>Finance Automation</li>
+      </ul>
       <p>यो website, यी tools — सबै त्यही direction को सुरुआत।</p>
     `
   },
   {
-    id:6, title:"Income Tax Slabs FY 2082/83 — Unmarried vs Married",
-    category:"tax", date:"फागुन २०, २०८२", readTime:"6 min",
-    excerpt:"FY 2082/83 income tax slabs — rates, PF deduction को फाइदा, र example calculation।",
-    icon:"fas fa-file-invoice-dollar", iconColor:"#e8c46a",
-    bg:"linear-gradient(135deg,#0d0900,#181200)",
-    content:`
+    id: 6,
+    title: "Income Tax Slabs FY 2082/83 — Unmarried vs Married",
+    category: "tax",
+    date: "फागुन २०, २०८२",
+    readTime: "6 min",
+    excerpt: "FY 2082/83 income tax slabs — rates, PF deduction को फाइदा, र example calculation।",
+    icon: "fas fa-file-invoice-dollar",
+    iconColor: "#e8c46a",
+    bg: "linear-gradient(135deg,#0d0900,#181200)",
+    content: `
       <h2>Tax Slabs 2082/83</h2>
       <h3>Unmarried (अविवाहित)</h3>
-      <ul><li>Rs 5L सम्म — 1%</li><li>5L–7L — 10%</li><li>7L–10L — 20%</li><li>10L–20L — 30%</li><li>20L–50L — 36%</li><li>50L+ — 39%</li></ul>
+      <ul>
+        <li>Rs 5L सम्म — 1%</li>
+        <li>5L–7L — 10%</li>
+        <li>7L–10L — 20%</li>
+        <li>10L–20L — 30%</li>
+        <li>20L–50L — 36%</li>
+        <li>50L+ — 39%</li>
+      </ul>
       <h3>Married (विवाहित)</h3>
       <p>Rs 6L सम्म 1% — Rs 1 लाख extra tax-free benefit।</p>
       <div class="highlight">PF contribution taxable income बाट घटाउन पाइन्छ — बचत गर्ने मौका!</div>
-      <h2>Exa
+      <h2>Example</h2>
+      <p>Annual income Rs 8 लाख (unmarried): Tax = Rs 31,000</p>
+      <p>Married: Tax = Rs 21,000 (Rs 10,000 कम)</p>
+    `
+  }
+];
+
+// BlogEngine लाई initialize गर्नुहोस्
+document.addEventListener('DOMContentLoaded', () => {
+  BlogEngine.init(BLOG_POSTS, 'filter-row');
+});
+</script>
+</body>
+</html>
