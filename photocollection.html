@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="canonical" href="https://kushalphuyal.com.np/photocollection.html" />
   <title>Gallery & Achievements | Kushal Phuyal</title>
   <meta name="description" content="Gallery of Kushal Phuyal — Certificates, Achievements, Work life, and moments from Okhaldhunga, Nepal." />
   <link rel="icon" href="images/profile.webp" type="image/webp" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="Gallery | Kushal Phuyal" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Gallery | Kushal Phuyal" />
   <meta property="og:description" content="Certificates, achievements and photos from Okhaldhunga, Nepal." />
-  <meta property="og:image"       content="https://kushalphuyal.com.np/images/kushal1.jpeg" />
-  <meta property="og:url"         content="https://kushalphuyal.com.np/photocollection.html" />
-  <meta name="twitter:card"       content="summary_large_image" />
+  <meta property="og:image" content="https://kushalphuyal.com.np/images/kushal1.jpeg" />
+  <meta property="og:url" content="https://kushalphuyal.com.np/photocollection.html" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="style.css" />
   <style>
     .cert-section { background:rgba(201,168,76,.04); border-radius:20px; padding:32px; border:1px solid rgba(201,168,76,.15); margin-bottom:40px; }
@@ -32,29 +33,38 @@
     .sh-num { font-family:var(--ff-head); font-size:2rem; font-weight:700; color:var(--gold); }
     .sh-lbl { font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
     @media(max-width:1000px){ .masonry{columns:3;} }
-    @media(max-width:700px){ .masonry{columns:2;} .grid-3{grid-template-columns:repeat(2,1fr);} }
-    @media(max-width:480px){ .masonry{columns:2;} }
+    @media(max-width:700px){ .masonry{columns:2;} }
+    @media(max-width:480px){ .masonry{columns:1;} }
   </style>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ImageGallery","name":"Kushal Phuyal Gallery — Certificates & Achievements","author":{"@type":"Person","name":"Kushal Phuyal"},"contentLocation":{"@type":"Place","name":"Okhaldhunga, Nepal"},"url":"https://kushalphuyal.com.np/photocollection.html"}</script>
 </head>
 <body>
-<div class="orb orb-1"></div><div class="orb orb-2"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- NAV -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">Kushal<span class="dot">.</span>P</a>
   <div class="nav-links">
-    <a href="index.html#about">About</a><a href="services.html">Services</a>
-    <a href="index.html#tools">Tools</a><a href="products.html">Products</a>
-    <a href="blog.html">Blog</a><a href="photocollection.html" class="active">Gallery</a>
+    <a href="index.html#about">About</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#tools">Tools</a>
+    <a href="products.html">Products</a>
+    <a href="blog.html">Blog</a>
+    <a href="photocollection.html" class="active">Gallery</a>
     <a href="contact.html" class="nav-cta">Hire Me</a>
   </div>
   <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
 </nav>
 <div class="mob-menu" id="mob-menu">
-  <a href="index.html">Home</a><a href="services.html">Services</a>
-  <a href="products.html">Products</a><a href="blog.html">Blog</a>
-  <a href="photocollection.html">Gallery</a><a href="contact.html">Contact</a>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="products.html">Products</a>
+  <a href="blog.html">Blog</a>
+  <a href="photocollection.html">Gallery</a>
+  <a href="contact.html">Contact</a>
 </div>
 
+<!-- PAGE HERO -->
 <div class="page-hero">
   <div class="eyebrow">Visual Stories</div>
   <h1>Gallery & <em>Achievements</em></h1>
@@ -79,8 +89,7 @@
 
 <section>
   <div class="inner">
-
-    <!-- CERTIFICATES — special highlighted grid -->
+    <!-- CERTIFICATES SECTION -->
     <div class="cert-section reveal" id="cert-section">
       <div class="cert-section-title">
         <div class="icon"><i class="fas fa-award"></i></div>
@@ -95,11 +104,13 @@
     <!-- ALL PHOTOS -->
     <div class="eyebrow" style="margin-bottom:18px;" id="photo-section-label">All Photos</div>
     <div class="masonry" id="masonry-grid"></div>
-    <div class="empty-state" id="gallery-empty"><i class="fas fa-camera-slash"></i><p>No photos in this category yet.</p></div>
+    <div class="empty-state" id="gallery-empty">
+      <i class="fas fa-camera-slash"></i>
+      <p>No photos in this category yet.</p>
+    </div>
     <div style="text-align:center;margin-top:28px;">
       <button class="btn btn-outline" id="load-more-btn"><i class="fas fa-images"></i> Load More Photos</button>
     </div>
-
   </div>
 </section>
 
@@ -124,114 +135,201 @@
 <footer id="footer">
   <div class="inner">
     <div class="footer-grid">
-      <div class="footer-brand"><div class="footer-logo">Kushal<span class="dot">.</span>P</div><p>AI Accountant from Okhaldhunga, Nepal 🇳🇵</p></div>
-      <div class="footer-col"><h4>Gallery</h4><a href="photocollection.html">Certificates</a><a href="photocollection.html">Nature</a><a href="photocollection.html">Travel</a></div>
-      <div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="services.html">Services</a></div>
-      <div class="footer-col"><h4>Contact</h4><a href="/cdn-cgi/l/email-protection#bed7d0d8d1fed5cbcdd6dfd2ced6cbc7dfd290ddd1d390d0ce"><span class="__cf_email__" data-cfemail="d5bcbbb3ba95bea0a6bdb4b9a5bda0acb4b9fbb6bab8fbbba5">[email&#160;protected]</span></a><a href="https://wa.me/9779863970493">+977 9863970493</a></div>
+      <div class="footer-brand">
+        <div class="footer-logo">Kushal<span class="dot">.</span>P</div>
+        <p>AI Accountant from Okhaldhunga, Nepal 🇳🇵</p>
+      </div>
+      <div class="footer-col">
+        <h4>Gallery</h4>
+        <a href="photocollection.html">Certificates</a>
+        <a href="photocollection.html">Nature</a>
+        <a href="photocollection.html">Travel</a>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="services.html">Services</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:info@kushalphuyal.com.np">info@kushalphuyal.com.np</a>
+        <a href="https://wa.me/9779863970493">+977 9863970493</a>
+      </div>
     </div>
-    <div class="footer-bottom"><span>© <span id="yr"></span> Kushal Phuyal.</span><span>Made with <span class="heart">♥</span> in Nepal 🇳🇵</span></div>
+    <div class="footer-bottom">
+      <span>© <span id="yr"></span> Kushal Phuyal.</span>
+      <span>Made with <span class="heart">♥</span> in Nepal 🇳🇵</span>
+    </div>
   </div>
 </footer>
 
+<!-- CHAT -->
 <button id="chat-toggle" aria-label="Chat"><i class="fas fa-robot"></i></button>
 <div id="chatbox">
-  <div class="chat-head"><div class="chat-head-left"><div class="chat-av"><i class="fas fa-robot"></i></div><div><div class="chat-name">Kushal's AI</div><div class="chat-status-text"><span class="s-dot"></span> Online</div></div></div><button class="chat-close-x" id="chat-close-x"><i class="fas fa-times"></i></button></div>
-  <div class="chat-msgs" id="chat-msgs"><div class="cmsg bot">Namaste! 🙏 Welcome to my gallery!</div></div>
-  <div class="chat-inp-row"><input id="c-input" placeholder="Ask anything…" autocomplete="off" /><button id="c-send"><i class="fas fa-paper-plane"></i></button></div>
+  <div class="chat-head">
+    <div class="chat-head-left">
+      <div class="chat-av"><i class="fas fa-robot"></i></div>
+      <div>
+        <div class="chat-name">Kushal's AI</div>
+        <div class="chat-status-text"><span class="s-dot"></span> Online</div>
+      </div>
+    </div>
+    <button class="chat-close-x" id="chat-close-x"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="chat-msgs" id="chat-msgs">
+    <div class="cmsg bot">Namaste! 🙏 Welcome to my gallery! Ask anything about photos or certificates.</div>
+  </div>
+  <div class="chat-inp-row">
+    <input id="c-input" placeholder="Ask anything…" autocomplete="off" />
+    <button id="c-send"><i class="fas fa-paper-plane"></i></button>
+  </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
+<script src="script.js"></script>
+
 <script>
-/* ── GALLERY DATA ─────────────────────────────────── */
-const CERT_NUMS     = [9,21,7,36,43,37,25,17,46,20,6,18];
-const NATURE_NUMS   = [1,2,4,8,11,12,13,14,15,3,5,10];
-const URBAN_NUMS    = [16,19,22,23,24,26,27,28,29,30];
-const TRAVEL_NUMS   = [31,32,33,34,35,38,39,40,41,42,44,45,47,48,49,50];
-const CERT_NAMES    = {
-  9:'Academic Certificate', 21:'Computer Course Certificate', 7:'Finance Training',
-  36:'Achievement Award', 43:'Workshop Completion', 37:'Professional Development',
-  25:'Special Recognition', 17:'Merit Certificate', 46:'Skill Certificate',
-  20:'Academic Award', 6:'Professional Certificate', 18:'Training Completion'
+// GALLERY DATA
+const CERT_NUMS = [9,21,7,36,43,37,25,17,46,20,6,18];
+const NATURE_NUMS = [1,2,4,8,11,12,13,14,15,3,5,10];
+const URBAN_NUMS = [16,19,22,23,24,26,27,28,29,30];
+const TRAVEL_NUMS = [31,32,33,34,35,38,39,40,41,42,44,45,47,48,49,50];
+
+const CERT_NAMES = {
+  9: 'Academic Certificate',
+  21: 'Computer Course Certificate',
+  7: 'Finance Training',
+  36: 'Achievement Award',
+  43: 'Workshop Completion',
+  37: 'Professional Development',
+  25: 'Special Recognition',
+  17: 'Merit Certificate',
+  46: 'Skill Certificate',
+  20: 'Academic Award',
+  6: 'Professional Certificate',
+  18: 'Training Completion'
 };
 
 const ALL_PHOTOS = [];
 for (let i = 1; i <= 50; i++) {
   let cat = 'travel';
-  if (CERT_NUMS.includes(i))   cat = 'certificate';
+  if (CERT_NUMS.includes(i)) cat = 'certificate';
   else if (NATURE_NUMS.includes(i)) cat = 'nature';
-  else if (URBAN_NUMS.includes(i))  cat = 'urban';
+  else if (URBAN_NUMS.includes(i)) cat = 'urban';
+
   ALL_PHOTOS.push({
-    n: i, src: `images/kushal${i}.jpeg`,
-    caption: CERT_NAMES[i] || `Kushal Phuyal — ${cat} #${i}`,
+    n: i,
+    src: `images/kushal${i}.jpeg`,
+    caption: CERT_NAMES[i] || `Kushal Phuyal — ${cat.charAt(0).toUpperCase() + cat.slice(1)} #${i}`,
     category: cat
   });
 }
 
-let shown = 0, filtered = [...ALL_PHOTOS];
-const PER = 16;
-const mGrid   = document.getElementById('masonry-grid');
-const cGrid   = document.getElementById('cert-grid');
+let shown = 0;
+let filtered = [...ALL_PHOTOS];
+const PER_PAGE = 16;
+
+const mGrid = document.getElementById('masonry-grid');
+const cGrid = document.getElementById('cert-grid');
 const emptyEl = document.getElementById('gallery-empty');
 const loadBtn = document.getElementById('load-more-btn');
 const certSec = document.getElementById('cert-section');
+const totalCountEl = document.getElementById('total-count');
+const photoLabel = document.getElementById('photo-section-label');
 
-function renderCerts(certs) {
+function renderCertificates() {
+  const certs = ALL_PHOTOS.filter(p => p.category === 'certificate');
   cGrid.innerHTML = certs.map(p => `
-    <div class="cert-card" onclick="Lightbox.open(ALL_PHOTOS.indexOf(p),ALL_PHOTOS)">
+    <div class="cert-card" data-index="${ALL_PHOTOS.indexOf(p)}">
       <img src="${p.src}" alt="${p.caption}" loading="lazy" onerror="this.src='images/kushal1.jpeg'" />
-      <div class="cert-info"><div class="ctitle">${p.caption}</div><div class="csub">Kushal Phuyal · Okhaldhunga, Nepal</div></div>
-    </div>`).join('');
+      <div class="cert-info">
+        <div class="ctitle">${p.caption}</div>
+        <div class="csub">Kushal Phuyal · Okhaldhunga, Nepal</div>
+      </div>
+    </div>
+  `).join('');
 
-  // Fix onclick context
-  cGrid.querySelectorAll('.cert-card').forEach((el, i) => {
-    const p = certs[i];
-    el.onclick = () => Lightbox.open(ALL_PHOTOS.indexOf(p), ALL_PHOTOS);
+  // Add click handler
+  cGrid.querySelectorAll('.cert-card').forEach(el => {
+    el.addEventListener('click', () => {
+      const index = parseInt(el.dataset.index);
+      Lightbox.open(index, ALL_PHOTOS);
+    });
   });
 }
 
-function renderBatch(arr) {
-  const batch = arr.slice(shown, shown + PER);
+function renderPhotos(batch) {
   batch.forEach(p => {
     const el = document.createElement('div');
     el.className = 'photo-item';
     el.innerHTML = `
-      <img src="${p.src}" alt="Kushal Phuyal ${p.category} — Okhaldhunga Nepal" loading="lazy" onerror="this.src='images/kushal1.jpeg'" />
+      <img src="${p.src}" alt="${p.caption}" loading="lazy" onerror="this.src='images/kushal1.jpeg'" />
       <div class="photo-overlay">
-        <div class="po-cat">${p.category}</div>
+        <div class="po-cat">${p.category.charAt(0).toUpperCase() + p.category.slice(1)}</div>
         <div class="po-num">#${p.n}</div>
-      </div>`;
+      </div>
+    `;
     el.addEventListener('click', () => Lightbox.open(ALL_PHOTOS.indexOf(p), ALL_PHOTOS));
     mGrid.appendChild(el);
   });
-  shown += batch.length;
-  loadBtn.style.display = shown >= arr.length ? 'none' : 'inline-flex';
 }
 
-function resetGrid(cat) {
-  mGrid.innerHTML = ''; shown = 0;
+function loadMore() {
+  const batch = filtered.slice(shown, shown + PER_PAGE);
+  if (batch.length === 0) return;
+  renderPhotos(batch);
+  shown += batch.length;
+  loadBtn.style.display = shown >= filtered.length ? 'none' : 'inline-flex';
+}
+
+function resetGallery(cat = 'all') {
+  mGrid.innerHTML = '';
+  shown = 0;
   filtered = cat === 'all' ? [...ALL_PHOTOS] : ALL_PHOTOS.filter(p => p.category === cat);
 
-  const certs = ALL_PHOTOS.filter(p => p.category === 'certificate');
+  // Update count
+  totalCountEl.textContent = filtered.length;
+
+  // Certificates section
   if (cat === 'all' || cat === 'certificate') {
     certSec.style.display = 'block';
-    renderCerts(cat === 'certificate' ? filtered : certs);
+    renderCertificates();
   } else {
     certSec.style.display = 'none';
   }
 
-  const nonCert = filtered.filter(p => p.category !== 'certificate');
-  const toRender = cat === 'all' ? nonCert : (cat === 'certificate' ? [] : filtered);
-  if (toRender.length === 0 && cat === 'certificate') {
-    document.getElementById('photo-section-label').style.display = 'none';
-  } else {
-    document.getElementById('photo-section-label').style.display = 'block';
-    renderBatch(toRender);
-  }
-  emptyEl.style.display = toRender.length === 0 && cat !== 'certificate' ? 'block' : 'none';
-  document.getElementById('total-count').textContent = filtered.length;
+  // Photo label
+  photoLabel.style.display = (cat === 'certificate' && filtered.length === 0) ? 'none' : 'block';
+
+  // Render first batch
+  loadMore();
+
+  // Empty state
+  emptyEl.style.display = (filtered.length === 0 && cat !== 'certificate') ? 'block' : 'none';
+
+  // Load more button
+  loadBtn.style.display = filtered.length > PER_PAGE ? 'inline-flex' : 'none';
 }
 
-document.querySelectorAll('.filter-btn[data-gcat]').forEach(btn => {
+// Filter buttons
+document.querySelectorAll('#gallery-filter .filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn[data-gcat]').forEach(b => b.classList.remove('active'));
-    btn.c
+    document.querySelectorAll('#gallery-filter .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    resetGallery(btn.dataset.gcat);
+  });
+});
+
+// Load more
+loadBtn.addEventListener('click', loadMore);
+
+// Initial load
+resetGallery('all');
+
+// Lightbox init (assuming Lightbox is defined in script.js)
+if (typeof Lightbox !== 'undefined') {
+  Lightbox.init();
+}
+</script>
+</body>
+</html>
