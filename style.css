@@ -1752,22 +1752,38 @@ section {
   .grid-3 { grid-template-columns: repeat(2,1fr); }
 }
 
+
 @media (max-width: 850px) {
-  #sidebar-toggle { 
-    display: block; 
-    position: fixed; 
-    top: 80px; 
-    left: 10px;  /* left: 50% हटाएर */
-    z-index: 1001; 
+  #sidebar-toggle {
+    display: block;
+    position: fixed;
+    top: 76px;
+    left: 12px;
+    z-index: 1100;
+    width: 50px;
+    height: 50px;
     background: var(--gold);
     color: #000;
     border: none;
     border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+  }
+
+  .suite-sidebar {
+    transform: translateX(-100%);
+    width: 280px;
+    transition: transform 0.32s ease;
+    box-shadow: 6px 0 30px rgba(0,0,0,0.6);
+  }
+
+  .suite-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .suite-main {
+    margin-left: 0 !important;
   }
 }
 
