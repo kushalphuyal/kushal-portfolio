@@ -214,15 +214,79 @@
     /* HAMBURGER for sidebar on mobile */
     #sidebar-toggle { display: none; }
     
+/* MOBILE SIDEBAR TOGGLE BUTTON */
+#sidebar-toggle {
+  display: none;
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  z-index: 1500;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #c9a84c, #e8c46a);
+  color: #000;
+  border: none;
+  font-size: 1.2rem;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 28px rgba(201,168,76,0.45);
+  cursor: pointer;
+  transition: all 0.28s;
+  flex-direction: column;
+  gap: 3px;
+}
 
-    @media (max-width: 850px) {
-      #sidebar-toggle { display: block; position: fixed; top: 14px; left: 50%; z-index: 1001; }
-      .suite-sidebar { transform: translateX(-100%); width: 280px; }
-      .suite-sidebar.open { transform: translateX(0); }
-      .suite-main { margin-left: 0; }
-      .row2, .row3 { grid-template-columns: 1fr; }
-      .dash-grid { grid-template-columns: 1fr; }
-    }
+#sidebar-toggle:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 36px rgba(201,168,76,0.6);
+}
+
+#sidebar-toggle .sb-toggle-label {
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Sidebar overlay (dark background when open) */
+#sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 99;
+  backdrop-filter: blur(2px);
+}
+
+#sidebar-overlay.show { display: block; }
+
+@media (max-width: 850px) {
+  #sidebar-toggle {
+    display: flex;
+  }
+
+  .suite-sidebar {
+    transform: translateX(-100%);
+    width: 280px;
+    z-index: 100;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .suite-sidebar.open {
+    transform: translateX(0);
+    box-shadow: 24px 0 60px rgba(0,0,0,0.7);
+  }
+
+  .suite-main {
+    margin-left: 0;
+    padding: 20px 4% 80px;
+  }
+
+  .row2, .row3 { grid-template-columns: 1fr; }
+  .dash-grid { grid-template-columns: 1fr; }
+}
     @media print {
       .suite-sidebar, #navbar, #chat-toggle, #chatbox { display: none !important; }
       .suite-main { margin-left: 0 !important; }
