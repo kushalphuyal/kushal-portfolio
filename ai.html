@@ -1,142 +1,140 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="canonical" href="https://kushalphuyal.com.np/ai.html"/>
-<title>Nepal Accounting Suite Pro | Kushal Phuyal</title>
-<meta name="description" content="Nepal's most complete free accounting suite — VAT, TDS, Income Tax, EMI, Payroll, TDS Certificate, Challan, Bulk Payroll, Amount to Words. FY 2082/83."/>
-<link rel="icon" href="images/profile.webp" type="image/webp"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-<link rel="stylesheet" href="style.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-<style>
-/* ── EXTRA STYLES FOR NEW FEATURES ── */
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://kushalphuyal.com.np/ai.html" />
+  <title>Nepal Accounting Suite Pro | Kushal Phuyal</title>
+  <meta name="description" content="Nepal's most complete free accounting suite — VAT, TDS, Income Tax, EMI, Payroll, TDS Certificate, Challan, Bulk Payroll, Amount to Words. FY 2082/83." />
+  <link rel="icon" href="images/profile.webp" type="image/webp" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <style>
+    /* ── EXTRA STYLES FOR NEW FEATURES ── */
 
-/* Loan Comparison Table */
-.loan-compare-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-top:18px; }
-.loan-box { background:var(--card2); border:1px solid var(--border); border-radius:14px; padding:18px; transition:all .3s; }
-.loan-box:hover { border-color:rgba(201,168,76,.4); transform:translateY(-4px); }
-.loan-box.best { border-color:var(--gold); background:rgba(201,168,76,.06); }
-.loan-box .lb-bank { font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px; }
-.loan-box .lb-emi  { font-family:var(--ff-head); font-size:1.5rem; font-weight:700; color:var(--gold); }
-.loan-box .lb-total{ font-size:.78rem; color:var(--muted); margin-top:4px; }
-.loan-box .lb-badge{ display:inline-block; background:var(--gold); color:#000; font-size:.62rem; font-weight:800; padding:2px 8px; border-radius:4px; margin-top:6px; text-transform:uppercase; letter-spacing:.06em; }
+    /* Loan Comparison Table */
+    .loan-compare-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-top:18px; }
+    .loan-box { background:var(--card2); border:1px solid var(--border); border-radius:14px; padding:18px; transition:all .3s; }
+    .loan-box:hover { border-color:rgba(201,168,76,.4); transform:translateY(-4px); }
+    .loan-box.best { border-color:var(--gold); background:rgba(201,168,76,.06); }
+    .loan-box .lb-bank { font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px; }
+    .loan-box .lb-emi  { font-family:var(--ff-head); font-size:1.5rem; font-weight:700; color:var(--gold); }
+    .loan-box .lb-total{ font-size:.78rem; color:var(--muted); margin-top:4px; }
+    .loan-box .lb-badge{ display:inline-block; background:var(--gold); color:#000; font-size:.62rem; font-weight:800; padding:2px 8px; border-radius:4px; margin-top:6px; text-transform:uppercase; letter-spacing:.06em; }
 
-/* TDS Certificate */
-.cert-doc { border:2px solid var(--border2); border-radius:16px; overflow:hidden; margin-top:16px; }
-.cert-doc-header { background:linear-gradient(135deg,#1a1200,#2a1e00); padding:24px; text-align:center; border-bottom:1px solid rgba(201,168,76,.3); }
-.cert-doc-header h2 { font-family:var(--ff-head); font-size:1.3rem; color:var(--white); }
-.cert-doc-header p  { color:rgba(255,255,255,.5); font-size:.8rem; margin-top:4px; }
-.cert-gold-line { height:3px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
-.cert-body { padding:24px; }
-.cert-info-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px; }
-.cert-field { background:rgba(0,0,0,.2); border-radius:10px; padding:12px 14px; }
-.cert-field .cf-label { font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px; }
-.cert-field .cf-value { font-size:.92rem; color:var(--white); font-weight:600; }
-.cert-amount-box { background:rgba(201,168,76,.07); border:1px solid rgba(201,168,76,.25); border-radius:12px; padding:16px; text-align:center; margin-bottom:16px; }
-.cert-amount-box .ca-label { font-size:.72rem; color:var(--gold); text-transform:uppercase; letter-spacing:.1em; margin-bottom:6px; }
-.cert-amount-box .ca-val   { font-family:var(--ff-head); font-size:1.8rem; font-weight:700; color:var(--gold); }
-.cert-amount-box .ca-words { font-size:.82rem; color:var(--muted); margin-top:4px; font-style:italic; }
-.cert-sign-row { display:flex; justify-content:space-between; margin-top:24px; padding-top:20px; border-top:1px solid var(--border); }
-.cert-sign-box { text-align:center; }
-.cert-sign-line { width:160px; height:1px; background:var(--border2); margin:0 auto 6px; }
-.cert-sign-label { font-size:.72rem; color:var(--muted); }
+    /* TDS Certificate */
+    .cert-doc { border:2px solid var(--border2); border-radius:16px; overflow:hidden; margin-top:16px; }
+    .cert-doc-header { background:linear-gradient(135deg,#1a1200,#2a1e00); padding:24px; text-align:center; border-bottom:1px solid rgba(201,168,76,.3); }
+    .cert-doc-header h2 { font-family:var(--ff-head); font-size:1.3rem; color:var(--white); }
+    .cert-doc-header p  { color:rgba(255,255,255,.5); font-size:.8rem; margin-top:4px; }
+    .cert-gold-line { height:3px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+    .cert-body { padding:24px; }
+    .cert-info-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px; }
+    .cert-field { background:rgba(0,0,0,.2); border-radius:10px; padding:12px 14px; }
+    .cert-field .cf-label { font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px; }
+    .cert-field .cf-value { font-size:.92rem; color:var(--white); font-weight:600; }
+    .cert-amount-box { background:rgba(201,168,76,.07); border:1px solid rgba(201,168,76,.25); border-radius:12px; padding:16px; text-align:center; margin-bottom:16px; }
+    .cert-amount-box .ca-label { font-size:.72rem; color:var(--gold); text-transform:uppercase; letter-spacing:.1em; margin-bottom:6px; }
+    .cert-amount-box .ca-val   { font-family:var(--ff-head); font-size:1.8rem; font-weight:700; color:var(--gold); }
+    .cert-amount-box .ca-words { font-size:.82rem; color:var(--muted); margin-top:4px; font-style:italic; }
+    .cert-sign-row { display:flex; justify-content:space-between; margin-top:24px; padding-top:20px; border-top:1px solid var(--border); }
+    .cert-sign-box { text-align:center; }
+    .cert-sign-line { width:160px; height:1px; background:var(--border2); margin:0 auto 6px; }
+    .cert-sign-label { font-size:.72rem; color:var(--muted); }
 
-/* Challan */
-.challan-doc { border:2px solid var(--border2); border-radius:16px; overflow:hidden; margin-top:16px; }
-.challan-header { background:linear-gradient(135deg,#001a08,#002a10); padding:20px 24px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(76,175,125,.2); }
-.challan-logo { width:48px; height:48px; border-radius:10px; background:rgba(76,175,125,.15); border:1px solid rgba(76,175,125,.3); color:var(--green); display:flex; align-items:center; justify-content:center; font-size:1.3rem; }
-.challan-header h2 { font-family:var(--ff-head); font-size:1.1rem; color:var(--white); }
-.challan-header p  { font-size:.75rem; color:rgba(255,255,255,.5); margin-top:2px; }
-.challan-body { padding:22px 24px; }
-.challan-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.04); font-size:.88rem; }
-.challan-row:last-child { border:none; }
-.challan-row .cr-label { color:var(--muted); }
-.challan-row .cr-value { color:var(--white); font-weight:600; }
-.challan-row.total .cr-label { color:var(--white); font-size:1rem; font-weight:700; }
-.challan-row.total .cr-value { color:var(--green); font-family:var(--ff-head); font-size:1.3rem; font-weight:700; }
-.challan-footer { background:rgba(0,0,0,.25); padding:14px 24px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
-.challan-stamp { width:80px; height:80px; border-radius:50%; border:2px dashed rgba(201,168,76,.4); display:flex; align-items:center; justify-content:center; font-size:.62rem; color:var(--muted); text-align:center; flex-shrink:0; }
+    /* Challan */
+    .challan-doc { border:2px solid var(--border2); border-radius:16px; overflow:hidden; margin-top:16px; }
+    .challan-header { background:linear-gradient(135deg,#001a08,#002a10); padding:20px 24px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(76,175,125,.2); }
+    .challan-logo { width:48px; height:48px; border-radius:10px; background:rgba(76,175,125,.15); border:1px solid rgba(76,175,125,.3); color:var(--green); display:flex; align-items:center; justify-content:center; font-size:1.3rem; }
+    .challan-header h2 { font-family:var(--ff-head); font-size:1.1rem; color:var(--white); }
+    .challan-header p  { font-size:.75rem; color:rgba(255,255,255,.5); margin-top:2px; }
+    .challan-body { padding:22px 24px; }
+    .challan-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.04); font-size:.88rem; }
+    .challan-row:last-child { border:none; }
+    .challan-row .cr-label { color:var(--muted); }
+    .challan-row .cr-value { color:var(--white); font-weight:600; }
+    .challan-row.total .cr-label { color:var(--white); font-size:1rem; font-weight:700; }
+    .challan-row.total .cr-value { color:var(--green); font-family:var(--ff-head); font-size:1.3rem; font-weight:700; }
+    .challan-footer { background:rgba(0,0,0,.25); padding:14px 24px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+    .challan-stamp { width:80px; height:80px; border-radius:50%; border:2px dashed rgba(201,168,76,.4); display:flex; align-items:center; justify-content:center; font-size:.62rem; color:var(--muted); text-align:center; flex-shrink:0; }
 
-/* Bulk Payroll */
-.payroll-table-wrap { border-radius:12px; overflow:hidden; border:1px solid var(--border); margin-top:16px; }
-.payroll-table-wrap table { width:100%; border-collapse:collapse; font-size:.82rem; }
-.payroll-table-wrap thead th { background:rgba(0,0,0,.4); color:var(--muted); font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; padding:10px 12px; text-align:right; border-bottom:1px solid var(--border); }
-.payroll-table-wrap thead th:first-child { text-align:left; }
-.payroll-table-wrap tbody tr { border-bottom:1px solid rgba(255,255,255,.03); transition:background .2s; }
-.payroll-table-wrap tbody tr:hover { background:rgba(255,255,255,.03); }
-.payroll-table-wrap tbody td { padding:10px 12px; text-align:right; }
-.payroll-table-wrap tbody td:first-child { text-align:left; color:var(--white); font-weight:500; }
-.payroll-table-wrap tfoot td { background:rgba(201,168,76,.07); color:var(--gold); font-weight:700; font-family:var(--ff-head); padding:10px 12px; text-align:right; border-top:1px solid rgba(201,168,76,.2); }
-.payroll-table-wrap tfoot td:first-child { text-align:left; }
-.emp-row-add { display:grid; grid-template-columns:2fr 1fr 1fr 1fr auto; gap:10px; align-items:end; margin-bottom:14px; }
+    /* Bulk Payroll */
+    .payroll-table-wrap { border-radius:12px; overflow:hidden; border:1px solid var(--border); margin-top:16px; }
+    .payroll-table-wrap table { width:100%; border-collapse:collapse; font-size:.82rem; }
+    .payroll-table-wrap thead th { background:rgba(0,0,0,.4); color:var(--muted); font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; padding:10px 12px; text-align:right; border-bottom:1px solid var(--border); }
+    .payroll-table-wrap thead th:first-child { text-align:left; }
+    .payroll-table-wrap tbody tr { border-bottom:1px solid rgba(255,255,255,.03); transition:background .2s; }
+    .payroll-table-wrap tbody tr:hover { background:rgba(255,255,255,.03); }
+    .payroll-table-wrap tbody td { padding:10px 12px; text-align:right; }
+    .payroll-table-wrap tbody td:first-child { text-align:left; color:var(--white); font-weight:500; }
+    .payroll-table-wrap tfoot td { background:rgba(201,168,76,.07); color:var(--gold); font-weight:700; font-family:var(--ff-head); padding:10px 12px; text-align:right; border-top:1px solid rgba(201,168,76,.2); }
+    .payroll-table-wrap tfoot td:first-child { text-align:left; }
+    .emp-row-add { display:grid; grid-template-columns:2fr 1fr 1fr 1fr auto; gap:10px; align-items:end; margin-bottom:14px; }
 
-/* Amount to Words */
-.atw-display { background:rgba(201,168,76,.05); border:1px solid rgba(201,168,76,.2); border-radius:14px; padding:20px 24px; margin-top:16px; text-align:center; }
-.atw-number  { font-family:var(--ff-head); font-size:2rem; font-weight:700; color:var(--gold); margin-bottom:8px; }
-.atw-words-np{ font-size:1.05rem; color:var(--white); font-weight:500; margin-bottom:6px; }
-.atw-words-en{ font-size:.88rem; color:var(--muted); font-style:italic; }
-.atw-copy-btn{ margin-top:14px; }
+    /* Amount to Words */
+    .atw-display { background:rgba(201,168,76,.05); border:1px solid rgba(201,168,76,.2); border-radius:14px; padding:20px 24px; margin-top:16px; text-align:center; }
+    .atw-number  { font-family:var(--ff-head); font-size:2rem; font-weight:700; color:var(--gold); margin-bottom:8px; }
+    .atw-words-np{ font-size:1.05rem; color:var(--white); font-weight:500; margin-bottom:6px; }
+    .atw-words-en{ font-size:.88rem; color:var(--muted); font-style:italic; }
+    .atw-copy-btn{ margin-top:14px; }
 
-/* Currency Converter */
-.fx-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:16px; align-items:center; margin-bottom:18px; }
-.fx-arrow { width:44px; height:44px; border-radius:50%; background:rgba(201,168,76,.1); border:1px solid rgba(201,168,76,.2); color:var(--gold); display:flex; align-items:center; justify-content:center; font-size:1.1rem; cursor:pointer; transition:all .25s; margin:0 auto; }
-.fx-arrow:hover { background:var(--gold); color:#000; }
-.fx-rate-badge { text-align:center; font-size:.75rem; color:var(--muted); margin-top:8px; }
-.fx-rate-badge span { color:var(--gold); font-weight:600; }
-.fx-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-top:14px; }
-.fx-card { background:var(--card2); border:1px solid var(--border); border-radius:12px; padding:14px; text-align:center; }
-.fx-card .fc-flag { font-size:1.5rem; margin-bottom:4px; }
-.fx-card .fc-name { font-size:.7rem; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.06em; }
-.fx-card .fc-val  { font-family:var(--ff-head); font-size:1.1rem; font-weight:700; color:var(--white); }
+    /* Currency Converter */
+    .fx-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:16px; align-items:center; margin-bottom:18px; }
+    .fx-arrow { width:44px; height:44px; border-radius:50%; background:rgba(201,168,76,.1); border:1px solid rgba(201,168,76,.2); color:var(--gold); display:flex; align-items:center; justify-content:center; font-size:1.1rem; cursor:pointer; transition:all .25s; margin:0 auto; }
+    .fx-arrow:hover { background:var(--gold); color:#000; }
+    .fx-rate-badge { text-align:center; font-size:.75rem; color:var(--muted); margin-top:8px; }
+    .fx-rate-badge span { color:var(--gold); font-weight:600; }
+    .fx-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-top:14px; }
+    .fx-card { background:var(--card2); border:1px solid var(--border); border-radius:12px; padding:14px; text-align:center; }
+    .fx-card .fc-flag { font-size:1.5rem; margin-bottom:4px; }
+    .fx-card .fc-name { font-size:.7rem; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.06em; }
+    .fx-card .fc-val  { font-family:var(--ff-head); font-size:1.1rem; font-weight:700; color:var(--white); }
 
-/* Dashboard improvements */
-.dash-summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:22px; }
-.ds-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px; position:relative; overflow:hidden; transition:all .3s; }
-.ds-card:hover { border-color:rgba(201,168,76,.3); transform:translateY(-3px); }
-.ds-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--gold),var(--gold3)); }
-.ds-card .dc-icon { font-size:1.5rem; margin-bottom:8px; }
-.ds-card .dc-label { font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px; }
-.ds-card .dc-val   { font-family:var(--ff-head); font-size:1.4rem; font-weight:700; color:var(--white); }
-.ds-card .dc-sub   { font-size:.7rem; color:var(--muted); margin-top:2px; }
+    /* Dashboard improvements */
+    .dash-summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:22px; }
+    .ds-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px; position:relative; overflow:hidden; transition:all .3s; }
+    .ds-card:hover { border-color:rgba(201,168,76,.3); transform:translateY(-3px); }
+    .ds-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--gold),var(--gold3)); }
+    .ds-card .dc-icon { font-size:1.5rem; margin-bottom:8px; }
+    .ds-card .dc-label { font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px; }
+    .ds-card .dc-val   { font-family:var(--ff-head); font-size:1.4rem; font-weight:700; color:var(--white); }
+    .ds-card .dc-sub   { font-size:.7rem; color:var(--muted); margin-top:2px; }
 
-/* Quick calc bar */
-.quick-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px; }
-.qb-pill { padding:6px 14px; border-radius:20px; background:rgba(201,168,76,.08); border:1px solid rgba(201,168,76,.2); color:var(--gold); font-size:.75rem; font-weight:600; cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:5px; }
-.qb-pill:hover { background:rgba(201,168,76,.18); }
+    /* Quick calc bar */
+    .quick-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px; }
+    .qb-pill { padding:6px 14px; border-radius:20px; background:rgba(201,168,76,.08); border:1px solid rgba(201,168,76,.2); color:var(--gold); font-size:.75rem; font-weight:600; cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:5px; }
+    .qb-pill:hover { background:rgba(201,168,76,.18); }
 
-/* Toast notification */
-.toast { position:fixed; bottom:90px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--card2); border:1px solid var(--border2); border-radius:12px; padding:12px 20px; font-size:.85rem; color:var(--white); z-index:9999; opacity:0; transition:all .3s; pointer-events:none; display:flex; align-items:center; gap:8px; box-shadow:0 8px 32px rgba(0,0,0,.5); }
-.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
-.toast i { color:var(--green); }
+    /* Toast notification */
+    .toast { position:fixed; bottom:90px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--card2); border:1px solid var(--border2); border-radius:12px; padding:12px 20px; font-size:.85rem; color:var(--white); z-index:9999; opacity:0; transition:all .3s; pointer-events:none; display:flex; align-items:center; gap:8px; box-shadow:0 8px 32px rgba(0,0,0,.5); }
+    .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+    .toast i { color:var(--green); }
 
-/* Fiscal year banner */
-.fy-banner { background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(201,168,76,.03)); border:1px solid rgba(201,168,76,.2); border-radius:12px; padding:12px 18px; display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; flex-wrap:wrap; gap:10px; }
-.fy-banner .fb-left { font-size:.8rem; color:var(--muted); }
-.fy-banner .fb-left strong { color:var(--gold); }
-.fy-banner .fb-pills { display:flex; gap:8px; flex-wrap:wrap; }
-.fy-pill { font-size:.7rem; font-weight:700; padding:3px 10px; border-radius:20px; background:rgba(201,168,76,.12); color:var(--gold); border:1px solid rgba(201,168,76,.2); }
+    /* Fiscal year banner */
+    .fy-banner { background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(201,168,76,.03)); border:1px solid rgba(201,168,76,.2); border-radius:12px; padding:12px 18px; display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; flex-wrap:wrap; gap:10px; }
+    .fy-banner .fb-left { font-size:.8rem; color:var(--muted); }
+    .fy-banner .fb-left strong { color:var(--gold); }
+    .fy-banner .fb-pills { display:flex; gap:8px; flex-wrap:wrap; }
+    .fy-pill { font-size:.7rem; font-weight:700; padding:3px 10px; border-radius:20px; background:rgba(201,168,76,.12); color:var(--gold); border:1px solid rgba(201,168,76,.2); }
 
-/* Income Tax slab visual */
-.slab-visual { margin-top:14px; }
-.sv-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
-.sv-bar-wrap { flex:1; height:8px; background:rgba(255,255,255,.05); border-radius:4px; overflow:hidden; }
-.sv-bar { height:100%; border-radius:4px; transition:width 1s ease; }
-.sv-label { font-size:.78rem; color:var(--muted); min-width:130px; }
-.sv-rate  { font-size:.78rem; font-family:var(--ff-mono); color:var(--gold); min-width:36px; text-align:right; }
+    /* Income Tax slab visual */
+    .slab-visual { margin-top:14px; }
+    .sv-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+    .sv-bar-wrap { flex:1; height:8px; background:rgba(255,255,255,.05); border-radius:4px; overflow:hidden; }
+    .sv-bar { height:100%; border-radius:4px; transition:width 1s ease; }
+    .sv-label { font-size:.78rem; color:var(--muted); min-width:130px; }
+    .sv-rate  { font-size:.78rem; font-family:var(--ff-mono); color:var(--gold); min-width:36px; text-align:right; }
 
-/* Responsive extras */
-@media(max-width:640px){
-.emp-row-add { grid-template-columns:1fr 1fr; }
-.cert-info-grid { grid-template-columns:1fr; }
-.fx-grid { grid-template-columns:1fr; }
-.fx-arrow { transform:rotate(90deg); }
-.loan-compare-grid { grid-template-columns:1fr 1fr; }
-}
-</style>
-
+    /* Responsive extras */
+    @media(max-width:640px){
+      .emp-row-add { grid-template-columns:1fr 1fr; }
+      .cert-info-grid { grid-template-columns:1fr; }
+      .fx-grid { grid-template-columns:1fr; }
+      .fx-arrow { transform:rotate(90deg); }
+      .loan-compare-grid { grid-template-columns:1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -144,7 +142,6 @@
 <div id="sidebar-overlay"></div>
 
 <!-- NAV -->
-
 <button id="sidebar-toggle" aria-label="Open Tools Menu">
   <i class="fas fa-calculator"></i>
   <span class="sb-toggle-label">Tools</span>
@@ -219,622 +216,621 @@
   </aside>
 
   <!-- MAIN -->
-
   <main class="suite-main">
 
-```
-<!-- ══ DASHBOARD ══ -->
-<div class="panel active" id="panel-dashboard">
-  <div class="ph">
-    <div class="ph-eye">Nepal Accounting Suite Pro</div>
-    <h1>AI Accounting Engine</h1>
-    <p>FY 2082/83 · 20+ tools · Nepal-specific · Always free</p>
-  </div>
-
-  <div class="fy-banner">
-    <div class="fb-left">Current Fiscal Year: <strong>2082/83</strong> &nbsp;|&nbsp; Shrawan 1, 2082 — Ashadh 31, 2083</div>
-    <div class="fb-pills">
-      <span class="fy-pill">VAT 13%</span>
-      <span class="fy-pill">TDS 1.5%</span>
-      <span class="fy-pill">PF 11%+20%</span>
-      <span class="fy-pill">Corp Tax 25%</span>
-    </div>
-  </div>
-
-  <!-- Quick access pills -->
-  <div class="quick-bar">
-    <span class="qb-pill" onclick="goPanel('vat')"><i class="fas fa-receipt"></i> VAT</span>
-    <span class="qb-pill" onclick="goPanel('tds')"><i class="fas fa-percentage"></i> TDS</span>
-    <span class="qb-pill" onclick="goPanel('income-tax')"><i class="fas fa-file-invoice-dollar"></i> Income Tax</span>
-    <span class="qb-pill" onclick="goPanel('emi')"><i class="fas fa-calculator"></i> EMI</span>
-    <span class="qb-pill" onclick="goPanel('tds-cert')"><i class="fas fa-certificate"></i> TDS Certificate</span>
-    <span class="qb-pill" onclick="goPanel('bulk-payroll')"><i class="fas fa-users"></i> Bulk Payroll</span>
-    <span class="qb-pill" onclick="goPanel('amount-words')"><i class="fas fa-spell-check"></i> Amount→Words</span>
-    <span class="qb-pill" onclick="goPanel('currency')"><i class="fas fa-exchange-alt"></i> Currency</span>
-  </div>
-
-  <!-- Stat cards -->
-  <div class="dash-summary">
-    <div class="ds-card"><div class="dc-icon">🏛️</div><div class="dc-label">VAT Rate</div><div class="dc-val">13%</div><div class="dc-sub">Monthly filing 25 गते</div></div>
-    <div class="ds-card"><div class="dc-icon">📋</div><div class="dc-label">TDS (Service)</div><div class="dc-val">1.5%</div><div class="dc-sub">VAT bill सहित</div></div>
-    <div class="ds-card"><div class="dc-icon">👤</div><div class="dc-label">PF Employee</div><div class="dc-val">11%</div><div class="dc-sub">Basic salary बाट</div></div>
-    <div class="ds-card"><div class="dc-icon">🏢</div><div class="dc-label">PF Employer</div><div class="dc-val">20%</div><div class="dc-sub">Employer contribution</div></div>
-    <div class="ds-card"><div class="dc-icon">💼</div><div class="dc-label">Corp Tax</div><div class="dc-val">25%</div><div class="dc-sub">Normal company</div></div>
-    <div class="ds-card"><div class="dc-icon">📅</div><div class="dc-label">Fiscal Year</div><div class="dc-val">2082/83</div><div class="dc-sub">चालु आ.व.</div></div>
-  </div>
-
-  <div class="dash-grid">
-    <div class="dash-chart-card">
-      <h3><i class="fas fa-chart-pie"></i> Income Tax Slabs — Unmarried</h3>
-      <div class="chart-h"><canvas id="slabChart"></canvas></div>
-    </div>
-    <div class="dash-chart-card">
-      <h3><i class="fas fa-chart-bar"></i> Tax Slab Visual</h3>
-      <div class="slab-visual" id="slab-visual-bars"></div>
-    </div>
-  </div>
-
-  <div class="calc-card" style="margin-top:0;">
-    <div class="calc-card-title"><i class="fas fa-bolt"></i> Quick Rate Reference</div>
-    <div id="quick-ref"></div>
-  </div>
-</div>
-
-<!-- ══ AI ASSISTANT ══ -->
-<div class="panel" id="panel-ai">
-  <div class="ph"><div class="ph-eye">Smart AI</div><h2>AI Accounting Assistant</h2><p>Nepal accounting को जुनसुकै प्रश्न सोध्नुस्</p></div>
-  <div class="chat-wrap">
-    <div class="ai-chat-head">
-      <div class="chat-av"><i class="fas fa-robot"></i></div>
-      <div><div class="ai-chat-name">Nepal Accounting AI</div><div class="ai-chat-status"><span class="s-dot"></span> Online · FY 2082/83</div></div>
-    </div>
-    <div class="chat-messages-inner" id="ai-msgs">
-      <div class="ai-msg bot">Namaste! 🙏 म तपाईंको Nepal Accounting AI हुँ। VAT, TDS, Income Tax, EMI, PF/SSF, वा अन्य कुनै पनि Nepal accounting बारे सोध्नुस्!</div>
-    </div>
-    <div class="chat-chips">
-      <span class="chip" onclick="aiQuickAsk('VAT rate Nepal 2082/83?')">VAT Rate?</span>
-      <span class="chip" onclick="aiQuickAsk('TDS rates for service payments?')">TDS Rates?</span>
-      <span class="chip" onclick="aiQuickAsk('Income tax slabs FY 2082/83?')">Tax Slabs?</span>
-      <span class="chip" onclick="aiQuickAsk('PF and SSF contribution rates?')">PF/SSF?</span>
-      <span class="chip" onclick="aiQuickAsk('VAT filing deadline Nepal?')">VAT Deadline?</span>
-      <span class="chip" onclick="aiQuickAsk('TDS deposit deadline?')">TDS Deadline?</span>
-    </div>
-    <div class="ai-inp-row">
-      <input id="ai-chat-input" placeholder="Nepal accounting बारे सोध्नुस्…" autocomplete="off"/>
-      <button id="ai-chat-send"><i class="fas fa-paper-plane"></i></button>
-    </div>
-  </div>
-</div>
-
-<!-- ══ VAT ══ -->
-<div class="panel" id="panel-vat">
-  <div class="ph"><div class="ph-eye">VAT</div><h2>VAT Calculator</h2><p>Nepal VAT @ 13% — Sale, Purchase & Payable</p></div>
-  <div class="row3" style="margin-bottom:18px;">
-    <div class="calc-card" style="margin-bottom:0">
-      <div class="calc-card-title"><i class="fas fa-arrow-up"></i> VAT on Sale</div>
-      <div class="fg"><label>Amount (excl. VAT) Rs</label><input type="number" id="vs-amt" placeholder="0" min="0" oninput="doVATSale()"></div>
-      <div class="result-box show" id="vs-res"><div class="result-box-title">Sale VAT</div><div class="res-grid"><div class="ri"><div class="rl">VAT (13%)</div><div class="rv" id="vs-vat">—</div></div><div class="ri gold"><div class="rl">Total with VAT</div><div class="rv" id="vs-total">—</div></div></div></div>
-    </div>
-    <div class="calc-card" style="margin-bottom:0">
-      <div class="calc-card-title"><i class="fas fa-arrow-down"></i> VAT on Purchase</div>
-      <div class="fg"><label>Amount (incl. VAT) Rs</label><input type="number" id="vp-amt" placeholder="0" min="0" oninput="doVATPurch()"></div>
-      <div class="result-box show" id="vp-res"><div class="result-box-title">Purchase VAT</div><div class="res-grid"><div class="ri"><div class="rl">VAT Credit</div><div class="rv" id="vp-vat">—</div></div><div class="ri gold"><div class="rl">Net Amount</div><div class="rv" id="vp-net">—</div></div></div></div>
-    </div>
-    <div class="calc-card" style="margin-bottom:0">
-      <div class="calc-card-title"><i class="fas fa-balance-scale"></i> VAT Payable</div>
-      <div class="fg"><label>Output VAT Rs</label><input type="number" id="vpy-out" placeholder="0" min="0" oninput="doVATPayable()"></div>
-      <div class="fg"><label>Input VAT Rs</label><input type="number" id="vpy-in" placeholder="0" min="0" oninput="doVATPayable()"></div>
-      <div class="result-box show" id="vpy-res"><div class="result-box-title">Net VAT Payable</div><div class="res-grid"><div class="ri gold"><div class="rl">Net Payable</div><div class="rv" id="vpy-val">—</div></div></div></div>
-    </div>
-  </div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-exclamation-circle"></i> Late Payment Penalty</div>
-    <div class="row2">
-      <div class="fg"><label>Outstanding VAT Rs</label><input type="number" id="vlp-amt" placeholder="0" min="0"></div>
-      <div class="fg"><label>Days Late</label><input type="number" id="vlp-days" placeholder="0" min="0"></div>
-    </div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn btn-gold btn-sm" onclick="doVATLate()"><i class="fas fa-calculator"></i> Calculate</button>
-      <button class="btn btn-dark btn-sm" onclick="printEl('vlp-res')"><i class="fas fa-print"></i></button>
-    </div>
-    <div class="result-box" id="vlp-res"><div class="result-box-title">Late Penalty</div><div class="res-grid"><div class="ri"><div class="rl">Interest (15% p.a.)</div><div class="rv" id="vlp-int">—</div></div><div class="ri"><div class="rl">Penalty (1%/mo)</div><div class="rv" id="vlp-pen">—</div></div><div class="ri gold"><div class="rl">Total Due</div><div class="rv" id="vlp-tot">—</div></div></div></div>
-  </div>
-</div>
-
-<!-- ══ TDS ══ -->
-<div class="panel" id="panel-tds">
-  <div class="ph"><div class="ph-eye">TDS</div><h2>TDS Calculator</h2><p>Nepal TDS rates FY 2082/83</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-percentage"></i> Calculate TDS</div>
-    <div class="row2">
-      <div class="fg"><label>Payment Type</label>
-        <select id="tds-type" onchange="doTDS()">
-          <option value="1.5">Service — with VAT bill (1.5%)</option>
-          <option value="15">Service — without VAT bill (15%)</option>
-          <option value="10">Rent (10%)</option>
-          <option value="15x">Interest / Royalty (15%)</option>
-          <option value="5">Dividend (5%)</option>
-          <option value="25">Natural Person Contract (25%)</option>
-          <option value="1">Land/Building Rent (1%)</option>
-        </select>
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="ph">
+        <div class="ph-eye">Nepal Accounting Suite Pro</div>
+        <h1>AI Accounting Engine</h1>
+        <p>FY 2082/83 · 20+ tools · Nepal-specific · Always free</p>
       </div>
-      <div class="fg"><label>Gross Amount Rs</label><input type="number" id="tds-amt" placeholder="0" min="0" oninput="doTDS()"></div>
-    </div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn btn-dark btn-sm" onclick="printEl('tds-res')"><i class="fas fa-print"></i></button>
-      <button class="btn btn-dark btn-sm" onclick="goPanel('tds-cert')"><i class="fas fa-certificate"></i> Generate Certificate</button>
-    </div>
-    <div class="result-box show" id="tds-res"><div class="result-box-title">TDS Result</div><div class="res-grid"><div class="ri red"><div class="rl">TDS Deducted</div><div class="rv" id="tds-ded">—</div></div><div class="ri gold"><div class="rl">Net Payment</div><div class="rv" id="tds-net">—</div></div><div class="ri"><div class="rl">Rate Applied</div><div class="rv" id="tds-rate-d">—</div></div></div></div>
-  </div>
-  <div class="calc-card"><div class="calc-card-title"><i class="fas fa-table"></i> TDS Rate Reference</div><div id="tds-ref"></div></div>
-</div>
 
-<!-- ══ TDS CERTIFICATE ✨ NEW ══ -->
-<div class="panel" id="panel-tds-cert">
-  <div class="ph"><div class="ph-eye">TDS Certificate</div><h2>TDS Certificate Generator</h2><p>IRD format — printable certificate</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-certificate"></i> Certificate Details</div>
-    <div class="row2">
-      <div class="fg"><label>Deductor Name (Company)</label><input type="text" id="cert-deductor" placeholder="ABC Pvt. Ltd." value=""></div>
-      <div class="fg"><label>Deductor PAN</label><input type="text" id="cert-ded-pan" placeholder="123456789" maxlength="9"></div>
-      <div class="fg"><label>Deductee Name</label><input type="text" id="cert-deductee" placeholder="Supplier Name"></div>
-      <div class="fg"><label>Deductee PAN</label><input type="text" id="cert-dee-pan" placeholder="987654321" maxlength="9"></div>
-      <div class="fg"><label>Gross Amount Rs</label><input type="number" id="cert-gross" placeholder="0" min="0" oninput="updateCert()"></div>
-      <div class="fg"><label>TDS Rate %</label>
-        <select id="cert-rate" onchange="updateCert()">
-          <option value="1.5">1.5% — Service (VAT bill)</option>
-          <option value="15">15% — Service (no VAT bill)</option>
-          <option value="10">10% — Rent</option>
-          <option value="5">5% — Dividend</option>
-          <option value="25">25% — Natural Person</option>
-        </select>
+      <div class="fy-banner">
+        <div class="fb-left">Current Fiscal Year: <strong>2082/83</strong> &nbsp;|&nbsp; Shrawan 1, 2082 — Ashadh 31, 2083</div>
+        <div class="fb-pills">
+          <span class="fy-pill">VAT 13%</span>
+          <span class="fy-pill">TDS 1.5%</span>
+          <span class="fy-pill">PF 11%+20%</span>
+          <span class="fy-pill">Corp Tax 25%</span>
+        </div>
       </div>
-      <div class="fg"><label>Payment Date (BS)</label><input type="text" id="cert-date" placeholder="2082-01-15"></div>
-      <div class="fg"><label>Nature of Payment</label><input type="text" id="cert-nature" placeholder="Professional Services"></div>
-    </div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn btn-gold btn-sm" onclick="generateCert()"><i class="fas fa-certificate"></i> Generate Certificate</button>
-      <button class="btn btn-dark btn-sm" onclick="printEl('cert-output')"><i class="fas fa-print"></i> Print</button>
-    </div>
-  </div>
-  <div id="cert-output"></div>
-</div>
 
-<!-- ══ CHALLAN GENERATOR ✨ NEW ══ -->
-<div class="panel" id="panel-challan">
-  <div class="ph"><div class="ph-eye">Challan</div><h2>Challan Generator</h2><p>VAT / TDS deposit challan — IRD format</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-file-alt"></i> Challan Details</div>
-    <div class="row2">
-      <div class="fg"><label>Challan Type</label>
-        <select id="ch-type">
-          <option value="VAT">VAT Challan</option>
-          <option value="TDS">TDS Challan</option>
-          <option value="Income Tax">Income Tax Challan</option>
-          <option value="Advance Tax">Advance Tax Challan</option>
-        </select>
+      <!-- Quick access pills -->
+      <div class="quick-bar">
+        <span class="qb-pill" onclick="goPanel('vat')"><i class="fas fa-receipt"></i> VAT</span>
+        <span class="qb-pill" onclick="goPanel('tds')"><i class="fas fa-percentage"></i> TDS</span>
+        <span class="qb-pill" onclick="goPanel('income-tax')"><i class="fas fa-file-invoice-dollar"></i> Income Tax</span>
+        <span class="qb-pill" onclick="goPanel('emi')"><i class="fas fa-calculator"></i> EMI</span>
+        <span class="qb-pill" onclick="goPanel('tds-cert')"><i class="fas fa-certificate"></i> TDS Certificate</span>
+        <span class="qb-pill" onclick="goPanel('bulk-payroll')"><i class="fas fa-users"></i> Bulk Payroll</span>
+        <span class="qb-pill" onclick="goPanel('amount-words')"><i class="fas fa-spell-check"></i> Amount→Words</span>
+        <span class="qb-pill" onclick="goPanel('currency')"><i class="fas fa-exchange-alt"></i> Currency</span>
       </div>
-      <div class="fg"><label>Taxpayer Name</label><input type="text" id="ch-name" placeholder="Company / Person Name"></div>
-      <div class="fg"><label>PAN Number</label><input type="text" id="ch-pan" placeholder="123456789" maxlength="9"></div>
-      <div class="fg"><label>Tax Office</label>
-        <select id="ch-office">
-          <option>IRD Kathmandu</option>
-          <option>IRD Lalitpur</option>
-          <option>IRD Bhaktapur</option>
-          <option>IRD Pokhara</option>
-          <option>IRD Biratnagar</option>
-          <option>IRD Butwal</option>
-          <option>IRD Okhaldhunga</option>
-          <option>अन्य (Other)</option>
-        </select>
+
+      <!-- Stat cards -->
+      <div class="dash-summary">
+        <div class="ds-card"><div class="dc-icon">🏛️</div><div class="dc-label">VAT Rate</div><div class="dc-val">13%</div><div class="dc-sub">Monthly filing 25 गते</div></div>
+        <div class="ds-card"><div class="dc-icon">📋</div><div class="dc-label">TDS (Service)</div><div class="dc-val">1.5%</div><div class="dc-sub">VAT bill सहित</div></div>
+        <div class="ds-card"><div class="dc-icon">👤</div><div class="dc-label">PF Employee</div><div class="dc-val">11%</div><div class="dc-sub">Basic salary बाट</div></div>
+        <div class="ds-card"><div class="dc-icon">🏢</div><div class="dc-label">PF Employer</div><div class="dc-val">20%</div><div class="dc-sub">Employer contribution</div></div>
+        <div class="ds-card"><div class="dc-icon">💼</div><div class="dc-label">Corp Tax</div><div class="dc-val">25%</div><div class="dc-sub">Normal company</div></div>
+        <div class="ds-card"><div class="dc-icon">📅</div><div class="dc-label">Fiscal Year</div><div class="dc-val">2082/83</div><div class="dc-sub">चालु आ.व.</div></div>
       </div>
-      <div class="fg"><label>Tax Amount Rs</label><input type="number" id="ch-tax" placeholder="0" min="0"></div>
-      <div class="fg"><label>Penalty / Fine Rs</label><input type="number" id="ch-fine" placeholder="0" min="0" value="0"></div>
-      <div class="fg"><label>Period (BS)</label><input type="text" id="ch-period" placeholder="Shrawan 2082"></div>
-      <div class="fg"><label>Date (BS)</label><input type="text" id="ch-date" placeholder="2082-05-01"></div>
-    </div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn btn-gold btn-sm" onclick="generateChallan()"><i class="fas fa-file-alt"></i> Generate Challan</button>
-      <button class="btn btn-dark btn-sm" onclick="printEl('challan-output')"><i class="fas fa-print"></i> Print</button>
-    </div>
-  </div>
-  <div id="challan-output"></div>
-</div>
 
-<!-- ══ INCOME TAX ══ -->
-<div class="panel" id="panel-income-tax">
-  <div class="ph"><div class="ph-eye">Income Tax</div><h2>Income Tax Calculator</h2><p>Nepal Income Tax — FY 2082/83 Slabs</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-file-invoice-dollar"></i> Calculate Tax</div>
-    <div class="row3">
-      <div class="fg"><label>Annual Income Rs</label><input type="number" id="it-income" placeholder="0" min="0" oninput="doIT()"></div>
-      <div class="fg"><label>Marital Status</label><select id="it-marital" onchange="doIT()"><option value="u">Unmarried</option><option value="m">Married</option></select></div>
-      <div class="fg"><label>Deductions (PF etc.) Rs</label><input type="number" id="it-deds" placeholder="0" min="0" value="0" oninput="doIT()"></div>
-    </div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn btn-dark btn-sm" onclick="printEl('it-res')"><i class="fas fa-print"></i></button>
-    </div>
-    <div class="result-box show" id="it-res">
-      <div class="result-box-title">Income Tax Result</div>
-      <div class="res-grid">
-        <div class="ri"><div class="rl">Taxable Income</div><div class="rv" id="it-taxable">—</div></div>
-        <div class="ri gold"><div class="rl">Annual Tax</div><div class="rv" id="it-tax">—</div></div>
-        <div class="ri"><div class="rl">Monthly TDS</div><div class="rv" id="it-monthly">—</div></div>
-        <div class="ri"><div class="rl">Effective Rate</div><div class="rv" id="it-eff">—</div></div>
+      <div class="dash-grid">
+        <div class="dash-chart-card">
+          <h3><i class="fas fa-chart-pie"></i> Income Tax Slabs — Unmarried</h3>
+          <div class="chart-h"><canvas id="slabChart"></canvas></div>
+        </div>
+        <div class="dash-chart-card">
+          <h3><i class="fas fa-chart-bar"></i> Tax Slab Visual</h3>
+          <div class="slab-visual" id="slab-visual-bars"></div>
+        </div>
       </div>
-      <div id="it-breakdown" style="margin-top:12px;"></div>
-    </div>
-  </div>
-  <div class="calc-card"><div class="calc-card-title"><i class="fas fa-list"></i> Tax Slabs FY 2082/83</div><div id="it-slabs"></div></div>
-</div>
 
-<!-- ══ ADVANCE TAX ══ -->
-<div class="panel" id="panel-advance-tax">
-  <div class="ph"><div class="ph-eye">Advance Tax</div><h2>Advance Tax Estimator</h2><p>Quarterly: 40% / 70% / 100%</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-calendar-check"></i> Calculate</div>
-    <div class="row2">
-      <div class="fg"><label>Estimated Annual Tax Rs</label><input type="number" id="at-annual" placeholder="0" min="0" oninput="doAT()"></div>
-      <div class="fg"><label>Quarter</label><select id="at-q" onchange="doAT()"><option value="0.4">Q1 — Poush end (40%)</option><option value="0.7">Q2 — Chaitra end (70%)</option><option value="1.0">Q3 — Ashadh end (100%)</option></select></div>
-    </div>
-    <div class="result-box show" id="at-res"><div class="result-box-title">Advance Tax Due</div><div class="res-grid"><div class="ri gold"><div class="rl">Amount Due</div><div class="rv" id="at-due">—</div></div><div class="ri"><div class="rl">Cumulative %</div><div class="rv" id="at-pct">—</div></div></div></div>
-  </div>
-</div>
-
-<!-- ══ EMI ══ -->
-<div class="panel" id="panel-emi">
-  <div class="ph"><div class="ph-eye">Banking</div><h2>EMI Calculator</h2><p>Reducing balance with service & insurance</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-calculator"></i> Loan Details</div>
-    <div class="row3">
-      <div class="fg"><label>Principal Rs</label><input type="number" id="em-p2" placeholder="500000" min="1"></div>
-      <div class="fg"><label>Annual Rate %</label><input type="number" id="em-r2" placeholder="12" step="0.01" min="0.01"></div>
-      <div class="fg"><label>Tenure (Months)</label><input type="number" id="em-n2" placeholder="36" min="1"></div>
-    </div>
-    <div class="row2" style="margin-top:4px;">
-      <div class="fg"><div class="range-lbl"><span>Service Charge</span><strong id="em-sc-lbl2">1.30%</strong></div><input type="range" id="em-sc2" min="0" max="5" step="0.05" value="1.3" oninput="document.getElementById('em-sc-lbl2').textContent=parseFloat(this.value).toFixed(2)+'%'"></div>
-      <div class="fg"><div class="range-lbl"><span>Insurance/yr</span><strong id="em-ic-lbl2">0.425%</strong></div><input type="range" id="em-ic2" min="0" max="2" step="0.025" value="0.425" oninput="document.getElementById('em-ic-lbl2').textContent=parseFloat(this.value).toFixed(3)+'%'"></div>
-    </div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn btn-gold btn-sm" onclick="doEMI2()"><i class="fas fa-calculator"></i> Calculate EMI</button>
-      <button class="btn btn-dark btn-sm" onclick="printEl('em-res2')"><i class="fas fa-print"></i></button>
-    </div>
-    <div class="result-box" id="em-res2"><div class="result-box-title">EMI Result</div><div class="res-grid"><div class="ri gold"><div class="rl">Monthly EMI</div><div class="rv" id="em-emi2">—</div></div><div class="ri"><div class="rl">Total Interest</div><div class="rv" id="em-int2">—</div></div><div class="ri"><div class="rl">Service Charge</div><div class="rv" id="em-sc-v2">—</div></div><div class="ri"><div class="rl">Total Cost</div><div class="rv" id="em-total2">—</div></div></div></div>
-  </div>
-  <div class="calc-card"><div class="calc-card-title"><i class="fas fa-table"></i> Amortization Schedule</div><div class="tbl-wrap"><div class="tbl-scroll"><table><thead><tr><th>#</th><th class="tl">Date</th><th>Principal</th><th>Interest</th><th>EMI</th><th>Balance</th></tr></thead><tbody id="em-tbody2"></tbody></table></div></div></div>
-</div>
-
-<!-- ══ LOAN COMPARISON ✨ NEW ══ -->
-<div class="panel" id="panel-loan-compare">
-  <div class="ph"><div class="ph-eye">Banking</div><h2>Loan Comparison</h2><p>एकैपटक ४ वटा loan offer तुलना गर्नुस्</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-balance-scale"></i> Common Loan Details</div>
-    <div class="row3">
-      <div class="fg"><label>Loan Amount Rs</label><input type="number" id="lc-principal" placeholder="1000000" min="1" oninput="doLoanCompare()"></div>
-      <div class="fg"><label>Tenure (Months)</label><input type="number" id="lc-tenure" placeholder="60" min="1" oninput="doLoanCompare()"></div>
-      <div class="fg"><label>Service Charge %</label><input type="number" id="lc-sc" placeholder="1.3" step="0.1" min="0" value="1.3" oninput="doLoanCompare()"></div>
-    </div>
-    <div class="calc-card-title" style="margin-top:4px;"><i class="fas fa-percentage"></i> Interest Rates per Bank</div>
-    <div class="row2">
-      <div class="fg"><label>Bank 1 Name</label><input type="text" id="lc-b1n" placeholder="Nabil Bank" value="Nabil Bank"></div>
-      <div class="fg"><label>Bank 1 Rate %</label><input type="number" id="lc-b1r" placeholder="11" step="0.1" value="11" oninput="doLoanCompare()"></div>
-      <div class="fg"><label>Bank 2 Name</label><input type="text" id="lc-b2n" placeholder="NIC Asia Bank" value="NIC Asia Bank"></div>
-      <div class="fg"><label>Bank 2 Rate %</label><input type="number" id="lc-b2r" placeholder="11.5" step="0.1" value="11.5" oninput="doLoanCompare()"></div>
-      <div class="fg"><label>Bank 3 Name</label><input type="text" id="lc-b3n" placeholder="Global IME Bank" value="Global IME Bank"></div>
-      <div class="fg"><label>Bank 3 Rate %</label><input type="number" id="lc-b3r" placeholder="12" step="0.1" value="12" oninput="doLoanCompare()"></div>
-      <div class="fg"><label>Bank 4 Name</label><input type="text" id="lc-b4n" placeholder="Sanima Bank" value="Sanima Bank"></div>
-      <div class="fg"><label>Bank 4 Rate %</label><input type="number" id="lc-b4r" placeholder="12.5" step="0.1" value="12.5" oninput="doLoanCompare()"></div>
-    </div>
-    <button class="btn btn-gold btn-sm" onclick="doLoanCompare()"><i class="fas fa-chart-bar"></i> Compare Now</button>
-  </div>
-  <div class="loan-compare-grid" id="loan-compare-results"></div>
-</div>
-
-<!-- ══ NPA ══ -->
-<div class="panel" id="panel-npa">
-  <div class="ph"><div class="ph-eye">Banking</div><h2>NPA Tracker</h2><p>NRB 2024 classification guidelines</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-exclamation-triangle"></i> NPA Classification</div>
-    <div class="row2">
-      <div class="fg"><label>Loan Amount Rs</label><input type="number" id="npa-amt" placeholder="0" min="0" oninput="doNPA()"></div>
-      <div class="fg"><label>Days Overdue</label><input type="number" id="npa-days" placeholder="0" min="0" oninput="doNPA()"></div>
-    </div>
-    <div class="result-box show" id="npa-res"><div class="result-box-title">NPA Classification</div><div class="res-grid"><div class="ri"><div class="rl">Classification</div><div class="rv" id="npa-cls">—</div></div><div class="ri"><div class="rl">Provision Rate</div><div class="rv" id="npa-prate">—</div></div><div class="ri gold"><div class="rl">Provision Amount</div><div class="rv" id="npa-pamt">—</div></div></div></div>
-  </div>
-  <div class="calc-card"><div class="calc-card-title"><i class="fas fa-table"></i> NPA Classification Table</div><div id="npa-ref"></div></div>
-</div>
-
-<!-- ══ BANK RECON ══ -->
-<div class="panel" id="panel-bank-recon">
-  <div class="ph"><div class="ph-eye">Banking</div><h2>Bank Reconciliation</h2></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-sync"></i> Reconcile</div>
-    <div class="row2">
-      <div class="fg"><label>Bank Statement Balance Rs</label><input type="number" id="br-bank" placeholder="0" oninput="doBankRecon()"></div>
-      <div class="fg"><label>Cash/Ledger Balance Rs</label><input type="number" id="br-ledger" placeholder="0" oninput="doBankRecon()"></div>
-      <div class="fg"><label>Outstanding Deposits Rs</label><input type="number" id="br-dep" placeholder="0" value="0" oninput="doBankRecon()"></div>
-      <div class="fg"><label>Outstanding Cheques Rs</label><input type="number" id="br-chq" placeholder="0" value="0" oninput="doBankRecon()"></div>
-    </div>
-    <button class="btn btn-dark btn-sm" onclick="printEl('br-res')"><i class="fas fa-print"></i></button>
-    <div class="result-box show" id="br-res"><div class="result-box-title">Reconciliation</div><div class="res-grid"><div class="ri"><div class="rl">Adjusted Bank Balance</div><div class="rv" id="br-adj">—</div></div><div class="ri"><div class="rl">Difference</div><div class="rv" id="br-diff">—</div></div><div class="ri gold"><div class="rl">Status</div><div class="rv" id="br-status">—</div></div></div></div>
-  </div>
-</div>
-
-<!-- ══ SALARY TAX ══ -->
-<div class="panel" id="panel-salary-tax">
-  <div class="ph"><div class="ph-eye">Payroll</div><h2>Salary Tax Calculator</h2><p>Monthly TDS — FY 2082/83</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-user-tie"></i> Calculate Monthly TDS</div>
-    <div class="row3">
-      <div class="fg"><label>Monthly Gross Rs</label><input type="number" id="st-gross" placeholder="0" min="0" oninput="doSalaryTax()"></div>
-      <div class="fg"><label>Marital Status</label><select id="st-marital" onchange="doSalaryTax()"><option value="u">Unmarried</option><option value="m">Married</option></select></div>
-      <div class="fg"><label>Monthly PF Rs</label><input type="number" id="st-pf" placeholder="0" value="0" min="0" oninput="doSalaryTax()"></div>
-    </div>
-    <button class="btn btn-dark btn-sm" onclick="printEl('st-res')"><i class="fas fa-print"></i></button>
-    <div class="result-box show" id="st-res"><div class="result-box-title">Salary Tax</div><div class="res-grid"><div class="ri"><div class="rl">Annual Income</div><div class="rv" id="st-annual">—</div></div><div class="ri"><div class="rl">Annual Tax</div><div class="rv" id="st-ann-tax">—</div></div><div class="ri gold"><div class="rl">Monthly TDS</div><div class="rv" id="st-mtds">—</div></div><div class="ri green"><div class="rl">Net Take-Home</div><div class="rv" id="st-net">—</div></div></div></div>
-  </div>
-</div>
-
-<!-- ══ BULK PAYROLL ✨ NEW ══ -->
-<div class="panel" id="panel-bulk-payroll">
-  <div class="ph"><div class="ph-eye">Payroll</div><h2>Bulk Payroll Calculator</h2><p>Multiple employees एकैपटक — auto TDS, PF, Net Salary</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-user-plus"></i> Add Employee</div>
-    <div class="emp-row-add">
-      <div class="fg" style="margin-bottom:0"><label>Name</label><input type="text" id="bp-name" placeholder="Employee Name"></div>
-      <div class="fg" style="margin-bottom:0"><label>Gross Rs</label><input type="number" id="bp-gross" placeholder="50000" min="0"></div>
-      <div class="fg" style="margin-bottom:0"><label>Status</label><select id="bp-status"><option value="u">Unmarried</option><option value="m">Married</option></select></div>
-      <div class="fg" style="margin-bottom:0"><label>PF Rs</label><input type="number" id="bp-pf" placeholder="0" value="0" min="0"></div>
-      <div class="fg" style="margin-bottom:0"><label>&nbsp;</label><button class="btn btn-gold btn-sm" onclick="addEmployee()" style="width:100%"><i class="fas fa-plus"></i></button></div>
-    </div>
-    <div style="display:flex;gap:8px;margin-top:4px;">
-      <button class="btn btn-gold btn-sm" onclick="calcBulkPayroll()"><i class="fas fa-calculator"></i> Calculate All</button>
-      <button class="btn btn-dark btn-sm" onclick="clearPayroll()"><i class="fas fa-trash"></i> Clear</button>
-      <button class="btn btn-dark btn-sm" onclick="printEl('bulk-payroll-out')"><i class="fas fa-print"></i> Print Sheet</button>
-    </div>
-  </div>
-  <div id="bulk-payroll-out">
-    <div class="payroll-table-wrap">
-      <table>
-        <thead><tr><th>Employee</th><th>Gross</th><th>PF (11%)</th><th>TDS/mo</th><th>Net Salary</th><th style="text-align:center;">Action</th></tr></thead>
-        <tbody id="payroll-tbody"></tbody>
-        <tfoot id="payroll-tfoot"><tr><td>TOTAL</td><td id="bp-tot-gross">—</td><td id="bp-tot-pf">—</td><td id="bp-tot-tds">—</td><td id="bp-tot-net">—</td><td></td></tr></tfoot>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- ══ PF SSF ══ -->
-<div class="panel" id="panel-pf">
-  <div class="ph"><div class="ph-eye">Payroll</div><h2>PF / SSF Calculator</h2><p>Employee 11% · Employer 20%</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-piggy-bank"></i> Calculate</div>
-    <div class="row2">
-      <div class="fg"><label>Basic Salary Rs</label><input type="number" id="pf-basic" placeholder="0" min="0" oninput="doPF()"></div>
-      <div class="fg"><label>Fund Type</label><select id="pf-type" onchange="doPF()"><option value="pf">Provident Fund (PF)</option><option value="ssf">Social Security Fund (SSF)</option></select></div>
-    </div>
-    <div class="result-box show" id="pf-res"><div class="result-box-title">PF / SSF</div><div class="res-grid"><div class="ri"><div class="rl">Employee (11%)</div><div class="rv" id="pf-emp">—</div></div><div class="ri"><div class="rl">Employer (20%)</div><div class="rv" id="pf-empl">—</div></div><div class="ri gold"><div class="rl">Total</div><div class="rv" id="pf-total">—</div></div><div class="ri green"><div class="rl">Net After PF</div><div class="rv" id="pf-net">—</div></div></div></div>
-  </div>
-</div>
-
-<!-- ══ PAYSLIP ══ -->
-<div class="panel" id="panel-payslip">
-  <div class="ph"><div class="ph-eye">Payroll</div><h2>Payslip Generator</h2></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-file-alt"></i> Employee Details</div>
-    <div class="row2">
-      <div class="fg"><label>Employee Name</label><input type="text" id="ps-name" placeholder="Full Name"></div>
-      <div class="fg"><label>Designation</label><input type="text" id="ps-desig" placeholder="e.g. Accountant"></div>
-      <div class="fg"><label>Gross Salary Rs</label><input type="number" id="ps-gross" placeholder="0" min="0"></div>
-      <div class="fg"><label>PF Deduction Rs</label><input type="number" id="ps-pf" placeholder="0" value="0" min="0"></div>
-      <div class="fg"><label>Income Tax TDS Rs</label><input type="number" id="ps-tax" placeholder="0" value="0" min="0"></div>
-      <div class="fg"><label>Other Deductions Rs</label><input type="number" id="ps-other" placeholder="0" value="0" min="0"></div>
-    </div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn btn-gold btn-sm" onclick="doPayslip()"><i class="fas fa-file-alt"></i> Generate</button>
-      <button class="btn btn-dark btn-sm" onclick="printEl('ps-out')"><i class="fas fa-print"></i> Print</button>
-    </div>
-  </div>
-  <div id="ps-out"></div>
-</div>
-
-<!-- ══ JOURNAL ══ -->
-<div class="panel" id="panel-journal">
-  <div class="ph"><div class="ph-eye">Accounting</div><h2>Journal Voucher</h2></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-plus-circle"></i> Add Entry</div>
-    <div class="row2">
-      <div class="fg"><label>Debit Account</label><input type="text" id="jv-dr" placeholder="Cash A/c"></div>
-      <div class="fg"><label>Credit Account</label><input type="text" id="jv-cr" placeholder="Sales A/c"></div>
-      <div class="fg"><label>Amount Rs</label><input type="number" id="jv-amt" placeholder="0" min="0"></div>
-      <div class="fg"><label>Narration</label><input type="text" id="jv-narr" placeholder="Being…"></div>
-    </div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn btn-gold btn-sm" onclick="doAddJV()"><i class="fas fa-plus"></i> Add</button>
-      <button class="btn btn-dark btn-sm" onclick="doClearJV()"><i class="fas fa-trash"></i> Clear</button>
-      <button class="btn btn-dark btn-sm" onclick="printEl('jv-table-card')"><i class="fas fa-print"></i></button>
-    </div>
-  </div>
-  <div class="calc-card" id="jv-table-card">
-    <div class="calc-card-title"><i class="fas fa-table"></i> Journal Entries</div>
-    <div class="tbl-wrap"><table><thead><tr><th>#</th><th class="tl">Debit A/c</th><th class="tl">Credit A/c</th><th>Amount</th><th class="tl">Narration</th></tr></thead><tbody id="jv-tbody"></tbody></table></div>
-    <div style="text-align:right;margin-top:10px;font-size:.85rem;color:var(--muted)">Total: <span id="jv-total" style="color:var(--gold);font-family:var(--ff-head);font-weight:700">Rs 0.00</span></div>
-  </div>
-</div>
-
-<!-- ══ DEPRECIATION ══ -->
-<div class="panel" id="panel-depreciation">
-  <div class="ph"><div class="ph-eye">Accounting</div><h2>Depreciation (WDV)</h2><p>Nepal Income Tax Act — Written Down Value</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-chart-line"></i> Asset Details</div>
-    <div class="row3">
-      <div class="fg"><label>Asset Cost Rs</label><input type="number" id="dep-cost" placeholder="0" min="0"></div>
-      <div class="fg"><label>Asset Type</label><select id="dep-type"><option value="5">Building (5%)</option><option value="20">Vehicle (20%)</option><option value="15">Machinery (15%)</option><option value="25">Furniture/Computer (25%)</option><option value="7">Intangibles (7%)</option></select></div>
-      <div class="fg"><label>Years</label><input type="number" id="dep-years" placeholder="5" min="1" max="50"></div>
-    </div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn btn-gold btn-sm" onclick="doDep()"><i class="fas fa-calculator"></i> Calculate</button>
-      <button class="btn btn-dark btn-sm" onclick="printEl('dep-table-card')"><i class="fas fa-print"></i></button>
-    </div>
-  </div>
-  <div class="calc-card" id="dep-table-card" style="display:none;">
-    <div class="calc-card-title"><i class="fas fa-table"></i> WDV Schedule</div>
-    <div class="tbl-wrap"><table><thead><tr><th>Year</th><th>Opening WDV</th><th>Depreciation</th><th>Closing WDV</th></tr></thead><tbody id="dep-tbody"></tbody></table></div>
-  </div>
-</div>
-
-<!-- ══ P&L ══ -->
-<div class="panel" id="panel-pl">
-  <div class="ph"><div class="ph-eye">Financial</div><h2>Profit & Loss</h2></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-chart-bar"></i> P&L Summary</div>
-    <div class="row3">
-      <div class="fg"><label>Total Revenue Rs</label><input type="number" id="pl-rev" placeholder="0" min="0" oninput="doPL()"></div>
-      <div class="fg"><label>Total Expenses Rs</label><input type="number" id="pl-exp" placeholder="0" min="0" oninput="doPL()"></div>
-      <div class="fg"><label>Tax Rate %</label><input type="number" id="pl-tax" placeholder="25" value="25" min="0" max="100" oninput="doPL()"></div>
-    </div>
-    <button class="btn btn-dark btn-sm" onclick="printEl('pl-res')"><i class="fas fa-print"></i></button>
-    <div class="result-box show" id="pl-res"><div class="result-box-title">P&L Result</div><div class="res-grid"><div class="ri"><div class="rl">Gross Profit</div><div class="rv" id="pl-gross">—</div></div><div class="ri"><div class="rl">Tax Amount</div><div class="rv" id="pl-tax-amt">—</div></div><div class="ri gold"><div class="rl">Net Profit</div><div class="rv" id="pl-net">—</div></div><div class="ri"><div class="rl">Profit Margin</div><div class="rv" id="pl-margin">—</div></div></div></div>
-  </div>
-</div>
-
-<!-- ══ BALANCE SHEET ══ -->
-<div class="panel" id="panel-bs">
-  <div class="ph"><div class="ph-eye">Financial</div><h2>Balance Sheet Checker</h2><p>Assets = Liabilities + Equity</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-layer-group"></i> Check Balance</div>
-    <div class="row3">
-      <div class="fg"><label>Total Assets Rs</label><input type="number" id="bs-assets" placeholder="0" min="0" oninput="doBS()"></div>
-      <div class="fg"><label>Total Liabilities Rs</label><input type="number" id="bs-liab" placeholder="0" min="0" oninput="doBS()"></div>
-      <div class="fg"><label>Equity / Capital Rs</label><input type="number" id="bs-equity" placeholder="0" min="0" oninput="doBS()"></div>
-    </div>
-    <button class="btn btn-dark btn-sm" onclick="printEl('bs-res')"><i class="fas fa-print"></i></button>
-    <div class="result-box show" id="bs-res"><div class="result-box-title">Balance Sheet</div><div class="res-grid"><div class="ri"><div class="rl">Total Assets</div><div class="rv" id="bs-a-d">—</div></div><div class="ri"><div class="rl">Liabilities + Equity</div><div class="rv" id="bs-le-d">—</div></div><div class="ri gold"><div class="rl">Status</div><div class="rv" id="bs-status">—</div></div></div></div>
-  </div>
-</div>
-
-<!-- ══ AMOUNT TO WORDS ✨ NEW ══ -->
-<div class="panel" id="panel-amount-words">
-  <div class="ph"><div class="ph-eye">Utility</div><h2>Amount to Words</h2><p>Cheque लेख्न, voucher को लागि — Nepali + English</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-spell-check"></i> Enter Amount</div>
-    <div class="fg"><label>Amount (Rs)</label><input type="number" id="atw-input" placeholder="0" min="0" step="0.01" oninput="doAmountToWords()"></div>
-    <div class="row2">
-      <div class="fg"><label>Currency</label><select id="atw-currency" onchange="doAmountToWords()"><option value="NPR">Nepali Rupees (रुपैयाँ)</option><option value="USD">US Dollars</option><option value="INR">Indian Rupees</option></select></div>
-      <div class="fg"><label>&nbsp;</label><button class="btn btn-dark btn-sm" onclick="copyWords()" style="width:100%"><i class="fas fa-copy"></i> Copy Words</button></div>
-    </div>
-  </div>
-  <div class="atw-display" id="atw-display" style="display:none;">
-    <div class="atw-number" id="atw-formatted">—</div>
-    <div class="atw-words-np" id="atw-np">—</div>
-    <div class="atw-words-en" id="atw-en">—</div>
-  </div>
-</div>
-
-<!-- ══ CURRENCY CONVERTER ✨ NEW ══ -->
-<div class="panel" id="panel-currency">
-  <div class="ph"><div class="ph-eye">Utility</div><h2>Currency Converter</h2><p>NPR ↔ USD, INR, EUR, GBP — NRB reference rates</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-exchange-alt"></i> Convert</div>
-    <div class="fg"><label>Amount</label><input type="number" id="fx-amount" placeholder="1000" min="0" value="1000" oninput="doFX()"></div>
-    <div class="fx-grid">
-      <div class="fg" style="margin-bottom:0">
-        <label>From</label>
-        <select id="fx-from" onchange="doFX()">
-          <option value="NPR">🇳🇵 NPR — Nepali Rupee</option>
-          <option value="USD">🇺🇸 USD — US Dollar</option>
-          <option value="INR">🇮🇳 INR — Indian Rupee</option>
-          <option value="EUR">🇪🇺 EUR — Euro</option>
-          <option value="GBP">🇬🇧 GBP — British Pound</option>
-          <option value="AUD">🇦🇺 AUD — Australian Dollar</option>
-        </select>
-      </div>
-      <div class="fx-arrow" onclick="swapFX()"><i class="fas fa-exchange-alt"></i></div>
-      <div class="fg" style="margin-bottom:0">
-        <label>To</label>
-        <select id="fx-to" onchange="doFX()">
-          <option value="USD">🇺🇸 USD — US Dollar</option>
-          <option value="NPR">🇳🇵 NPR — Nepali Rupee</option>
-          <option value="INR">🇮🇳 INR — Indian Rupee</option>
-          <option value="EUR">🇪🇺 EUR — Euro</option>
-          <option value="GBP">🇬🇧 GBP — British Pound</option>
-          <option value="AUD">🇦🇺 AUD — Australian Dollar</option>
-        </select>
+      <div class="calc-card" style="margin-top:0;">
+        <div class="calc-card-title"><i class="fas fa-bolt"></i> Quick Rate Reference</div>
+        <div id="quick-ref"></div>
       </div>
     </div>
-    <div class="result-box show" id="fx-result" style="margin-top:16px;">
-      <div class="result-box-title">Conversion Result</div>
-      <div class="res-grid">
-        <div class="ri gold"><div class="rl">Converted Amount</div><div class="rv" id="fx-converted">—</div></div>
-        <div class="ri"><div class="rl">Exchange Rate</div><div class="rv" id="fx-rate">—</div></div>
+
+    <!-- AI ASSISTANT -->
+    <div class="panel" id="panel-ai">
+      <div class="ph"><div class="ph-eye">Smart AI</div><h2>AI Accounting Assistant</h2><p>Nepal accounting को जुनसुकै प्रश्न सोध्नुस्</p></div>
+      <div class="chat-wrap">
+        <div class="ai-chat-head">
+          <div class="chat-av"><i class="fas fa-robot"></i></div>
+          <div><div class="ai-chat-name">Nepal Accounting AI</div><div class="ai-chat-status"><span class="s-dot"></span> Online · FY 2082/83</div></div>
+        </div>
+        <div class="chat-messages-inner" id="ai-msgs">
+          <div class="ai-msg bot">Namaste! 🙏 म तपाईंको Nepal Accounting AI हुँ। VAT, TDS, Income Tax, EMI, PF/SSF, वा अन्य कुनै पनि Nepal accounting बारे सोध्नुस्!</div>
+        </div>
+        <div class="chat-chips">
+          <span class="chip" onclick="aiQuickAsk('VAT rate Nepal 2082/83?')">VAT Rate?</span>
+          <span class="chip" onclick="aiQuickAsk('TDS rates for service payments?')">TDS Rates?</span>
+          <span class="chip" onclick="aiQuickAsk('Income tax slabs FY 2082/83?')">Tax Slabs?</span>
+          <span class="chip" onclick="aiQuickAsk('PF and SSF contribution rates?')">PF/SSF?</span>
+          <span class="chip" onclick="aiQuickAsk('VAT filing deadline Nepal?')">VAT Deadline?</span>
+          <span class="chip" onclick="aiQuickAsk('TDS deposit deadline?')">TDS Deadline?</span>
+        </div>
+        <div class="ai-inp-row">
+          <input id="ai-chat-input" placeholder="Nepal accounting बारे सोध्नुस्…" autocomplete="off" />
+          <button id="ai-chat-send"><i class="fas fa-paper-plane"></i></button>
+        </div>
       </div>
     </div>
-    <p style="font-size:.72rem;color:var(--muted);margin-top:10px;"><i class="fas fa-info-circle"></i> NRB reference rates approximation — exact rates: <a href="https://www.nrb.org.np" target="_blank" style="color:var(---gold)">nrb.org.np</a></p>
-  </div>
-  <div class="calc-card" style="margin-top:0">
-    <div class="calc-card-title"><i class="fas fa-list"></i> All NPR Rates (1 USD = ~135 NPR approx)</div>
-    <div class="fx-cards" id="fx-all-cards"></div>
-  </div>
-</div>
 
-<!-- ══ DATE CONVERTER ══ -->
-<div class="panel" id="panel-date-conv">
-  <div class="ph"><div class="ph-eye">Utility</div><h2>BS / AD Date Converter</h2></div>
-  <div style="text-align:center;margin-bottom:20px;">
-    <button class="btn btn-gold btn-sm" onclick="setToday()"><i class="fas fa-clock"></i> Today's Date</button>
-  </div>
-  <div class="row2">
-    <div class="calc-card">
-      <div class="calc-card-title"><i class="fas fa-exchange-alt"></i> AD → BS</div>
-      <div class="fg"><label>AD Date</label><input type="date" id="ad-in" onchange="doADtoBS()"></div>
-      <button class="btn btn-gold btn-sm" onclick="doADtoBS()">Convert → BS</button>
-      <div class="result-box show" style="margin-top:14px;"><div class="result-box-title">BS Date</div><div id="ad-bs-out" style="padding:8px;font-size:1.1rem;color:var(---gold);font-weight:700;">—</div></div>
-    </div>
-    <div class="calc-card">
-      <div class="calc-card-title"><i class="fas fa-exchange-alt"></i> BS → AD</div>
-      <div class="row3">
-        <div class="fg"><label>Year</label><input type="number" id="bs-yr" placeholder="2082" min="1970" max="2100"></div>
-        <div class="fg"><label>Month</label><input type="number" id="bs-mo" placeholder="1" min="1" max="12"></div>
-        <div class="fg"><label>Day</label><input type="number" id="bs-dy" placeholder="1" min="1" max="32"></div>
+    <!-- VAT -->
+    <div class="panel" id="panel-vat">
+      <div class="ph"><div class="ph-eye">VAT</div><h2>VAT Calculator</h2><p>Nepal VAT @ 13% — Sale, Purchase & Payable</p></div>
+      <div class="row3" style="margin-bottom:18px;">
+        <div class="calc-card" style="margin-bottom:0">
+          <div class="calc-card-title"><i class="fas fa-arrow-up"></i> VAT on Sale</div>
+          <div class="fg"><label>Amount (excl. VAT) Rs</label><input type="number" id="vs-amt" placeholder="0" min="0" oninput="doVATSale()"></div>
+          <div class="result-box show" id="vs-res"><div class="result-box-title">Sale VAT</div><div class="res-grid"><div class="ri"><div class="rl">VAT (13%)</div><div class="rv" id="vs-vat">—</div></div><div class="ri gold"><div class="rl">Total with VAT</div><div class="rv" id="vs-total">—</div></div></div></div>
+        </div>
+        <div class="calc-card" style="margin-bottom:0">
+          <div class="calc-card-title"><i class="fas fa-arrow-down"></i> VAT on Purchase</div>
+          <div class="fg"><label>Amount (incl. VAT) Rs</label><input type="number" id="vp-amt" placeholder="0" min="0" oninput="doVATPurch()"></div>
+          <div class="result-box show" id="vp-res"><div class="result-box-title">Purchase VAT</div><div class="res-grid"><div class="ri"><div class="rl">VAT Credit</div><div class="rv" id="vp-vat">—</div></div><div class="ri gold"><div class="rl">Net Amount</div><div class="rv" id="vp-net">—</div></div></div></div>
+        </div>
+        <div class="calc-card" style="margin-bottom:0">
+          <div class="calc-card-title"><i class="fas fa-balance-scale"></i> VAT Payable</div>
+          <div class="fg"><label>Output VAT Rs</label><input type="number" id="vpy-out" placeholder="0" min="0" oninput="doVATPayable()"></div>
+          <div class="fg"><label>Input VAT Rs</label><input type="number" id="vpy-in" placeholder="0" min="0" oninput="doVATPayable()"></div>
+          <div class="result-box show" id="vpy-res"><div class="result-box-title">Net VAT Payable</div><div class="res-grid"><div class="ri gold"><div class="rl">Net Payable</div><div class="rv" id="vpy-val">—</div></div></div></div>
+        </div>
       </div>
-      <button class="btn btn-gold btn-sm" onclick="doBStoAD()">Convert → AD</button>
-      <div class="result-box show" style="margin-top:14px;"><div class="result-box-title">AD Date</div><div id="bs-ad-out" style="padding:8px;font-size:1.1rem;color:var(--gold);font-weight:700;">—</div></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-exclamation-circle"></i> Late Payment Penalty</div>
+        <div class="row2">
+          <div class="fg"><label>Outstanding VAT Rs</label><input type="number" id="vlp-amt" placeholder="0" min="0"></div>
+          <div class="fg"><label>Days Late</label><input type="number" id="vlp-days" placeholder="0" min="0"></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-gold btn-sm" onclick="doVATLate()"><i class="fas fa-calculator"></i> Calculate</button>
+          <button class="btn btn-dark btn-sm" onclick="printEl('vlp-res')"><i class="fas fa-print"></i></button>
+        </div>
+        <div class="result-box" id="vlp-res"><div class="result-box-title">Late Penalty</div><div class="res-grid"><div class="ri"><div class="rl">Interest (15% p.a.)</div><div class="rv" id="vlp-int">—</div></div><div class="ri"><div class="rl">Penalty (1%/mo)</div><div class="rv" id="vlp-pen">—</div></div><div class="ri gold"><div class="rl">Total Due</div><div class="rv" id="vlp-tot">—</div></div></div></div>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- ══ PAN VALIDATOR ══ -->
-<div class="panel" id="panel-pan">
-  <div class="ph"><div class="ph-eye">Utility</div><h2>PAN Validator</h2><p>Nepal IRD PAN format check</p></div>
-  <div class="calc-card">
-    <div class="calc-card-title"><i class="fas fa-id-card"></i> Validate PAN</div>
-    <div class="fg" style="max-width:280px;"><label>PAN Number (9 digits)</label><input type="text" id="pan-in" placeholder="123456789" maxlength="9" oninput="doPAN()"></div>
-    <div class="result-box show" id="pan-res"><div class="result-box-title">PAN Validation</div><div class="res-grid"><div class="ri gold"><div class="rl">Format Status</div><div class="rv" id="pan-status">—</div></div><div class="ri"><div class="rl">Likely Type</div><div class="rv" id="pan-type">—</div></div></div></div>
-    <p style="margin-top:14px;font-size:.8rem;color:var(--muted);">Verify at <a href="https://ird.gov.np" target="_blank" style="color:var(--gold);">ird.gov.np</a></p>
-  </div>
-</div>
-```
+    <!-- TDS -->
+    <div class="panel" id="panel-tds">
+      <div class="ph"><div class="ph-eye">TDS</div><h2>TDS Calculator</h2><p>Nepal TDS rates FY 2082/83</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-percentage"></i> Calculate TDS</div>
+        <div class="row2">
+          <div class="fg"><label>Payment Type</label>
+            <select id="tds-type" onchange="doTDS()">
+              <option value="1.5">Service — with VAT bill (1.5%)</option>
+              <option value="15">Service — without VAT bill (15%)</option>
+              <option value="10">Rent (10%)</option>
+              <option value="15">Interest / Royalty (15%)</option>
+              <option value="5">Dividend (5%)</option>
+              <option value="25">Natural Person Contract (25%)</option>
+              <option value="1">Land/Building Rent (1%)</option>
+            </select>
+          </div>
+          <div class="fg"><label>Gross Amount Rs</label><input type="number" id="tds-amt" placeholder="0" min="0" oninput="doTDS()"></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-dark btn-sm" onclick="printEl('tds-res')"><i class="fas fa-print"></i></button>
+          <button class="btn btn-dark btn-sm" onclick="goPanel('tds-cert')"><i class="fas fa-certificate"></i> Generate Certificate</button>
+        </div>
+        <div class="result-box show" id="tds-res"><div class="result-box-title">TDS Result</div><div class="res-grid"><div class="ri red"><div class="rl">TDS Deducted</div><div class="rv" id="tds-ded">—</div></div><div class="ri gold"><div class="rl">Net Payment</div><div class="rv" id="tds-net">—</div></div><div class="ri"><div class="rl">Rate Applied</div><div class="rv" id="tds-rate-d">—</div></div></div></div>
+      </div>
+      <div class="calc-card"><div class="calc-card-title"><i class="fas fa-table"></i> TDS Rate Reference</div><div id="tds-ref"></div></div>
+    </div>
+
+    <!-- TDS CERTIFICATE ✨ NEW -->
+    <div class="panel" id="panel-tds-cert">
+      <div class="ph"><div class="ph-eye">TDS Certificate</div><h2>TDS Certificate Generator</h2><p>IRD format — printable certificate</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-certificate"></i> Certificate Details</div>
+        <div class="row2">
+          <div class="fg"><label>Deductor Name (Company)</label><input type="text" id="cert-deductor" placeholder="ABC Pvt. Ltd." value=""></div>
+          <div class="fg"><label>Deductor PAN</label><input type="text" id="cert-ded-pan" placeholder="123456789" maxlength="9"></div>
+          <div class="fg"><label>Deductee Name</label><input type="text" id="cert-deductee" placeholder="Supplier Name"></div>
+          <div class="fg"><label>Deductee PAN</label><input type="text" id="cert-dee-pan" placeholder="987654321" maxlength="9"></div>
+          <div class="fg"><label>Gross Amount Rs</label><input type="number" id="cert-gross" placeholder="0" min="0" oninput="updateCert()"></div>
+          <div class="fg"><label>TDS Rate %</label>
+            <select id="cert-rate" onchange="updateCert()">
+              <option value="1.5">1.5% — Service (VAT bill)</option>
+              <option value="15">15% — Service (no VAT bill)</option>
+              <option value="10">10% — Rent</option>
+              <option value="5">5% — Dividend</option>
+              <option value="25">25% — Natural Person</option>
+            </select>
+          </div>
+          <div class="fg"><label>Payment Date (BS)</label><input type="text" id="cert-date" placeholder="2082-01-15"></div>
+          <div class="fg"><label>Nature of Payment</label><input type="text" id="cert-nature" placeholder="Professional Services"></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-gold btn-sm" onclick="generateCert()"><i class="fas fa-certificate"></i> Generate Certificate</button>
+          <button class="btn btn-dark btn-sm" onclick="printEl('cert-output')"><i class="fas fa-print"></i> Print</button>
+        </div>
+      </div>
+      <div id="cert-output"></div>
+    </div>
+
+    <!-- CHALLAN GENERATOR ✨ NEW -->
+    <div class="panel" id="panel-challan">
+      <div class="ph"><div class="ph-eye">Challan</div><h2>Challan Generator</h2><p>VAT / TDS deposit challan — IRD format</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-file-alt"></i> Challan Details</div>
+        <div class="row2">
+          <div class="fg"><label>Challan Type</label>
+            <select id="ch-type">
+              <option value="VAT">VAT Challan</option>
+              <option value="TDS">TDS Challan</option>
+              <option value="Income Tax">Income Tax Challan</option>
+              <option value="Advance Tax">Advance Tax Challan</option>
+            </select>
+          </div>
+          <div class="fg"><label>Taxpayer Name</label><input type="text" id="ch-name" placeholder="Company / Person Name"></div>
+          <div class="fg"><label>PAN Number</label><input type="text" id="ch-pan" placeholder="123456789" maxlength="9"></div>
+          <div class="fg"><label>Tax Office</label>
+            <select id="ch-office">
+              <option>IRD Kathmandu</option>
+              <option>IRD Lalitpur</option>
+              <option>IRD Bhaktapur</option>
+              <option>IRD Pokhara</option>
+              <option>IRD Biratnagar</option>
+              <option>IRD Butwal</option>
+              <option>IRD Okhaldhunga</option>
+              <option>अन्य (Other)</option>
+            </select>
+          </div>
+          <div class="fg"><label>Tax Amount Rs</label><input type="number" id="ch-tax" placeholder="0" min="0"></div>
+          <div class="fg"><label>Penalty / Fine Rs</label><input type="number" id="ch-fine" placeholder="0" min="0" value="0"></div>
+          <div class="fg"><label>Period (BS)</label><input type="text" id="ch-period" placeholder="Shrawan 2082"></div>
+          <div class="fg"><label>Date (BS)</label><input type="text" id="ch-date" placeholder="2082-05-01"></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-gold btn-sm" onclick="generateChallan()"><i class="fas fa-file-alt"></i> Generate Challan</button>
+          <button class="btn btn-dark btn-sm" onclick="printEl('challan-output')"><i class="fas fa-print"></i> Print</button>
+        </div>
+      </div>
+      <div id="challan-output"></div>
+    </div>
+
+    <!-- INCOME TAX -->
+    <div class="panel" id="panel-income-tax">
+      <div class="ph"><div class="ph-eye">Income Tax</div><h2>Income Tax Calculator</h2><p>Nepal Income Tax — FY 2082/83 Slabs</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-file-invoice-dollar"></i> Calculate Tax</div>
+        <div class="row3">
+          <div class="fg"><label>Annual Income Rs</label><input type="number" id="it-income" placeholder="0" min="0" oninput="doIT()"></div>
+          <div class="fg"><label>Marital Status</label><select id="it-marital" onchange="doIT()"><option value="u">Unmarried</option><option value="m">Married</option></select></div>
+          <div class="fg"><label>Deductions (PF etc.) Rs</label><input type="number" id="it-deds" placeholder="0" min="0" value="0" oninput="doIT()"></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-dark btn-sm" onclick="printEl('it-res')"><i class="fas fa-print"></i></button>
+        </div>
+        <div class="result-box show" id="it-res">
+          <div class="result-box-title">Income Tax Result</div>
+          <div class="res-grid">
+            <div class="ri"><div class="rl">Taxable Income</div><div class="rv" id="it-taxable">—</div></div>
+            <div class="ri gold"><div class="rl">Annual Tax</div><div class="rv" id="it-tax">—</div></div>
+            <div class="ri"><div class="rl">Monthly TDS</div><div class="rv" id="it-monthly">—</div></div>
+            <div class="ri"><div class="rl">Effective Rate</div><div class="rv" id="it-eff">—</div></div>
+          </div>
+          <div id="it-breakdown" style="margin-top:12px;"></div>
+        </div>
+      </div>
+      <div class="calc-card"><div class="calc-card-title"><i class="fas fa-list"></i> Tax Slabs FY 2082/83</div><div id="it-slabs"></div></div>
+    </div>
+
+    <!-- ADVANCE TAX -->
+    <div class="panel" id="panel-advance-tax">
+      <div class="ph"><div class="ph-eye">Advance Tax</div><h2>Advance Tax Estimator</h2><p>Quarterly: 40% / 70% / 100%</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-calendar-check"></i> Calculate</div>
+        <div class="row2">
+          <div class="fg"><label>Estimated Annual Tax Rs</label><input type="number" id="at-annual" placeholder="0" min="0" oninput="doAT()"></div>
+          <div class="fg"><label>Quarter</label><select id="at-q" onchange="doAT()"><option value="0.4">Q1 — Poush end (40%)</option><option value="0.7">Q2 — Chaitra end (70%)</option><option value="1.0">Q3 — Ashadh end (100%)</option></select></div>
+        </div>
+        <div class="result-box show" id="at-res"><div class="result-box-title">Advance Tax Due</div><div class="res-grid"><div class="ri gold"><div class="rl">Amount Due</div><div class="rv" id="at-due">—</div></div><div class="ri"><div class="rl">Cumulative %</div><div class="rv" id="at-pct">—</div></div></div></div>
+      </div>
+    </div>
+
+    <!-- EMI -->
+    <div class="panel" id="panel-emi">
+      <div class="ph"><div class="ph-eye">Banking</div><h2>EMI Calculator</h2><p>Reducing balance with service & insurance</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-calculator"></i> Loan Details</div>
+        <div class="row3">
+          <div class="fg"><label>Principal Rs</label><input type="number" id="em-p2" placeholder="500000" min="1"></div>
+          <div class="fg"><label>Annual Rate %</label><input type="number" id="em-r2" placeholder="12" step="0.01" min="0.01"></div>
+          <div class="fg"><label>Tenure (Months)</label><input type="number" id="em-n2" placeholder="36" min="1"></div>
+        </div>
+        <div class="row2" style="margin-top:4px;">
+          <div class="fg"><div class="range-lbl"><span>Service Charge</span><strong id="em-sc-lbl2">1.30%</strong></div><input type="range" id="em-sc2" min="0" max="5" step="0.05" value="1.3" oninput="document.getElementById('em-sc-lbl2').textContent=parseFloat(this.value).toFixed(2)+'%'"></div>
+          <div class="fg"><div class="range-lbl"><span>Insurance/yr</span><strong id="em-ic-lbl2">0.425%</strong></div><input type="range" id="em-ic2" min="0" max="2" step="0.025" value="0.425" oninput="document.getElementById('em-ic-lbl2').textContent=parseFloat(this.value).toFixed(3)+'%'"></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-gold btn-sm" onclick="doEMI2()"><i class="fas fa-calculator"></i> Calculate EMI</button>
+          <button class="btn btn-dark btn-sm" onclick="printEl('em-res2')"><i class="fas fa-print"></i></button>
+        </div>
+        <div class="result-box" id="em-res2"><div class="result-box-title">EMI Result</div><div class="res-grid"><div class="ri gold"><div class="rl">Monthly EMI</div><div class="rv" id="em-emi2">—</div></div><div class="ri"><div class="rl">Total Interest</div><div class="rv" id="em-int2">—</div></div><div class="ri"><div class="rl">Service Charge</div><div class="rv" id="em-sc-v2">—</div></div><div class="ri"><div class="rl">Total Cost</div><div class="rv" id="em-total2">—</div></div></div></div>
+      </div>
+      <div class="calc-card"><div class="calc-card-title"><i class="fas fa-table"></i> Amortization Schedule</div><div class="tbl-wrap"><div class="tbl-scroll"><table><thead><tr><th>#</th><th class="tl">Date</th><th>Principal</th><th>Interest</th><th>EMI</th><th>Balance</th></tr></thead><tbody id="em-tbody2"></tbody></table></div></div></div>
+    </div>
+
+    <!-- LOAN COMPARISON ✨ NEW -->
+    <div class="panel" id="panel-loan-compare">
+      <div class="ph"><div class="ph-eye">Banking</div><h2>Loan Comparison</h2><p>एकैपटक ४ वटा loan offer तुलना गर्नुस्</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-balance-scale"></i> Common Loan Details</div>
+        <div class="row3">
+          <div class="fg"><label>Loan Amount Rs</label><input type="number" id="lc-principal" placeholder="1000000" min="1" oninput="doLoanCompare()"></div>
+          <div class="fg"><label>Tenure (Months)</label><input type="number" id="lc-tenure" placeholder="60" min="1" oninput="doLoanCompare()"></div>
+          <div class="fg"><label>Service Charge %</label><input type="number" id="lc-sc" placeholder="1.3" step="0.1" min="0" value="1.3" oninput="doLoanCompare()"></div>
+        </div>
+        <div class="calc-card-title" style="margin-top:4px;"><i class="fas fa-percentage"></i> Interest Rates per Bank</div>
+        <div class="row2">
+          <div class="fg"><label>Bank 1 Name</label><input type="text" id="lc-b1n" placeholder="Nabil Bank" value="Nabil Bank"></div>
+          <div class="fg"><label>Bank 1 Rate %</label><input type="number" id="lc-b1r" placeholder="11" step="0.1" value="11" oninput="doLoanCompare()"></div>
+          <div class="fg"><label>Bank 2 Name</label><input type="text" id="lc-b2n" placeholder="NIC Asia Bank" value="NIC Asia Bank"></div>
+          <div class="fg"><label>Bank 2 Rate %</label><input type="number" id="lc-b2r" placeholder="11.5" step="0.1" value="11.5" oninput="doLoanCompare()"></div>
+          <div class="fg"><label>Bank 3 Name</label><input type="text" id="lc-b3n" placeholder="Global IME Bank" value="Global IME Bank"></div>
+          <div class="fg"><label>Bank 3 Rate %</label><input type="number" id="lc-b3r" placeholder="12" step="0.1" value="12" oninput="doLoanCompare()"></div>
+          <div class="fg"><label>Bank 4 Name</label><input type="text" id="lc-b4n" placeholder="Sanima Bank" value="Sanima Bank"></div>
+          <div class="fg"><label>Bank 4 Rate %</label><input type="number" id="lc-b4r" placeholder="12.5" step="0.1" value="12.5" oninput="doLoanCompare()"></div>
+        </div>
+        <button class="btn btn-gold btn-sm" onclick="doLoanCompare()"><i class="fas fa-chart-bar"></i> Compare Now</button>
+      </div>
+      <div class="loan-compare-grid" id="loan-compare-results"></div>
+    </div>
+
+    <!-- NPA -->
+    <div class="panel" id="panel-npa">
+      <div class="ph"><div class="ph-eye">Banking</div><h2>NPA Tracker</h2><p>NRB 2024 classification guidelines</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-exclamation-triangle"></i> NPA Classification</div>
+        <div class="row2">
+          <div class="fg"><label>Loan Amount Rs</label><input type="number" id="npa-amt" placeholder="0" min="0" oninput="doNPA()"></div>
+          <div class="fg"><label>Days Overdue</label><input type="number" id="npa-days" placeholder="0" min="0" oninput="doNPA()"></div>
+        </div>
+        <div class="result-box show" id="npa-res"><div class="result-box-title">NPA Classification</div><div class="res-grid"><div class="ri"><div class="rl">Classification</div><div class="rv" id="npa-cls">—</div></div><div class="ri"><div class="rl">Provision Rate</div><div class="rv" id="npa-prate">—</div></div><div class="ri gold"><div class="rl">Provision Amount</div><div class="rv" id="npa-pamt">—</div></div></div></div>
+      </div>
+      <div class="calc-card"><div class="calc-card-title"><i class="fas fa-table"></i> NPA Classification Table</div><div id="npa-ref"></div></div>
+    </div>
+
+    <!-- BANK RECON -->
+    <div class="panel" id="panel-bank-recon">
+      <div class="ph"><div class="ph-eye">Banking</div><h2>Bank Reconciliation</h2></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-sync"></i> Reconcile</div>
+        <div class="row2">
+          <div class="fg"><label>Bank Statement Balance Rs</label><input type="number" id="br-bank" placeholder="0" oninput="doBankRecon()"></div>
+          <div class="fg"><label>Cash/Ledger Balance Rs</label><input type="number" id="br-ledger" placeholder="0" oninput="doBankRecon()"></div>
+          <div class="fg"><label>Outstanding Deposits Rs</label><input type="number" id="br-dep" placeholder="0" value="0" oninput="doBankRecon()"></div>
+          <div class="fg"><label>Outstanding Cheques Rs</label><input type="number" id="br-chq" placeholder="0" value="0" oninput="doBankRecon()"></div>
+        </div>
+        <button class="btn btn-dark btn-sm" onclick="printEl('br-res')"><i class="fas fa-print"></i></button>
+        <div class="result-box show" id="br-res"><div class="result-box-title">Reconciliation</div><div class="res-grid"><div class="ri"><div class="rl">Adjusted Bank Balance</div><div class="rv" id="br-adj">—</div></div><div class="ri"><div class="rl">Difference</div><div class="rv" id="br-diff">—</div></div><div class="ri gold"><div class="rl">Status</div><div class="rv" id="br-status">—</div></div></div></div>
+      </div>
+    </div>
+
+    <!-- SALARY TAX -->
+    <div class="panel" id="panel-salary-tax">
+      <div class="ph"><div class="ph-eye">Payroll</div><h2>Salary Tax Calculator</h2><p>Monthly TDS — FY 2082/83</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-user-tie"></i> Calculate Monthly TDS</div>
+        <div class="row3">
+          <div class="fg"><label>Monthly Gross Rs</label><input type="number" id="st-gross" placeholder="0" min="0" oninput="doSalaryTax()"></div>
+          <div class="fg"><label>Marital Status</label><select id="st-marital" onchange="doSalaryTax()"><option value="u">Unmarried</option><option value="m">Married</option></select></div>
+          <div class="fg"><label>Monthly PF Rs</label><input type="number" id="st-pf" placeholder="0" value="0" min="0" oninput="doSalaryTax()"></div>
+        </div>
+        <button class="btn btn-dark btn-sm" onclick="printEl('st-res')"><i class="fas fa-print"></i></button>
+        <div class="result-box show" id="st-res"><div class="result-box-title">Salary Tax</div><div class="res-grid"><div class="ri"><div class="rl">Annual Income</div><div class="rv" id="st-annual">—</div></div><div class="ri"><div class="rl">Annual Tax</div><div class="rv" id="st-ann-tax">—</div></div><div class="ri gold"><div class="rl">Monthly TDS</div><div class="rv" id="st-mtds">—</div></div><div class="ri green"><div class="rl">Net Take-Home</div><div class="rv" id="st-net">—</div></div></div></div>
+      </div>
+    </div>
+
+    <!-- BULK PAYROLL ✨ NEW -->
+    <div class="panel" id="panel-bulk-payroll">
+      <div class="ph"><div class="ph-eye">Payroll</div><h2>Bulk Payroll Calculator</h2><p>Multiple employees एकैपटक — auto TDS, PF, Net Salary</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-user-plus"></i> Add Employee</div>
+        <div class="emp-row-add">
+          <div class="fg" style="margin-bottom:0"><label>Name</label><input type="text" id="bp-name" placeholder="Employee Name"></div>
+          <div class="fg" style="margin-bottom:0"><label>Gross Rs</label><input type="number" id="bp-gross" placeholder="50000" min="0"></div>
+          <div class="fg" style="margin-bottom:0"><label>Status</label><select id="bp-status"><option value="u">Unmarried</option><option value="m">Married</option></select></div>
+          <div class="fg" style="margin-bottom:0"><label>PF Rs</label><input type="number" id="bp-pf" placeholder="0" value="0" min="0"></div>
+          <div class="fg" style="margin-bottom:0"><label>&nbsp;</label><button class="btn btn-gold btn-sm" onclick="addEmployee()" style="width:100%"><i class="fas fa-plus"></i></button></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:4px;">
+          <button class="btn btn-gold btn-sm" onclick="calcBulkPayroll()"><i class="fas fa-calculator"></i> Calculate All</button>
+          <button class="btn btn-dark btn-sm" onclick="clearPayroll()"><i class="fas fa-trash"></i> Clear</button>
+          <button class="btn btn-dark btn-sm" onclick="printEl('bulk-payroll-out')"><i class="fas fa-print"></i> Print Sheet</button>
+        </div>
+      </div>
+      <div id="bulk-payroll-out">
+        <div class="payroll-table-wrap">
+          <table>
+            <thead><tr><th>Employee</th><th>Gross</th><th>PF (11%)</th><th>TDS/mo</th><th>Net Salary</th><th style="text-align:center;">Action</th></tr></thead>
+            <tbody id="payroll-tbody"></tbody>
+            <tfoot id="payroll-tfoot"><tr><td>TOTAL</td><td id="bp-tot-gross">—</td><td id="bp-tot-pf">—</td><td id="bp-tot-tds">—</td><td id="bp-tot-net">—</td><td></td></tr></tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PF SSF -->
+    <div class="panel" id="panel-pf">
+      <div class="ph"><div class="ph-eye">Payroll</div><h2>PF / SSF Calculator</h2><p>Employee 11% · Employer 20%</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-piggy-bank"></i> Calculate</div>
+        <div class="row2">
+          <div class="fg"><label>Basic Salary Rs</label><input type="number" id="pf-basic" placeholder="0" min="0" oninput="doPF()"></div>
+          <div class="fg"><label>Fund Type</label><select id="pf-type" onchange="doPF()"><option value="pf">Provident Fund (PF)</option><option value="ssf">Social Security Fund (SSF)</option></select></div>
+        </div>
+        <div class="result-box show" id="pf-res"><div class="result-box-title">PF / SSF</div><div class="res-grid"><div class="ri"><div class="rl">Employee (11%)</div><div class="rv" id="pf-emp">—</div></div><div class="ri"><div class="rl">Employer (20%)</div><div class="rv" id="pf-empl">—</div></div><div class="ri gold"><div class="rl">Total</div><div class="rv" id="pf-total">—</div></div><div class="ri green"><div class="rl">Net After PF</div><div class="rv" id="pf-net">—</div></div></div></div>
+      </div>
+    </div>
+
+    <!-- PAYSLIP -->
+    <div class="panel" id="panel-payslip">
+      <div class="ph"><div class="ph-eye">Payroll</div><h2>Payslip Generator</h2></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-file-alt"></i> Employee Details</div>
+        <div class="row2">
+          <div class="fg"><label>Employee Name</label><input type="text" id="ps-name" placeholder="Full Name"></div>
+          <div class="fg"><label>Designation</label><input type="text" id="ps-desig" placeholder="e.g. Accountant"></div>
+          <div class="fg"><label>Gross Salary Rs</label><input type="number" id="ps-gross" placeholder="0" min="0"></div>
+          <div class="fg"><label>PF Deduction Rs</label><input type="number" id="ps-pf" placeholder="0" value="0" min="0"></div>
+          <div class="fg"><label>Income Tax TDS Rs</label><input type="number" id="ps-tax" placeholder="0" value="0" min="0"></div>
+          <div class="fg"><label>Other Deductions Rs</label><input type="number" id="ps-other" placeholder="0" value="0" min="0"></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-gold btn-sm" onclick="doPayslip()"><i class="fas fa-file-alt"></i> Generate</button>
+          <button class="btn btn-dark btn-sm" onclick="printEl('ps-out')"><i class="fas fa-print"></i> Print</button>
+        </div>
+      </div>
+      <div id="ps-out"></div>
+    </div>
+
+    <!-- JOURNAL -->
+    <div class="panel" id="panel-journal">
+      <div class="ph"><div class="ph-eye">Accounting</div><h2>Journal Voucher</h2></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-plus-circle"></i> Add Entry</div>
+        <div class="row2">
+          <div class="fg"><label>Debit Account</label><input type="text" id="jv-dr" placeholder="Cash A/c"></div>
+          <div class="fg"><label>Credit Account</label><input type="text" id="jv-cr" placeholder="Sales A/c"></div>
+          <div class="fg"><label>Amount Rs</label><input type="number" id="jv-amt" placeholder="0" min="0"></div>
+          <div class="fg"><label>Narration</label><input type="text" id="jv-narr" placeholder="Being…"></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-gold btn-sm" onclick="doAddJV()"><i class="fas fa-plus"></i> Add</button>
+          <button class="btn btn-dark btn-sm" onclick="doClearJV()"><i class="fas fa-trash"></i> Clear</button>
+          <button class="btn btn-dark btn-sm" onclick="printEl('jv-table-card')"><i class="fas fa-print"></i></button>
+        </div>
+      </div>
+      <div class="calc-card" id="jv-table-card">
+        <div class="calc-card-title"><i class="fas fa-table"></i> Journal Entries</div>
+        <div class="tbl-wrap"><table><thead><tr><th>#</th><th class="tl">Debit A/c</th><th class="tl">Credit A/c</th><th>Amount</th><th class="tl">Narration</th></tr></thead><tbody id="jv-tbody"></tbody></table></div>
+        <div style="text-align:right;margin-top:10px;font-size:.85rem;color:var(--muted)">Total: <span id="jv-total" style="color:var(--gold);font-family:var(--ff-head);font-weight:700">Rs 0.00</span></div>
+      </div>
+    </div>
+
+    <!-- DEPRECIATION -->
+    <div class="panel" id="panel-depreciation">
+      <div class="ph"><div class="ph-eye">Accounting</div><h2>Depreciation (WDV)</h2><p>Nepal Income Tax Act — Written Down Value</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-chart-line"></i> Asset Details</div>
+        <div class="row3">
+          <div class="fg"><label>Asset Cost Rs</label><input type="number" id="dep-cost" placeholder="0" min="0"></div>
+          <div class="fg"><label>Asset Type</label><select id="dep-type"><option value="5">Building (5%)</option><option value="20">Vehicle (20%)</option><option value="15">Machinery (15%)</option><option value="25">Furniture/Computer (25%)</option><option value="7">Intangibles (7%)</option></select></div>
+          <div class="fg"><label>Years</label><input type="number" id="dep-years" placeholder="5" min="1" max="50"></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-gold btn-sm" onclick="doDep()"><i class="fas fa-calculator"></i> Calculate</button>
+          <button class="btn btn-dark btn-sm" onclick="printEl('dep-table-card')"><i class="fas fa-print"></i></button>
+        </div>
+      </div>
+      <div class="calc-card" id="dep-table-card" style="display:none;">
+        <div class="calc-card-title"><i class="fas fa-table"></i> WDV Schedule</div>
+        <div class="tbl-wrap"><table><thead><tr><th>Year</th><th>Opening WDV</th><th>Depreciation</th><th>Closing WDV</th></tr></thead><tbody id="dep-tbody"></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- P&L -->
+    <div class="panel" id="panel-pl">
+      <div class="ph"><div class="ph-eye">Financial</div><h2>Profit & Loss</h2></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-chart-bar"></i> P&L Summary</div>
+        <div class="row3">
+          <div class="fg"><label>Total Revenue Rs</label><input type="number" id="pl-rev" placeholder="0" min="0" oninput="doPL()"></div>
+          <div class="fg"><label>Total Expenses Rs</label><input type="number" id="pl-exp" placeholder="0" min="0" oninput="doPL()"></div>
+          <div class="fg"><label>Tax Rate %</label><input type="number" id="pl-tax" placeholder="25" value="25" min="0" max="100" oninput="doPL()"></div>
+        </div>
+        <button class="btn btn-dark btn-sm" onclick="printEl('pl-res')"><i class="fas fa-print"></i></button>
+        <div class="result-box show" id="pl-res"><div class="result-box-title">P&L Result</div><div class="res-grid"><div class="ri"><div class="rl">Gross Profit</div><div class="rv" id="pl-gross">—</div></div><div class="ri"><div class="rl">Tax Amount</div><div class="rv" id="pl-tax-amt">—</div></div><div class="ri gold"><div class="rl">Net Profit</div><div class="rv" id="pl-net">—</div></div><div class="ri"><div class="rl">Profit Margin</div><div class="rv" id="pl-margin">—</div></div></div></div>
+      </div>
+    </div>
+
+    <!-- BALANCE SHEET -->
+    <div class="panel" id="panel-bs">
+      <div class="ph"><div class="ph-eye">Financial</div><h2>Balance Sheet Checker</h2><p>Assets = Liabilities + Equity</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-layer-group"></i> Check Balance</div>
+        <div class="row3">
+          <div class="fg"><label>Total Assets Rs</label><input type="number" id="bs-assets" placeholder="0" min="0" oninput="doBS()"></div>
+          <div class="fg"><label>Total Liabilities Rs</label><input type="number" id="bs-liab" placeholder="0" min="0" oninput="doBS()"></div>
+          <div class="fg"><label>Equity / Capital Rs</label><input type="number" id="bs-equity" placeholder="0" min="0" oninput="doBS()"></div>
+        </div>
+        <button class="btn btn-dark btn-sm" onclick="printEl('bs-res')"><i class="fas fa-print"></i></button>
+        <div class="result-box show" id="bs-res"><div class="result-box-title">Balance Sheet</div><div class="res-grid"><div class="ri"><div class="rl">Total Assets</div><div class="rv" id="bs-a-d">—</div></div><div class="ri"><div class="rl">Liabilities + Equity</div><div class="rv" id="bs-le-d">—</div></div><div class="ri gold"><div class="rl">Status</div><div class="rv" id="bs-status">—</div></div></div></div>
+      </div>
+    </div>
+
+    <!-- AMOUNT TO WORDS ✨ NEW -->
+    <div class="panel" id="panel-amount-words">
+      <div class="ph"><div class="ph-eye">Utility</div><h2>Amount to Words</h2><p>Cheque लेख्न, voucher को लागि — Nepali + English</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-spell-check"></i> Enter Amount</div>
+        <div class="fg"><label>Amount (Rs)</label><input type="number" id="atw-input" placeholder="0" min="0" step="0.01" oninput="doAmountToWords()"></div>
+        <div class="row2">
+          <div class="fg"><label>Currency</label><select id="atw-currency" onchange="doAmountToWords()"><option value="NPR">Nepali Rupees (रुपैयाँ)</option><option value="USD">US Dollars</option><option value="INR">Indian Rupees</option></select></div>
+          <div class="fg"><label>&nbsp;</label><button class="btn btn-dark btn-sm" onclick="copyWords()" style="width:100%"><i class="fas fa-copy"></i> Copy Words</button></div>
+        </div>
+      </div>
+      <div class="atw-display" id="atw-display" style="display:none;">
+        <div class="atw-number" id="atw-formatted">—</div>
+        <div class="atw-words-np" id="atw-np">—</div>
+        <div class="atw-words-en" id="atw-en">—</div>
+      </div>
+    </div>
+
+    <!-- CURRENCY CONVERTER ✨ NEW -->
+    <div class="panel" id="panel-currency">
+      <div class="ph"><div class="ph-eye">Utility</div><h2>Currency Converter</h2><p>NPR ↔ USD, INR, EUR, GBP — NRB reference rates</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-exchange-alt"></i> Convert</div>
+        <div class="fg"><label>Amount</label><input type="number" id="fx-amount" placeholder="1000" min="0" value="1000" oninput="doFX()"></div>
+        <div class="fx-grid">
+          <div class="fg" style="margin-bottom:0">
+            <label>From</label>
+            <select id="fx-from" onchange="doFX()">
+              <option value="NPR">🇳🇵 NPR — Nepali Rupee</option>
+              <option value="USD">🇺🇸 USD — US Dollar</option>
+              <option value="INR">🇮🇳 INR — Indian Rupee</option>
+              <option value="EUR">🇪🇺 EUR — Euro</option>
+              <option value="GBP">🇬🇧 GBP — British Pound</option>
+              <option value="AUD">🇦🇺 AUD — Australian Dollar</option>
+            </select>
+          </div>
+          <div class="fx-arrow" onclick="swapFX()"><i class="fas fa-exchange-alt"></i></div>
+          <div class="fg" style="margin-bottom:0">
+            <label>To</label>
+            <select id="fx-to" onchange="doFX()">
+              <option value="USD">🇺🇸 USD — US Dollar</option>
+              <option value="NPR">🇳🇵 NPR — Nepali Rupee</option>
+              <option value="INR">🇮🇳 INR — Indian Rupee</option>
+              <option value="EUR">🇪🇺 EUR — Euro</option>
+              <option value="GBP">🇬🇧 GBP — British Pound</option>
+              <option value="AUD">🇦🇺 AUD — Australian Dollar</option>
+            </select>
+          </div>
+        </div>
+        <div class="result-box show" id="fx-result" style="margin-top:16px;">
+          <div class="result-box-title">Conversion Result</div>
+          <div class="res-grid">
+            <div class="ri gold"><div class="rl">Converted Amount</div><div class="rv" id="fx-converted">—</div></div>
+            <div class="ri"><div class="rl">Exchange Rate</div><div class="rv" id="fx-rate">—</div></div>
+          </div>
+        </div>
+        <p style="font-size:.72rem;color:var(--muted);margin-top:10px;"><i class="fas fa-info-circle"></i> NRB reference rates approximation — exact rates: <a href="https://www.nrb.org.np" target="_blank" style="color:var(--gold)">nrb.org.np</a></p>
+      </div>
+      <div class="calc-card" style="margin-top:0;">
+        <div class="calc-card-title"><i class="fas fa-list"></i> All NPR Rates (1 USD = ~135 NPR approx)</div>
+        <div class="fx-cards" id="fx-all-cards"></div>
+      </div>
+    </div>
+
+    <!-- DATE CONVERTER -->
+    <div class="panel" id="panel-date-conv">
+      <div class="ph"><div class="ph-eye">Utility</div><h2>BS / AD Date Converter</h2></div>
+      <div style="text-align:center;margin-bottom:20px;">
+        <button class="btn btn-gold btn-sm" onclick="setToday()"><i class="fas fa-clock"></i> Today's Date</button>
+      </div>
+      <div class="row2">
+        <div class="calc-card">
+          <div class="calc-card-title"><i class="fas fa-exchange-alt"></i> AD → BS</div>
+          <div class="fg"><label>AD Date</label><input type="date" id="ad-in" onchange="doADtoBS()"></div>
+          <button class="btn btn-gold btn-sm" onclick="doADtoBS()">Convert → BS</button>
+          <div class="result-box show" style="margin-top:14px;"><div class="result-box-title">BS Date</div><div id="ad-bs-out" style="padding:8px;font-size:1.1rem;color:var(--gold);font-weight:700;">—</div></div>
+        </div>
+        <div class="calc-card">
+          <div class="calc-card-title"><i class="fas fa-exchange-alt"></i> BS → AD</div>
+          <div class="row3">
+            <div class="fg"><label>Year</label><input type="number" id="bs-yr" placeholder="2082" min="1970" max="2100"></div>
+            <div class="fg"><label>Month</label><input type="number" id="bs-mo" placeholder="1" min="1" max="12"></div>
+            <div class="fg"><label>Day</label><input type="number" id="bs-dy" placeholder="1" min="1" max="32"></div>
+          </div>
+          <button class="btn btn-gold btn-sm" onclick="doBStoAD()">Convert → AD</button>
+          <div class="result-box show" style="margin-top:14px;"><div class="result-box-title">AD Date</div><div id="bs-ad-out" style="padding:8px;font-size:1.1rem;color:var(--gold);font-weight:700;">—</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAN VALIDATOR -->
+    <div class="panel" id="panel-pan">
+      <div class="ph"><div class="ph-eye">Utility</div><h2>PAN Validator</h2><p>Nepal IRD PAN format check</p></div>
+      <div class="calc-card">
+        <div class="calc-card-title"><i class="fas fa-id-card"></i> Validate PAN</div>
+        <div class="fg" style="max-width:280px;"><label>PAN Number (9 digits)</label><input type="text" id="pan-in" placeholder="123456789" maxlength="9" oninput="doPAN()"></div>
+        <div class="result-box show" id="pan-res"><div class="result-box-title">PAN Validation</div><div class="res-grid"><div class="ri gold"><div class="rl">Format Status</div><div class="rv" id="pan-status">—</div></div><div class="ri"><div class="rl">Likely Type</div><div class="rv" id="pan-type">—</div></div></div></div>
+        <p style="margin-top:14px;font-size:.8rem;color:var(--muted);">Verify at <a href="https://ird.gov.np" target="_blank" style="color:var(--gold);">ird.gov.np</a></p>
+      </div>
+    </div>
 
   </main>
 </div>
 
 <!-- GLOBAL CHAT -->
-
 <button id="chat-toggle" aria-label="Chat"><i class="fas fa-robot"></i></button>
 
 <div id="chatbox">
   <div class="chat-head"><div class="chat-head-left"><div class="chat-av"><i class="fas fa-robot"></i></div><div><div class="chat-name">Kushal's AI</div><div class="chat-status-text"><span class="s-dot"></span> Online</div></div></div><button class="chat-close-x" id="chat-close-x"><i class="fas fa-times"></i></button></div>
   <div class="chat-msgs" id="chat-msgs"><div class="cmsg bot">Namaste! 🙏 Nepal accounting बारे सोध्नुस्!</div></div>
-  <div class="chat-inp-row"><input id="c-input" placeholder="Ask…" autocomplete="off"/><button id="c-send"><i class="fas fa-paper-plane"></i></button></div>
+  <div class="chat-inp-row"><input id="c-input" placeholder="Ask…" autocomplete="off" /><button id="c-send"><i class="fas fa-paper-plane"></i></button></div>
 </div>
 
 <!-- NepaliDate: Primary jsdelivr, Backup unpkg -->
-
 <script>
 (function(){
-  var s=document.createElement('script');
-  s.src='https://cdn.jsdelivr.net/npm/nepali-date-converter@3.4.0/dist/nepali-date-converter.umd.js';
-  s.onerror=function(){ var s2=document.createElement('script'); s2.src='https://unpkg.com/nepali-date-converter@3.4.0/dist/nepali-date-converter.umd.js'; document.head.appendChild(s2); };
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/nepali-date-converter@3.4.0/dist/nepali-date-converter.umd.js';
+  s.onerror = function() {
+    var s2 = document.createElement('script');
+    s2.src = 'https://unpkg.com/nepali-date-converter@3.4.0/dist/nepali-date-converter.umd.js';
+    document.head.appendChild(s2);
+  };
   document.head.appendChild(s);
 })();
 </script>
@@ -848,452 +844,596 @@
 
 /* ── HELPERS ── */
 const fmt = n => {
-  if(isNaN(n)||n===null) return '—';
-  const neg=n<0,abs=Math.abs(n).toFixed(2),[int,dec]=abs.split('.');
-  let res='';
-  if(int.length<=3){res=int;}
-  else{res=int.slice(-3);let rem=int.slice(0,int.length-3);while(rem.length>2){res=rem.slice(-2)+','+res;rem=rem.slice(0,rem.length-2);}if(rem)res=rem+','+res;}
-  return (neg?'-':'')+'Rs '+res+'.'+dec;
+  if (isNaN(n) || n === null) return '—';
+  const neg = n < 0, abs = Math.abs(n).toFixed(2), [int, dec] = abs.split('.');
+  let res = '';
+  if (int.length <= 3) { res = int; }
+  else {
+    res = int.slice(-3);
+    let rem = int.slice(0, int.length - 3);
+    while (rem.length > 2) {
+      res = rem.slice(-2) + ',' + res;
+      rem = rem.slice(0, rem.length - 2);
+    }
+    if (rem) res = rem + ',' + res;
+  }
+  return (neg ? '-' : '') + 'Rs ' + res + '.' + dec;
 };
 const fmtN = n => { // format number only, no Rs
-  if(isNaN(n)) return '0';
-  const abs=Math.abs(n).toFixed(2),[int,dec]=abs.split('.');
-  let res='';
-  if(int.length<=3){res=int;}
-  else{res=int.slice(-3);let rem=int.slice(0,int.length-3);while(rem.length>2){res=rem.slice(-2)+','+res;rem=rem.slice(0,rem.length-2);}if(rem)res=rem+','+res;}
-  return res+'.'+dec;
+  if (isNaN(n)) return '0';
+  const abs = Math.abs(n).toFixed(2), [int, dec] = abs.split('.');
+  let res = '';
+  if (int.length <= 3) { res = int; }
+  else {
+    res = int.slice(-3);
+    let rem = int.slice(0, int.length - 3);
+    while (rem.length > 2) {
+      res = rem.slice(-2) + ',' + res;
+      rem = rem.slice(0, rem.length - 2);
+    }
+    if (rem) res = rem + ',' + res;
+  }
+  return res + '.' + dec;
 };
-const sv  = id => document.getElementById(id)?.value||'';
-const v   = id => parseFloat(document.getElementById(id)?.value)||0;
-const set = (id,val) => { const el=document.getElementById(id); if(el) el.textContent=val; };
-const showRes = id => { const el=document.getElementById(id); if(el) el.classList.add('show'); };
+const sv  = id => document.getElementById(id)?.value || '';
+const v   = id => parseFloat(document.getElementById(id)?.value) || 0;
+const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+const showRes = id => { const el = document.getElementById(id); if (el) el.classList.add('show'); };
 
 function printEl(id) {
-  const el=document.getElementById(id); if(!el) return;
-  const w=window.open('','_blank','width=800,height=600');
+  const el = document.getElementById(id);
+  if (!el) return;
+  const w = window.open('', '_blank', 'width=800,height=600');
   w.document.write(`<!DOCTYPE html><html><head><title>Print</title><style>
     body{font-family:sans-serif;padding:20px;background:#fff;color:#000;}
     table{width:100%;border-collapse:collapse;}
     th,td{border:1px solid #ccc;padding:8px;text-align:left;}
     .result-box-title{font-weight:bold;text-transform:uppercase;margin-bottom:8px;}
   </style></head><body>${el.outerHTML}</body></html>`);
-
-w.document.close(); setTimeout(()=>{w.print();w.close();},400);
+  w.document.close();
+  setTimeout(() => { w.print(); w.close(); }, 400);
 }
 
-function showToast(msg=‘Copied!’) {
-const t=document.getElementById(‘toast’);
-document.getElementById(‘toast-msg’).textContent=msg;
-t.classList.add(‘show’);
-setTimeout(()=>t.classList.remove(‘show’),2500);
+function showToast(msg = 'Copied!') {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
 }
 
 /* ── PANEL NAVIGATION ── */
 function goPanel(name) {
-document.querySelectorAll(’.sb-item’).forEach(b=>b.classList.remove(‘active’));
-document.querySelectorAll(’.panel’).forEach(p=>p.classList.remove(‘active’));
-const btn=document.querySelector(`.sb-item[data-panel="${name}"]`);
-const panel=document.getElementById(`panel-${name}`);
-if(btn) btn.classList.add(‘active’);
-if(panel) panel.classList.add(‘active’);
-panel?.scrollIntoView({behavior:‘smooth’,block:‘start’});
+  document.querySelectorAll('.sb-item').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  const btn = document.querySelector(`.sb-item[data-panel="${name}"]`);
+  const panel = document.getElementById(`panel-${name}`);
+  if (btn) btn.classList.add('active');
+  if (panel) panel.classList.add('active');
+  panel?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-document.querySelectorAll(’.sb-item’).forEach(btn=>{
-btn.addEventListener(‘click’,()=>{
-document.querySelectorAll(’.sb-item’).forEach(b=>b.classList.remove(‘active’));
-document.querySelectorAll(’.panel’).forEach(p=>p.classList.remove(‘active’));
-btn.classList.add(‘active’);
-document.getElementById(‘panel-’+btn.dataset.panel)?.classList.add(‘active’);
-});
+document.querySelectorAll('.sb-item').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sb-item').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.panel)?.classList.add('active');
+  });
 });
 
 /* ── MOBILE SIDEBAR ── */
-(function(){
-const tb=document.getElementById(‘sidebar-toggle’),sb=document.getElementById(‘suite-sidebar’),ov=document.getElementById(‘sidebar-overlay’);
-const open=()=>{sb.classList.add(‘open’);ov.classList.add(‘show’);document.body.style.overflow=‘hidden’;};
-const close=()=>{sb.classList.remove(‘open’);ov.classList.remove(‘show’);document.body.style.overflow=’’;};
-tb?.addEventListener(‘click’,()=>sb.classList.contains(‘open’)?close():open());
-ov?.addEventListener(‘click’,close);
-document.querySelectorAll(’.sb-item’).forEach(b=>b.addEventListener(‘click’,()=>{if(window.innerWidth<=850)close();}));
+(function() {
+  const tb = document.getElementById('sidebar-toggle'), sb = document.getElementById('suite-sidebar'), ov = document.getElementById('sidebar-overlay');
+  const open = () => { sb.classList.add('open'); ov.classList.add('show'); document.body.style.overflow = 'hidden'; };
+  const close = () => { sb.classList.remove('open'); ov.classList.remove('show'); document.body.style.overflow = ''; };
+  tb?.addEventListener('click', () => sb.classList.contains('open') ? close() : open());
+  ov?.addEventListener('click', close);
+  document.querySelectorAll('.sb-item').forEach(b => b.addEventListener('click', () => { if (window.innerWidth <= 850) close(); }));
 })();
 
 /* ══ VAT ══ */
-function doVATSale()   { const a=v(‘vs-amt’); if(!a)return; set(‘vs-vat’,fmt(a*.13)); set(‘vs-total’,fmt(a*1.13)); }
-function doVATPurch()  { const t=v(‘vp-amt’); if(!t)return; const vat=t*.13/1.13; set(‘vp-vat’,fmt(vat)); set(‘vp-net’,fmt(t-vat)); }
-function doVATPayable(){ const pay=v(‘vpy-out’)-v(‘vpy-in’); const el=document.getElementById(‘vpy-val’); if(el){el.textContent=fmt(pay);el.style.color=pay>0?‘var(--red)’:‘var(--green)’;} }
-function doVATLate()   { const a=v(‘vlp-amt’),d=v(‘vlp-days’),int=a*.15/365*d,pen=a*.01*(d/30); set(‘vlp-int’,fmt(int)); set(‘vlp-pen’,fmt(pen)); set(‘vlp-tot’,fmt(int+pen)); showRes(‘vlp-res’); }
+function doVATSale()   { const a = v('vs-amt'); if (!a) return; set('vs-vat', fmt(a * 0.13)); set('vs-total', fmt(a * 1.13)); }
+function doVATPurch()  { const t = v('vp-amt'); if (!t) return; const vat = t * 0.13 / 1.13; set('vp-vat', fmt(vat)); set('vp-net', fmt(t - vat)); }
+function doVATPayable() { const pay = v('vpy-out') - v('vpy-in'); const el = document.getElementById('vpy-val'); if (el) { el.textContent = fmt(pay); el.style.color = pay > 0 ? 'var(--red)' : 'var(--green)'; } }
+function doVATLate()   { const a = v('vlp-amt'), d = v('vlp-days'), int = a * 0.15 / 365 * d, pen = a * 0.01 * (d / 30); set('vlp-int', fmt(int)); set('vlp-pen', fmt(pen)); set('vlp-tot', fmt(int + pen)); showRes('vlp-res'); }
 
 /* ══ TDS ══ */
 function doTDS() {
-const rateRaw=sv(‘tds-type’),rate=parseFloat(rateRaw)||1.5,amt=v(‘tds-amt’),tds=amt*rate/100;
-set(‘tds-ded’,fmt(tds)); set(‘tds-net’,fmt(amt-tds)); set(‘tds-rate-d’,rate+’%’);
+  const rateRaw = sv('tds-type'), rate = parseFloat(rateRaw) || 1.5, amt = v('tds-amt'), tds = amt * rate / 100;
+  set('tds-ded', fmt(tds)); set('tds-net', fmt(amt - tds)); set('tds-rate-d', rate + '%');
 }
 function buildTDSRef() {
-const rows=[[‘Service — VAT bill सहित’,‘1.5%’],[‘Service — VAT bill बिना’,‘15%’],[‘Rent’,‘10%’],[‘Interest/Royalty’,‘15%’],[‘Dividend’,‘5%’],[‘Natural Person Contract’,‘25%’],[‘Land/Bldg Rent’,‘1%’],[‘Salary’,‘Slab-based’]];
-document.getElementById(‘tds-ref’).innerHTML=rows.map(([l,r])=>`<div class="ref-row"><span class="ref-label">${l}</span><span class="ref-val">${r}</span></div>`).join(’’);
+  const rows = [['Service — VAT bill सहित', '1.5%'], ['Service — VAT bill बिना', '15%'], ['Rent', '10%'], ['Interest/Royalty', '15%'], ['Dividend', '5%'], ['Natural Person Contract', '25%'], ['Land/Bldg Rent', '1%'], ['Salary', 'Slab-based']];
+  document.getElementById('tds-ref').innerHTML = rows.map(([l, r]) => `<div class="ref-row"><span class="ref-label">${l}</span><span class="ref-val">${r}</span></div>`).join('');
 }
 
 /* ══ TDS CERTIFICATE ✨ ══ */
 function updateCert() { /* live update could go here */ }
 function generateCert() {
-const gross=v(‘cert-gross’),rate=parseFloat(sv(‘cert-rate’))||1.5,tds=gross*rate/100,net=gross-tds;
-const deductor=document.getElementById(‘cert-deductor’).value||‘Deductor Name’;
-const dedPan=document.getElementById(‘cert-ded-pan’).value||’—’;
-const deductee=document.getElementById(‘cert-deductee’).value||‘Deductee Name’;
-const deePan=document.getElementById(‘cert-dee-pan’).value||’—’;
-const date=document.getElementById(‘cert-date’).value||’—’;
-const nature=document.getElementById(‘cert-nature’).value||’—’;
-const words=numberToWords(tds,‘NPR’);
+  const gross = v('cert-gross'), rate = parseFloat(sv('cert-rate')) || 1.5, tds = gross * rate / 100, net = gross - tds;
+  const deductor = document.getElementById('cert-deductor').value || 'Deductor Name';
+  const dedPan = document.getElementById('cert-ded-pan').value || '—';
+  const deductee = document.getElementById('cert-deductee').value || 'Deductee Name';
+  const deePan = document.getElementById('cert-dee-pan').value || '—';
+  const date = document.getElementById('cert-date').value || '—';
+  const nature = document.getElementById('cert-nature').value || '—';
+  const words = numberToWords(tds, 'NPR');
 
-document.getElementById(‘cert-output’).innerHTML=`
-
-  <div class="cert-doc" id="cert-print-area">
-    <div class="cert-doc-header">
-      <p style="font-size:.75rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px;">Government of Nepal · Inland Revenue Department</p>
-      <h2>TDS Deduction Certificate</h2>
-      <p>कर कट्टी प्रमाणपत्र — FY 2082/83</p>
-    </div>
-    <div class="cert-gold-line"></div>
-    <div class="cert-body">
-      <div class="cert-info-grid">
-        <div class="cert-field"><div class="cf-label">Deductor (Tax Cutter)</div><div class="cf-value">${deductor}</div></div>
-        <div class="cert-field"><div class="cf-label">Deductor PAN</div><div class="cf-value">${dedPan}</div></div>
-        <div class="cert-field"><div class="cf-label">Deductee (Payee)</div><div class="cf-value">${deductee}</div></div>
-        <div class="cert-field"><div class="cf-label">Deductee PAN</div><div class="cf-value">${deePan}</div></div>
-        <div class="cert-field"><div class="cf-label">Nature of Payment</div><div class="cf-value">${nature}</div></div>
-        <div class="cert-field"><div class="cf-label">Payment Date (BS)</div><div class="cf-value">${date}</div></div>
-        <div class="cert-field"><div class="cf-label">TDS Rate</div><div class="cf-value">${rate}%</div></div>
-        <div class="cert-field"><div class="cf-label">Gross Payment</div><div class="cf-value">${fmt(gross)}</div></div>
+  document.getElementById('cert-output').innerHTML = `
+    <div class="cert-doc" id="cert-print-area">
+      <div class="cert-doc-header">
+        <p style="font-size:.75rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px;">Government of Nepal · Inland Revenue Department</p>
+        <h2>TDS Deduction Certificate</h2>
+        <p>कर कट्टी प्रमाणपत्र — FY 2082/83</p>
       </div>
-      <div class="cert-amount-box">
-        <div class="ca-label">TDS Amount Deducted</div>
-        <div class="ca-val">${fmt(tds)}</div>
-        <div class="ca-words">${words}</div>
+      <div class="cert-gold-line"></div>
+      <div class="cert-body">
+        <div class="cert-info-grid">
+          <div class="cert-field"><div class="cf-label">Deductor (Tax Cutter)</div><div class="cf-value">${deductor}</div></div>
+          <div class="cert-field"><div class="cf-label">Deductor PAN</div><div class="cf-value">${dedPan}</div></div>
+          <div class="cert-field"><div class="cf-label">Deductee (Payee)</div><div class="cf-value">${deductee}</div></div>
+          <div class="cert-field"><div class="cf-label">Deductee PAN</div><div class="cf-value">${deePan}</div></div>
+          <div class="cert-field"><div class="cf-label">Nature of Payment</div><div class="cf-value">${nature}</div></div>
+          <div class="cert-field"><div class="cf-label">Payment Date (BS)</div><div class="cf-value">${date}</div></div>
+          <div class="cert-field"><div class="cf-label">TDS Rate</div><div class="cf-value">${rate}%</div></div>
+          <div class="cert-field"><div class="cf-label">Gross Payment</div><div class="cf-value">${fmt(gross)}</div></div>
+        </div>
+        <div class="cert-amount-box">
+          <div class="ca-label">TDS Amount Deducted</div>
+          <div class="ca-val">${fmt(tds)}</div>
+          <div class="ca-words">${words}</div>
+        </div>
+        <div class="cert-info-grid">
+          <div class="cert-field"><div class="cf-label">Net Amount Paid</div><div class="cf-value" style="color:var(--green)">${fmt(net)}</div></div>
+          <div class="cert-field"><div class="cf-label">Certificate No.</div><div class="cf-value">TDS-2082-${Math.floor(Math.random() * 90000 + 10000)}</div></div>
+        </div>
+        <div class="cert-sign-row">
+          <div class="cert-sign-box"><div class="cert-sign-line"></div><div class="cert-sign-label">Deductor Signature & Stamp</div></div>
+          <div class="cert-sign-box"><div class="cert-sign-line"></div><div class="cert-sign-label">Authorized Signatory</div></div>
+        </div>
+        <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:14px;">This certificate is issued under Section 87 of Income Tax Act, 2058</p>
       </div>
-      <div class="cert-info-grid">
-        <div class="cert-field"><div class="cf-label">Net Amount Paid</div><div class="cf-value" style="color:var(--green)">${fmt(net)}</div></div>
-        <div class="cert-field"><div class="cf-label">Certificate No.</div><div class="cf-value">TDS-2082-${Math.floor(Math.random()*90000+10000)}</div></div>
-      </div>
-      <div class="cert-sign-row">
-        <div class="cert-sign-box"><div class="cert-sign-line"></div><div class="cert-sign-label">Deductor Signature & Stamp</div></div>
-        <div class="cert-sign-box"><div class="cert-sign-line"></div><div class="cert-sign-label">Authorized Signatory</div></div>
-      </div>
-      <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:14px;">This certificate is issued under Section 87 of Income Tax Act, 2058</p>
-    </div>
-  </div>`;
+    </div>`;
   showToast('TDS Certificate generated!');
 }
 
 /* ══ CHALLAN GENERATOR ✨ ══ */
 function generateChallan() {
-const type=sv(‘ch-type’),name=document.getElementById(‘ch-name’).value||’—’,pan=document.getElementById(‘ch-pan’).value||’—’;
-const office=sv(‘ch-office’),tax=v(‘ch-tax’),fine=v(‘ch-fine’),total=tax+fine;
-const period=document.getElementById(‘ch-period’).value||’—’,date=document.getElementById(‘ch-date’).value||’—’;
-const words=numberToWords(total,‘NPR’);
+  const type = sv('ch-type'), name = document.getElementById('ch-name').value || '—', pan = document.getElementById('ch-pan').value || '—';
+  const office = sv('ch-office'), tax = v('ch-tax'), fine = v('ch-fine'), total = tax + fine;
+  const period = document.getElementById('ch-period').value || '—', date = document.getElementById('ch-date').value || '—';
+  const words = numberToWords(total, 'NPR');
 
-document.getElementById(‘challan-output’).innerHTML=`
-
-  <div class="challan-doc" id="challan-print-area">
-    <div class="challan-header">
-      <div class="challan-logo"><i class="fas fa-landmark"></i></div>
-      <div>
-        <h2>Government of Nepal — ${type} Deposit Challan</h2>
-        <p>Inland Revenue Department · ${office}</p>
+  document.getElementById('challan-output').innerHTML = `
+    <div class="challan-doc" id="challan-print-area">
+      <div class="challan-header">
+        <div class="challan-logo"><i class="fas fa-landmark"></i></div>
+        <div>
+          <h2>Government of Nepal — ${type} Deposit Challan</h2>
+          <p>Inland Revenue Department · ${office}</p>
+        </div>
       </div>
-    </div>
-    <div class="challan-body">
-      <div class="challan-row"><span class="cr-label">Taxpayer Name</span><span class="cr-value">${name}</span></div>
-      <div class="challan-row"><span class="cr-label">PAN Number</span><span class="cr-value">${pan}</span></div>
-      <div class="challan-row"><span class="cr-label">Tax Type</span><span class="cr-value">${type}</span></div>
-      <div class="challan-row"><span class="cr-label">Period</span><span class="cr-value">${period}</span></div>
-      <div class="challan-row"><span class="cr-label">Date (BS)</span><span class="cr-value">${date}</span></div>
-      <div class="challan-row"><span class="cr-label">Tax Amount</span><span class="cr-value">${fmt(tax)}</span></div>
-      <div class="challan-row"><span class="cr-label">Penalty / Fine</span><span class="cr-value">${fmt(fine)}</span></div>
-      <div class="challan-row total"><span class="cr-label">TOTAL PAYABLE</span><span class="cr-value">${fmt(total)}</span></div>
-      <p style="font-size:.78rem;color:var(--muted);margin-top:8px;font-style:italic;">${words}</p>
-    </div>
-    <div class="challan-footer">
-      <div>
-        <div style="font-size:.72rem;color:var(--muted);margin-bottom:4px;">Bank Seal & Date</div>
-        <div style="width:160px;height:1px;background:var(--border2);"></div>
+      <div class="challan-body">
+        <div class="challan-row"><span class="cr-label">Taxpayer Name</span><span class="cr-value">${name}</span></div>
+        <div class="challan-row"><span class="cr-label">PAN Number</span><span class="cr-value">${pan}</span></div>
+        <div class="challan-row"><span class="cr-label">Tax Type</span><span class="cr-value">${type}</span></div>
+        <div class="challan-row"><span class="cr-label">Period</span><span class="cr-value">${period}</span></div>
+        <div class="challan-row"><span class="cr-label">Date (BS)</span><span class="cr-value">${date}</span></div>
+        <div class="challan-row"><span class="cr-label">Tax Amount</span><span class="cr-value">${fmt(tax)}</span></div>
+        <div class="challan-row"><span class="cr-label">Penalty / Fine</span><span class="cr-value">${fmt(fine)}</span></div>
+        <div class="challan-row total"><span class="cr-label">TOTAL PAYABLE</span><span class="cr-value">${fmt(total)}</span></div>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:8px;font-style:italic;">${words}</p>
       </div>
-      <div class="challan-stamp">Bank<br>Stamp</div>
-      <div>
-        <div style="font-size:.72rem;color:var(--muted);margin-bottom:4px;">IRD Officer Signature</div>
-        <div style="width:160px;height:1px;background:var(--border2);"></div>
+      <div class="challan-footer">
+        <div>
+          <div style="font-size:.72rem;color:var(--muted);margin-bottom:4px;">Bank Seal & Date</div>
+          <div style="width:160px;height:1px;background:var(--border2);"></div>
+        </div>
+        <div class="challan-stamp">Bank<br>Stamp</div>
+        <div>
+          <div style="font-size:.72rem;color:var(--muted);margin-bottom:4px;">IRD Officer Signature</div>
+          <div style="width:160px;height:1px;background:var(--border2);"></div>
+        </div>
       </div>
-    </div>
-  </div>`;
+    </div>`;
   showToast('Challan generated!');
 }
 
 /* ══ INCOME TAX ══ */
-const SLABS={u:[[500000,.01],[200000,.10],[300000,.20],[1000000,.30],[3000000,.36],[Infinity,.39]],m:[[600000,.01],[200000,.10],[300000,.20],[900000,.30],[3000000,.36],[Infinity,.39]]};
-function calcTax(income,status){ let tax=0,rem=income,bd=[]; SLABS[status].forEach(([b,rate])=>{ if(rem<=0)return; const t2=Math.min(rem,b===Infinity?rem:b),tx=t2*rate; bd.push({taxable:t2,rate,t:tx}); tax+=tx; rem-=t2; }); return{tax,bd}; }
-function doIT(){
-const income=v(‘it-income’),status=sv(‘it-marital’),deds=v(‘it-deds’),taxable=Math.max(0,income-deds),{tax,bd}=calcTax(taxable,status);
-set(‘it-taxable’,fmt(taxable)); set(‘it-tax’,fmt(tax)); set(‘it-monthly’,fmt(tax/12));
-set(‘it-eff’,income>0?((tax/income)*100).toFixed(2)+’%’:‘0%’);
-document.getElementById(‘it-breakdown’).innerHTML=’<div style="margin-top:8px;">’+bd.filter(b=>b.taxable>0).map(b=>`<div class="slab-row"><span class="slab-label">${fmt(b.taxable)} @ ${(b.rate*100).toFixed(0)}%</span><span class="slab-rate" style="color:var(--gold)">${fmt(b.t)}</span></div>`).join(’’)+’</div>’;
+const SLABS = { u: [[500000, .01], [200000, .10], [300000, .20], [1000000, .30], [3000000, .36], [Infinity, .39]], m: [[600000, .01], [200000, .10], [300000, .20], [900000, .30], [3000000, .36], [Infinity, .39]] };
+function calcTax(income, status) {
+  let tax = 0, rem = income, bd = [];
+  SLABS[status].forEach(([b, rate]) => {
+    if (rem <= 0) return;
+    const t2 = Math.min(rem, b === Infinity ? rem : b), tx = t2 * rate;
+    bd.push({ taxable: t2, rate, t: tx });
+    tax += tx;
+    rem -= t2;
+  });
+  return { tax, bd };
 }
-function buildITSlabs(){
-const data=[[‘Up to Rs 5L’,‘1%’,‘var(--green)’],[‘Rs 5L – 7L’,‘10%’,‘var(--blue)’],[‘Rs 7L – 10L’,‘20%’,‘var(--gold)’],[‘Rs 10L – 20L’,‘30%’,’#e8a84c’],[‘Rs 20L – 50L’,‘36%’,‘var(--red)’],[‘Above Rs 50L’,‘39%’,’#cc3333’]];
-document.getElementById(‘it-slabs’).innerHTML=data.map(([l,r,c])=>`<div class="slab-row"><span class="slab-label">${l}</span><span class="slab-rate" style="color:${c}">${r}</span></div>`).join(’’);
+function doIT() {
+  const income = v('it-income'), status = sv('it-marital'), deds = v('it-deds'), taxable = Math.max(0, income - deds), { tax, bd } = calcTax(taxable, status);
+  set('it-taxable', fmt(taxable)); set('it-tax', fmt(tax)); set('it-monthly', fmt(tax / 12));
+  set('it-eff', income > 0 ? ((tax / income) * 100).toFixed(2) + '%' : '0%');
+  document.getElementById('it-breakdown').innerHTML = '<div style="margin-top:8px;">' + bd.filter(b => b.taxable > 0).map(b => `<div class="slab-row"><span class="slab-label">${fmt(b.taxable)} @ ${(b.rate * 100).toFixed(0)}%</span><span class="slab-rate" style="color:var(--gold)">${fmt(b.t)}</span></div>`).join('') + '</div>';
+}
+function buildITSlabs() {
+  const data = [['Up to Rs 5L', '1%', 'var(--green)'], ['Rs 5L – 7L', '10%', 'var(--blue)'], ['Rs 7L – 10L', '20%', 'var(--gold)'], ['Rs 10L – 20L', '30%', '#e8a84c'], ['Rs 20L – 50L', '36%', 'var(--red)'], ['Above Rs 50L', '39%', '#cc3333']];
+  document.getElementById('it-slabs').innerHTML = data.map(([l, r, c]) => `<div class="slab-row"><span class="slab-label">${l}</span><span class="slab-rate" style="color:${c}">${r}</span></div>`).join('');
 }
 
 /* ══ ADVANCE TAX ══ */
-function doAT(){ const annual=v(‘at-annual’),pct=parseFloat(sv(‘at-q’)); set(‘at-due’,fmt(annual*pct)); set(‘at-pct’,(pct*100)+’%’); }
+function doAT() { const annual = v('at-annual'), pct = parseFloat(sv('at-q')); set('at-due', fmt(annual * pct)); set('at-pct', (pct * 100) + '%'); }
 
 /* ══ EMI ══ */
-function doEMI2(){
-const p=v(‘em-p2’),ar=v(‘em-r2’),n=parseInt(document.getElementById(‘em-n2’).value)||0;
-const sc=parseFloat(document.getElementById(‘em-sc2’).value)/100,ic=parseFloat(document.getElementById(‘em-ic2’).value)/100;
-if(!p||!ar||!n)return;
-const r=ar/12/100,emi=p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1),tInt=emi*n-p,scAmt=p*sc,icAmt=p*ic*Math.ceil(n/12);
-set(‘em-emi2’,fmt(emi)); set(‘em-int2’,fmt(tInt)); set(‘em-sc-v2’,fmt(scAmt)); set(‘em-total2’,fmt(p+tInt+scAmt+icAmt)); showRes(‘em-res2’);
-let rem=p,rows=’’; const dt=new Date();
-for(let i=1;i<=n;i++){const ip=rem*r,pp=emi-ip;rem-=pp;const d=new Date(dt);d.setMonth(d.getMonth()+i-1);rows+=`<tr><td>${i}</td><td class="tl td-muted">${d.toISOString().split('T')[0]}</td><td class="td-green">${fmt(pp)}</td><td class="td-red">${fmt(ip)}</td><td class="td-gold">${fmt(emi)}</td><td class="td-muted">${fmt(Math.max(0,rem))}</td></tr>`;}
-document.getElementById(‘em-tbody2’).innerHTML=rows;
+function doEMI2() {
+  const p = v('em-p2'), ar = v('em-r2'), n = parseInt(document.getElementById('em-n2').value) || 0;
+  const sc = parseFloat(document.getElementById('em-sc2').value) / 100, ic = parseFloat(document.getElementById('em-ic2').value) / 100;
+  if (!p || !ar || !n) return;
+  const r = ar / 12 / 100, emi = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1), tInt = emi * n - p, scAmt = p * sc, icAmt = p * ic * Math.ceil(n / 12);
+  set('em-emi2', fmt(emi)); set('em-int2', fmt(tInt)); set('em-sc-v2', fmt(scAmt)); set('em-total2', fmt(p + tInt + scAmt + icAmt)); showRes('em-res2');
+  let rem = p, rows = ''; const dt = new Date();
+  for (let i = 1; i <= n; i++) {
+    const ip = rem * r, pp = emi - ip; rem -= pp;
+    const d = new Date(dt); d.setMonth(d.getMonth() + i - 1);
+    rows += `<tr><td>${i}</td><td class="tl td-muted">${d.toISOString().split('T')[0]}</td><td class="td-green">${fmt(pp)}</td><td class="td-red">${fmt(ip)}</td><td class="td-gold">${fmt(emi)}</td><td class="td-muted">${fmt(Math.max(0, rem))}</td></tr>`;
+  }
+  document.getElementById('em-tbody2').innerHTML = rows;
 }
 
 /* ══ LOAN COMPARISON ✨ ══ */
-function doLoanCompare(){
-const p=v(‘lc-principal’),n=parseInt(document.getElementById(‘lc-tenure’).value)||60,sc=v(‘lc-sc’)/100;
-if(!p||!n) return;
-const banks=[
-{n:document.getElementById(‘lc-b1n’).value,r:v(‘lc-b1r’)},
-{n:document.getElementById(‘lc-b2n’).value,r:v(‘lc-b2r’)},
-{n:document.getElementById(‘lc-b3n’).value,r:v(‘lc-b3r’)},
-{n:document.getElementById(‘lc-b4n’).value,r:v(‘lc-b4r’)},
-];
-const calcs=banks.map(b=>{
-const r=b.r/12/100,emi=p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1),tInt=emi*n-p,scAmt=p*sc;
-return{…b,emi,tInt,total:p+tInt+scAmt};
-});
-const bestEMI=Math.min(…calcs.map(c=>c.emi));
-const bestTotal=Math.min(…calcs.map(c=>c.total));
-document.getElementById(‘loan-compare-results’).innerHTML=calcs.map(c=>` <div class="loan-box ${c.emi===bestEMI?'best':''}"> <div class="lb-bank">${c.n}</div> <div class="lb-emi">${fmt(c.emi)}<span style="font-size:.75rem;color:var(--muted);font-family:var(--ff-body);font-weight:400">/mo</span></div> <div class="lb-total">Total Interest: ${fmt(c.tInt)}</div> <div class="lb-total">Total Cost: ${fmt(c.total)}</div> ${c.emi===bestEMI?'<span class="lb-badge">✓ Best Deal</span>':''} </div>`).join(’’);
+function doLoanCompare() {
+  const p = v('lc-principal'), n = parseInt(document.getElementById('lc-tenure').value) || 60, sc = v('lc-sc') / 100;
+  if (!p || !n) return;
+  const banks = [
+    { n: document.getElementById('lc-b1n').value, r: v('lc-b1r') },
+    { n: document.getElementById('lc-b2n').value, r: v('lc-b2r') },
+    { n: document.getElementById('lc-b3n').value, r: v('lc-b3r') },
+    { n: document.getElementById('lc-b4n').value, r: v('lc-b4r') },
+  ];
+  const calcs = banks.map(b => {
+    const r = b.r / 12 / 100, emi = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1), tInt = emi * n - p, scAmt = p * sc;
+    return { ...b, emi, tInt, total: p + tInt + scAmt };
+  });
+  const bestEMI = Math.min(...calcs.map(c => c.emi));
+  const bestTotal = Math.min(...calcs.map(c => c.total));
+  document.getElementById('loan-compare-results').innerHTML = calcs.map(c => `
+    <div class="loan-box ${c.emi === bestEMI ? 'best' : ''}">
+      <div class="lb-bank">${c.n}</div>
+      <div class="lb-emi">${fmt(c.emi)}<span style="font-size:.75rem;color:var(--muted);font-family:var(--ff-body);font-weight:400">/mo</span></div>
+      <div class="lb-total">Total Interest: ${fmt(c.tInt)}</div>
+      <div class="lb-total">Total Cost: ${fmt(c.total)}</div>
+      ${c.emi === bestEMI ? '<span class="lb-badge">✓ Best Deal</span>' : ''}
+    </div>`).join('');
 }
 
 /* ══ NPA ══ */
-function doNPA(){
-const amt=v(‘npa-amt’),days=v(‘npa-days’);
-if(!amt) return;
-let cls,prov,color;
-if(days<30){cls=‘Pass / Performing’;prov=.01;color=‘var(--green)’;}
-else if(days<90){cls=‘Watchlist’;prov=.05;color=‘var(--gold)’;}
-else if(days<180){cls=‘Substandard’;prov=.25;color=‘var(--red)’;}
-else if(days<365){cls=‘Doubtful’;prov=.50;color=‘var(--red)’;}
-else{cls=‘Bad / Loss’;prov=1;color=’#ff4400’;}
-const el=document.getElementById(‘npa-cls’);if(el){el.textContent=cls;el.style.color=color;}
-set(‘npa-prate’,(prov*100)+’%’); set(‘npa-pamt’,fmt(amt*prov));
+function doNPA() {
+  const amt = v('npa-amt'), days = v('npa-days');
+  if (!amt) return;
+  let cls, prov, color;
+  if (days < 30) { cls = 'Pass / Performing'; prov = .01; color = 'var(--green)'; }
+  else if (days < 90) { cls = 'Watchlist'; prov = .05; color = 'var(--gold)'; }
+  else if (days < 180) { cls = 'Substandard'; prov = .25; color = 'var(--red)'; }
+  else if (days < 365) { cls = 'Doubtful'; prov = .50; color = 'var(--red)'; }
+  else { cls = 'Bad / Loss'; prov = 1; color = '#ff4400'; }
+  const el = document.getElementById('npa-cls'); if (el) { el.textContent = cls; el.style.color = color; }
+  set('npa-prate', (prov * 100) + '%'); set('npa-pamt', fmt(amt * prov));
 }
-function buildNPARef(){
-const rows=[[’< 30 days’,‘Pass’,‘1%’,‘var(--green)’],[‘30–90 days’,‘Watchlist’,‘5%’,‘var(--gold)’],[‘90–180 days’,‘Substandard’,‘25%’,‘var(--red)’],[‘180–365 days’,‘Doubtful’,‘50%’,‘var(--red)’],[’> 365 days’,‘Bad/Loss’,‘100%’,’#ff4400’]];
-document.getElementById(‘npa-ref’).innerHTML=rows.map(([d,c,p,col])=>`<div class="ref-row"><span class="ref-label">${d} — <strong style="color:${col}">${c}</strong></span><span class="ref-val">${p} provision</span></div>`).join(’’);
+function buildNPARef() {
+  const rows = [['< 30 days', 'Pass', '1%', 'var(--green)'], ['30–90 days', 'Watchlist', '5%', 'var(--gold)'], ['90–180 days', 'Substandard', '25%', 'var(--red)'], ['180–365 days', 'Doubtful', '50%', 'var(--red)'], ['> 365 days', 'Bad/Loss', '100%', '#ff4400']];
+  document.getElementById('npa-ref').innerHTML = rows.map(([d, c, p, col]) => `<div class="ref-row"><span class="ref-label">${d} — <strong style="color:${col}">${c}</strong></span><span class="ref-val">${p} provision</span></div>`).join('');
 }
 
 /* ══ BANK RECON ══ */
-function doBankRecon(){
-const bank=v(‘br-bank’),ledger=v(‘br-ledger’),dep=v(‘br-dep’),chq=v(‘br-chq’),adj=bank+dep-chq,diff=adj-ledger;
-set(‘br-adj’,fmt(adj)); set(‘br-diff’,fmt(diff));
-const st=document.getElementById(‘br-status’);if(st){st.textContent=Math.abs(diff)<.01?‘✓ Reconciled’:’✗ Difference ’+fmt(Math.abs(diff));st.style.color=Math.abs(diff)<.01?‘var(--green)’:‘var(--red)’;}
+function doBankRecon() {
+  const bank = v('br-bank'), ledger = v('br-ledger'), dep = v('br-dep'), chq = v('br-chq'), adj = bank + dep - chq, diff = adj - ledger;
+  set('br-adj', fmt(adj)); set('br-diff', fmt(diff));
+  const st = document.getElementById('br-status'); if (st) { st.textContent = Math.abs(diff) < .01 ? '✓ Reconciled' : '✗ Difference ' + fmt(Math.abs(diff)); st.style.color = Math.abs(diff) < .01 ? 'var(--green)' : 'var(--red)'; }
 }
 
 /* ══ SALARY TAX ══ */
-function doSalaryTax(){
-const mo=v(‘st-gross’),status=sv(‘st-marital’),pf=v(‘st-pf’),annual=mo*12,taxable=Math.max(0,annual-pf*12),{tax}=calcTax(taxable,status),mtds=tax/12;
-set(‘st-annual’,fmt(annual)); set(‘st-ann-tax’,fmt(tax)); set(‘st-mtds’,fmt(mtds)); set(‘st-net’,fmt(mo-mtds-pf));
+function doSalaryTax() {
+  const mo = v('st-gross'), status = sv('st-marital'), pf = v('st-pf'), annual = mo * 12, taxable = Math.max(0, annual - pf * 12), { tax } = calcTax(taxable, status), mtds = tax / 12;
+  set('st-annual', fmt(annual)); set('st-ann-tax', fmt(tax)); set('st-mtds', fmt(mtds)); set('st-net', fmt(mo - mtds - pf));
 }
 
 /* ══ BULK PAYROLL ✨ ══ */
-let employees=[];
-function addEmployee(){
-const name=document.getElementById(‘bp-name’).value.trim();
-if(!name) return;
-employees.push({name,gross:v(‘bp-gross’),status:sv(‘bp-status’),pf:v(‘bp-pf’)});
-document.getElementById(‘bp-name’).value=’’; document.getElementById(‘bp-gross’).value=’’; document.getElementById(‘bp-pf’).value=‘0’;
-calcBulkPayroll();
+let employees = [];
+function addEmployee() {
+  const name = document.getElementById('bp-name').value.trim();
+  if (!name) return;
+  employees.push({ name, gross: v('bp-gross'), status: sv('bp-status'), pf: v('bp-pf') });
+  document.getElementById('bp-name').value = ''; document.getElementById('bp-gross').value = ''; document.getElementById('bp-pf').value = '0';
+  calcBulkPayroll();
 }
-function removeEmployee(i){ employees.splice(i,1); calcBulkPayroll(); }
-function calcBulkPayroll(){
-let totGross=0,totPF=0,totTDS=0,totNet=0;
-const rows=employees.map((e,i)=>{
-const pfAmt=e.pf||e.gross*.11;
-const annual=Math.max(0,e.gross*12-pfAmt*12);
-const {tax}=calcTax(annual,e.status);
-const mtds=tax/12,net=e.gross-mtds-pfAmt;
-totGross+=e.gross; totPF+=pfAmt; totTDS+=mtds; totNet+=net;
-return `<tr> <td>${e.name}<br><small style="color:var(--muted)">${e.status==='m'?'Married':'Unmarried'}</small></td> <td style="color:var(--white)">${fmt(e.gross)}</td> <td style="color:var(--muted)">${fmt(pfAmt)}</td> <td style="color:var(--red)">${fmt(mtds)}</td> <td style="color:var(--green)">${fmt(net)}</td> <td style="text-align:center"><button onclick="removeEmployee(${i})" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:.9rem"><i class="fas fa-trash"></i></button></td> </tr>`;
-}).join(’’);
-document.getElementById(‘payroll-tbody’).innerHTML=rows||’<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">Employee थप्नुस्</td></tr>’;
-set(‘bp-tot-gross’,fmt(totGross)); set(‘bp-tot-pf’,fmt(totPF)); set(‘bp-tot-tds’,fmt(totTDS)); set(‘bp-tot-net’,fmt(totNet));
+function removeEmployee(i) { employees.splice(i, 1); calcBulkPayroll(); }
+function calcBulkPayroll() {
+  let totGross = 0, totPF = 0, totTDS = 0, totNet = 0;
+  const rows = employees.map((e, i) => {
+    const pfAmt = e.pf || e.gross * .11;
+    const annual = Math.max(0, e.gross * 12 - pfAmt * 12);
+    const { tax } = calcTax(annual, e.status);
+    const mtds = tax / 12, net = e.gross - mtds - pfAmt;
+    totGross += e.gross; totPF += pfAmt; totTDS += mtds; totNet += net;
+    return `<tr>
+      <td>${e.name}<br><small style="color:var(--muted)">${e.status === 'm' ? 'Married' : 'Unmarried'}</small></td>
+      <td style="color:var(--white)">${fmt(e.gross)}</td>
+      <td style="color:var(--muted)">${fmt(pfAmt)}</td>
+      <td style="color:var(--red)">${fmt(mtds)}</td>
+      <td style="color:var(--green)">${fmt(net)}</td>
+      <td style="text-align:center"><button onclick="removeEmployee(${i})" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:.9rem"><i class="fas fa-trash"></i></button></td>
+    </tr>`;
+  }).join('');
+  document.getElementById('payroll-tbody').innerHTML = rows || '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">Employee थप्नुस्</td></tr>';
+  set('bp-tot-gross', fmt(totGross)); set('bp-tot-pf', fmt(totPF)); set('bp-tot-tds', fmt(totTDS)); set('bp-tot-net', fmt(totNet));
 }
-function clearPayroll(){ employees=[]; calcBulkPayroll(); }
+function clearPayroll() { employees = []; calcBulkPayroll(); }
 
 /* ══ PF ══ */
-function doPF(){ const basic=v(‘pf-basic’),emp=basic*.11,empl=basic*.20; set(‘pf-emp’,fmt(emp)); set(‘pf-empl’,fmt(empl)); set(‘pf-total’,fmt(emp+empl)); set(‘pf-net’,fmt(basic-emp)); }
+function doPF() { const basic = v('pf-basic'), emp = basic * .11, empl = basic * .20; set('pf-emp', fmt(emp)); set('pf-empl', fmt(empl)); set('pf-total', fmt(emp + empl)); set('pf-net', fmt(basic - emp)); }
 
 /* ══ PAYSLIP ══ */
-function doPayslip(){
-const name=document.getElementById(‘ps-name’).value||‘Employee’,desig=document.getElementById(‘ps-desig’).value||‘Staff’;
-const gross=v(‘ps-gross’),pf=v(‘ps-pf’),tax=v(‘ps-tax’),other=v(‘ps-other’),net=gross-pf-tax-other;
-document.getElementById(‘ps-out’).innerHTML=`
-
-  <div class="payslip-box">
-    <div class="payslip-hdr"><h2>PAYSLIP</h2><p>${name} — ${desig} — ${new Date().toLocaleDateString('en-GB')}</p></div>
-    <div class="payslip-body">
-      <div class="ps-row"><span class="ps-label">Gross Salary</span><span class="ps-val">${fmt(gross)}</span></div>
-      <div class="ps-row"><span class="ps-label">PF Deduction</span><span class="ps-val" style="color:var(--red)">- ${fmt(pf)}</span></div>
-      <div class="ps-row"><span class="ps-label">Income Tax TDS</span><span class="ps-val" style="color:var(--red)">- ${fmt(tax)}</span></div>
-      <div class="ps-row"><span class="ps-label">Other Deductions</span><span class="ps-val" style="color:var(--red)">- ${fmt(other)}</span></div>
-      <div class="ps-row total"><span class="ps-label">Net Take-Home</span><span class="ps-val">${fmt(net)}</span></div>
-    </div>
-  </div>`;
+function doPayslip() {
+  const name = document.getElementById('ps-name').value || 'Employee', desig = document.getElementById('ps-desig').value || 'Staff';
+  const gross = v('ps-gross'), pf = v('ps-pf'), tax = v('ps-tax'), other = v('ps-other'), net = gross - pf - tax - other;
+  document.getElementById('ps-out').innerHTML = `
+    <div class="payslip-box">
+      <div class="payslip-hdr"><h2>PAYSLIP</h2><p>${name} — ${desig} — ${new Date().toLocaleDateString('en-GB')}</p></div>
+      <div class="payslip-body">
+        <div class="ps-row"><span class="ps-label">Gross Salary</span><span class="ps-val">${fmt(gross)}</span></div>
+        <div class="ps-row"><span class="ps-label">PF Deduction</span><span class="ps-val" style="color:var(--red)">- ${fmt(pf)}</span></div>
+        <div class="ps-row"><span class="ps-label">Income Tax TDS</span><span class="ps-val" style="color:var(--red)">- ${fmt(tax)}</span></div>
+        <div class="ps-row"><span class="ps-label">Other Deductions</span><span class="ps-val" style="color:var(--red)">- ${fmt(other)}</span></div>
+        <div class="ps-row total"><span class="ps-label">Net Take-Home</span><span class="ps-val">${fmt(net)}</span></div>
+      </div>
+    </div>`;
 }
 
 /* ══ JOURNAL ══ */
-let jvList=[];
-function doAddJV(){ const dr=document.getElementById(‘jv-dr’).value.trim(),cr=document.getElementById(‘jv-cr’).value.trim(),amt=v(‘jv-amt’),narr=document.getElementById(‘jv-narr’).value.trim(); if(!dr||!cr||!amt)return; jvList.push({dr,cr,amt,narr}); renderJV(); [‘jv-dr’,‘jv-cr’,‘jv-amt’,‘jv-narr’].forEach(id=>{const el=document.getElementById(id);if(el)el.value=’’;}); }
-function doClearJV(){ jvList=[]; renderJV(); }
-function renderJV(){ let total=0,rows=’’; jvList.forEach((e,i)=>{total+=e.amt;rows+=`<tr><td>${i+1}</td><td class="tl">${e.dr} Dr</td><td class="tl">${e.cr} Cr</td><td class="td-gold">${fmt(e.amt)}</td><td class="tl td-muted">${e.narr}</td></tr>`;});  document.getElementById(‘jv-tbody’).innerHTML=rows; set(‘jv-total’,fmt(total)); }
+let jvList = [];
+function doAddJV() {
+  const dr = document.getElementById('jv-dr').value.trim(), cr = document.getElementById('jv-cr').value.trim(), amt = v('jv-amt'), narr = document.getElementById('jv-narr').value.trim();
+  if (!dr || !cr || !amt) return;
+  jvList.push({ dr, cr, amt, narr });
+  renderJV();
+  ['jv-dr', 'jv-cr', 'jv-amt', 'jv-narr'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+}
+function doClearJV() { jvList = []; renderJV(); }
+function renderJV() {
+  let total = 0, rows = '';
+  jvList.forEach((e, i) => { total += e.amt; rows += `<tr><td>${i + 1}</td><td class="tl">${e.dr} Dr</td><td class="tl">${e.cr} Cr</td><td class="td-gold">${fmt(e.amt)}</td><td class="tl td-muted">${e.narr}</td></tr>`; });
+  document.getElementById('jv-tbody').innerHTML = rows; set('jv-total', fmt(total));
+}
 
 /* ══ DEPRECIATION ══ */
-function doDep(){ const cost=v(‘dep-cost’),rate=parseFloat(sv(‘dep-type’))/100,years=parseInt(document.getElementById(‘dep-years’).value)||5; let wdv=cost,rows=’’; for(let y=1;y<=years;y++){const dep=wdv*rate;rows+=`<tr><td>${y}</td><td>${fmt(wdv)}</td><td class="td-red">${fmt(dep)}</td><td class="td-gold">${fmt(wdv-dep)}</td></tr>`;wdv-=dep;} document.getElementById(‘dep-tbody’).innerHTML=rows; document.getElementById(‘dep-table-card’).style.display=‘block’; }
+function doDep() {
+  const cost = v('dep-cost'), rate = parseFloat(sv('dep-type')) / 100, years = parseInt(document.getElementById('dep-years').value) || 5;
+  let wdv = cost, rows = '';
+  for (let y = 1; y <= years; y++) {
+    const dep = wdv * rate;
+    rows += `<tr><td>${y}</td><td>${fmt(wdv)}</td><td class="td-red">${fmt(dep)}</td><td class="td-gold">${fmt(wdv - dep)}</td></tr>`;
+    wdv -= dep;
+  }
+  document.getElementById('dep-tbody').innerHTML = rows; document.getElementById('dep-table-card').style.display = 'block';
+}
 
 /* ══ P&L ══ */
-function doPL(){ const rev=v(‘pl-rev’),exp=v(‘pl-exp’),taxRate=v(‘pl-tax’),gross=rev-exp,taxAmt=Math.max(0,gross)*taxRate/100,net=gross-taxAmt; set(‘pl-gross’,fmt(gross)); set(‘pl-tax-amt’,fmt(taxAmt)); const el=document.getElementById(‘pl-net’);if(el){el.textContent=fmt(net);el.style.color=net>=0?‘var(--green)’:‘var(--red)’;} set(‘pl-margin’,rev>0?((net/rev)*100).toFixed(2)+’%’:‘0%’); }
+function doPL() {
+  const rev = v('pl-rev'), exp = v('pl-exp'), taxRate = v('pl-tax'), gross = rev - exp, taxAmt = Math.max(0, gross) * taxRate / 100, net = gross - taxAmt;
+  set('pl-gross', fmt(gross)); set('pl-tax-amt', fmt(taxAmt));
+  const el = document.getElementById('pl-net'); if (el) { el.textContent = fmt(net); el.style.color = net >= 0 ? 'var(--green)' : 'var(--red)'; }
+  set('pl-margin', rev > 0 ? ((net / rev) * 100).toFixed(2) + '%' : '0%');
+}
 
 /* ══ BALANCE SHEET ══ */
-function doBS(){ const a=v(‘bs-assets’),l=v(‘bs-liab’),e=v(‘bs-equity’),le=l+e,diff=Math.abs(a-le); set(‘bs-a-d’,fmt(a)); set(‘bs-le-d’,fmt(le)); const st=document.getElementById(‘bs-status’);if(st){st.textContent=diff<.01?‘✓ Balanced’:‘✗ Imbalanced (Diff: ‘+fmt(diff)+’)’;st.style.color=diff<.01?‘var(--green)’:‘var(--red)’;} }
+function doBS() {
+  const a = v('bs-assets'), l = v('bs-liab'), e = v('bs-equity'), le = l + e, diff = Math.abs(a - le);
+  set('bs-a-d', fmt(a)); set('bs-le-d', fmt(le));
+  const st = document.getElementById('bs-status'); if (st) { st.textContent = diff < .01 ? '✓ Balanced' : '✗ Imbalanced (Diff: ' + fmt(diff) + ')'; st.style.color = diff < .01 ? 'var(--green)' : 'var(--red)'; }
+}
 
 /* ══ AMOUNT TO WORDS ✨ ══ */
-const ones=[’’,‘One’,‘Two’,‘Three’,‘Four’,‘Five’,‘Six’,‘Seven’,‘Eight’,‘Nine’,‘Ten’,‘Eleven’,‘Twelve’,‘Thirteen’,‘Fourteen’,‘Fifteen’,‘Sixteen’,‘Seventeen’,‘Eighteen’,‘Nineteen’];
-const tens=[’’,’’,‘Twenty’,‘Thirty’,‘Forty’,‘Fifty’,‘Sixty’,‘Seventy’,‘Eighty’,‘Ninety’];
-const onesNP=[’’,‘एक’,‘दुई’,‘तीन’,‘चार’,‘पाँच’,‘छ’,‘सात’,‘आठ’,‘नौ’,‘दस’,‘एघार’,‘बाह्र’,‘तेह्र’,‘चौध’,‘पन्ध्र’,‘सोह्र’,‘सत्र’,‘अठार’,‘उन्नाइस’];
-const tensNP=[’’,’’,‘बीस’,‘तीस’,‘चालीस’,‘पचास’,‘साठी’,‘सत्तरी’,‘असी’,‘नब्बे’];
+const ones = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+const tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+const onesNP = ['', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ', 'दस', 'एघार', 'बाह्र', 'तेह्र', 'चौध', 'पन्ध्र', 'सोह्र', 'सत्र', 'अठार', 'उन्नाइस'];
+const tensNP = ['', '', 'बीस', 'तीस', 'चालीस', 'पचास', 'साठी', 'सत्तरी', 'असी', 'नब्बे'];
 
-function numToEnglish(n){
-if(n===0)return’Zero’;
-if(n<0)return’Minus ‘+numToEnglish(-n);
-if(n<20)return ones[n];
-if(n<100)return tens[Math.floor(n/10)]+(n%10?’ ‘+ones[n%10]:’’);
-if(n<1000)return ones[Math.floor(n/100)]+’ Hundred’+(n%100?’ ‘+numToEnglish(n%100):’’);
-if(n<100000)return numToEnglish(Math.floor(n/1000))+’ Thousand’+(n%1000?’ ‘+numToEnglish(n%1000):’’);
-if(n<10000000)return numToEnglish(Math.floor(n/100000))+’ Lakh’+(n%100000?’ ‘+numToEnglish(n%100000):’’);
-return numToEnglish(Math.floor(n/10000000))+’ Crore’+(n%10000000?’ ‘+numToEnglish(n%10000000):’’);
+function numToEnglish(n) {
+  if (n === 0) return 'Zero';
+  if (n < 0) return 'Minus ' + numToEnglish(-n);
+  if (n < 20) return ones[n];
+  if (n < 100) return tens[Math.floor(n / 10)] + (n % 10 ? ' ' + ones[n % 10] : '');
+  if (n < 1000) return ones[Math.floor(n / 100)] + ' Hundred' + (n % 100 ? ' ' + numToEnglish(n % 100) : '');
+  if (n < 100000) return numToEnglish(Math.floor(n / 1000)) + ' Thousand' + (n % 1000 ? ' ' + numToEnglish(n % 1000) : '');
+  if (n < 10000000) return numToEnglish(Math.floor(n / 100000)) + ' Lakh' + (n % 100000 ? ' ' + numToEnglish(n % 100000) : '');
+  return numToEnglish(Math.floor(n / 10000000)) + ' Crore' + (n % 10000000 ? ' ' + numToEnglish(n % 10000000) : '');
 }
-function numToNepali(n){
-if(n===0)return’शून्य’;
-if(n<20)return onesNP[n];
-if(n<100)return tensNP[Math.floor(n/10)]+(n%10?’ ‘+onesNP[n%10]:’’);
-if(n<1000)return onesNP[Math.floor(n/100)]+’ सय’+(n%100?’ ‘+numToNepali(n%100):’’);
-if(n<100000)return numToNepali(Math.floor(n/1000))+’ हजार’+(n%1000?’ ‘+numToNepali(n%1000):’’);
-if(n<10000000)return numToNepali(Math.floor(n/100000))+’ लाख’+(n%100000?’ ‘+numToNepali(n%100000):’’);
-return numToNepali(Math.floor(n/10000000))+’ करोड’+(n%10000000?’ ‘+numToNepali(n%10000000):’’);
+function numToNepali(n) {
+  if (n === 0) return 'शून्य';
+  if (n < 20) return onesNP[n];
+  if (n < 100) return tensNP[Math.floor(n / 10)] + (n % 10 ? ' ' + onesNP[n % 10] : '');
+  if (n < 1000) return onesNP[Math.floor(n / 100)] + ' सय' + (n % 100 ? ' ' + numToNepali(n % 100) : '');
+  if (n < 100000) return numToNepali(Math.floor(n / 1000)) + ' हजार' + (n % 1000 ? ' ' + numToNepali(n % 1000) : '');
+  if (n < 10000000) return numToNepali(Math.floor(n / 100000)) + ' लाख' + (n % 100000 ? ' ' + numToNepali(n % 100000) : '');
+  return numToNepali(Math.floor(n / 10000000)) + ' करोड' + (n % 10000000 ? ' ' + numToNepali(n % 10000000) : '');
 }
-function numberToWords(amount, currency=‘NPR’){
-const intPart=Math.floor(amount),decPart=Math.round((amount-intPart)*100);
-const curWord={‘NPR’:‘रुपैयाँ’,‘USD’:‘Dollars’,‘INR’:‘Rupees’}[currency]||‘Rupees’;
-const curWordEn={‘NPR’:‘Rupees’,‘USD’:‘Dollars’,‘INR’:‘Rupees’}[currency]||‘Rupees’;
-let np=numToNepali(intPart)+’ ‘+curWord+(decPart>0?’ र ‘+numToNepali(decPart)+’ पैसा मात्र’:‘मात्र’);
-let en=numToEnglish(intPart)+’ ‘+curWordEn+(decPart>0?’ and ‘+numToEnglish(decPart)+’ Paisa Only’:’ Only’);
-return currency===‘NPR’?np:en;
+function numberToWords(amount, currency = 'NPR') {
+  const intPart = Math.floor(amount), decPart = Math.round((amount - intPart) * 100);
+  const curWord = { 'NPR': 'रुपैयाँ', 'USD': 'Dollars', 'INR': 'Rupees' }[currency] || 'Rupees';
+  const curWordEn = { 'NPR': 'Rupees', 'USD': 'Dollars', 'INR': 'Rupees' }[currency] || 'Rupees';
+  let np = numToNepali(intPart) + ' ' + curWord + (decPart > 0 ? ' र ' + numToNepali(decPart) + ' पैसा' : '') + 'मात्र';
+  let en = numToEnglish(intPart) + ' ' + curWordEn + (decPart > 0 ? ' and ' + numToEnglish(decPart) + ' Paisa' : '') + ' Only';
+  return currency === 'NPR' ? np : en;
 }
-function doAmountToWords(){
-const amt=v(‘atw-input’),cur=sv(‘atw-currency’);
-if(!amt){ document.getElementById(‘atw-display’).style.display=‘none’; return; }
-document.getElementById(‘atw-display’).style.display=‘block’;
-const symb={‘NPR’:‘Rs’,‘USD’:’$’,‘INR’:‘₹’}[cur]||‘Rs’;
-set(‘atw-formatted’,symb+’ ‘+fmtN(amt));
-set(‘atw-np’,cur===‘NPR’?numToNepali(Math.floor(amt))+’ रुपैयाँ’+(Math.round((amt-Math.floor(amt))*100)>0?’ र ‘+numToNepali(Math.round((amt-Math.floor(amt))*100))+’ पैसा’:’’)+‘मात्र’:’’);
-set(‘atw-en’,numToEnglish(Math.floor(amt))+’ ‘+({‘NPR’:‘Nepali Rupees’,‘USD’:‘US Dollars’,‘INR’:‘Indian Rupees’}[cur]||‘Rupees’)+(Math.round((amt-Math.floor(amt))*100)>0?’ and ‘+numToEnglish(Math.round((amt-Math.floor(amt))*100))+’ Paisa’:’’)+’ Only’);
+function doAmountToWords() {
+  const amt = v('atw-input'), cur = sv('atw-currency');
+  if (!amt) { document.getElementById('atw-display').style.display = 'none'; return; }
+  document.getElementById('atw-display').style.display = 'block';
+  const symb = { 'NPR': 'Rs', 'USD': '$', 'INR': '₹' }[cur] || 'Rs';
+  set('atw-formatted', symb + ' ' + fmtN(amt));
+  set('atw-np', cur === 'NPR' ? numToNepali(Math.floor(amt)) + ' रुपैयाँ' + (Math.round((amt - Math.floor(amt)) * 100) > 0 ? ' र ' + numToNepali(Math.round((amt - Math.floor(amt)) * 100)) + ' पैसा' : '') + 'मात्र' : '');
+  set('atw-en', numToEnglish(Math.floor(amt)) + ' ' + ({ 'NPR': 'Nepali Rupees', 'USD': 'US Dollars', 'INR': 'Indian Rupees' }[cur] || 'Rupees') + (Math.round((amt - Math.floor(amt)) * 100) > 0 ? ' and ' + numToEnglish(Math.round((amt - Math.floor(amt)) * 100)) + ' Paisa' : '') + ' Only');
 }
-function copyWords(){
-const words=(document.getElementById(‘atw-np’)?.textContent||’’)+’\n’+(document.getElementById(‘atw-en’)?.textContent||’’);
-navigator.clipboard.writeText(words).then(()=>showToast(‘Words copied!’)).catch(()=>showToast(‘Copy failed’));
+function copyWords() {
+  const words = (document.getElementById('atw-np')?.textContent || '') + '\n' + (document.getElementById('atw-en')?.textContent || '');
+  navigator.clipboard.writeText(words).then(() => showToast('Words copied!')).catch(() => showToast('Copy failed'));
 }
 
 /* ══ CURRENCY CONVERTER ✨ ══ */
 // NRB approximate rates as of FY 2082/83 (1 NPR = ?)
-const FX_RATES = { NPR:1, USD:0.00752, INR:0.625, EUR:0.00685, GBP:0.00589, AUD:0.01152 };
-const FX_NAMES = { NPR:‘🇳🇵 NPR’, USD:‘🇺🇸 USD’, INR:‘🇮🇳 INR’, EUR:‘🇪🇺 EUR’, GBP:‘🇬🇧 GBP’, AUD:‘🇦🇺 AUD’ };
-const FX_FLAGS = { NPR:‘🇳🇵’, USD:‘🇺🇸’, INR:‘🇮🇳’, EUR:‘🇪🇺’, GBP:‘🇬🇧’, AUD:‘🇦🇺’ };
+const FX_RATES = { NPR: 1, USD: 0.00752, INR: 0.625, EUR: 0.00685, GBP: 0.00589, AUD: 0.01152 };
+const FX_NAMES = { NPR: '🇳🇵 NPR', USD: '🇺🇸 USD', INR: '🇮🇳 INR', EUR: '🇪🇺 EUR', GBP: '🇬🇧 GBP', AUD: '🇦🇺 AUD' };
+const FX_FLAGS = { NPR: '🇳🇵', USD: '🇺🇸', INR: '🇮🇳', EUR: '🇪🇺', GBP: '🇬🇧', AUD: '🇦🇺' };
 
-function doFX(){
-const amt=v(‘fx-amount’),from=sv(‘fx-from’),to=sv(‘fx-to’);
-if(!amt) return;
-const inNPR=amt/FX_RATES[from],result=inNPR*FX_RATES[to];
-const rate=FX_RATES[to]/FX_RATES[from];
-set(‘fx-converted’,to+’ ’+result.toFixed(4));
-set(‘fx-rate’,‘1 ‘+from+’ = ‘+rate.toFixed(6)+’ ‘+to);
-buildFXCards(amt,from);
+function doFX() {
+  const amt = v('fx-amount'), from = sv('fx-from'), to = sv('fx-to');
+  if (!amt) return;
+  const inNPR = amt / FX_RATES[from], result = inNPR * FX_RATES[to];
+  const rate = FX_RATES[to] / FX_RATES[from];
+  set('fx-converted', to + ' ' + result.toFixed(4));
+  set('fx-rate', '1 ' + from + ' = ' + rate.toFixed(6) + ' ' + to);
+  buildFXCards(amt, from);
 }
-function swapFX(){
-const f=document.getElementById(‘fx-from’),t=document.getElementById(‘fx-to’),tmp=f.value;
-f.value=t.value; t.value=tmp; doFX();
+function swapFX() {
+  const f = document.getElementById('fx-from'), t = document.getElementById('fx-to'), tmp = f.value;
+  f.value = t.value; t.value = tmp; doFX();
 }
-function buildFXCards(amt=1000,from=‘NPR’){
-const inNPR=amt/FX_RATES[from];
-const cards=Object.entries(FX_RATES).map(([cur,rate])=>` <div class="fx-card"> <div class="fc-flag">${FX_FLAGS[cur]}</div> <div class="fc-name">${cur}</div> <div class="fc-val">${(inNPR*rate).toFixed(cur==='NPR'?0:4)}</div> </div>`).join(’’);
-document.getElementById(‘fx-all-cards’).innerHTML=cards;
+function buildFXCards(amt = 1000, from = 'NPR') {
+  const inNPR = amt / FX_RATES[from];
+  const cards = Object.entries(FX_RATES).map(([cur, rate]) => `
+    <div class="fx-card">
+      <div class="fc-flag">${FX_FLAGS[cur]}</div>
+      <div class="fc-name">${cur}</div>
+      <div class="fc-val">${(inNPR * rate).toFixed(cur === 'NPR' ? 0 : 4)}</div>
+    </div>`).join('');
+  document.getElementById('fx-all-cards').innerHTML = cards;
 }
 
 /* ══ DATE CONVERTER ══ */
-let ndLibReady=false;
-function waitForND(cb){ if(typeof NepaliDate!==‘undefined’){ndLibReady=true;cb();return;} let tries=0; const t=setInterval(()=>{tries++;if(typeof NepaliDate!==‘undefined’){ndLibReady=true;clearInterval(t);cb();}else if(tries>25)clearInterval(t);},200); }
-function ndErr(id){ document.getElementById(id).innerHTML=’<span style="color:var(--red);font-size:.8rem;">⚠️ Internet जाँच गरेर reload गर्नुस्</span>’; }
-function setToday(){ waitForND(()=>{ const now=new Date(); document.getElementById(‘ad-in’).value=now.toISOString().split(‘T’)[0]; const bs=new NepaliDate(now); document.getElementById(‘bs-yr’).value=bs.getYear(); document.getElementById(‘bs-mo’).value=bs.getMonth()+1; document.getElementById(‘bs-dy’).value=bs.getDate(); doADtoBS(); doBStoAD(); }); }
-function doADtoBS(){ if(typeof NepaliDate===‘undefined’){ndErr(‘ad-bs-out’);return;} const v=document.getElementById(‘ad-in’).value; if(!v)return; try{const b=new NepaliDate(new Date(v)); document.getElementById(‘ad-bs-out’).textContent=b.format(‘YYYY MMMM DD’);}catch(e){document.getElementById(‘ad-bs-out’).textContent=‘Invalid date’;} }
-function doBStoAD(){ if(typeof NepaliDate===‘undefined’){ndErr(‘bs-ad-out’);return;} const yr=parseInt(document.getElementById(‘bs-yr’).value)||0,mo=parseInt(document.getElementById(‘bs-mo’).value)||0,dy=parseInt(document.getElementById(‘bs-dy’).value)||0; if(!yr||!mo||!dy)return; try{const b=new NepaliDate(yr,mo-1,dy); document.getElementById(‘bs-ad-out’).textContent=b.getAdDate().toLocaleDateString(‘en-GB’,{day:‘numeric’,month:‘long’,year:‘numeric’});}catch(e){document.getElementById(‘bs-ad-out’).textContent=‘Invalid BS date’;} }
-window.addEventListener(‘load’,()=>waitForND(()=>setToday()));
+let ndLibReady = false;
+function waitForND(cb) {
+  if (typeof NepaliDate !== 'undefined') { ndLibReady = true; cb(); return; }
+  let tries = 0;
+  const t = setInterval(() => {
+    tries++;
+    if (typeof NepaliDate !== 'undefined') { ndLibReady = true; clearInterval(t); cb(); }
+    else if (tries > 25) clearInterval(t);
+  }, 200);
+}
+function ndErr(id) { document.getElementById(id).innerHTML = '<span style="color:var(--red);font-size:.8rem;">⚠️ Internet जाँच गरेर reload गर्नुस्</span>'; }
+function setToday() {
+  waitForND(() => {
+    const now = new Date();
+    document.getElementById('ad-in').value = now.toISOString().split('T')[0];
+    const bs = new NepaliDate(now);
+    document.getElementById('bs-yr').value = bs.getYear();
+    document.getElementById('bs-mo').value = bs.getMonth() + 1;
+    document.getElementById('bs-dy').value = bs.getDate();
+    doADtoBS(); doBStoAD();
+  });
+}
+function doADtoBS() {
+  if (typeof NepaliDate === 'undefined') { ndErr('ad-bs-out'); return; }
+  const v = document.getElementById('ad-in').value; if (!v) return;
+  try { const b = new NepaliDate(new Date(v)); document.getElementById('ad-bs-out').textContent = b.format('YYYY MMMM DD'); }
+  catch (e) { document.getElementById('ad-bs-out').textContent = 'Invalid date'; }
+}
+function doBStoAD() {
+  if (typeof NepaliDate === 'undefined') { ndErr('bs-ad-out'); return; }
+  const yr = parseInt(document.getElementById('bs-yr').value) || 0, mo = parseInt(document.getElementById('bs-mo').value) || 0, dy = parseInt(document.getElementById('bs-dy').value) || 0;
+  if (!yr || !mo || !dy) return;
+  try { const b = new NepaliDate(yr, mo - 1, dy); document.getElementById('bs-ad-out').textContent = b.getAdDate().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }); }
+  catch (e) { document.getElementById('bs-ad-out').textContent = 'Invalid BS date'; }
+}
+window.addEventListener('load', () => waitForND(() => setToday()));
 
 /* ══ PAN ══ */
-function doPAN(){ const pan=document.getElementById(‘pan-in’).value.trim(),valid=pan.length===9&&/^\d{9}$/.test(pan); const st=document.getElementById(‘pan-status’);if(st){st.textContent=valid?‘✓ Valid Format’:‘✗ Invalid Format’;st.style.color=valid?‘var(--green)’:‘var(--red)’;} const f=parseInt(pan[0]); set(‘pan-type’,valid?(f<=3?‘Individual’:f<=6?‘Company/Firm’:‘Organization/NGO’):’—’); showRes(‘pan-res’); }
+function doPAN() {
+  const pan = document.getElementById('pan-in').value.trim(), valid = pan.length === 9 && /^\d{9}$/.test(pan);
+  const st = document.getElementById('pan-status'); if (st) { st.textContent = valid ? '✓ Valid Format' : '✗ Invalid Format'; st.style.color = valid ? 'var(--green)' : 'var(--red)'; }
+  const f = parseInt(pan[0]); set('pan-type', valid ? (f <= 3 ? 'Individual' : f <= 6 ? 'Company/Firm' : 'Organization/NGO') : '—');
+  showRes('pan-res');
+}
 
 /* ══ AI CHAT ══ */
-const aiMsgs=document.getElementById(‘ai-msgs’);
-function aiQuickAsk(q){document.getElementById(‘ai-chat-input’).value=q;aiSend();}
-async function aiSend(){
-const text=(document.getElementById(‘ai-chat-input’).value||’’).trim(); if(!text)return;
-document.getElementById(‘ai-chat-input’).value=’’;
-aiMsgs.innerHTML+=`<div class="ai-msg user">${text}</div>`;
-aiMsgs.scrollTop=aiMsgs.scrollHeight;
-const tid=‘t’+Date.now();
-aiMsgs.innerHTML+=`<div class="ai-msg bot" id="${tid}"><i class="fas fa-circle-notch fa-spin" style="color:var(--gold)"></i></div>`;
-aiMsgs.scrollTop=aiMsgs.scrollHeight;
-try{
-const ctrl=new AbortController(),to=setTimeout(()=>ctrl.abort(),15000);
-const res=await fetch(‘https://morning-bush-8bd5.kushalphuyal.workers.dev/’,{method:‘POST’,headers:{‘Content-Type’:‘application/json’},body:JSON.stringify({message:’Nepal accounting FY2082/83: ’+text}),signal:ctrl.signal});
-clearTimeout(to);
-const el=document.getElementById(tid);if(el)el.innerHTML=await res.text()||‘No response.’;
-}catch(e){const el=document.getElementById(tid);if(el)el.innerHTML=e.name===‘AbortError’?‘⏱️ Timeout — retry gara!’:‘⚠️ Error. <a href="https://wa.me/9779863970493" target="_blank" style="color:var(--gold)">WhatsApp</a>’;}
-aiMsgs.scrollTop=aiMsgs.scrollHeight;
+const aiMsgs = document.getElementById('ai-msgs');
+function aiQuickAsk(q) { document.getElementById('ai-chat-input').value = q; aiSend(); }
+async function aiSend() {
+  const text = (document.getElementById('ai-chat-input').value || '').trim(); if (!text) return;
+  document.getElementById('ai-chat-input').value = '';
+  aiMsgs.innerHTML += `<div class="ai-msg user">${text}</div>`;
+  aiMsgs.scrollTop = aiMsgs.scrollHeight;
+  const tid = 't' + Date.now();
+  aiMsgs.innerHTML += `<div class="ai-msg bot" id="${tid}"><i class="fas fa-circle-notch fa-spin" style="color:var(--gold)"></i></div>`;
+  aiMsgs.scrollTop = aiMsgs.scrollHeight;
+  try {
+    const ctrl = new AbortController(), to = setTimeout(() => ctrl.abort(), 15000);
+    const res = await fetch('https://morning-bush-8bd5.kushalphuyal.workers.dev/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Nepal accounting FY2082/83: ' + text }),
+      signal: ctrl.signal
+    });
+    clearTimeout(to);
+    const el = document.getElementById(tid); if (el) el.innerHTML = await res.text() || 'No response.';
+  } catch (e) {
+    const el = document.getElementById(tid); if (el) el.innerHTML = e.name === 'AbortError' ? '⏱️ Timeout — retry gara!' : '⚠️ Error. <a href="https://wa.me/9779863970493" target="_blank" style="color:var(--gold)">WhatsApp</a>';
+  }
+  aiMsgs.scrollTop = aiMsgs.scrollHeight;
 }
-document.getElementById(‘ai-chat-send’).addEventListener(‘click’,aiSend);
-document.getElementById(‘ai-chat-input’).addEventListener(‘keypress’,e=>{if(e.key===‘Enter’)aiSend();});
+document.getElementById('ai-chat-send').addEventListener('click', aiSend);
+document.getElementById('ai-chat-input').addEventListener('keypress', e => { if (e.key === 'Enter') aiSend(); });
 
 /* ══ DASHBOARD ══ */
-function buildDashboard(){
-// Donut chart
-new Chart(document.getElementById(‘slabChart’),{
-type:‘doughnut’,
-data:{ labels:[‘1% (≤5L)’,‘10% (5-7L)’,‘20% (7-10L)’,‘30% (10-20L)’,‘36% (20-50L)’,‘39% (50L+)’], datasets:[{data:[500000,200000,300000,1000000,3000000,2000000],backgroundColor:[’#4caf7d’,’#5a9ee0’,’#c9a84c’,’#e8a84c’,’#e05a5a’,’#cc3333’],borderColor:’#161616’,borderWidth:3}] },
-options:{cutout:‘62%’,responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:‘rgba(255,255,255,.5)’,font:{size:10},boxWidth:12}}}}
-});
+function buildDashboard() {
+  // Donut chart
+  new Chart(document.getElementById('slabChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['1% (≤5L)', '10% (5-7L)', '20% (7-10L)', '30% (10-20L)', '36% (20-50L)', '39% (50L+)'],
+      datasets: [{
+        data: [500000, 200000, 300000, 1000000, 3000000, 2000000],
+        backgroundColor: ['#4caf7d', '#5a9ee0', '#c9a84c', '#e8a84c', '#e05a5a', '#cc3333'],
+        borderColor: '#161616',
+        borderWidth: 3
+      }]
+    },
+    options: {
+      cutout: '62%',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: 'rgba(255,255,255,.5)', font: { size: 10 }, boxWidth: 12 } }
+      }
+    }
+  });
 
-// Slab visual bars
-const slabs=[{l:‘Rs 5L @ 1%’,rate:1,color:’#4caf7d’},{l:‘Rs 2L @ 10%’,rate:10,color:’#5a9ee0’},{l:‘Rs 3L @ 20%’,rate:20,color:’#c9a84c’},{l:‘Rs 10L @ 30%’,rate:30,color:’#e8a84c’},{l:‘Rs 30L @ 36%’,rate:36,color:’#e05a5a’},{l:‘Above @ 39%’,rate:39,color:’#cc3333’}];
-document.getElementById(‘slab-visual-bars’).innerHTML=slabs.map(s=>` <div class="sv-row"> <div class="sv-label">${s.l}</div> <div class="sv-bar-wrap"><div class="sv-bar" style="width:${s.rate*2.5}%;background:${s.color}"></div></div> <div class="sv-rate">${s.rate}%</div> </div>`).join(’’);
+  // Slab visual bars
+  const slabs = [{ l: 'Rs 5L @ 1%', rate: 1, color: '#4caf7d' }, { l: 'Rs 2L @ 10%', rate: 10, color: '#5a9ee0' }, { l: 'Rs 3L @ 20%', rate: 20, color: '#c9a84c' }, { l: 'Rs 10L @ 30%', rate: 30, color: '#e8a84c' }, { l: 'Rs 30L @ 36%', rate: 36, color: '#e05a5a' }, { l: 'Above @ 39%', rate: 39, color: '#cc3333' }];
+  document.getElementById('slab-visual-bars').innerHTML = slabs.map(s => `
+    <div class="sv-row">
+      <div class="sv-label">${s.l}</div>
+      <div class="sv-bar-wrap"><div class="sv-bar" style="width:${s.rate * 2.5}%;background:${s.color}"></div></div>
+      <div class="sv-rate">${s.rate}%</div>
+    </div>`).join('');
 
-// Quick ref
-document.getElementById(‘quick-ref’).innerHTML=[
-[‘VAT Rate’,‘13%’],[‘TDS (VAT bill)’,‘1.5%’],[‘TDS (no VAT)’,‘15%’],[‘Rent TDS’,‘10%’],
-[‘Dividend TDS’,‘5%’],[‘PF Employee’,‘11%’],[‘PF Employer’,‘20%’],
-[‘Corporate Tax’,‘25%’],[‘VAT Filing’,‘25 गते monthly’],[‘TDS Deposit’,‘25 गते next month’],
-[‘Advance Tax Q1’,‘40% — Poush end’],[‘Advance Tax Q2’,‘70% — Chaitra end’],
-].map(([l,r])=>`<div class="ref-row"><span class="ref-label">${l}</span><span class="ref-val">${r}</span></div>`).join(’’);
+  // Quick ref
+  document.getElementById('quick-ref').innerHTML = [
+    ['VAT Rate', '13%'],
+    ['TDS (VAT bill)', '1.5%'],
+    ['TDS (no VAT)', '15%'],
+    ['Rent TDS', '10%'],
+    ['Dividend TDS', '5%'],
+    ['PF Employee', '11%'],
+    ['PF Employer', '20%'],
+    ['Corporate Tax', '25%'],
+    ['VAT Filing', '25 गते monthly'],
+    ['TDS Deposit', '25 गते next month'],
+    ['Advance Tax Q1', '40% — Poush end'],
+    ['Advance Tax Q2', '70% — Chaitra end'],
+  ].map(([l, r]) => `<div class="ref-row"><span class="ref-label">${l}</span><span class="ref-val">${r}</span></div>`).join('');
 }
 
 /* ══ INIT ══ */
