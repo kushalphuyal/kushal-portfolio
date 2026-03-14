@@ -680,55 +680,72 @@ function doBS() {
   showRes('bs-res');
 }
 
-/* ── DATE CONVERTER — uses NepaliDate library ── */
+/* ── DATE CONVERTER — NepaliDate library (accurate lookup table) ── */
+let ndLibReady = false;
+
+function waitForND(cb) {
+  if (typeof NepaliDate !== 'undefined') { ndLibReady = true; cb(); return; }
+  let tries = 0;
+  const t = setInterval(() => {
+    tries++;
+    if (typeof NepaliDate !== 'undefined') { ndLibReady = true; clearInterval(t); cb(); }
+    else if (tries > 20) { clearInterval(t); }
+  }, 200);
+}
+
+function ndError(elId) {
+  document.getElementById(elId).innerHTML = '<span style="color:var(--red);font-size:.8rem;">⚠️ Internet जडान जाँच गर्नुस् र page reload गर्नुस्</span>';
+}
+
 function setToday() {
-  if (typeof NepaliDate === 'undefined') { alert('Date library load हुँदैछ, छिटो retry गर्नुस!'); return; }
-  const now = new Date();
-  document.getElementById('ad-in').value = now.toISOString().split('T')[0];
-  const bsToday = new NepaliDate(now);
-  document.getElementById('bs-yr').value = bsToday.getYear();
-  document.getElementById('bs-mo').value = bsToday.getMonth() + 1;
-  document.getElementById('bs-dy').value = bsToday.getDate();
-  doADtoBS(); doBStoAD();
+  waitForND(() => {
+    const now = new Date();
+    document.getElementById('ad-in').value = now.toISOString().split('T')[0];
+    const bsToday = new NepaliDate(now);
+    document.getElementById('bs-yr').value = bsToday.getYear();
+    document.getElementById('bs-mo').value = bsToday.getMonth() + 1;
+    document.getElementById('bs-dy').value = bsToday.getDate();
+    doADtoBS(); doBStoAD();
+  });
+  if (!ndLibReady) {
+    document.getElementById('ad-bs-out').textContent = 'Loading…';
+    document.getElementById('bs-ad-out').textContent = 'Loading…';
+  }
 }
 
 function doADtoBS() {
+  if (typeof NepaliDate === 'undefined') { ndError('ad-bs-out'); return; }
   const adVal = document.getElementById('ad-in').value;
   if (!adVal) return;
   try {
-    if (typeof NepaliDate !== 'undefined') {
-      const bsDate = new NepaliDate(new Date(adVal));
-      document.getElementById('ad-bs-out').textContent = bsDate.format('YYYY MMMM DD');
-    } else {
-      // Approximate fallback
-      const d = new Date(adVal);
-      const y = d.getFullYear() + 57, m = ((d.getMonth() + 9) % 12) || 12, dy = d.getDate() + 17;
-      document.getElementById('ad-bs-out').textContent = `${y}-${String(m).padStart(2,'0')}-${String(dy>30?dy-30:dy).padStart(2,'0')} (Approx)`;
-    }
-  } catch(e) { document.getElementById('ad-bs-out').textContent = 'Invalid date'; }
+    const bsDate = new NepaliDate(new Date(adVal));
+    // format: YYYY = BS year, MMMM = Nepali month name, DD = day
+    document.getElementById('ad-bs-out').textContent = bsDate.format('YYYY MMMM DD');
+  } catch(e) {
+    document.getElementById('ad-bs-out').textContent = 'Invalid date';
+  }
 }
 
 function doBStoAD() {
-  const yr=parseInt(document.getElementById('bs-yr').value)||0;
-  const mo=parseInt(document.getElementById('bs-mo').value)||0;
-  const dy=parseInt(document.getElementById('bs-dy').value)||0;
-  if (!yr||!mo||!dy) return;
+  if (typeof NepaliDate === 'undefined') { ndError('bs-ad-out'); return; }
+  const yr = parseInt(document.getElementById('bs-yr').value) || 0;
+  const mo = parseInt(document.getElementById('bs-mo').value) || 0;
+  const dy = parseInt(document.getElementById('bs-dy').value) || 0;
+  if (!yr || !mo || !dy) return;
   try {
-    if (typeof NepaliDate !== 'undefined') {
-      const bsDate = new NepaliDate(yr, mo - 1, dy);
-      const adDate = bsDate.getAdDate();
-      document.getElementById('bs-ad-out').textContent = adDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-    } else {
-      let adY=yr-57, adM=mo-9, adD=dy-17;
-      if(adM<=0){adM+=12;adY--;} if(adD<=0){adD+=30;adM--;}
-      document.getElementById('bs-ad-out').textContent = `${adY}-${String(adM).padStart(2,'0')}-${String(adD).padStart(2,'0')} (Approx)`;
-    }
-  } catch(e) { document.getElementById('bs-ad-out').textContent = 'Invalid BS date'; }
+    const bsDate = new NepaliDate(yr, mo - 1, dy); // month is 0-indexed in library
+    const adDate = bsDate.getAdDate();
+    document.getElementById('bs-ad-out').textContent = adDate.toLocaleDateString('en-GB', {
+      day: 'numeric', month: 'long', year: 'numeric'
+    });
+  } catch(e) {
+    document.getElementById('bs-ad-out').textContent = 'Invalid BS date — यो मिति छैन';
+  }
 }
 
-// Auto-load today on page load
+// Auto-show today's date on page load
 window.addEventListener('load', () => {
-  setTimeout(() => { if (typeof NepaliDate !== 'undefined') setToday(); }, 800);
+  waitForND(() => setToday());
 });
 
 /* ── PAN ── */
