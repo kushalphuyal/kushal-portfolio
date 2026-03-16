@@ -1339,7 +1339,7 @@ function setToday() {
     document.getElementById('ad-in').value = now.toISOString().split('T')[0];
 
     const converter = new NepaliDateConverter();
-    const bs = converter.ad2bs(now.getFullYear(), now.getMonth() + 1, now.getDate());
+    const bs = converter.adToBs(now.getFullYear(), now.getMonth() + 1, now.getDate());
 
     document.getElementById('bs-yr').value = bs.year;
     document.getElementById('bs-mo').value = bs.month;
@@ -1365,7 +1365,7 @@ function doADtoBS() {
   try {
     const [year, month, day] = v.split('-').map(Number);
     const converter = new NepaliDateConverter();
-    const bs = converter.ad2bs(year, month, day);
+    const bs = converter.adToBs(year, month, day);
 
     // महिनाको नाम नेपालीमा देखाउन चाहनुहुन्छ भने यहाँ map गर्नुहोस्
     const months = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फाल्गुन', 'चैत'];
@@ -1393,7 +1393,7 @@ function doBStoAD() {
 
   try {
     const converter = new NepaliDateConverter();
-    const ad = converter.bs2ad(yr, mo, dy);
+    const ad = converter.bsToAd(yr, mo, dy);
 
     const date = new Date(ad.year, ad.month - 1, ad.day);
     document.getElementById('bs-ad-out').textContent = 
