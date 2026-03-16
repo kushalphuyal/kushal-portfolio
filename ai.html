@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/nepali-date@latest/dist/nepali-date.umd.min.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="canonical" href="https://kushalphuyal.com.np/ai.html" />
@@ -773,30 +774,46 @@
     </div>
 
     <!-- DATE CONVERTER -->
+
     <div class="panel" id="panel-date-conv">
-      <div class="ph"><div class="ph-eye">Utility</div><h2>BS / AD Date Converter</h2></div>
-      <div style="text-align:center;margin-bottom:20px;">
-        <button class="btn btn-gold btn-sm" onclick="setToday()"><i class="fas fa-clock"></i> Today's Date</button>
+  <div class="ph">
+    <div class="ph-eye">Utility</div>
+    <h2>BS / AD Date Converter</h2>
+  </div>
+  <div style="text-align:center;margin-bottom:20px;">
+    <button class="btn btn-gold btn-sm" onclick="setToday()">
+      <i class="fas fa-clock"></i> Today's Date
+    </button>
+  </div>
+  <div class="row2">
+    <div class="calc-card">
+      <div class="calc-card-title"><i class="fas fa-exchange-alt"></i> AD → BS</div>
+      <div class="fg">
+        <label>AD Date</label>
+        <input type="date" id="ad-in" onchange="doADtoBS()">
       </div>
-      <div class="row2">
-        <div class="calc-card">
-          <div class="calc-card-title"><i class="fas fa-exchange-alt"></i> AD → BS</div>
-          <div class="fg"><label>AD Date</label><input type="date" id="ad-in" onchange="doADtoBS()"></div>
-          <button class="btn btn-gold btn-sm" onclick="doADtoBS()">Convert → BS</button>
-          <div class="result-box show" style="margin-top:14px;"><div class="result-box-title">BS Date</div><div id="ad-bs-out" style="padding:8px;font-size:1.1rem;color:var(--gold);font-weight:700;">—</div></div>
-        </div>
-        <div class="calc-card">
-          <div class="calc-card-title"><i class="fas fa-exchange-alt"></i> BS → AD</div>
-          <div class="row3">
-            <div class="fg"><label>Year</label><input type="number" id="bs-yr" placeholder="2082" min="1970" max="2100"></div>
-            <div class="fg"><label>Month</label><input type="number" id="bs-mo" placeholder="1" min="1" max="12"></div>
-            <div class="fg"><label>Day</label><input type="number" id="bs-dy" placeholder="1" min="1" max="32"></div>
-          </div>
-          <button class="btn btn-gold btn-sm" onclick="doBStoAD()">Convert → AD</button>
-          <div class="result-box show" style="margin-top:14px;"><div class="result-box-title">AD Date</div><div id="bs-ad-out" style="padding:8px;font-size:1.1rem;color:var(--gold);font-weight:700;">—</div></div>
-        </div>
+      <button class="btn btn-gold btn-sm" onclick="doADtoBS()">Convert → BS</button>
+      <div class="result-box show" style="margin-top:14px;">
+        <div class="result-box-title">BS Date</div>
+        <div id="ad-bs-out" style="padding:8px;font-size:1.1rem;color:var(--gold);font-weight:700;">—</div>
       </div>
     </div>
+
+    <div class="calc-card">
+      <div class="calc-card-title"><i class="fas fa-exchange-alt"></i> BS → AD</div>
+      <div class="row3">
+        <div class="fg"><label>Year</label><input type="number" id="bs-yr" placeholder="2082" min="1970" max="2100"></div>
+        <div class="fg"><label>Month</label><input type="number" id="bs-mo" placeholder="1" min="1" max="12"></div>
+        <div class="fg"><label>Day</label><input type="number" id="bs-dy" placeholder="1" min="1" max="32"></div>
+      </div>
+      <button class="btn btn-gold btn-sm" onclick="doBStoAD()">Convert → AD</button>
+      <div class="result-box show" style="margin-top:14px;">
+        <div class="result-box-title">AD Date</div>
+        <div id="bs-ad-out" style="padding:8px;font-size:1.1rem;color:var(--gold);font-weight:700;">—</div>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- PAN VALIDATOR -->
     <div class="panel" id="panel-pan">
@@ -822,18 +839,7 @@
 </div>
 
 <!-- NepaliDate: Primary jsdelivr, Backup unpkg -->
-<script>
-(function(){
-  var s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/nepali-date-converter@3.4.0/dist/nepali-date-converter.umd.js';
-  s.onerror = function() {
-    var s2 = document.createElement('script');
-    s2.src = 'https://unpkg.com/nepali-date-converter@3.4.0/dist/nepali-date-converter.umd.js';
-    document.head.appendChild(s2);
-  };
-  document.head.appendChild(s);
-})();
-</script>
+
 
 <script src="script.js"></script>
 
@@ -1312,42 +1318,105 @@ function buildFXCards(amt = 1000, from = 'NPR') {
 }
 
 /* ══ DATE CONVERTER ══ */
-let ndLibReady = false;
-function waitForND(cb) {
-  if (typeof NepaliDate !== 'undefined') { ndLibReady = true; cb(); return; }
-  let tries = 0;
-  const t = setInterval(() => {
-    tries++;
-    if (typeof NepaliDate !== 'undefined') { ndLibReady = true; clearInterval(t); cb(); }
-    else if (tries > 25) clearInterval(t);
-  }, 200);
+  /* ══ DATE CONVERTER - Simplified (using nepali-date library) ══ */
+
+// Error देखाउने function (पुरानै राख्न सकिन्छ)
+function ndErr(id, msg = '⚠️ Date converter लोड हुन सकेन। इन्टरनेट जाँच गर्नुहोस्।') {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = `<span style="color:var(--red);font-size:.8rem;">${msg}</span>`;
 }
-function ndErr(id) { document.getElementById(id).innerHTML = '<span style="color:var(--red);font-size:.8rem;">⚠️ Internet जाँच गरेर reload गर्नुस्</span>'; }
+
+// आजको मिति सेट गर्ने
 function setToday() {
-  waitForND(() => {
+  if (typeof NepaliDate === 'undefined') {
+    ndErr('ad-bs-out', 'NepaliDate library लोड भएन');
+    ndErr('bs-ad-out', 'NepaliDate library लोड भएन');
+    return;
+  }
+
+  try {
     const now = new Date();
     document.getElementById('ad-in').value = now.toISOString().split('T')[0];
+
     const bs = new NepaliDate(now);
     document.getElementById('bs-yr').value = bs.getYear();
     document.getElementById('bs-mo').value = bs.getMonth() + 1;
     document.getElementById('bs-dy').value = bs.getDate();
-    doADtoBS(); doBStoAD();
-  });
+
+    doADtoBS();
+    doBStoAD();
+  } catch (e) {
+    console.error("setToday error:", e);
+    ndErr('ad-bs-out', 'आजको मिति लोड गर्न समस्या');
+  }
 }
+
+// AD → BS
 function doADtoBS() {
-  if (typeof NepaliDate === 'undefined') { ndErr('ad-bs-out'); return; }
-  const v = document.getElementById('ad-in').value; if (!v) return;
-  try { const b = new NepaliDate(new Date(v)); document.getElementById('ad-bs-out').textContent = b.format('YYYY MMMM DD'); }
-  catch (e) { document.getElementById('ad-bs-out').textContent = 'Invalid date'; }
+  if (typeof NepaliDate === 'undefined') {
+    ndErr('ad-bs-out');
+    return;
+  }
+
+  const v = document.getElementById('ad-in').value;
+  if (!v) return;
+
+  try {
+    const date = new Date(v);
+    if (isNaN(date.getTime())) throw new Error("Invalid date");
+
+    const bs = new NepaliDate(date);
+    document.getElementById('ad-bs-out').textContent = bs.format('YYYY MMMM DD');
+  } catch (e) {
+    document.getElementById('ad-bs-out').textContent = 'Invalid AD date';
+    console.warn(e);
+  }
 }
+
+// BS → AD
 function doBStoAD() {
-  if (typeof NepaliDate === 'undefined') { ndErr('bs-ad-out'); return; }
-  const yr = parseInt(document.getElementById('bs-yr').value) || 0, mo = parseInt(document.getElementById('bs-mo').value) || 0, dy = parseInt(document.getElementById('bs-dy').value) || 0;
-  if (!yr || !mo || !dy) return;
-  try { const b = new NepaliDate(yr, mo - 1, dy); document.getElementById('bs-ad-out').textContent = b.getAdDate().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }); }
-  catch (e) { document.getElementById('bs-ad-out').textContent = 'Invalid BS date'; }
+  if (typeof NepaliDate === 'undefined') {
+    ndErr('bs-ad-out');
+    return;
+  }
+
+  const yr = parseInt(document.getElementById('bs-yr').value) || 0;
+  const mo = parseInt(document.getElementById('bs-mo').value) || 0;
+  const dy = parseInt(document.getElementById('bs-dy').value) || 0;
+
+  if (yr < 1970 || yr > 2100 || mo < 1 || mo > 12 || dy < 1 || dy > 32) {
+    document.getElementById('bs-ad-out').textContent = 'Invalid BS date';
+    return;
+  }
+
+  try {
+    const bs = new NepaliDate(yr, mo - 1, dy);
+    const ad = bs.getAdDate();
+    document.getElementById('bs-ad-out').textContent = 
+      ad.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  } catch (e) {
+    document.getElementById('bs-ad-out').textContent = 'Invalid BS date';
+    console.warn(e);
+  }
 }
-window.addEventListener('load', () => waitForND(() => setToday()));
+
+// Page load मा आजको मिति देखाउने (wait बिना, library सिधै उपलब्ध हुन्छ)
+window.addEventListener('load', function() {
+  // Library तुरुन्त उपलब्ध हुन्छ, तर ढुक्क हुन १ सेकेन्ड पछि पनि प्रयास गर्न सकिन्छ
+  if (typeof NepaliDate !== 'undefined') {
+    setToday();
+  } else {
+    // यदि कुनै कारणले ढिलो लोड भयो भने
+    setTimeout(() => {
+      if (typeof NepaliDate !== 'undefined') {
+        setToday();
+      } else {
+        ndErr('ad-bs-out', 'Date converter लोड हुन सकेन। पेज refresh गर्नुहोस्।');
+      }
+    }, 1200); // १.२ सेकेन्ड
+  }
+});
+  
 
 /* ══ PAN ══ */
 function doPAN() {
