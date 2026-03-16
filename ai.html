@@ -1505,6 +1505,17 @@ buildDashboard(); buildTDSRef(); buildITSlabs(); buildNPARef();
 doFX(); // init currency
 doLoanCompare(); // init loan compare with defaults
 </script>
+<div id="debug-info" style="position:fixed;bottom:10px;right:10px;background:rgba(0,0,0,0.8);color:lime;padding:10px;font-size:12px;z-index:99999;border-radius:8px;">
+  Checking...
+</div>
+<script>
+  setTimeout(() => {
+    document.getElementById('debug-info').textContent = 
+      typeof NepaliDate !== 'undefined' ? 
+      '✓ CDN loaded' : '✗ Local file used';
+  }, 2000);
+</script>
+
 
 </body>
 </html>
