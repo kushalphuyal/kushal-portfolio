@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/nepali-date@latest/dist/nepali-date.umd.min.js"></script>
+  
+  <script src="js/nepali-date-converter.umd.min.js"></script>
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="canonical" href="https://kushalphuyal.com.np/ai.html" />
@@ -1318,17 +1320,15 @@ function buildFXCards(amt = 1000, from = 'NPR') {
 }
 
 /* ══ DATE CONVERTER ══ */
-  /* ══ DATE CONVERTER - Simplified (using nepali-date library) ══ */
+  /* ══ DATE CONVERTER - Using nepali-date-converter library ══ */
 
-// Error देखाउने function (पुरानै राख्न सकिन्छ)
 function ndErr(id, msg = '⚠️ Date converter लोड हुन सकेन। इन्टरनेट जाँच गर्नुहोस्।') {
   const el = document.getElementById(id);
   if (el) el.innerHTML = `<span style="color:var(--red);font-size:.8rem;">${msg}</span>`;
 }
 
-// आजको मिति सेट गर्ने
 function setToday() {
-  if (typeof NepaliDate === 'undefined') {
+  if (typeof NepaliDateConverter === 'undefined') {
     ndErr('ad-bs-out', 'NepaliDate library लोड भएन');
     ndErr('bs-ad-out', 'NepaliDate library लोड भएन');
     return;
@@ -1338,22 +1338,23 @@ function setToday() {
     const now = new Date();
     document.getElementById('ad-in').value = now.toISOString().split('T')[0];
 
-    const bs = new NepaliDate(now);
-    document.getElementById('bs-yr').value = bs.getYear();
-    document.getElementById('bs-mo').value = bs.getMonth() + 1;
-    document.getElementById('bs-dy').value = bs.getDate();
+    const converter = new NepaliDateConverter();
+    const bs = converter.ad2bs(now.getFullYear(), now.getMonth() + 1, now.getDate());
+
+    document.getElementById('bs-yr').value = bs.year;
+    document.getElementById('bs-mo').value = bs.month;
+    document.getElementById('bs-dy').value = bs.day;
 
     doADtoBS();
     doBStoAD();
   } catch (e) {
-    console.error("setToday error:", e);
+    console.error(e);
     ndErr('ad-bs-out', 'आजको मिति लोड गर्न समस्या');
   }
 }
 
-// AD → BS
 function doADtoBS() {
-  if (typeof NepaliDate === 'undefined') {
+  if (typeof NepaliDateConverter === 'undefined') {
     ndErr('ad-bs-out');
     return;
   }
@@ -1362,20 +1363,21 @@ function doADtoBS() {
   if (!v) return;
 
   try {
-    const date = new Date(v);
-    if (isNaN(date.getTime())) throw new Error("Invalid date");
+    const [year, month, day] = v.split('-').map(Number);
+    const converter = new NepaliDateConverter();
+    const bs = converter.ad2bs(year, month, day);
 
-    const bs = new NepaliDate(date);
-    document.getElementById('ad-bs-out').textContent = bs.format('YYYY MMMM DD');
+    // महिनाको नाम नेपालीमा देखाउन चाहनुहुन्छ भने यहाँ map गर्नुहोस्
+    const months = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फाल्गुन', 'चैत'];
+    document.getElementById('ad-bs-out').textContent = 
+      `${bs.year} ${months[bs.month - 1]} ${bs.day}`;
   } catch (e) {
     document.getElementById('ad-bs-out').textContent = 'Invalid AD date';
-    console.warn(e);
   }
 }
 
-// BS → AD
 function doBStoAD() {
-  if (typeof NepaliDate === 'undefined') {
+  if (typeof NepaliDateConverter === 'undefined') {
     ndErr('bs-ad-out');
     return;
   }
@@ -1390,32 +1392,28 @@ function doBStoAD() {
   }
 
   try {
-    const bs = new NepaliDate(yr, mo - 1, dy);
-    const ad = bs.getAdDate();
+    const converter = new NepaliDateConverter();
+    const ad = converter.bs2ad(yr, mo, dy);
+
+    const date = new Date(ad.year, ad.month - 1, ad.day);
     document.getElementById('bs-ad-out').textContent = 
-      ad.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   } catch (e) {
     document.getElementById('bs-ad-out').textContent = 'Invalid BS date';
-    console.warn(e);
   }
 }
 
-// Page load मा आजको मिति देखाउने (wait बिना, library सिधै उपलब्ध हुन्छ)
+// Page load मा आजको मिति देखाउने
 window.addEventListener('load', function() {
-  // Library तुरुन्त उपलब्ध हुन्छ, तर ढुक्क हुन १ सेकेन्ड पछि पनि प्रयास गर्न सकिन्छ
-  if (typeof NepaliDate !== 'undefined') {
-    setToday();
-  } else {
-    // यदि कुनै कारणले ढिलो लोड भयो भने
-    setTimeout(() => {
-      if (typeof NepaliDate !== 'undefined') {
-        setToday();
-      } else {
-        ndErr('ad-bs-out', 'Date converter लोड हुन सकेन। पेज refresh गर्नुहोस्।');
-      }
-    }, 1200); // १.२ सेकेन्ड
-  }
+  setTimeout(() => {
+    if (typeof NepaliDateConverter !== 'undefined') {
+      setToday();
+    } else {
+      ndErr('ad-bs-out', 'Date converter लोड हुन सकेन। पेज refresh गर्नुहोस्।');
+    }
+  }, 800); // ०.८ सेकेन्ड पर्खेर प्रयास
 });
+
   
 
 /* ══ PAN ══ */
