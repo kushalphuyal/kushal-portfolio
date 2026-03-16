@@ -1311,25 +1311,37 @@ async function fetchLiveRates() {
   const rateEl = document.getElementById('fx-live-status');
   try {
     if (rateEl) rateEl.textContent = '⏳ Updating rates...';
-    const res = await fetch('https://api.frankfurter.app/latest?from=USD&to=NPR,INR,EUR,GBP,AUD');
+    
+    // NPR support गर्ने API
+    const res = await fetch('https://api.exchangerate-api.com/v4/latest/NPR');
     const data = await res.json();
+    
     if (data && data.rates) {
-      const usdToNPR = data.rates.NPR;
       FX_RATES = {
         NPR: 1,
-        USD: 1 / usdToNPR,
-        INR: data.rates.INR / usdToNPR,
-        EUR: data.rates.EUR / usdToNPR,
-        GBP: data.rates.GBP / usdToNPR,
-        AUD: data.rates.AUD / usdToNPR,
+        USD: data.rates.USD,
+        INR: data.rates.INR,
+        EUR: data.rates.EUR,
+        GBP: data.rates.GBP,
+        AUD: data.rates.AUD,
       };
-      if (rateEl) { rateEl.textContent = `✓ Live rates — ${data.date}`; rateEl.style.color = 'var(--green)'; }
+      if (rateEl) { 
+        rateEl.textContent = `✓ Live rates — ${data.date}`; 
+        rateEl.style.color = 'var(--green)'; 
+      }
       doFX();
     }
   } catch (e) {
-    if (rateEl) { rateEl.textContent = '⚠️ Approximate rates (offline)'; rateEl.style.color = 'var(--gold)'; }
+    // Fallback — static rates use गर्ने
+    FX_RATES = { NPR: 1, USD: 0.00752, INR: 0.625, EUR: 0.00685, GBP: 0.00589, AUD: 0.01152 };
+    if (rateEl) { 
+      rateEl.textContent = '⚠️ Approximate rates (offline)'; 
+      rateEl.style.color = 'var(--gold)'; 
+    }
+    doFX();
   }
 }
+
 
 function doFX() {
   const amt = v('fx-amount'), from = sv('fx-from'), to = sv('fx-to');
