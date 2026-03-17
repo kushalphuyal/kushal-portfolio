@@ -1444,7 +1444,7 @@ function doBStoAD() {
   const mo = parseInt(document.getElementById('bs-mo').value) || 0;  // 1‑based
   const dy = parseInt(document.getElementById('bs-dy').value) || 0;
 
-  if (yr < 2000 || yr > 2090 || mo < 1 || mo > 12 || dy < 1 || dy > 32) {
+  if (yr < 2000 || yr > 2098 || mo < 1 || mo > 12 || dy < 1 || dy > 32) {
     document.getElementById('bs-ad-out').textContent = 'Invalid BS date';
     return;
   }
