@@ -153,7 +153,7 @@ function initChat() {
     try {
       const ctrl = new AbortController();
       const to   = setTimeout(() => ctrl.abort(), 12000);
-      const res  = await fetch('https://morning-bush-8bd5.kushalphuyal.workers.dev/', {
+      const res  = await fetch('https://morning-bush-8bd5.kushalphuyal.workers.dev/api/chat/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: text }),
