@@ -840,15 +840,7 @@
   <div class="chat-inp-row"><input id="c-input" placeholder="Ask…" autocomplete="off" /><button id="c-send"><i class="fas fa-paper-plane"></i></button></div>
 </div>
 
-<!-- NepaliDate: Primary jsdelivr, Backup unpkg -->
-<script src="https://cdn.jsdelivr.net/npm/nepali-date-converter@latest/dist/nepali-date-converter.umd.min.js"></script>
-<script>
-  if (typeof NepaliDate === 'undefined') {
-    var script = document.createElement('script');
-    script.src = 'nepali-date-converter.min.js'; // यदि root मा छ भने
-    document.head.appendChild(script);
-  }
-</script>
+<script src="nepali-date-converter.min.js"></script>
 
 <script src="script.js"></script>
 
@@ -1366,89 +1358,45 @@ function buildFXCards(amt = 1000, from = 'NPR') {
 
 /* ══ DATE CONVERTER - सही month handling ══ */
 
-function ndErr(id, msg = '⚠️ Date converter लोड हुन सकेन। इन्टरनेट जाँच गर्नुहोस्।') {
-  const el = document.getElementById(id);
-  if (el) el.innerHTML = `<span style="color:var(--red);font-size:.8rem;">${msg}</span>`;
-}
-
 function setToday() {
-  if (typeof NepaliDate === 'undefined') {
-    ndErr('ad-bs-out', 'NepaliDate library लोड भएन');
-    ndErr('bs-ad-out', 'NepaliDate library लोड भएन');
-    return;
-  }
-
-  try {
-    const now = new Date();
-    document.getElementById('ad-in').value = now.toISOString().split('T')[0];
-
-    const converter = new NepaliDate.default();
-    const bs = converter.getBS();  // { year, month: 0‑based, date, day }
-
-    document.getElementById('bs-yr').value = bs.year;
-    document.getElementById('bs-mo').value = bs.month + 1;  // 0‑based → 1‑based
-    document.getElementById('bs-dy').value = bs.date;
-
-    doADtoBS();
-    doBStoAD();
-  } catch (e) {
-    console.error(e);
-    ndErr('ad-bs-out', 'आजको मिति लोड गर्न समस्या');
-  }
+  const now = new Date();
+  document.getElementById('ad-in').value = now.toISOString().split('T')[0];
+  const bs = adToBs(now);
+  document.getElementById('bs-yr').value = bs.year;
+  document.getElementById('bs-mo').value = bs.month;
+  document.getElementById('bs-dy').value = bs.day;
+  doADtoBS();
+  doBStoAD();
 }
-
 
 function doADtoBS() {
-  if (typeof NepaliDate === 'undefined') {
-    ndErr('ad-bs-out');
-    return;
-  }
-
   const adDateStr = document.getElementById('ad-in').value;
   if (!adDateStr) return;
-
+  const [year, month, day] = adDateStr.split('-').map(Number);
+  const jsDate = new Date(year, month - 1, day);
   try {
-    const [year, month, day] = adDateStr.split('-').map(Number);
-    
-    // Direct JS Date object बनाउने अनि NepaliDate मा pass गर्ने
-    const jsDate = new Date(year, month - 1, day);
-    const converter = new NepaliDate.default(jsDate);
-    const bs = converter.getBS();
-
-    const months = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फाल्गुन', 'चैत'];
+    const bs = adToBs(jsDate);
+    const months = ['बैशाख','जेठ','असार','साउन','भदौ','असोज','कात्तिक','मंसिर','पुस','माघ','फाल्गुन','चैत'];
     document.getElementById('ad-bs-out').textContent =
-      `${bs.year} ${months[bs.month]} ${bs.date}`;
-  } catch (e) {
-    document.getElementById('ad-bs-out').textContent = 'Invalid AD date';
+      `${bs.year} ${months[bs.month - 1]} ${bs.day}`;
+  } catch(e) {
+    document.getElementById('ad-bs-out').textContent = 'Invalid date / Range baahira';
   }
 }
 
 function doBStoAD() {
-  if (typeof NepaliDate === 'undefined') {
-    ndErr('bs-ad-out');
-    return;
-  }
-
   const yr = parseInt(document.getElementById('bs-yr').value) || 0;
-  const mo = parseInt(document.getElementById('bs-mo').value) || 0;  // 1‑based
+  const mo = parseInt(document.getElementById('bs-mo').value) || 0;
   const dy = parseInt(document.getElementById('bs-dy').value) || 0;
-
-  if (yr < 2000 || yr > 2098 || mo < 1 || mo > 12 || dy < 1 || dy > 32) {
+  if (yr < 2000 || yr > 2100 || mo < 1 || mo > 12 || dy < 1 || dy > 32) {
     document.getElementById('bs-ad-out').textContent = 'Invalid BS date';
     return;
   }
-
   try {
-    const converter = new NepaliDate.default();
-    converter.setYear(yr);
-    converter.setMonth(mo - 1);  // 1‑based → 0‑based
-    converter.setDate(dy);
-    const ad = converter.getAD();  // { year, month: 0‑based, date, day }
-
-    const date = new Date(ad.year, ad.month, ad.date);  // month already 0‑based
-    document.getElementById('bs-ad-out').textContent = 
-      date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-  } catch (e) {
+    const ad = bsToAd(yr, mo, dy);
+    document.getElementById('bs-ad-out').textContent =
+      ad.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  } catch(e) {
     document.getElementById('bs-ad-out').textContent = 'Invalid BS date';
   }
 }
@@ -1592,16 +1540,7 @@ buildDashboard(); buildTDSRef(); buildITSlabs(); buildNPARef();
 doFX(); doLoanCompare(); fetchLiveRates();
 loadAdminConfig();
 </script>
-<div id="debug-info" style="position:fixed;bottom:10px;right:10px;background:rgba(0,0,0,0.8);color:lime;padding:10px;font-size:12px;z-index:99999;border-radius:8px;">
-  Checking...
-</div>
 
-<script>
-  setTimeout(() => {
-    document.getElementById('debug-info').innerHTML = 
-      typeof NepaliDate !== 'undefined' ? '✓ Local loaded' : '✗ Local FAILED';
-  }, 2000);
-</script>
 
 </body>
 </html>
