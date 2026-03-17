@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel | Nepal Accounting Suite</title>
+  <title>Admin Panel - Nepal Accounting Suite</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <style>
     :root {
@@ -19,44 +19,43 @@
       --blue: #5a9ee0;
       --white: #f0f0f0;
       --muted: rgba(255,255,255,.4);
-      --ff-head: 'Georgia', serif;
-      --ff-body: 'Segoe UI', sans-serif;
-      --ff-mono: 'Courier New', monospace;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); color: var(--white); font-family: var(--ff-body); min-height: 100vh; }
-
-    /* ── LOGIN SCREEN ── */
+    body { background: var(--bg); color: var(--white); font-family: 'Segoe UI', sans-serif; }
+    
+    /* Login Screen */
     #login-screen {
       position: fixed; inset: 0; background: var(--bg);
       display: flex; align-items: center; justify-content: center;
-      z-index: 9999; flex-direction: column; gap: 0;
+      z-index: 9999;
     }
     .login-box {
       background: var(--card); border: 1px solid var(--border2);
       border-radius: 20px; padding: 48px 40px; width: 100%; max-width: 400px;
       box-shadow: 0 32px 80px rgba(0,0,0,.6);
     }
-    .login-logo {
-      text-align: center; margin-bottom: 32px;
+    .login-logo { text-align: center; margin-bottom: 32px; }
+    .login-logo i { 
+      font-size: 2.5rem; color: var(--gold); 
+      background: rgba(201,168,76,.1); width: 80px; height: 80px;
+      border-radius: 20px; display: flex; align-items: center;
+      justify-content: center; margin: 0 auto 16px;
     }
-    .login-logo .ll-icon {
-      width: 64px; height: 64px; border-radius: 16px;
-      background: linear-gradient(135deg, rgba(201,168,76,.2), rgba(201,168,76,.05));
-      border: 1px solid rgba(201,168,76,.3);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem; margin: 0 auto 14px; color: var(--gold);
-    }
-    .login-logo h2 { font-family: var(--ff-head); font-size: 1.3rem; color: var(--white); }
+    .login-logo h2 { font-size: 1.3rem; color: var(--white); }
     .login-logo p { font-size: .8rem; color: var(--muted); margin-top: 4px; }
+    
     .login-fg { margin-bottom: 18px; }
-    .login-fg label { display: block; font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+    .login-fg label { 
+      display: block; font-size: .75rem; color: var(--muted); 
+      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; 
+    }
     .login-fg input {
       width: 100%; background: var(--card2); border: 1px solid var(--border2);
       border-radius: 10px; padding: 12px 16px; color: var(--white);
-      font-size: .95rem; outline: none; transition: border-color .2s;
+      font-size: .95rem; outline: none;
     }
     .login-fg input:focus { border-color: var(--gold); }
+    
     .login-btn {
       width: 100%; padding: 14px; border-radius: 12px;
       background: linear-gradient(135deg, var(--gold), #a8862e);
@@ -64,36 +63,54 @@
       cursor: pointer; transition: all .2s; margin-top: 8px;
     }
     .login-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,.3); }
-    .login-err { color: var(--red); font-size: .82rem; text-align: center; margin-top: 12px; display: none; }
+    .login-err { 
+      color: var(--red); font-size: .82rem; text-align: center; 
+      margin-top: 12px; display: none; 
+    }
 
-    /* ── ADMIN LAYOUT ── */
+    /* Admin Panel */
     #admin-panel { display: none; }
+    
     .admin-nav {
       background: var(--card); border-bottom: 1px solid var(--border);
       padding: 14px 28px; display: flex; align-items: center;
       justify-content: space-between; position: sticky; top: 0; z-index: 100;
     }
-    .admin-nav .an-logo { font-family: var(--ff-head); font-size: 1.1rem; color: var(--gold); display: flex; align-items: center; gap: 10px; }
-    .admin-nav .an-logo i { font-size: .9rem; }
-    .admin-nav .an-right { display: flex; align-items: center; gap: 12px; }
-    .an-fy-badge { background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.25); border-radius: 20px; padding: 4px 14px; font-size: .75rem; color: var(--gold); font-weight: 600; }
-    .btn-logout { background: rgba(224,90,90,.1); border: 1px solid rgba(224,90,90,.2); color: var(--red); border-radius: 8px; padding: 7px 14px; font-size: .78rem; cursor: pointer; transition: all .2s; }
+    .an-logo { 
+      font-family: 'Georgia', serif; font-size: 1.1rem; 
+      color: var(--gold); display: flex; align-items: center; gap: 10px; 
+    }
+    .an-right { display: flex; align-items: center; gap: 12px; }
+    .fy-badge { 
+      background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.25);
+      border-radius: 20px; padding: 4px 14px; font-size: .75rem; 
+      color: var(--gold); font-weight: 600; 
+    }
+    .btn-logout {
+      background: rgba(224,90,90,.1); border: 1px solid rgba(224,90,90,.2);
+      color: var(--red); border-radius: 8px; padding: 7px 14px;
+      font-size: .78rem; cursor: pointer; transition: all .2s;
+    }
     .btn-logout:hover { background: rgba(224,90,90,.2); }
-    .btn-save-all { background: linear-gradient(135deg, var(--gold), #a8862e); border: none; color: #000; border-radius: 8px; padding: 8px 20px; font-size: .82rem; font-weight: 700; cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 6px; }
-    .btn-save-all:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,.3); }
+    .btn-save-all {
+      background: linear-gradient(135deg, var(--gold), #a8862e);
+      border: none; color: #000; border-radius: 8px; padding: 8px 20px;
+      font-size: .82rem; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+    }
 
-    .admin-body { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+    .admin-body { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
 
-    /* Alert banner */
+    /* Alert Banner */
     .alert-banner {
       background: rgba(76,175,125,.08); border: 1px solid rgba(76,175,125,.2);
-      border-radius: 12px; padding: 14px 20px; display: flex; align-items: center;
-      gap: 12px; margin-bottom: 28px; font-size: .85rem; color: var(--green);
-      display: none;
+      border-radius: 12px; padding: 14px 20px; display: flex;
+      align-items: center; gap: 12px; margin-bottom: 28px;
+      font-size: .85rem; color: var(--green); display: none;
     }
     .alert-banner.show { display: flex; }
 
-    /* Section cards */
+    /* Sections */
     .admin-section { margin-bottom: 28px; }
     .as-header {
       display: flex; align-items: center; justify-content: space-between;
@@ -101,481 +118,370 @@
     }
     .as-title {
       display: flex; align-items: center; gap: 10px;
-      font-family: var(--ff-head); font-size: 1.05rem; color: var(--white);
+      font-family: 'Georgia', serif; font-size: 1.05rem; color: var(--white);
     }
     .as-title i { color: var(--gold); font-size: .9rem; }
-    .as-badge { font-size: .68rem; color: var(--muted); background: var(--card2); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; }
+    .as-badge { 
+      font-size: .68rem; color: var(--muted); background: var(--card2);
+      border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; 
+    }
 
     .admin-card {
       background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 24px; transition: border-color .2s;
+      border-radius: 16px; padding: 24px;
     }
-    .admin-card:hover { border-color: rgba(201,168,76,.2); }
 
-    /* Form fields */
-    .ag { display: grid; gap: 16px; }
-    .ag-2 { grid-template-columns: 1fr 1fr; }
-    .ag-3 { grid-template-columns: 1fr 1fr 1fr; }
-    .ag-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    /* Form Grid */
+    .grid { display: grid; gap: 16px; }
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    
     .fg { }
     .fg label {
       display: block; font-size: .72rem; color: var(--muted);
-      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px;
+      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px;
     }
     .fg input, .fg select {
       width: 100%; background: var(--card2); border: 1px solid var(--border2);
       border-radius: 10px; padding: 10px 14px; color: var(--white);
-      font-size: .92rem; outline: none; transition: border-color .2s;
+      font-size: .92rem; outline: none;
     }
-    .fg input:focus, .fg select:focus { border-color: var(--gold); }
-    .fg .hint { font-size: .7rem; color: var(--muted); margin-top: 5px; }
+    .fg input:focus { border-color: var(--gold); }
+    .hint { font-size: .7rem; color: var(--muted); margin-top: 5px; }
 
-    /* Slab table */
-    .slab-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-    .slab-table th { font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
-    .slab-table td { padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,.03); }
-    .slab-table input {
-      background: var(--card2); border: 1px solid var(--border2); border-radius: 8px;
-      padding: 7px 10px; color: var(--white); font-size: .85rem; width: 100%;
-      outline: none; transition: border-color .2s;
+    /* TDS Grid */
+    .tds-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+      gap: 12px; 
     }
-    .slab-table input:focus { border-color: var(--gold); }
-    .slab-row-label { font-size: .82rem; color: var(--muted); }
-
-    /* TDS rows */
-    .tds-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .tds-item { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
-    .tds-item label { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; display: block; }
+    .tds-item {
+      background: var(--card2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px;
+    }
+    .tds-item label {
+      font-size: .7rem; color: var(--muted); text-transform: uppercase;
+      letter-spacing: .06em; margin-bottom: 8px; display: block;
+    }
     .tds-item input {
       width: 100%; background: var(--bg); border: 1px solid var(--border2);
       border-radius: 8px; padding: 8px 12px; color: var(--gold);
-      font-size: 1rem; font-weight: 700; font-family: var(--ff-mono);
-      outline: none; transition: border-color .2s;
+      font-size: 1rem; font-weight: 700; outline: none;
     }
-    .tds-item input:focus { border-color: var(--gold); }
 
-    /* Divider */
-    .divider { height: 1px; background: var(--border); margin: 20px 0; }
+    /* Slab Table */
+    .slab-table { width: 100%; border-collapse: collapse; }
+    .slab-table th {
+      font-size: .68rem; color: var(--muted); text-transform: uppercase;
+      padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border);
+    }
+    .slab-table td { padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,.03); }
+    .slab-table input {
+      background: var(--card2); border: 1px solid var(--border2);
+      border-radius: 6px; padding: 6px 10px; color: var(--white);
+      width: 100%; outline: none;
+    }
+    .slab-table input:focus { border-color: var(--gold); }
 
-    /* Toast */
+    /* Changelog */
+    .changelog {
+      background: var(--card2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px; max-height: 200px;
+      overflow-y: auto; margin-top: 16px;
+    }
+    .changelog-item {
+      font-size: .78rem; color: var(--muted); padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,.03);
+      display: flex; justify-content: space-between;
+    }
+    .changelog-item span { color: var(--gold); }
+    .changelog-empty { 
+      text-align: center; padding: 20px; color: var(--muted); 
+    }
+
+    .btn-reset {
+      background: rgba(224,90,90,.08); border: 1px solid rgba(224,90,90,.15);
+      color: var(--red); border-radius: 6px; padding: 6px 12px;
+      font-size: .75rem; cursor: pointer;
+    }
+
     .toast {
       position: fixed; bottom: 30px; left: 50%;
       transform: translateX(-50%) translateY(20px);
       background: var(--card2); border: 1px solid rgba(76,175,125,.3);
       border-radius: 12px; padding: 12px 24px; font-size: .85rem;
       color: var(--green); z-index: 9999; opacity: 0;
-      transition: all .3s; pointer-events: none;
-      display: flex; align-items: center; gap: 8px;
-      box-shadow: 0 8px 32px rgba(0,0,0,.5);
+      transition: all .3s; display: flex; align-items: center; gap: 8px;
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* Change log */
-    .changelog { background: var(--card2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-top: 16px; max-height: 200px; overflow-y: auto; }
-    .changelog-item { font-size: .78rem; color: var(--muted); padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,.03); display: flex; justify-content: space-between; }
-    .changelog-item span { color: var(--gold); }
-    .changelog-empty { font-size: .78rem; color: var(--muted); text-align: center; padding: 20px; }
-
-    /* Reset button */
-    .btn-reset { background: rgba(224,90,90,.08); border: 1px solid rgba(224,90,90,.15); color: var(--red); border-radius: 8px; padding: 7px 14px; font-size: .75rem; cursor: pointer; transition: all .2s; }
-    .btn-reset:hover { background: rgba(224,90,90,.15); }
-
-    @media(max-width: 640px) {
-      .ag-2, .ag-3, .ag-4 { grid-template-columns: 1fr; }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
       .tds-grid { grid-template-columns: 1fr; }
-      .admin-body { padding: 16px; }
-      .login-box { padding: 32px 24px; margin: 16px; }
     }
   </style>
 </head>
 <body>
 
-<div id="toast" class="toast"><i class="fas fa-check-circle"></i><span id="toast-msg">Saved!</span></div>
+<div id="toast" class="toast"><i class="fas fa-check-circle"></i><span id="toast-msg">सफल!</span></div>
 
-<!-- ══ LOGIN SCREEN ══ -->
+<!-- Login Screen -->
 <div id="login-screen">
   <div class="login-box">
     <div class="login-logo">
-      <div class="ll-icon"><i class="fas fa-shield-alt"></i></div>
+      <i class="fas fa-shield-alt"></i>
       <h2>Admin Panel</h2>
       <p>Nepal Accounting Suite Pro</p>
     </div>
     <div class="login-fg">
-      <label>Username</label>
-      <input type="text" id="login-user" placeholder="Enter username" autocomplete="off" />
+      <label>पासवर्ड</label>
+      <input type="password" id="login-pass" placeholder="एडमिन पासवर्ड" autofocus />
     </div>
-    <div class="login-fg">
-      <label>Password</label>
-      <input type="password" id="login-pass" placeholder="Enter password" />
-    </div>
-    <button class="login-btn" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Login</button>
-    <div class="login-err" id="login-err">❌ Invalid username or password!</div>
+    <button class="login-btn" onclick="doLogin()">
+      <i class="fas fa-sign-in-alt"></i> लगइन
+    </button>
+    <div class="login-err" id="login-err">❌ गलत पासवर्ड!</div>
   </div>
 </div>
 
-<!-- ══ ADMIN PANEL ══ -->
+<!-- Admin Panel -->
 <div id="admin-panel">
-
-  <!-- NAV -->
   <div class="admin-nav">
     <div class="an-logo">
       <i class="fas fa-cog"></i>
-      Nepal Accounting Suite — Admin Panel
+      <span>Nepal Accounting Suite — Admin</span>
     </div>
     <div class="an-right">
-      <span class="an-fy-badge" id="nav-fy">FY 2082/83</span>
+      <span class="fy-badge" id="nav-fy">FY 2082/83</span>
       <button class="btn-save-all" onclick="saveAll()">
-        <i class="fas fa-save"></i> Save All Changes
+        <i class="fas fa-save"></i> सेभ गर्नुहोस्
       </button>
       <button class="btn-logout" onclick="doLogout()">
-        <i class="fas fa-sign-out-alt"></i> Logout
+        <i class="fas fa-sign-out-alt"></i> लगआउट
       </button>
     </div>
   </div>
 
   <div class="admin-body">
-
-    <!-- Success alert -->
     <div class="alert-banner" id="save-alert">
-      <i class="fas fa-check-circle" style="font-size:1.2rem"></i>
+      <i class="fas fa-check-circle"></i>
       <div>
-        <strong>Changes saved successfully!</strong>
-        <div style="font-size:.78rem;opacity:.8;margin-top:2px;">ai.html ले अब नयाँ rates use गर्नेछ। Page reload गर्नुस्।</div>
+        <strong>सेभ भयो!</strong>
+        <div style="font-size:.78rem;">नयाँ सेटिङ्हरू तुरुन्त प्रभावमा आउनेछ।</div>
       </div>
     </div>
 
-    <!-- ══ FISCAL YEAR ══ -->
+    <!-- Fiscal Year -->
     <div class="admin-section">
       <div class="as-header">
-        <div class="as-title"><i class="fas fa-calendar-alt"></i> Fiscal Year Settings</div>
-        <span class="as-badge">General</span>
+        <div class="as-title"><i class="fas fa-calendar-alt"></i> Fiscal Year</div>
       </div>
       <div class="admin-card">
-        <div class="ag ag-3">
+        <div class="grid grid-3">
           <div class="fg">
-            <label>Current Fiscal Year (BS)</label>
+            <label>चालु आर्थिक वर्ष</label>
             <input type="text" id="cfg-fy" placeholder="2082/83" />
-            <div class="hint">e.g. 2082/83</div>
+            <div class="hint">जस्तै: 2082/83</div>
           </div>
           <div class="fg">
-            <label>FY Start Date (BS)</label>
+            <label>सुरु मिति</label>
             <input type="text" id="cfg-fy-start" placeholder="Shrawan 1, 2082" />
           </div>
           <div class="fg">
-            <label>FY End Date (BS)</label>
+            <label>अन्त्य मिति</label>
             <input type="text" id="cfg-fy-end" placeholder="Ashadh 31, 2083" />
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ══ VAT ══ -->
+    <!-- VAT Settings -->
     <div class="admin-section">
       <div class="as-header">
-        <div class="as-title"><i class="fas fa-receipt"></i> VAT Settings</div>
-        <span class="as-badge">VAT Act</span>
+        <div class="as-title"><i class="fas fa-receipt"></i> VAT (मूल्य अभिवृद्धि कर)</div>
       </div>
       <div class="admin-card">
-        <div class="ag ag-3">
+        <div class="grid grid-4">
           <div class="fg">
-            <label>VAT Rate %</label>
-            <input type="number" id="cfg-vat" placeholder="13" step="0.01" min="0" max="100" />
-            <div class="hint">Standard VAT rate</div>
+            <label>VAT दर %</label>
+            <input type="number" id="cfg-vat" step="0.01" min="0" max="100" />
           </div>
           <div class="fg">
-            <label>VAT Filing Deadline (गते)</label>
-            <input type="number" id="cfg-vat-deadline" placeholder="25" min="1" max="32" />
-            <div class="hint">Monthly filing date</div>
+            <label>दाखिला मिति (गते)</label>
+            <input type="number" id="cfg-vat-deadline" min="1" max="32" />
           </div>
           <div class="fg">
-            <label>Late Interest Rate % (p.a.)</label>
-            <input type="number" id="cfg-vat-interest" placeholder="15" step="0.1" min="0" />
-            <div class="hint">Annual interest on late payment</div>
-          </div>
-        </div>
-        <div class="divider"></div>
-        <div class="ag ag-2">
-          <div class="fg">
-            <label>Late Penalty Rate % (per month)</label>
-            <input type="number" id="cfg-vat-penalty" placeholder="1" step="0.1" min="0" />
+            <label>ब्याज दर % (वार्षिक)</label>
+            <input type="number" id="cfg-vat-interest" step="0.1" min="0" />
           </div>
           <div class="fg">
-            <label>VAT Registration Threshold Rs</label>
-            <input type="number" id="cfg-vat-threshold" placeholder="5000000" />
-            <div class="hint">Annual turnover threshold</div>
+            <label>जरिवाना % (मासिक)</label>
+            <input type="number" id="cfg-vat-penalty" step="0.1" min="0" />
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ══ TDS RATES ══ -->
+    <!-- TDS Rates -->
     <div class="admin-section">
       <div class="as-header">
-        <div class="as-title"><i class="fas fa-percentage"></i> TDS Rates</div>
-        <span class="as-badge">Income Tax Act 2058</span>
+        <div class="as-title"><i class="fas fa-percentage"></i> TDS (कर कट्टी) दरहरू</div>
       </div>
       <div class="admin-card">
         <div class="tds-grid">
           <div class="tds-item">
-            <label>Service — With VAT Bill %</label>
+            <label>सेवा (भ्याट बिल सहित)</label>
             <input type="number" id="cfg-tds-service-vat" step="0.1" min="0" />
           </div>
           <div class="tds-item">
-            <label>Service — Without VAT Bill %</label>
+            <label>सेवा (भ्याट बिल बिना)</label>
             <input type="number" id="cfg-tds-service-novat" step="0.1" min="0" />
           </div>
           <div class="tds-item">
-            <label>Rent %</label>
+            <label>भाडा (Rent)</label>
             <input type="number" id="cfg-tds-rent" step="0.1" min="0" />
           </div>
           <div class="tds-item">
-            <label>Interest / Royalty %</label>
+            <label>ब्याज / रोयल्टी</label>
             <input type="number" id="cfg-tds-interest" step="0.1" min="0" />
           </div>
           <div class="tds-item">
-            <label>Dividend %</label>
+            <label>लाभांश (Dividend)</label>
             <input type="number" id="cfg-tds-dividend" step="0.1" min="0" />
           </div>
           <div class="tds-item">
-            <label>Natural Person Contract %</label>
+            <label>प्राकृतिक व्यक्ति ठेक्का</label>
             <input type="number" id="cfg-tds-person" step="0.1" min="0" />
           </div>
           <div class="tds-item">
-            <label>Land/Building Rent %</label>
+            <label>जग्गा/घर भाडा</label>
             <input type="number" id="cfg-tds-land" step="0.1" min="0" />
           </div>
           <div class="tds-item">
-            <label>TDS Deposit Deadline (गते)</label>
+            <label>दाखिला मिति (गते)</label>
             <input type="number" id="cfg-tds-deadline" min="1" max="32" />
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ══ INCOME TAX SLABS ══ -->
+    <!-- Income Tax Slabs -->
     <div class="admin-section">
       <div class="as-header">
-        <div class="as-title"><i class="fas fa-file-invoice-dollar"></i> Income Tax Slabs</div>
-        <span class="as-badge">Income Tax Act 2058</span>
+        <div class="as-title"><i class="fas fa-file-invoice-dollar"></i> आयकर स्ल्याब</div>
       </div>
       <div class="admin-card">
-
-        <!-- Unmarried -->
         <div style="margin-bottom:20px;">
-          <div style="font-size:.82rem;color:var(--gold);font-weight:600;margin-bottom:12px;"><i class="fas fa-user"></i> Unmarried / Single</div>
-          <table class="slab-table">
+          <h4 style="color: var(--gold); margin-bottom:12px;"><i class="fas fa-user"></i> अविवाहित</h4>
+          <table class="slab-table" id="slab-unmarried-table">
             <thead>
-              <tr>
-                <th>Slab</th>
-                <th>Up to Amount (Rs)</th>
-                <th>Tax Rate %</th>
-              </tr>
+              <tr><th>स्ल्याब</th><th>सम्म (रु.)</th><th>दर %</th></tr>
             </thead>
-            <tbody id="slab-unmarried">
-              <!-- Dynamically filled -->
-            </tbody>
+            <tbody id="slab-unmarried"></tbody>
           </table>
         </div>
-
-        <div class="divider"></div>
-
-        <!-- Married -->
         <div>
-          <div style="font-size:.82rem;color:var(--blue);font-weight:600;margin-bottom:12px;"><i class="fas fa-users"></i> Married / Couple</div>
-          <table class="slab-table">
+          <h4 style="color: var(--blue); margin-bottom:12px;"><i class="fas fa-users"></i> विवाहित</h4>
+          <table class="slab-table" id="slab-married-table">
             <thead>
-              <tr>
-                <th>Slab</th>
-                <th>Up to Amount (Rs)</th>
-                <th>Tax Rate %</th>
-              </tr>
+              <tr><th>स्ल्याब</th><th>सम्म (रु.)</th><th>दर %</th></tr>
             </thead>
-            <tbody id="slab-married">
-              <!-- Dynamically filled -->
-            </tbody>
+            <tbody id="slab-married"></tbody>
           </table>
         </div>
-
       </div>
     </div>
 
-    <!-- ══ PF / SSF ══ -->
+    <!-- PF / SSF -->
     <div class="admin-section">
       <div class="as-header">
-        <div class="as-title"><i class="fas fa-piggy-bank"></i> PF / SSF Rates</div>
-        <span class="as-badge">Labor Act</span>
+        <div class="as-title"><i class="fas fa-piggy-bank"></i> PF / SSF</div>
       </div>
       <div class="admin-card">
-        <div class="ag ag-4">
-          <div class="fg">
-            <label>PF Employee %</label>
-            <input type="number" id="cfg-pf-emp" step="0.1" min="0" />
-            <div class="hint">Employee contribution</div>
-          </div>
-          <div class="fg">
-            <label>PF Employer %</label>
-            <input type="number" id="cfg-pf-empl" step="0.1" min="0" />
-            <div class="hint">Employer contribution</div>
-          </div>
-          <div class="fg">
-            <label>SSF Employee %</label>
-            <input type="number" id="cfg-ssf-emp" step="0.1" min="0" />
-          </div>
-          <div class="fg">
-            <label>SSF Employer %</label>
-            <input type="number" id="cfg-ssf-empl" step="0.1" min="0" />
-          </div>
+        <div class="grid grid-4">
+          <div class="fg"><label>PF कर्मचारी %</label><input type="number" id="cfg-pf-emp" step="0.1" /></div>
+          <div class="fg"><label>PF नियोक्ता %</label><input type="number" id="cfg-pf-empl" step="0.1" /></div>
+          <div class="fg"><label>SSF कर्मचारी %</label><input type="number" id="cfg-ssf-emp" step="0.1" /></div>
+          <div class="fg"><label>SSF नियोक्ता %</label><input type="number" id="cfg-ssf-empl" step="0.1" /></div>
         </div>
       </div>
     </div>
 
-    <!-- ══ CORPORATE TAX ══ -->
+    <!-- Corporate Tax -->
     <div class="admin-section">
       <div class="as-header">
-        <div class="as-title"><i class="fas fa-building"></i> Corporate Tax Rates</div>
-        <span class="as-badge">Income Tax Act</span>
+        <div class="as-title"><i class="fas fa-building"></i> कर्पोरेट कर</div>
       </div>
       <div class="admin-card">
-        <div class="ag ag-3">
-          <div class="fg">
-            <label>Normal Company %</label>
-            <input type="number" id="cfg-corp-normal" step="0.1" min="0" />
-          </div>
-          <div class="fg">
-            <label>Special Industry %</label>
-            <input type="number" id="cfg-corp-special" step="0.1" min="0" />
-            <div class="hint">Manufacturing, IT, etc.</div>
-          </div>
-          <div class="fg">
-            <label>Bank / Financial %</label>
-            <input type="number" id="cfg-corp-bank" step="0.1" min="0" />
-          </div>
+        <div class="grid grid-3">
+          <div class="fg"><label>साधारण कम्पनी %</label><input type="number" id="cfg-corp-normal" step="0.1" /></div>
+          <div class="fg"><label>विशेष उद्योग %</label><input type="number" id="cfg-corp-special" step="0.1" /></div>
+          <div class="fg"><label>बैंक/वित्त %</label><input type="number" id="cfg-corp-bank" step="0.1" /></div>
         </div>
       </div>
     </div>
 
-    <!-- ══ ADVANCE TAX ══ -->
+    <!-- Depreciation -->
     <div class="admin-section">
       <div class="as-header">
-        <div class="as-title"><i class="fas fa-calendar-check"></i> Advance Tax Schedule</div>
-        <span class="as-badge">Quarterly</span>
+        <div class="as-title"><i class="fas fa-chart-line"></i> ह्रासकट्टी दर (WDV)</div>
       </div>
       <div class="admin-card">
-        <div class="ag ag-3">
-          <div class="fg">
-            <label>Q1 Cumulative % (Poush end)</label>
-            <input type="number" id="cfg-at-q1" step="1" min="0" max="100" />
-          </div>
-          <div class="fg">
-            <label>Q2 Cumulative % (Chaitra end)</label>
-            <input type="number" id="cfg-at-q2" step="1" min="0" max="100" />
-          </div>
-          <div class="fg">
-            <label>Q3 Cumulative % (Ashadh end)</label>
-            <input type="number" id="cfg-at-q3" step="1" min="0" max="100" />
-          </div>
+        <div class="grid grid-3">
+          <div class="fg"><label>भवन %</label><input type="number" id="cfg-dep-building" step="0.1" /></div>
+          <div class="fg"><label>सवारी साधन %</label><input type="number" id="cfg-dep-vehicle" step="0.1" /></div>
+          <div class="fg"><label>मेसिनरी %</label><input type="number" id="cfg-dep-machinery" step="0.1" /></div>
+          <div class="fg"><label>फर्निचर/कम्प्युटर %</label><input type="number" id="cfg-dep-furniture" step="0.1" /></div>
+          <div class="fg"><label>अमूर्त सम्पत्ति %</label><input type="number" id="cfg-dep-intangible" step="0.1" /></div>
         </div>
       </div>
     </div>
 
-    <!-- ══ DEPRECIATION RATES ══ -->
+    <!-- NPA -->
     <div class="admin-section">
       <div class="as-header">
-        <div class="as-title"><i class="fas fa-chart-line"></i> Depreciation Rates (WDV)</div>
-        <span class="as-badge">Income Tax Act Schedule</span>
+        <div class="as-title"><i class="fas fa-exclamation-triangle"></i> NPA प्रावधान</div>
       </div>
       <div class="admin-card">
-        <div class="ag ag-3">
-          <div class="fg">
-            <label>Building %</label>
-            <input type="number" id="cfg-dep-building" step="0.1" min="0" />
-          </div>
-          <div class="fg">
-            <label>Vehicle %</label>
-            <input type="number" id="cfg-dep-vehicle" step="0.1" min="0" />
-          </div>
-          <div class="fg">
-            <label>Machinery %</label>
-            <input type="number" id="cfg-dep-machinery" step="0.1" min="0" />
-          </div>
-          <div class="fg">
-            <label>Furniture / Computer %</label>
-            <input type="number" id="cfg-dep-furniture" step="0.1" min="0" />
-          </div>
-          <div class="fg">
-            <label>Intangibles %</label>
-            <input type="number" id="cfg-dep-intangible" step="0.1" min="0" />
-          </div>
+        <div class="grid grid-3">
+          <div class="fg"><label>Pass (<30 days) %</label><input type="number" id="cfg-npa-pass" step="0.1" /></div>
+          <div class="fg"><label>Watchlist %</label><input type="number" id="cfg-npa-watch" step="0.1" /></div>
+          <div class="fg"><label>Substandard %</label><input type="number" id="cfg-npa-sub" step="0.1" /></div>
+          <div class="fg"><label>Doubtful %</label><input type="number" id="cfg-npa-doubt" step="0.1" /></div>
+          <div class="fg"><label>Bad/Loss %</label><input type="number" id="cfg-npa-bad" step="0.1" /></div>
         </div>
       </div>
     </div>
 
-    <!-- ══ NPA RATES ══ -->
+    <!-- Changelog -->
     <div class="admin-section">
       <div class="as-header">
-        <div class="as-title"><i class="fas fa-exclamation-triangle"></i> NPA Provision Rates</div>
-        <span class="as-badge">NRB Guidelines</span>
-      </div>
-      <div class="admin-card">
-        <div class="ag ag-3">
-          <div class="fg">
-            <label>Pass (< 30 days) %</label>
-            <input type="number" id="cfg-npa-pass" step="0.1" min="0" />
-          </div>
-          <div class="fg">
-            <label>Watchlist (30-90 days) %</label>
-            <input type="number" id="cfg-npa-watch" step="0.1" min="0" />
-          </div>
-          <div class="fg">
-            <label>Substandard (90-180 days) %</label>
-            <input type="number" id="cfg-npa-sub" step="0.1" min="0" />
-          </div>
-          <div class="fg">
-            <label>Doubtful (180-365 days) %</label>
-            <input type="number" id="cfg-npa-doubt" step="0.1" min="0" />
-          </div>
-          <div class="fg">
-            <label>Bad/Loss (> 365 days) %</label>
-            <input type="number" id="cfg-npa-bad" step="0.1" min="0" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ CHANGE LOG ══ -->
-    <div class="admin-section">
-      <div class="as-header">
-        <div class="as-title"><i class="fas fa-history"></i> Change Log</div>
-        <button class="btn-reset" onclick="clearLog()"><i class="fas fa-trash"></i> Clear Log</button>
+        <div class="as-title"><i class="fas fa-history"></i> परिवर्तन लग</div>
+        <button class="btn-reset" onclick="clearLogs()"><i class="fas fa-trash"></i> लग मेट्नुहोस्</button>
       </div>
       <div class="changelog" id="changelog">
-        <div class="changelog-empty">No changes yet.</div>
+        <div class="changelog-empty">कुनै परिवर्तन भएको छैन।</div>
       </div>
     </div>
-
-    <!-- Reset to defaults -->
-    <div style="text-align:center;margin-top:8px;margin-bottom:40px;">
-      <button class="btn-reset" onclick="resetDefaults()" style="padding:10px 24px;">
-        <i class="fas fa-undo"></i> Reset All to Default Values
-      </button>
-    </div>
-
   </div>
 </div>
 
 <script>
-/* ══ DEFAULT VALUES ══ */
+// कन्फिगरेसन
+const WORKER_URL = 'https://morning-bush-8bd5.kushalphuyal.workers.dev';
+let jwtToken = sessionStorage.getItem('adminToken') || null;
+let autoLogoutTimer = null;
+
+// डिफल्ट मानहरू
 const DEFAULTS = {
   fy: '2082/83',
   fyStart: 'Shrawan 1, 2082',
   fyEnd: 'Ashadh 31, 2083',
-
   vat: 13,
   vatDeadline: 25,
   vatInterest: 15,
   vatPenalty: 1,
-  vatThreshold: 5000000,
-
   tdsServiceVat: 1.5,
   tdsServiceNoVat: 15,
   tdsRent: 10,
@@ -584,317 +490,267 @@ const DEFAULTS = {
   tdsPerson: 25,
   tdsLand: 1,
   tdsDeadline: 25,
-
-  slabsU: [
-    { label: 'Slab 1', upto: 500000, rate: 1 },
-    { label: 'Slab 2', upto: 200000, rate: 10 },
-    { label: 'Slab 3', upto: 300000, rate: 20 },
-    { label: 'Slab 4', upto: 1000000, rate: 30 },
-    { label: 'Slab 5', upto: 3000000, rate: 36 },
-    { label: 'Slab 6 (Above)', upto: 0, rate: 39 },
-  ],
-  slabsM: [
-    { label: 'Slab 1', upto: 600000, rate: 1 },
-    { label: 'Slab 2', upto: 200000, rate: 10 },
-    { label: 'Slab 3', upto: 300000, rate: 20 },
-    { label: 'Slab 4', upto: 900000, rate: 30 },
-    { label: 'Slab 5', upto: 3000000, rate: 36 },
-    { label: 'Slab 6 (Above)', upto: 0, rate: 39 },
-  ],
-
   pfEmp: 11,
   pfEmpl: 20,
   ssfEmp: 11,
   ssfEmpl: 20,
-
   corpNormal: 25,
   corpSpecial: 20,
   corpBank: 30,
-
-  atQ1: 40,
-  atQ2: 70,
-  atQ3: 100,
-
   depBuilding: 5,
   depVehicle: 20,
   depMachinery: 15,
   depFurniture: 25,
   depIntangible: 7,
-
   npaPass: 1,
   npaWatch: 5,
   npaSub: 25,
   npaDoubt: 50,
   npaBad: 100,
+  slabsU: [
+    { upto: 500000, rate: 1 },
+    { upto: 200000, rate: 10 },
+    { upto: 300000, rate: 20 },
+    { upto: 1000000, rate: 30 },
+    { upto: 3000000, rate: 36 },
+    { upto: 0, rate: 39 }
+  ],
+  slabsM: [
+    { upto: 600000, rate: 1 },
+    { upto: 200000, rate: 10 },
+    { upto: 300000, rate: 20 },
+    { upto: 900000, rate: 30 },
+    { upto: 3000000, rate: 36 },
+    { upto: 0, rate: 39 }
+  ]
 };
 
-/* ══ WORKER URL ══ */
-const WORKER_URL = 'https://morning-bush-8bd5.kushalphuyal.workers.dev';
-const ADMIN_KEY = 'kushal_admin_2082';
-
-/* ══ AUTH ══ */
-const ADMIN_USER = 'kushal';
-const ADMIN_PASS = 'kushal';
-
-function doLogin() {
-  const user = document.getElementById('login-user').value.trim();
-  const pass = document.getElementById('login-pass').value.trim();
-  if (user === ADMIN_USER && pass === ADMIN_PASS) {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('admin-panel').style.display = 'block';
-    loadValues();
-  } else {
-    document.getElementById('login-err').style.display = 'block';
-    setTimeout(() => document.getElementById('login-err').style.display = 'none', 3000);
-  }
+// टोस्ट देखाउने
+function showToast(msg, type = 'success') {
+  const toast = document.getElementById('toast');
+  const msgEl = document.getElementById('toast-msg');
+  msgEl.textContent = msg;
+  toast.style.color = type === 'success' ? 'var(--green)' : 'var(--red)';
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
 }
 
-document.addEventListener('keypress', e => {
-  if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') doLogin();
-});
-
-function doLogout() {
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('admin-panel').style.display = 'none';
-  document.getElementById('login-user').value = '';
-  document.getElementById('login-pass').value = '';
-}
-
-/* ══ LOAD VALUES — Cloud बाट load ══ */
-async function loadValues() {
-  // Loading indicator
-  document.querySelector('.btn-save-all').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-
-  // Cloud बाट load गर्ने
-  let cfg = await getConfig();
-
-  // Cloud मा छैन भने localStorage check गर्ने
-  if (!cfg) {
-    cfg = JSON.parse(localStorage.getItem('naps_config') || 'null');
-  }
-
-  // दुवैमा छैन भने defaults use गर्ने
-  if (!cfg) cfg = DEFAULTS;
-
-  document.querySelector('.btn-save-all').innerHTML = '<i class="fas fa-save"></i> Save All Changes';
-
-  document.getElementById('cfg-fy').value = cfg.fy || DEFAULTS.fy;
-  document.getElementById('cfg-fy-start').value = cfg.fyStart || DEFAULTS.fyStart;
-  document.getElementById('cfg-fy-end').value = cfg.fyEnd || DEFAULTS.fyEnd;
-
-  document.getElementById('cfg-vat').value = cfg.vat ?? DEFAULTS.vat;
-  document.getElementById('cfg-vat-deadline').value = cfg.vatDeadline ?? DEFAULTS.vatDeadline;
-  document.getElementById('cfg-vat-interest').value = cfg.vatInterest ?? DEFAULTS.vatInterest;
-  document.getElementById('cfg-vat-penalty').value = cfg.vatPenalty ?? DEFAULTS.vatPenalty;
-  document.getElementById('cfg-vat-threshold').value = cfg.vatThreshold ?? DEFAULTS.vatThreshold;
-
-  document.getElementById('cfg-tds-service-vat').value = cfg.tdsServiceVat ?? DEFAULTS.tdsServiceVat;
-  document.getElementById('cfg-tds-service-novat').value = cfg.tdsServiceNoVat ?? DEFAULTS.tdsServiceNoVat;
-  document.getElementById('cfg-tds-rent').value = cfg.tdsRent ?? DEFAULTS.tdsRent;
-  document.getElementById('cfg-tds-interest').value = cfg.tdsInterest ?? DEFAULTS.tdsInterest;
-  document.getElementById('cfg-tds-dividend').value = cfg.tdsDividend ?? DEFAULTS.tdsDividend;
-  document.getElementById('cfg-tds-person').value = cfg.tdsPerson ?? DEFAULTS.tdsPerson;
-  document.getElementById('cfg-tds-land').value = cfg.tdsLand ?? DEFAULTS.tdsLand;
-  document.getElementById('cfg-tds-deadline').value = cfg.tdsDeadline ?? DEFAULTS.tdsDeadline;
-
-  document.getElementById('cfg-pf-emp').value = cfg.pfEmp ?? DEFAULTS.pfEmp;
-  document.getElementById('cfg-pf-empl').value = cfg.pfEmpl ?? DEFAULTS.pfEmpl;
-  document.getElementById('cfg-ssf-emp').value = cfg.ssfEmp ?? DEFAULTS.ssfEmp;
-  document.getElementById('cfg-ssf-empl').value = cfg.ssfEmpl ?? DEFAULTS.ssfEmpl;
-
-  document.getElementById('cfg-corp-normal').value = cfg.corpNormal ?? DEFAULTS.corpNormal;
-  document.getElementById('cfg-corp-special').value = cfg.corpSpecial ?? DEFAULTS.corpSpecial;
-  document.getElementById('cfg-corp-bank').value = cfg.corpBank ?? DEFAULTS.corpBank;
-
-  document.getElementById('cfg-at-q1').value = cfg.atQ1 ?? DEFAULTS.atQ1;
-  document.getElementById('cfg-at-q2').value = cfg.atQ2 ?? DEFAULTS.atQ2;
-  document.getElementById('cfg-at-q3').value = cfg.atQ3 ?? DEFAULTS.atQ3;
-
-  document.getElementById('cfg-dep-building').value = cfg.depBuilding ?? DEFAULTS.depBuilding;
-  document.getElementById('cfg-dep-vehicle').value = cfg.depVehicle ?? DEFAULTS.depVehicle;
-  document.getElementById('cfg-dep-machinery').value = cfg.depMachinery ?? DEFAULTS.depMachinery;
-  document.getElementById('cfg-dep-furniture').value = cfg.depFurniture ?? DEFAULTS.depFurniture;
-  document.getElementById('cfg-dep-intangible').value = cfg.depIntangible ?? DEFAULTS.depIntangible;
-
-  document.getElementById('cfg-npa-pass').value = cfg.npaPass ?? DEFAULTS.npaPass;
-  document.getElementById('cfg-npa-watch').value = cfg.npaWatch ?? DEFAULTS.npaWatch;
-  document.getElementById('cfg-npa-sub').value = cfg.npaSub ?? DEFAULTS.npaSub;
-  document.getElementById('cfg-npa-doubt').value = cfg.npaDoubt ?? DEFAULTS.npaDoubt;
-  document.getElementById('cfg-npa-bad').value = cfg.npaBad ?? DEFAULTS.npaBad;
-
-  // Build slab tables
-  buildSlabTable('slab-unmarried', cfg.slabsU || DEFAULTS.slabsU);
-  buildSlabTable('slab-married', cfg.slabsM || DEFAULTS.slabsM);
-
-  // Update nav FY
-  document.getElementById('nav-fy').textContent = 'FY ' + (cfg.fy || DEFAULTS.fy);
-
-  // Load changelog
-  renderChangelog();
-}
-
-/* ══ SLAB TABLE ══ */
-function buildSlabTable(tbodyId, slabs) {
-  const tbody = document.getElementById(tbodyId);
-  tbody.innerHTML = slabs.map((s, i) => `
-    <tr>
-      <td class="slab-row-label">${s.label}</td>
-      <td><input type="number" id="${tbodyId}-upto-${i}" value="${s.upto}" placeholder="${i === slabs.length-1 ? 'Infinity' : s.upto}" min="0" ${i === slabs.length-1 ? 'disabled style="opacity:.4"' : ''} /></td>
-      <td><input type="number" id="${tbodyId}-rate-${i}" value="${s.rate}" step="0.1" min="0" max="100" /></td>
-    </tr>`).join('');
-}
-
-function getSlabValues(tbodyId, count) {
-  const labels = ['Slab 1','Slab 2','Slab 3','Slab 4','Slab 5','Slab 6 (Above)'];
-  return Array.from({length: count}, (_, i) => ({
-    label: labels[i],
-    upto: parseFloat(document.getElementById(`${tbodyId}-upto-${i}`)?.value) || 0,
-    rate: parseFloat(document.getElementById(`${tbodyId}-rate-${i}`)?.value) || 0,
-  }));
-}
-
-/* ══ GET CONFIG FROM CLOUD ══ */
-async function getConfig() {
-  try {
-    const res = await fetch(`${WORKER_URL}/get-config`);
-    const data = await res.json();
-    return Object.keys(data).length > 0 ? data : null;
-  } catch (e) {
-    return null;
-  }
-}
-
-/* ══ SAVE ALL — Cloud मा save ══ */
-async function saveAll() {
-  const saveBtn = document.querySelector('.btn-save-all');
-  saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-  saveBtn.disabled = true;
-
-  const cfg = {
-    fy: document.getElementById('cfg-fy').value || DEFAULTS.fy,
-    fyStart: document.getElementById('cfg-fy-start').value,
-    fyEnd: document.getElementById('cfg-fy-end').value,
-
-    vat: parseFloat(document.getElementById('cfg-vat').value) || DEFAULTS.vat,
-    vatDeadline: parseInt(document.getElementById('cfg-vat-deadline').value) || 25,
-    vatInterest: parseFloat(document.getElementById('cfg-vat-interest').value) || 15,
-    vatPenalty: parseFloat(document.getElementById('cfg-vat-penalty').value) || 1,
-    vatThreshold: parseFloat(document.getElementById('cfg-vat-threshold').value) || 5000000,
-
-    tdsServiceVat: parseFloat(document.getElementById('cfg-tds-service-vat').value) || 1.5,
-    tdsServiceNoVat: parseFloat(document.getElementById('cfg-tds-service-novat').value) || 15,
-    tdsRent: parseFloat(document.getElementById('cfg-tds-rent').value) || 10,
-    tdsInterest: parseFloat(document.getElementById('cfg-tds-interest').value) || 15,
-    tdsDividend: parseFloat(document.getElementById('cfg-tds-dividend').value) || 5,
-    tdsPerson: parseFloat(document.getElementById('cfg-tds-person').value) || 25,
-    tdsLand: parseFloat(document.getElementById('cfg-tds-land').value) || 1,
-    tdsDeadline: parseInt(document.getElementById('cfg-tds-deadline').value) || 25,
-
-    slabsU: getSlabValues('slab-unmarried', 6),
-    slabsM: getSlabValues('slab-married', 6),
-
-    pfEmp: parseFloat(document.getElementById('cfg-pf-emp').value) || 11,
-    pfEmpl: parseFloat(document.getElementById('cfg-pf-empl').value) || 20,
-    ssfEmp: parseFloat(document.getElementById('cfg-ssf-emp').value) || 11,
-    ssfEmpl: parseFloat(document.getElementById('cfg-ssf-empl').value) || 20,
-
-    corpNormal: parseFloat(document.getElementById('cfg-corp-normal').value) || 25,
-    corpSpecial: parseFloat(document.getElementById('cfg-corp-special').value) || 20,
-    corpBank: parseFloat(document.getElementById('cfg-corp-bank').value) || 30,
-
-    atQ1: parseFloat(document.getElementById('cfg-at-q1').value) || 40,
-    atQ2: parseFloat(document.getElementById('cfg-at-q2').value) || 70,
-    atQ3: parseFloat(document.getElementById('cfg-at-q3').value) || 100,
-
-    depBuilding: parseFloat(document.getElementById('cfg-dep-building').value) || 5,
-    depVehicle: parseFloat(document.getElementById('cfg-dep-vehicle').value) || 20,
-    depMachinery: parseFloat(document.getElementById('cfg-dep-machinery').value) || 15,
-    depFurniture: parseFloat(document.getElementById('cfg-dep-furniture').value) || 25,
-    depIntangible: parseFloat(document.getElementById('cfg-dep-intangible').value) || 7,
-
-    npaPass: parseFloat(document.getElementById('cfg-npa-pass').value) || 1,
-    npaWatch: parseFloat(document.getElementById('cfg-npa-watch').value) || 5,
-    npaSub: parseFloat(document.getElementById('cfg-npa-sub').value) || 25,
-    npaDoubt: parseFloat(document.getElementById('cfg-npa-doubt').value) || 50,
-    npaBad: parseFloat(document.getElementById('cfg-npa-bad').value) || 100,
-
-    savedAt: new Date().toLocaleString('en-GB'),
-  };
+// लगिन
+async function doLogin() {
+  const password = document.getElementById('login-pass').value.trim();
+  if (!password) return;
 
   try {
-    // Cloud मा save गर्ने
-    const res = await fetch(`${WORKER_URL}/save-config`, {
+    const res = await fetch(`${WORKER_URL}/api/admin/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ adminKey: ADMIN_KEY, config: cfg }),
+      body: JSON.stringify({ password })
     });
-
-    if (res.ok) {
-      // Local backup पनि
-      localStorage.setItem('naps_config', JSON.stringify(cfg));
-      document.getElementById('nav-fy').textContent = 'FY ' + cfg.fy;
-      addLog(`☁️ Cloud saved — FY ${cfg.fy} | VAT ${cfg.vat}% | TDS ${cfg.tdsServiceVat}%`);
-
-      const alert = document.getElementById('save-alert');
-      alert.classList.add('show');
-      setTimeout(() => alert.classList.remove('show'), 4000);
-      showToast('☁️ Cloud मा save भयो!');
+    
+    const data = await res.json();
+    
+    if (data.success && data.token) {
+      jwtToken = data.token;
+      sessionStorage.setItem('adminToken', jwtToken);
+      
+      // अटो लगआउट सेट गर्ने (२४ घन्टा)
+      if (autoLogoutTimer) clearTimeout(autoLogoutTimer);
+      autoLogoutTimer = setTimeout(() => {
+        alert('सत्र समाप्त भयो। कृपया पुन: लगइन गर्नुहोस्।');
+        doLogout();
+      }, 23 * 60 * 60 * 1000); // २३ घन्टा
+      
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-panel').style.display = 'block';
+      
+      // कन्फिग लोड गर्ने
+      await loadConfig();
+      await loadLogs();
     } else {
-      showToast('❌ Save failed — retry!');
+      document.getElementById('login-err').style.display = 'block';
+      setTimeout(() => document.getElementById('login-err').style.display = 'none', 3000);
     }
-  } catch (e) {
-    showToast('❌ Network error — retry!');
+  } catch (err) {
+    showToast('नेटवर्क समस्या', 'error');
   }
-
-  saveBtn.innerHTML = '<i class="fas fa-save"></i> Save All Changes';
-  saveBtn.disabled = false;
 }
 
-/* ══ CHANGELOG ══ */
-function addLog(msg) {
-  const logs = JSON.parse(localStorage.getItem('naps_log') || '[]');
-  logs.unshift({ msg, time: new Date().toLocaleString('en-GB') });
-  if (logs.length > 20) logs.pop();
-  localStorage.setItem('naps_log', JSON.stringify(logs));
-  renderChangelog();
+// लगआउट
+function doLogout() {
+  jwtToken = null;
+  sessionStorage.removeItem('adminToken');
+  if (autoLogoutTimer) clearTimeout(autoLogoutTimer);
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('admin-panel').style.display = 'none';
 }
 
-function renderChangelog() {
-  const logs = JSON.parse(localStorage.getItem('naps_log') || '[]');
-  const el = document.getElementById('changelog');
-  if (logs.length === 0) {
-    el.innerHTML = '<div class="changelog-empty">No changes yet.</div>';
+// कन्फिग लोड गर्ने
+async function loadConfig() {
+  try {
+    const res = await fetch(`${WORKER_URL}/api/config`);
+    const cfg = await res.json();
+    
+    if (Object.keys(cfg).length === 0) {
+      applyDefaults();
+      return;
+    }
+    
+    // फर्म भर्ने
+    Object.keys(DEFAULTS).forEach(key => {
+      const el = document.getElementById(`cfg-${key}`);
+      if (el) el.value = cfg[key] ?? DEFAULTS[key];
+    });
+    
+    // स्ल्याबहरू भर्ने
+    buildSlabTable('slab-unmarried', cfg.slabsU || DEFAULTS.slabsU);
+    buildSlabTable('slab-married', cfg.slabsM || DEFAULTS.slabsM);
+    
+    document.getElementById('nav-fy').textContent = `FY ${cfg.fy || DEFAULTS.fy}`;
+    
+  } catch (err) {
+    console.error('Load config error:', err);
+    applyDefaults();
+  }
+}
+
+function applyDefaults() {
+  Object.keys(DEFAULTS).forEach(key => {
+    const el = document.getElementById(`cfg-${key}`);
+    if (el) el.value = DEFAULTS[key];
+  });
+  buildSlabTable('slab-unmarried', DEFAULTS.slabsU);
+  buildSlabTable('slab-married', DEFAULTS.slabsM);
+  document.getElementById('nav-fy').textContent = `FY ${DEFAULTS.fy}`;
+}
+
+function buildSlabTable(id, slabs) {
+  const tbody = document.getElementById(id);
+  if (!tbody) return;
+  
+  tbody.innerHTML = slabs.map((slab, i) => {
+    const isLast = i === slabs.length - 1;
+    return `
+      <tr>
+        <td>स्ल्याब ${i+1}</td>
+        <td><input type="number" id="${id}-upto-${i}" value="${slab.upto}" ${isLast ? 'disabled style="opacity:0.5"' : ''} /></td>
+        <td><input type="number" id="${id}-rate-${i}" value="${slab.rate}" step="0.1" min="0" max="100" /></td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function getSlabValues(id) {
+  const slabs = [];
+  for (let i = 0; i < 6; i++) {
+    const uptoEl = document.getElementById(`${id}-upto-${i}`);
+    const rateEl = document.getElementById(`${id}-rate-${i}`);
+    slabs.push({
+      upto: uptoEl ? parseFloat(uptoEl.value) || 0 : 0,
+      rate: rateEl ? parseFloat(rateEl.value) || 0 : 0
+    });
+  }
+  return slabs;
+}
+
+// लग लोड गर्ने
+async function loadLogs() {
+  if (!jwtToken) return;
+  
+  try {
+    const res = await fetch(`${WORKER_URL}/api/admin/logs`, {
+      headers: { 'Authorization': `Bearer ${jwtToken}` }
+    });
+    const logs = await res.json();
+    
+    const logEl = document.getElementById('changelog');
+    if (!logs || logs.length === 0) {
+      logEl.innerHTML = '<div class="changelog-empty">कुनै परिवर्तन भएको छैन।</div>';
+      return;
+    }
+    
+    logEl.innerHTML = logs.map(log => `
+      <div class="changelog-item">
+        <span>${log.config?.fy} - VAT ${log.config?.vat}%</span>
+        <span style="color:var(--muted)">${new Date(log.timestamp).toLocaleString('ne-NP')}</span>
+      </div>
+    `).join('');
+  } catch (err) {
+    console.error('Load logs error:', err);
+  }
+}
+
+// सेभ गर्ने
+async function saveAll() {
+  if (!jwtToken) {
+    showToast('सत्र समाप्त भयो। पुन: लगइन गर्नुहोस्।', 'error');
+    doLogout();
     return;
   }
-  el.innerHTML = logs.map(l => `
-    <div class="changelog-item">
-      <span>${l.msg}</span>
-      <span style="color:var(--muted);font-size:.7rem">${l.time}</span>
-    </div>`).join('');
+
+  const config = {};
+  
+  // फर्मबाट डाटा लिने
+  Object.keys(DEFAULTS).forEach(key => {
+    const el = document.getElementById(`cfg-${key}`);
+    if (el) config[key] = parseFloat(el.value) || el.value;
+  });
+  
+  // स्ल्याबहरू
+  config.slabsU = getSlabValues('slab-unmarried');
+  config.slabsM = getSlabValues('slab-married');
+  
+  try {
+    const res = await fetch(`${WORKER_URL}/api/admin/config`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${jwtToken}`
+      },
+      body: JSON.stringify({ config })
+    });
+    
+    const data = await res.json();
+    
+    if (data.success) {
+      // लोकल स्टोरेजमा ब्याकअप
+      localStorage.setItem('naps_config_backup', JSON.stringify(config));
+      
+      document.getElementById('save-alert').classList.add('show');
+      setTimeout(() => document.getElementById('save-alert').classList.remove('show'), 3000);
+      showToast('✅ सेभ भयो!');
+      
+      // लग पुन: लोड गर्ने
+      await loadLogs();
+    } else {
+      showToast('❌ सेभ हुन सकेन', 'error');
+    }
+  } catch (err) {
+    showToast('❌ नेटवर्क समस्या', 'error');
+  }
 }
 
-function clearLog() {
+// लग मेट्ने (क्लाइन्ट साइडमा मात्र)
+function clearLogs() {
+  if (!jwtToken) return;
   localStorage.removeItem('naps_log');
-  renderChangelog();
-  showToast('Log cleared!');
+  document.getElementById('changelog').innerHTML = '<div class="changelog-empty">कुनै परिवर्तन भएको छैन।</div>';
+  showToast('लग मेटियो');
 }
 
-/* ══ RESET DEFAULTS ══ */
-function resetDefaults() {
-  if (!confirm('सबै rates default मा reset गर्ने? यो action undo हुँदैन!')) return;
-  localStorage.removeItem('naps_config');
-  loadValues();
-  addLog('Reset to default values');
-  showToast('Reset to defaults!');
-}
+// पेज लोड हुँदा
+window.addEventListener('load', async () => {
+  if (jwtToken) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    await loadConfig();
+    await loadLogs();
+  }
+});
 
-/* ══ TOAST ══ */
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  document.getElementById('toast-msg').textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
-}
+// इन्टरप्रेस लगइन
+document.getElementById('login-pass').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') doLogin();
+});
 </script>
 </body>
 </html>
